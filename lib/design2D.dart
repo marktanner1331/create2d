@@ -1,1 +1,1 @@
-export './StatefulGraphics.dart';
+export './src/view/MainWindow.dart';

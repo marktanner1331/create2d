@@ -1,5 +1,5 @@
 import 'package:stagexl/stagexl.dart';
-import '../../StatefulGraphics.dart';
+import '../stateful_graphics/StatefulGraphics.dart';
 
 class StageXLRenderer {
   Sprite _canvas;
@@ -9,7 +9,13 @@ class StageXLRenderer {
     _canvas = Sprite();
   }
 
-  Sprite renderContainer(Container container) {
+  ///resets the renderer back to its initial state
+  void reset() {
+    _canvas.graphics.clear();
+  }
+
+  ///renders the given container and all of its children onto the canvas
+  void renderContainer(Container container) {
     for(IShape shape in container.shapes) {
       if(shape is Line) {
         _renderLine(shape);
@@ -20,5 +26,6 @@ class StageXLRenderer {
   void _renderLine(Line line) {
     _canvas.graphics.moveTo(line.start.x, line.start.y);
     _canvas.graphics.lineTo(line.end.x, line.end.y);
+    _canvas.graphics.strokeColor(0xff000000);
   }
 }

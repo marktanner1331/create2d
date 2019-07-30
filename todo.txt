@@ -1,0 +1,1 @@
+canvas needs its own width height stored privately (away from how its scaled in stageXL)

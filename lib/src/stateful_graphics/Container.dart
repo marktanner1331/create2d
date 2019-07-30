@@ -11,8 +11,8 @@ class Container {
     _shapes = List();
   }
 
-  void addLine(Line line) {
-    _shapes.add(line);
+  void addShape(IShape shape) {
+    _shapes.add(shape);
   }
 
   ///returns the first vertex found which is close enough to the given point with the given tolerance

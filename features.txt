@@ -10,3 +10,22 @@ grid
     grid size
     square
     isometric
+
+canvas
+    background color
+    size
+        different measurement units
+
+line
+    color
+    thickness
+    dash pattern
+    cap style
+
+zoom
+    pan
+    center
+
+split line window
+    part of line properties
+    splits a line into multiple segments
