@@ -1,0 +1,12 @@
+layers
+colour picker
+move tool
+    moves sets of vertices
+resize
+    a lot like move, except keeps the far edge vertex in place and scales any vertex in between
+grid
+    show grid
+    snapping
+    grid size
+    square
+    isometric

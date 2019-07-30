@@ -1,0 +1,16 @@
+name: design2D
+description: A vector-based 2d design tool.
+
+version: 0.1.0
+author: Mark Tanner <admin@64bitdragon.com>
+homepage: https://github.com/marktanner1331/
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  stagexl: ^1.0.0
+  stagexl_ui_components:
+    git: https://github.com/marktanner1331/stagexl_ui_components
+  js: any
+  test: ^1.5.3
