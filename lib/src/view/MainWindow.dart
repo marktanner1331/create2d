@@ -1,26 +1,54 @@
 import 'package:stagexl/stagexl.dart';
 import 'package:stagexl_ui_components/ui_components.dart';
 
-import '../tools/ITool.dart';
 import './Toolbox.dart';
 import './Canvas.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
+  int _backgroundColor = 0xff3333aa;
+
+  static Canvas _canvas;
+  static Canvas get currentCanvas => _canvas;
+
   Toolbox _toolbox;
-  Canvas _canvas;
+
+  static MainWindow _instance;
 
   MainWindow() {
-    _canvas = Canvas(this);
+    assert(_instance == null);
+    _instance = this;
+
+    _canvas = Canvas();
     addChild(_canvas);
 
-    _toolbox = Toolbox(_canvas);
+    _toolbox = Toolbox();
   }
-
-  ITool get currentTool => _toolbox.currentTool;
 
   @override
   void refresh() {
-    _canvas.setSize(width - 20, height - 20);
-    _canvas.setPosition(10, 10);
+    graphics.clear();
+    graphics.rect(0, 0, width, height);
+    graphics.fillColor(_backgroundColor);
+    _resetCanvasZoomAndPosition();
+  }
+
+  ///resets the canvas back to the default size and centers it
+  void _resetCanvasZoomAndPosition() {
+    num padding = 20;
+
+    num ratioX = (width - 2 * padding) / currentCanvas.canvasWidth;
+    num ratioY = (height - 2 * padding) / currentCanvas.canvasHeight;
+
+    if(ratioX < ratioY) {
+      currentCanvas.scaleX = ratioX;
+      currentCanvas.scaleY = ratioX;
+      currentCanvas.x = padding;
+      currentCanvas.y = (height - currentCanvas.height) / 2;
+    } else {
+      currentCanvas.scaleX = ratioY;
+      currentCanvas.scaleY = ratioY;
+      currentCanvas.x = (width - currentCanvas.width) / 2;
+      currentCanvas.y = padding;
+    }
   }
 }

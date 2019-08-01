@@ -1,13 +1,10 @@
 import 'package:stagexl/stagexl.dart';
-import 'package:stagexl_ui_components/ui_components.dart';
 
-import './MainWindow.dart';
+import './Toolbox.dart';
 import '../stateful_graphics/Container.dart';
 import '../Renderers/StageXLRenderer.dart';
 
-class Canvas extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
-  MainWindow _mainWindow;
-
+class Canvas extends Sprite {
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
@@ -15,43 +12,55 @@ class Canvas extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   StageXLRenderer _renderer;
 
-  Canvas(MainWindow mainWindow) {
-    this._mainWindow = mainWindow;
-    this._graphicsContainer = Container();
+  num _canvasWidth = 1000;
+  num get canvasWidth => _canvasWidth;
+
+  num _canvasHeight = 1000;
+  num get canvasHeight => _canvasHeight;
+
+  Canvas() {
+    graphics.clear();
+    graphics.rect(0, 0, _canvasWidth, _canvasHeight);
+    graphics.fillColor(_backgroundColor);
+
+    _graphicsContainer = Container();
     
-    this._renderer = StageXLRenderer();
+    _renderer = StageXLRenderer();
     this.addChild(_renderer.canvas);
 
     this.onMouseDown.listen(_onMouseDown);
     this.onMouseMove.listen(_onMouseMove);
     this.onMouseUp.listen(_onMouseUp);
   }
+  
+  void setCanvasSize(num canvasWidth, num canvasHeight) {
+    _canvasWidth = canvasWidth;
+    _canvasHeight = canvasHeight;
+    _refreshCanvasBackground();
+  }
+
+  void _refreshCanvasBackground() {
+    graphics.clear();
+    graphics.rect(0, 0, _canvasWidth, _canvasHeight);
+    graphics.fillColor(_backgroundColor);
+  }
 
   void invalidateCurrentGraphics() {
     _renderer.reset();
-    _renderer.renderContainer(this._graphicsContainer);
+    _renderer.renderContainer(_graphicsContainer);
   }
 
   void _onMouseMove(MouseEvent e) {
-    if (_mainWindow.currentTool.isActive) {
-      _mainWindow.currentTool.onMouseMove(e.localX, e.localY);
+    if (Toolbox.currentTool.isActive) {
+      Toolbox.currentTool.onMouseMove(e.localX, e.localY);
     }
   }
 
   void _onMouseDown(MouseEvent e) {
-    _mainWindow.currentTool.onMouseDown(e.localX, e.localY);
+    Toolbox.currentTool.onMouseDown(e.localX, e.localY);
   }
 
   void _onMouseUp(MouseEvent e) {
-    _mainWindow.currentTool.onMouseUp(e.localX, e.localY);
-  }
-
-  @override
-  void refresh() {
-    graphics.clear();
-    graphics.rect(0, 0, width, height);
-    graphics.fillColor(_backgroundColor);
-
-    invalidateCurrentGraphics();
+    Toolbox.currentTool.onMouseUp(e.localX, e.localY);
   }
 }

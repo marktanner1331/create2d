@@ -1,9 +1,6 @@
 layers
 colour picker
-move tool
-    moves sets of vertices
-resize
-    a lot like move, except keeps the far edge vertex in place and scales any vertex in between
+
 grid
     show grid
     snapping
@@ -21,11 +18,36 @@ line
     thickness
     dash pattern
     cap style
+    lock to horizontal/vertical/diagonal
+    split line window
+        part of line properties
+        splits a line into multiple segments
+    length of line
+        use canvas units (e.g. px or mm, inch, etc)
 
-zoom
-    pan
-    center
+canvas rulers
 
-split line window
-    part of line properties
-    splits a line into multiple segments
+tools
+    line
+    measure
+    circle
+    partial circle
+    bezier spline
+    fill
+    regular shape
+        option to choose number of sides
+    select
+        vertex
+        line
+        multi select by drawing box / holding down shift
+    move/resize/rotate
+        shows up automatically if vertices are selected
+        resize is a lot like move, except keeps the far edge vertex in place and scales any vertex in between
+    move canvas
+        pan
+        center
+    zoom
+    text
+    duplicate
+
+prefabs

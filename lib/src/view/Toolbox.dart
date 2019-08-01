@@ -4,13 +4,18 @@ import './Canvas.dart';
 import '../tools/Tools.dart';
 
 class Toolbox extends Sprite {
-  LineTool _line;
+  static LineTool _line;
 
-  Toolbox(Canvas canvas) {
-    _line = LineTool(canvas);
+  static Toolbox _instance;
+  
+  Toolbox() {
+    assert(_instance == null);
+    _instance = this;
+
+    _line = LineTool();
   }
 
-  ITool get currentTool {
+  static ITool get currentTool {
     return _line;
   }
 }

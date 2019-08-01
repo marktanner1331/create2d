@@ -1,13 +1,6 @@
 import '../view/Canvas.dart';
 
 abstract class ITool {
-  Canvas _canvas;
-  Canvas get canvas => _canvas;
-
-  ITool(Canvas canvas) {
-    this._canvas = canvas;
-  }
-
   //when set to true, the tool is active
   //it receives mouse updates from the canvas such as onMouseMove
   bool _isActive = false;
