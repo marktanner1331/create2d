@@ -1,6 +1,14 @@
 import './Vertex.dart';
+import '../Properties.dart';
 
 abstract class IShape {
+  int strokeColor;
+
+  //initializes the shape with default values from Properties.dart
+  IShape() {
+    this.strokeColor = Properties.strokeColor;
+  }
+
   ///returns true if the shape contains the given vertex
   bool hasVertex(Vertex vertex);
 

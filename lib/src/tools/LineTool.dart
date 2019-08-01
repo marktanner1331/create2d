@@ -1,5 +1,3 @@
-import 'package:design2D/src/view/Canvas.dart';
-
 import '../view/MainWindow.dart';
 import './ITool.dart';
 import '../stateful_graphics/Line.dart';

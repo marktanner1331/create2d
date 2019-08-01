@@ -26,6 +26,6 @@ class StageXLRenderer {
   void _renderLine(Line line) {
     _canvas.graphics.moveTo(line.start.x, line.start.y);
     _canvas.graphics.lineTo(line.end.x, line.end.y);
-    _canvas.graphics.strokeColor(0xff000000);
+    _canvas.graphics.strokeColor(line.strokeColor);
   }
 }
