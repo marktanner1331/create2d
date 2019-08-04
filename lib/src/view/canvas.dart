@@ -5,23 +5,24 @@ import './Toolbox.dart';
 import '../property_mixins/InitializeMixins.dart';
 import '../property_mixins/GridMixin.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
+import '../property_mixins/SnappingPropertiesMixin.dart';
+import '../property_mixins/CanvasPropertiesMixin.dart';
 
 import '../stateful_graphics/Container.dart';
 import '../Renderers/StageXLRenderer.dart';
 
-class Canvas extends Sprite with InitializeMixins, GridMixin, GridPropertiesMixin {
+class Canvas extends Sprite
+    with
+        InitializeMixins,
+        GridMixin,
+        GridPropertiesMixin,
+        SnappingPropertiesMixin,
+        CanvasPropertiesMixin {
+          
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
-  int _backgroundColor = 0xffffffff;
-
   StageXLRenderer _renderer;
-
-  num _canvasWidth = 1000;
-  num get canvasWidth => _canvasWidth;
-
-  num _canvasHeight = 1000;
-  num get canvasHeight => _canvasHeight;
 
   Canvas() {
     initializeMixins();
@@ -29,7 +30,7 @@ class Canvas extends Sprite with InitializeMixins, GridMixin, GridPropertiesMixi
     _graphicsContainer = Container();
 
     this.addChild(grid);
-    
+
     _renderer = StageXLRenderer();
     this.addChild(_renderer.canvas);
 
@@ -37,23 +38,17 @@ class Canvas extends Sprite with InitializeMixins, GridMixin, GridPropertiesMixi
     this.onMouseMove.listen(_onMouseMove);
     this.onMouseUp.listen(_onMouseUp);
 
-    _refreshCanvasBackground();
+    refreshCanvasBackground();
   }
 
   void dispose() {
     grid.dispose();
   }
-  
-  void setCanvasSize(num canvasWidth, num canvasHeight) {
-    _canvasWidth = canvasWidth;
-    _canvasHeight = canvasHeight;
-    _refreshCanvasBackground();
-  }
 
-  void _refreshCanvasBackground() {
+  void refreshCanvasBackground() {
     graphics.clear();
-    graphics.rect(0, 0, _canvasWidth, _canvasHeight);
-    graphics.fillColor(_backgroundColor);
+    graphics.rect(0, 0, canvasWidth, canvasHeight);
+    graphics.fillColor(backgroundColor);
 
     grid.refresh();
   }
@@ -65,18 +60,30 @@ class Canvas extends Sprite with InitializeMixins, GridMixin, GridPropertiesMixi
 
   void _onMouseMove(MouseEvent e) {
     if (Toolbox.currentTool.isActive) {
-      Point p = grid.getClosestPoint(e.localX, e.localY);
-      Toolbox.currentTool.onMouseMove(p.x, p.y);
+      if (snapToGrid) {
+        Point p = grid.getClosestPoint(e.localX, e.localY);
+        Toolbox.currentTool.onMouseMove(p.x, p.y);
+      } else {
+        Toolbox.currentTool.onMouseMove(e.localX, e.localY);
+      }
     }
   }
 
   void _onMouseDown(MouseEvent e) {
-    Point p = grid.getClosestPoint(e.localX, e.localY);
-    Toolbox.currentTool.onMouseDown(p.x, p.y);
+    if (snapToGrid) {
+      Point p = grid.getClosestPoint(e.localX, e.localY);
+      Toolbox.currentTool.onMouseDown(p.x, p.y);
+    } else {
+      Toolbox.currentTool.onMouseDown(e.localX, e.localY);
+    }
   }
 
   void _onMouseUp(MouseEvent e) {
-    Point p = grid.getClosestPoint(e.localX, e.localY);
-    Toolbox.currentTool.onMouseUp(p.x, p.y);
+    if (snapToGrid) {
+      Point p = grid.getClosestPoint(e.localX, e.localY);
+      Toolbox.currentTool.onMouseUp(p.x, p.y);
+    } else {
+      Toolbox.currentTool.onMouseUp(e.localX, e.localY);
+    }
   }
 }
