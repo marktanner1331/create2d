@@ -51,3 +51,8 @@ tools
     duplicate
 
 prefabs
+
+clear canvas
+
+undo
+    redo

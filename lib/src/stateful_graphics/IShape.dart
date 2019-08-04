@@ -1,5 +1,6 @@
 import './Vertex.dart';
-import '../Properties.dart';
+import '../model/Properties.dart';
+import 'package:stagexl/src/geom/point.dart';
 
 abstract class IShape {
   int strokeColor;
@@ -24,5 +25,5 @@ abstract class IShape {
   ///otherwise null is returned instead
   ///the tolerance is given in its squared form
   ///this is so it works more efficiently with pythagorus
-  Vertex getFirstVertexUnderPoint(num x, num y, num squareTolerance);
+  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance);
 }

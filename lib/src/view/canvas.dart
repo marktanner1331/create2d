@@ -1,10 +1,15 @@
 import 'package:stagexl/stagexl.dart';
 
 import './Toolbox.dart';
+
+import '../property_mixins/InitializeMixins.dart';
+import '../property_mixins/GridMixin.dart';
+import '../property_mixins/GridPropertiesMixin.dart';
+
 import '../stateful_graphics/Container.dart';
 import '../Renderers/StageXLRenderer.dart';
 
-class Canvas extends Sprite {
+class Canvas extends Sprite with InitializeMixins, GridMixin, GridPropertiesMixin {
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
@@ -19,11 +24,11 @@ class Canvas extends Sprite {
   num get canvasHeight => _canvasHeight;
 
   Canvas() {
-    graphics.clear();
-    graphics.rect(0, 0, _canvasWidth, _canvasHeight);
-    graphics.fillColor(_backgroundColor);
+    initializeMixins();
 
     _graphicsContainer = Container();
+
+    this.addChild(grid);
     
     _renderer = StageXLRenderer();
     this.addChild(_renderer.canvas);
@@ -31,6 +36,12 @@ class Canvas extends Sprite {
     this.onMouseDown.listen(_onMouseDown);
     this.onMouseMove.listen(_onMouseMove);
     this.onMouseUp.listen(_onMouseUp);
+
+    _refreshCanvasBackground();
+  }
+
+  void dispose() {
+    grid.dispose();
   }
   
   void setCanvasSize(num canvasWidth, num canvasHeight) {
@@ -43,6 +54,8 @@ class Canvas extends Sprite {
     graphics.clear();
     graphics.rect(0, 0, _canvasWidth, _canvasHeight);
     graphics.fillColor(_backgroundColor);
+
+    grid.refresh();
   }
 
   void invalidateCurrentGraphics() {
@@ -52,15 +65,18 @@ class Canvas extends Sprite {
 
   void _onMouseMove(MouseEvent e) {
     if (Toolbox.currentTool.isActive) {
-      Toolbox.currentTool.onMouseMove(e.localX, e.localY);
+      Point p = grid.getClosestPoint(e.localX, e.localY);
+      Toolbox.currentTool.onMouseMove(p.x, p.y);
     }
   }
 
   void _onMouseDown(MouseEvent e) {
-    Toolbox.currentTool.onMouseDown(e.localX, e.localY);
+    Point p = grid.getClosestPoint(e.localX, e.localY);
+    Toolbox.currentTool.onMouseDown(p.x, p.y);
   }
 
   void _onMouseUp(MouseEvent e) {
-    Toolbox.currentTool.onMouseUp(e.localX, e.localY);
+    Point p = grid.getClosestPoint(e.localX, e.localY);
+    Toolbox.currentTool.onMouseUp(p.x, p.y);
   }
 }

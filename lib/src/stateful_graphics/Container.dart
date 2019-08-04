@@ -1,6 +1,7 @@
 import './Line.dart';
 import './Vertex.dart';
 import './IShape.dart';
+import 'package:stagexl/src/geom/point.dart';
 
 //the high level class that owns and manages the stateful graphics objects
 class Container {
@@ -17,11 +18,11 @@ class Container {
 
   ///returns the first vertex found which is close enough to the given point with the given tolerance
   ///or null if one cannot be found
-  Vertex getFirstVertexUnderPoint(num x, num y, num tolerance) {
+  Vertex getFirstVertexUnderPoint(Point p, num tolerance) {
     num squareTolerance = tolerance * tolerance;
 
     for(IShape shape in _shapes) {
-      Vertex v = shape.getFirstVertexUnderPoint(x, y, squareTolerance);
+      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance);
       if(v != null) {
         return v;
       }

@@ -1,0 +1,4 @@
+enum GridGeometryType {
+  Square,
+  Isometric
+}

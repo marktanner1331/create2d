@@ -1,7 +1,7 @@
 import 'package:stagexl/stagexl.dart';
 
-import './Canvas.dart';
-import '../tools/Tools.dart';
+import '../tools/LineTool.dart';
+import '../tools/ITool.dart';
 
 class Toolbox extends Sprite {
   static LineTool _line;

@@ -1,6 +1,8 @@
 import './Vertex.dart';
 import './IShape.dart';
 
+import 'package:stagexl/src/geom/point.dart';
+
 class Line extends IShape {
   Vertex _start;
   Vertex get start => _start;
@@ -36,11 +38,11 @@ class Line extends IShape {
   }
 
   @override
-  Vertex getFirstVertexUnderPoint(num x, num y, num squareTolerance) {
+  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance) {
     assert(_end != null);
-    if(_start.squareDistanceToPoint(x, y) <= squareTolerance) {
+    if(_start.squaredDistanceTo(p) <= squareTolerance) {
       return _start;
-    } else if(_end.squareDistanceToPoint(x, y) <= squareTolerance) {
+    } else if(_end.squaredDistanceTo(p) <= squareTolerance) {
       return _end;
     } else {
       return null;
