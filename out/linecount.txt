@@ -1,0 +1,46 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-08-07 08:24:07
+count workspace : c:\Users\Mark Tanner\Documents\dart\stagexl\design2D
+total files : 34
+total code lines : 1205
+total comment lines : 69
+total blank lines : 336
+
+example\main.dart, code is 24, comment is 0, blank is 7.
+lib\design2D.dart, code is 1, comment is 0, blank is 0.
+lib\src\ErrorLogger.dart, code is 5, comment is 0, blank is 0.
+lib\src\model\GridDisplayType.dart, code is 5, comment is 0, blank is 0.
+lib\src\model\GridGeometryType.dart, code is 4, comment is 0, blank is 0.
+lib\src\model\Properties.dart, code is 5, comment is 1, blank is 2.
+lib\src\property_mixins\CanvasPropertiesMixin.dart, code is 18, comment is 0, blank is 4.
+lib\src\property_mixins\GridPropertiesMixin.dart, code is 39, comment is 0, blank is 8.
+lib\src\property_mixins\InitializeMixins.dart, code is 4, comment is 0, blank is 1.
+lib\src\property_mixins\SnappingPropertiesMixin.dart, code is 3, comment is 0, blank is 0.
+lib\src\property_windows\CanvasPropertiesWindow.dart, code is 23, comment is 0, blank is 6.
+lib\src\property_windows\groups\GridPropertiesGroup.dart, code is 32, comment is 0, blank is 10.
+lib\src\property_windows\groups\PropertyGroup.dart, code is 59, comment is 0, blank is 18.
+lib\src\property_windows\groups\PropertyGroupHeader.dart, code is 63, comment is 0, blank is 15.
+lib\src\property_windows\PropertyWindow.dart, code is 42, comment is 0, blank is 13.
+lib\src\property_windows\TabbedPropertyWindow.dart, code is 106, comment is 0, blank is 37.
+lib\src\Renderers\StageXLRenderer.dart, code is 24, comment is 2, blank is 5.
+lib\src\stateful_graphics\Container.dart, code is 42, comment is 8, blank is 12.
+lib\src\stateful_graphics\IShape.dart, code is 13, comment is 10, blank is 6.
+lib\src\stateful_graphics\Line.dart, code is 41, comment is 1, blank is 9.
+lib\src\stateful_graphics\StatefulGraphics.dart, code is 4, comment is 0, blank is 0.
+lib\src\stateful_graphics\Vertex.dart, code is 4, comment is 0, blank is 1.
+lib\src\Styles.dart, code is 18, comment is 0, blank is 5.
+lib\src\tools\ITool.dart, code is 12, comment is 3, blank is 4.
+lib\src\tools\LineTool.dart, code is 25, comment is 0, blank is 7.
+lib\src\view\Canvas.dart, code is 72, comment is 0, blank is 20.
+lib\src\view\ColorPicker.dart, code is 4, comment is 0, blank is 4.
+lib\src\view\Grid.dart, code is 261, comment is 42, blank is 70.
+lib\src\view\MainWindow.dart, code is 45, comment is 1, blank is 13.
+lib\src\view\Toolbox.dart, code is 15, comment is 0, blank is 6.
+lib\src\widgets\CloseButton.dart, code is 19, comment is 0, blank is 5.
+lib\src\widgets\NumberFieldWithLabel.dart, code is 65, comment is 0, blank is 18.
+lib\src\widgets\TabButton.dart, code is 54, comment is 0, blank is 14.
+lib\src\widgets\TabButtonRow.dart, code is 54, comment is 1, blank is 16.
+===============================================================================

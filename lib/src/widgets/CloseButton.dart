@@ -5,8 +5,8 @@ import '../Styles.dart';
 
 class CloseButton extends GraphicsButton {
   CloseButton() : super(redraw) {
-    backgroundColor = Styles.button;
-    hoveredColor = Styles.buttonHover;
+    unhoveredColor = Styles.closeButtonUnhovered;
+    hoveredColor = Styles.closeButtonHovered;
     padding = 5;
     setSize(25, 25);
   }
@@ -17,8 +17,8 @@ class CloseButton extends GraphicsButton {
     graphics.lineTo(width, height);
 
     graphics.moveTo(0, height);
-    graphics.moveTo(width, 0);
+    graphics.lineTo(width, 0);
 
-    graphics.strokeColor(0xff000000);
+    graphics.strokeColor(Styles.closeButtonGraphics, 3);
   }
 }

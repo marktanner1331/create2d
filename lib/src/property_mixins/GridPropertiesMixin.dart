@@ -1,9 +1,11 @@
-import './GridMixin.dart';
+import '../view/Grid.dart';
 
 import '../model/GridDisplayType.dart';
 import '../model/GridGeometryType.dart';
 
-mixin GridPropertiesMixin on GridMixin {
+mixin GridPropertiesMixin {
+  Grid get grid;
+
    GridDisplayType _gridDisplayType = GridDisplayType.Dots;
    GridDisplayType get gridDisplayType => _gridDisplayType;
    void set gridDisplayType(GridDisplayType value) {

@@ -3,6 +3,7 @@ import 'package:stagexl_ui_components/ui_components.dart';
 
 import './Toolbox.dart';
 import './Canvas.dart';
+import '../property_windows/TabbedPropertyWindow.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   int _backgroundColor = 0xff3333aa;
@@ -11,6 +12,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static Canvas get currentCanvas => _canvas;
 
   Toolbox _toolbox;
+  TabbedPropertyWindow _propertyWindow;
 
   static MainWindow _instance;
 
@@ -22,6 +24,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     addChild(_canvas);
 
     _toolbox = Toolbox();
+
+    _propertyWindow = TabbedPropertyWindow();
+    addChild(_propertyWindow);
   }
 
   @override

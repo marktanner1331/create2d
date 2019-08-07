@@ -11,8 +11,6 @@ Future<Null> main() async {
     ..backgroundColor = Color.White
     ..renderEngine = RenderEngine.WebGL
     ..stageAlign = StageAlign.TOP_LEFT
-    ..preventDefaultOnTouch = false
-    ..inputEventMode = InputEventMode.MouseOnly
     ..stageScaleMode = StageScaleMode.NO_SCALE;
 
   var canvas = html.querySelector('#stage');

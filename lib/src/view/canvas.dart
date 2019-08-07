@@ -1,9 +1,9 @@
+import 'package:design2D/src/view/Grid.dart';
 import 'package:stagexl/stagexl.dart';
 
 import './Toolbox.dart';
 
 import '../property_mixins/InitializeMixins.dart';
-import '../property_mixins/GridMixin.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
 import '../property_mixins/SnappingPropertiesMixin.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
@@ -14,21 +14,24 @@ import '../Renderers/StageXLRenderer.dart';
 class Canvas extends Sprite
     with
         InitializeMixins,
-        GridMixin,
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
-          
+  
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
   StageXLRenderer _renderer;
 
+  Grid _grid;
+  Grid get grid => _grid;
+
   Canvas() {
     initializeMixins();
 
     _graphicsContainer = Container();
-
+    
+    _grid = Grid(this);
     this.addChild(grid);
 
     _renderer = StageXLRenderer();

@@ -1,14 +1,8 @@
-import './PropertyWindow.dart';
+import 'package:stagexl/stagexl.dart';
 
-class ColorPicker extends PropertyWindow {
-  ColorPicker() : super("Color Picker");
+class ColorPicker extends Sprite {
+  ColorPicker();
 
-  @override
-  // TODO: implement preferredHeight
-  num get preferredHeight => null;
 
-  @override
-  // TODO: implement preferredWidth
-  num get preferredWidth => null;
 
 }
