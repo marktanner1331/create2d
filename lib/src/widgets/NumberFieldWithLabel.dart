@@ -15,33 +15,18 @@ class NumberFieldWithLabel extends Sprite {
     _valueField.text = value.toString();
   }
 
-  String _labelText = "";
-  String get labelText => _labelText;
-  void set labelText(String value) {
-    if(value.endsWith(":") == false) {
-      value += ":";
-    }
-
-    _labelText = value;
-
-    _labelField..text = value;
-    _labelField
-      ..width = _labelField.textWidth
-      ..height = _labelField.textHeight;
-  }
-
-  void set valueOffset(num value) {
-    _valueField.x = value;
-    _labelField.x = value - _labelField.width - 5;
-  }
-
   TextField _valueField;
   TextField _labelField;
 
-  NumberFieldWithLabel() {
-    _labelField = TextField("L");
-    _labelField.height = _labelField.textHeight;
-    _labelField.text = "";
+  NumberFieldWithLabel(String labelText) {
+    if(labelText.endsWith(":") == false) {
+      labelText += ":";
+    }
+
+    _labelField = TextField(labelText);
+    _labelField
+      ..width = _labelField.textWidth
+      ..height = _labelField.textHeight;
     addChild(_labelField);
 
     _valueField = TextField()
@@ -62,6 +47,7 @@ class NumberFieldWithLabel extends Sprite {
     
     _valueField
       ..defaultTextFormat = tf
+      ..x = _labelField.width + 5
       ..width = _valueField.textWidth + 5
       ..height = _valueField.textHeight + 5;
     

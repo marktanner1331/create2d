@@ -286,7 +286,7 @@ class Grid extends Sprite {
       //now we have hit the bottom right corner
       //so we travel down the left edge and left along the bottom
       num xDelta2 = (_canvas.canvasHeight - yDelta) * 1.732;
-      print(xDelta2);
+      
       while (xDelta2 >= 0) {
         graphics.moveTo(0, yDelta);
         graphics.lineTo(xDelta2, _canvas.canvasHeight);
@@ -341,7 +341,7 @@ class Grid extends Sprite {
       while(yDelta <= _canvas.canvasHeight) {
         graphics.beginPath();
         graphics.circle(xDelta, yDelta, _canvas.gridThickness);
-        graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
+        graphics.fillColor(_canvas.gridColor);
         graphics.closePath();
 
         yDelta += verticalStep;
@@ -361,7 +361,7 @@ class Grid extends Sprite {
       while(yDelta <= _canvas.canvasHeight) {
         graphics.beginPath();
         graphics.circle(xDelta, yDelta, _canvas.gridThickness);
-        graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
+        graphics.fillColor(_canvas.gridColor);
         graphics.closePath();
 
         yDelta += verticalStep;

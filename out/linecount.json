@@ -216,6 +216,238 @@
                     "filename": "lib\\src\\widgets\\TabButtonRow.dart"
                 }
             ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-08-07 09:00:44",
+            "filesum": 37,
+            "codesum": 1272,
+            "commentsum": 69,
+            "blanksum": 355,
+            "filelist": [
+                {
+                    "blank": 7,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "example\\main.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "lib\\design2D.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\ErrorLogger.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridDisplayType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridGeometryType.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "lib\\src\\model\\Properties.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\CanvasPropertiesMixin.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\GridPropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\InitializeMixins.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SnappingPropertiesMixin.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\CanvasPropertiesWindow.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\groups\\GridPropertiesGroup.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\groups\\PropertyGroup.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\groups\\PropertyGroupHeader.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 42,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\PropertyWindow.dart"
+                },
+                {
+                    "blank": 37,
+                    "code": 106,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\TabbedPropertyWindow.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 24,
+                    "comment": 2,
+                    "filename": "lib\\src\\Renderers\\StageXLRenderer.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 42,
+                    "comment": 8,
+                    "filename": "lib\\src\\stateful_graphics\\Container.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 13,
+                    "comment": 10,
+                    "filename": "lib\\src\\stateful_graphics\\IShape.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 41,
+                    "comment": 1,
+                    "filename": "lib\\src\\stateful_graphics\\Line.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\StatefulGraphics.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\Vertex.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "lib\\src\\Styles.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 12,
+                    "comment": 3,
+                    "filename": "lib\\src\\tools\\ITool.dart"
+                },
+                {
+                    "blank": 7,
+                    "code": 25,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\LineTool.dart"
+                },
+                {
+                    "blank": 20,
+                    "code": 72,
+                    "comment": 0,
+                    "filename": "lib\\src\\view\\Canvas.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\view\\ColorPicker.dart"
+                },
+                {
+                    "blank": 70,
+                    "code": 261,
+                    "comment": 42,
+                    "filename": "lib\\src\\view\\Grid.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 45,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\MainWindow.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "lib\\src\\view\\Toolbox.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CloseButton.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 65,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\NumberFieldWithLabel.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButton.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonGroup.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonRow.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TabButton.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 54,
+                    "comment": 1,
+                    "filename": "lib\\src\\widgets\\TabButtonRow.dart"
+                }
+            ]
         }
     ]
 }

@@ -8,6 +8,7 @@ class Styles {
   static int panelHeadText = 0xff000000;
 
   static int panelBG = 0xff777777;
+  static int panelText = 0xff000000;
 
   static int closeButtonUnhovered = 0xff555555;
   static int closeButtonHovered = 0xff999999;
@@ -16,6 +17,9 @@ class Styles {
   static int tabButtonUnhovered = 0xff555555;
   static int tabButtonHovered = 0xff999999;
   static int tabButtonText = 0xff000000;
+
+  static int radioButtonUnselected = 0xffffffff;
+  static int radioButtonSelected = 0xff5555cc;
 
   static int button = 0xff555555;
   static int buttonHover = 0xff999999;
