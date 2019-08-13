@@ -3,7 +3,6 @@ import 'package:stagexl/stagexl.dart';
 
 import './Toolbox.dart';
 
-import '../property_mixins/InitializeMixins.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
 import '../property_mixins/SnappingPropertiesMixin.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
@@ -13,7 +12,6 @@ import '../Renderers/StageXLRenderer.dart';
 
 class Canvas extends Sprite
     with
-        InitializeMixins,
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
@@ -27,8 +25,6 @@ class Canvas extends Sprite
   Grid get grid => _grid;
 
   Canvas() {
-    initializeMixins();
-
     _graphicsContainer = Container();
     
     _grid = Grid(this);
@@ -36,7 +32,7 @@ class Canvas extends Sprite
 
     _renderer = StageXLRenderer();
     this.addChild(_renderer.canvas);
-
+    
     this.onMouseDown.listen(_onMouseDown);
     this.onMouseMove.listen(_onMouseMove);
     this.onMouseUp.listen(_onMouseUp);

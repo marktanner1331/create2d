@@ -21,6 +21,9 @@ class Styles {
   static int radioButtonUnselected = 0xffffffff;
   static int radioButtonSelected = 0xff5555cc;
 
+  static int checkboxBG = 0xffffffff;
+  static int checkboxSelected = 0xff55cc55;
+
   static int button = 0xff555555;
   static int buttonHover = 0xff999999;
   static int buttonText = 0xff000000;

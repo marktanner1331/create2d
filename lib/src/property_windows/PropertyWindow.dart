@@ -32,7 +32,8 @@ abstract class PropertyWindow extends Sprite {
   @protected
   void addPropertyGroup(PropertyGroup group) {
     group
-      ..x = 3;
+      ..x = 3
+      ..isOpen = true;
     _groups.add(group);
     addChild(group);
 

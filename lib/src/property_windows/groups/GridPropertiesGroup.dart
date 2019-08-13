@@ -69,8 +69,8 @@ class GridPropertiesGroup extends PropertyGroup {
 
     _thickness.value = _properties.gridThickness;
     _step.value = _properties.gridStep;
-    _displayType.switchToRow(properties.gridDisplayType);
-    _geometryType.switchToRow(properties.gridGeometryType);
+    _displayType.switchToRow(_properties.gridDisplayType);
+    _geometryType.switchToRow(_properties.gridGeometryType);
   }
 
   @override

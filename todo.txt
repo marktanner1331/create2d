@@ -3,3 +3,5 @@ move the logic in Property Window into its own controller to move objects
 in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
+
+custom cursors that actually snap
