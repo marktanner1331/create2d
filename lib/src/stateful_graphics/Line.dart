@@ -48,4 +48,9 @@ class Line extends IShape {
       return null;
     }
   }
+
+  @override
+  Iterable<Vertex> getVertices() {
+    return [_start, _end];
+  }
 }

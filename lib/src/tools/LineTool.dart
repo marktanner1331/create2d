@@ -2,16 +2,21 @@ import '../view/MainWindow.dart';
 import './ITool.dart';
 import '../stateful_graphics/Line.dart';
 import '../stateful_graphics/Vertex.dart';
+import '../stateful_graphics/Container.dart';
 
 class LineTool extends ITool {
   Line _currentLine;
+  Container _currentGraphics;
 
   @override
   void onMouseDown(num x, num y) {
     super.onMouseDown(x, y);
 
     _currentLine = Line(Vertex(x, y), Vertex(x, y));
-    MainWindow.currentCanvas.currentGraphics.addShape(_currentLine);
+    _currentGraphics = MainWindow.currentCanvas.generateTemporaryLayer();
+
+    _currentGraphics.addShape(_currentLine, false);
+    MainWindow.currentCanvas.invalidateVertices();
   }
 
   @override
@@ -19,6 +24,9 @@ class LineTool extends ITool {
     super.onMouseUp(x, y);
 
     _currentLine = null;
+    MainWindow.currentCanvas.mergeInTemporaryLayer(_currentGraphics);
+    _currentGraphics = null;
+    MainWindow.currentCanvas.invalidateVertices();
   }
 
   @override
@@ -27,6 +35,7 @@ class LineTool extends ITool {
     
     _currentLine.end.x = x;
     _currentLine.end.y = y;
-    MainWindow.currentCanvas.invalidateCurrentGraphics();
+
+    MainWindow.currentCanvas.invalidateVertexPositions();
   }
 }

@@ -1,13 +1,14 @@
-import 'package:design2D/src/view/Grid.dart';
 import 'package:stagexl/stagexl.dart';
 
-import './Toolbox.dart';
+import './Grid.dart';
 
 import '../property_mixins/GridPropertiesMixin.dart';
 import '../property_mixins/SnappingPropertiesMixin.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
 import '../stateful_graphics/Container.dart';
+import '../stateful_graphics/Vertex.dart';
+
 import '../Renderers/StageXLRenderer.dart';
 
 class Canvas extends Sprite
@@ -15,9 +16,26 @@ class Canvas extends Sprite
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
-  
+  static const String VERTICES_MOVED = "VERTICES_MOVED";
+  static const String VERTICES_CHANGED = "VERTICES_CHANGED";
+
+  static const EventStreamProvider<Event> _verticesMovedEvent =
+      const EventStreamProvider<Event>(VERTICES_MOVED);
+  static const EventStreamProvider<Event> _verticesChangedEvent =
+      const EventStreamProvider<Event>(VERTICES_CHANGED);
+    
+  EventStream<Event> get onVerticesMoved =>
+      _verticesMovedEvent.forTarget(this);
+  EventStream<Event> get onVerticesChanged =>
+      _verticesChangedEvent.forTarget(this);
+
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
+
+  //temp layers are used for staging
+  //i.e. for shapes that are being currently drawn
+  //but are not yet complete
+  Container _temporaryLayer;
 
   StageXLRenderer _renderer;
 
@@ -33,15 +51,27 @@ class Canvas extends Sprite
     _renderer = StageXLRenderer();
     this.addChild(_renderer.canvas);
     
-    this.onMouseDown.listen(_onMouseDown);
-    this.onMouseMove.listen(_onMouseMove);
-    this.onMouseUp.listen(_onMouseUp);
-
     refreshCanvasBackground();
+  }
+
+  Container generateTemporaryLayer() {
+    if(_temporaryLayer == null) {
+      _temporaryLayer = Container();
+    }
+
+    return _temporaryLayer;
   }
 
   void dispose() {
     grid.dispose();
+  }
+
+  Iterable<Vertex> getAllTemporaryVertices() {
+    if(_temporaryLayer == null) {
+      return [];
+    } else {
+      return _temporaryLayer.getVertices();
+    }
   }
 
   void refreshCanvasBackground() {
@@ -52,37 +82,33 @@ class Canvas extends Sprite
     grid.refresh();
   }
 
-  void invalidateCurrentGraphics() {
+  void mergeInTemporaryLayer(Container layer) {
+    assert(_temporaryLayer == layer);
+
+    _graphicsContainer.addShape(layer, true);
+    _temporaryLayer = null;
+  }
+
+  ///called when the caller believes the positons of the vertices have changed and the rest
+  ///of the program should know about it
+  void invalidateVertexPositions() {
+    dispatchEvent(Event(VERTICES_MOVED));
+    _renderGraphics();
+  }
+
+  ///called when the caller believes the amount of vertices have changed and the rest
+  ///of the program should know about it
+  void invalidateVertices() {
+    dispatchEvent(Event(VERTICES_CHANGED));
+    _renderGraphics();
+  }
+
+  void _renderGraphics() {
     _renderer.reset();
     _renderer.renderContainer(_graphicsContainer);
-  }
 
-  void _onMouseMove(MouseEvent e) {
-    if (Toolbox.currentTool.isActive) {
-      if (snapToGrid) {
-        Point p = grid.getClosestPoint(e.localX, e.localY);
-        Toolbox.currentTool.onMouseMove(p.x, p.y);
-      } else {
-        Toolbox.currentTool.onMouseMove(e.localX, e.localY);
-      }
-    }
-  }
-
-  void _onMouseDown(MouseEvent e) {
-    if (snapToGrid) {
-      Point p = grid.getClosestPoint(e.localX, e.localY);
-      Toolbox.currentTool.onMouseDown(p.x, p.y);
-    } else {
-      Toolbox.currentTool.onMouseDown(e.localX, e.localY);
-    }
-  }
-
-  void _onMouseUp(MouseEvent e) {
-    if (snapToGrid) {
-      Point p = grid.getClosestPoint(e.localX, e.localY);
-      Toolbox.currentTool.onMouseUp(p.x, p.y);
-    } else {
-      Toolbox.currentTool.onMouseUp(e.localX, e.localY);
+    if(_temporaryLayer != null) {
+      _renderer.renderContainer(_temporaryLayer);
     }
   }
 }

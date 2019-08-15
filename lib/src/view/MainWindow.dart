@@ -3,10 +3,18 @@ import 'package:stagexl_ui_components/ui_components.dart';
 
 import './Toolbox.dart';
 import './Canvas.dart';
+import './CanvasMouseEventsController.dart';
+import './SelectionLayer.dart';
+
+import '../stateful_graphics/Vertex.dart';
+
 import '../property_windows/TabbedPropertyWindow.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   int _backgroundColor = 0xff3333aa;
+
+  static CanvasMouseEventsController _canvasEvents;
+  static SelectionLayer _selectionLayer;
 
   static Canvas _canvas;
   static Canvas get currentCanvas => _canvas;
@@ -21,12 +29,33 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _instance = this;
 
     _canvas = Canvas();
+    _canvas
+      ..onVerticesMoved.listen((_) => _selectionLayer.refresh())
+      ..onVerticesChanged.listen(_refreshSelectedVertices);
+
     addChild(_canvas);
+
+    _selectionLayer = SelectionLayer(() => _canvas.transformationMatrix);
+    addChild(_selectionLayer);
 
     _toolbox = Toolbox();
 
+    _canvasEvents = CanvasMouseEventsController(_toolbox, _canvas);
+    _canvasEvents.detectMouseOverVertex = true;
+    _canvasEvents.onMouseOverVertex.listen(_refreshSelectedVertices);
+
     _propertyWindow = TabbedPropertyWindow();
     addChild(_propertyWindow);
+  }
+
+  void _refreshSelectedVertices(_) {
+    List<Vertex> vertices = List();
+
+    if (_canvasEvents.currentMouseOverVertex != null) {
+      vertices.add(_canvasEvents.currentMouseOverVertex);
+    }
+    
+    _selectionLayer.deselectAllAndSelectVertices(vertices);
   }
 
   @override
@@ -44,7 +73,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     num ratioX = (width - 2 * padding) / currentCanvas.canvasWidth;
     num ratioY = (height - 2 * padding) / currentCanvas.canvasHeight;
 
-    if(ratioX < ratioY) {
+    if (ratioX < ratioY) {
       currentCanvas.scaleX = ratioX;
       currentCanvas.scaleY = ratioX;
       currentCanvas.x = padding;
