@@ -64,6 +64,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     graphics.rect(0, 0, width, height);
     graphics.fillColor(_backgroundColor);
     _resetCanvasZoomAndPosition();
+
+    _propertyWindow.x = width - _propertyWindow.width - 5;
+    _propertyWindow.y = 5;
   }
 
   ///resets the canvas back to the default size and centers it
