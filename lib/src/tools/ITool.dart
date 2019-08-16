@@ -1,3 +1,5 @@
+import 'package:stagexl/stagexl.dart';
+
 import '../view/Canvas.dart';
 
 abstract class ITool {
@@ -5,6 +7,8 @@ abstract class ITool {
   //it receives mouse updates from the canvas such as onMouseMove
   bool _isActive = false;
   bool get isActive => _isActive;
+
+  DisplayObject getIcon();
 
   void onMouseDown(num x, num y) {
     _isActive = true;

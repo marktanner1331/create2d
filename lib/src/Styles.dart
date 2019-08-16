@@ -18,6 +18,9 @@ class Styles {
   static int tabButtonHovered = 0xff999999;
   static int tabButtonText = 0xff000000;
 
+  static int toolButtonUnhovered = 0xff555555;
+  static int toolButtonHovered = 0xff999999;
+
   static int radioButtonUnselected = 0xffffffff;
   static int radioButtonSelected = 0xff5555cc;
 

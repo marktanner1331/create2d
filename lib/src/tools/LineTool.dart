@@ -1,3 +1,5 @@
+import 'package:stagexl/stagexl.dart';
+
 import '../view/MainWindow.dart';
 import './ITool.dart';
 import '../stateful_graphics/Line.dart';
@@ -17,6 +19,16 @@ class LineTool extends ITool {
 
     _currentGraphics.addShape(_currentLine, false);
     MainWindow.currentCanvas.invalidateVertices();
+  }
+
+  @override
+  DisplayObject getIcon() {
+    TextField tf = TextField("L");
+    
+    return tf
+      ..autoSize = TextFieldAutoSize.NONE
+      ..width = tf.textWidth
+      ..height = tf.textHeight;
   }
 
   @override

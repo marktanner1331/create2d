@@ -7,3 +7,57 @@ in NumberFieldWithLabel.dart
 custom cursors that actually snap
 vertex snapping tolerance needs to be calculated from the canvas scale
     right now its hardcoded in canvas space, so a smaller canvas would have stronger snapping than a larger one
+
+what i want is layers for the canvas
+    canvas BG
+    grid
+    drawing
+    selection layer
+    resize layer
+the problem is that some things need scaling
+    such as the drawing layer
+others only need translation
+    such as the grid
+so we probably want the layer itself to handle that
+but we want to put as much as possible on the main Window
+    also, if the canvas isn't controlling the grid anymore
+    then this is a problem
+    as we might have mutliple canvasses
+    with multiple grids
+    so how do we do it?
+        have one set of everything? and just swap out their target?
+    or have some container class, that is the overarching controller?
+        and can be swapped out by the main window?
+    i like the single version of everything
+        so like MainWindow.currentCanvas still?
+        but currentCanvas will be a layer too?
+        currentCanvas no longer owns things like grid
+        so it doesn't make sense for it to own its properties
+        maybe mainWindow should own the grid properties?
+        and try and make mainWindow global?
+        so we don't have a currentCanvas?
+        but maybe we still need some kind of container, for the drawing layers?
+        it's handy
+            especially for the tools
+            and the events
+        so maybe currentCanvas is still a thing
+            and it does contain all the different layers still
+            and can be swapped out if necessary
+            in that case, maybe a lot of the layers can directly reference the canvas
+            and prefabs can swap out for a new canvas
+                easier than having to temporarily store the state of the canvas? not really
+                downside is that the canvas will now need to scale its own stuff
+                i.e. will have to give a new transformationMatrix to go from device space to drawing space
+                rather than the canvas itself being scaled
+                im not sure i mind that 
+                but it is nice just to go canvas.transformationMatrix
+                although we can now go canvas.drawingSpaceToDeviceSpace
+                    and canvas.deviceSpaceToDrawingSpace
+                maybe we have the best of both
+                only one canvas
+                    that is owned by the main window
+                    that can be loaded into for prefabs
+                we can now just call this 'canvas' instead of 'currentCanvas'
+                mainWindow still needs to be a thing
+                    as it handles the property panels, toolbox, etc
+                sorted!

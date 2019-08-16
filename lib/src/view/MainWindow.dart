@@ -39,6 +39,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     addChild(_selectionLayer);
 
     _toolbox = Toolbox();
+    addChild(_toolbox);
 
     _canvasEvents = CanvasMouseEventsController(_toolbox, _canvas);
     _canvasEvents.detectMouseOverVertex = true;
