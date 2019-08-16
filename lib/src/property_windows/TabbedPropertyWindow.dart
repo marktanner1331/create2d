@@ -4,17 +4,14 @@ import '../Styles.dart';
 
 import '../widgets/CloseButton.dart';
 import '../widgets/TabButtonRow.dart';
+import '../helpers/DraggableController.dart';
 
 import './PropertyWindow.dart';
 import './CanvasPropertiesWindow.dart';
 
 class TabbedPropertyWindow extends Sprite {
-  TabbedPropertyWindow _instance;
-
   Sprite _titleBar;
-  Point _titleBarMouseOffset = Point(0, 0);
-  EventStreamSubscription<MouseEvent> _stageMoveSubscription;
-  EventStreamSubscription<MouseEvent> _stageUpSubscription;
+  DraggableController _draggableController;
 
   TextField _titleLabel;
   CloseButton _closeButton;
@@ -28,13 +25,11 @@ class TabbedPropertyWindow extends Sprite {
   num get preferredHeight => 500;
 
   TabbedPropertyWindow() {
-    assert(_instance == null);
-    _instance = this;
-    
     _titleBar = Sprite()
-      ..mouseCursor = MouseCursor.POINTER
-      ..onMouseDown.listen(_onTitleMouseDown);
+      ..mouseCursor = MouseCursor.POINTER;
     addChild(_titleBar);
+
+    _draggableController = DraggableController(this, _titleBar);
 
     _titleLabel = TextField()
       ..x = 5
@@ -91,25 +86,6 @@ class TabbedPropertyWindow extends Sprite {
   void addTab(PropertyWindow propertyWindow) {
     _tabButtons.addTab(propertyWindow.modelName, propertyWindow.displayName);
     _tabs[propertyWindow.modelName] = propertyWindow;
-  }
-
-  void _onTitleMouseDown(_) {
-    _titleBarMouseOffset = Point(parent.mouseX - x, parent.mouseY - y);
-    _stageMoveSubscription = stage.onMouseMove.listen(stageMove);
-    _stageUpSubscription = stage.onMouseUp.listen(stageUp);
-  }
-
-  void stageMove(_) {
-    x = parent.mouseX - _titleBarMouseOffset.x;
-    y = parent.mouseY - _titleBarMouseOffset.y;
-  }
-
-  void stageUp(_) {
-    _stageUpSubscription.cancel();
-    _stageUpSubscription = null;
-
-    _stageMoveSubscription.cancel();
-    _stageMoveSubscription = null;
   }
 
   void _refresh() {
