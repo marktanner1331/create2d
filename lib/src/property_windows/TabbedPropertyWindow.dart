@@ -8,6 +8,7 @@ import '../helpers/DraggableController.dart';
 
 import './PropertyWindow.dart';
 import './CanvasPropertiesWindow.dart';
+import './ContextProperties.dart';
 
 class TabbedPropertyWindow extends Sprite {
   Sprite _titleBar;
@@ -58,6 +59,7 @@ class TabbedPropertyWindow extends Sprite {
     addChild(_inner);
     
     addTab(CanvasPropertiesWindow());
+    addTab(ContextPropertiesWindow());
     switchToTab(_tabs[_tabs.keys.first].modelName);
 
     _refresh();

@@ -5,6 +5,8 @@ import '../tools/ITool.dart';
 import '../widgets/ToolboxButton.dart';
 import '../helpers/DraggableController.dart';
 
+import '../property_windows/ContextProperties.dart';
+
 import '../Styles.dart';
 
 class Toolbox extends Sprite {
@@ -18,6 +20,8 @@ class Toolbox extends Sprite {
 
   num _panelWidth = 50;
   num _panelHeight = 400;
+
+  static ITool _currentTool;
 
   Toolbox() {
     assert(_instance == null);
@@ -61,6 +65,8 @@ class Toolbox extends Sprite {
 
     _line = LineTool();
     _addButtonForTool(_line)..y = deltaY;
+
+    currentTool = _line;
   }
 
   ToolboxButton _addButtonForTool(ITool tool) {
@@ -73,6 +79,11 @@ class Toolbox extends Sprite {
   }
 
   static ITool get currentTool {
-    return _line;
+    return _currentTool;
+  }
+
+  static void set currentTool(ITool value) {
+    _currentTool = value;
+    ContextPropertiesWindow.currentObject = _currentTool;
   }
 }
