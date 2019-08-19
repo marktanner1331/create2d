@@ -25,8 +25,8 @@ class CanvasPropertiesWindow extends PropertyWindow {
 
   @override
   void onEnter() {
-    _grid.myGridProperties = MainWindow.currentCanvas;
-    _snapping.myGridProperties = MainWindow.currentCanvas;
+    _grid.myGridProperties = MainWindow.canvas;
+    _snapping.myGridProperties = MainWindow.canvas;
   }
 
   @override

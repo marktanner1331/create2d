@@ -8,17 +8,21 @@ import '../helpers/DraggableController.dart';
 import '../Styles.dart';
 
 class Toolbox extends Sprite {
+  static Toolbox _instance;
+  static LineTool _line;
+
   Sprite _titleBar;
   DraggableController _draggableController;
 
   TextField _titleLabel;
 
-  LineTool _line;
-
   num _panelWidth = 50;
   num _panelHeight = 400;
 
   Toolbox() {
+    assert(_instance == null);
+    _instance = this;
+
     _titleBar = Sprite()..mouseCursor = MouseCursor.POINTER;
     addChild(_titleBar);
 
@@ -68,7 +72,7 @@ class Toolbox extends Sprite {
     return button;
   }
 
-  ITool get currentTool {
+  static ITool get currentTool {
     return _line;
   }
 }

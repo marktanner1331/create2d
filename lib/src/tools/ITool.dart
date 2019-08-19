@@ -1,7 +1,5 @@
 import 'package:stagexl/stagexl.dart';
 
-import '../view/Canvas.dart';
-
 abstract class ITool {
   //when set to true, the tool is active
   //it receives mouse updates from the canvas such as onMouseMove

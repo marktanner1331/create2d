@@ -6,21 +6,11 @@ import '../model/GridDisplayType.dart';
 import '../view/Canvas.dart';
 import '../ErrorLogger.dart';
 
-import 'dart:math' as math;
-
 class Grid extends Sprite {
-  //TODO
-  //expose interface for snapping
-
   Canvas _canvas;
-  EventStreamSubscription<Event> _gridChangedSubscription;
 
   Grid(Canvas canvas) {
     _canvas = canvas;
-  }
-
-  void dispose() {
-    _gridChangedSubscription.cancel();
   }
 
   void refresh() {
@@ -40,7 +30,8 @@ class Grid extends Sprite {
             _refreshIsometricDots();
             break;
           default:
-            ErrorLogger.warn("unknown grid display type: ${_canvas.gridDisplayType}");
+            ErrorLogger.warn(
+                "unknown grid display type: ${_canvas.gridDisplayType}");
             return;
         }
         break;
@@ -53,19 +44,21 @@ class Grid extends Sprite {
             _refreshSquareDots();
             break;
           default:
-            ErrorLogger.warn("unknown grid display type: ${_canvas.gridDisplayType}");
+            ErrorLogger.warn(
+                "unknown grid display type: ${_canvas.gridDisplayType}");
             return;
         }
         break;
       default:
-        ErrorLogger.warn("unknown grid geometry type: ${_canvas.gridGeometryType}");
+        ErrorLogger.warn(
+            "unknown grid geometry type: ${_canvas.gridGeometryType}");
         return;
     }
   }
 
   //gets the closest grid point to the given point
   Point getClosestPoint(num x, num y) {
-    switch(_canvas.gridGeometryType) {
+    switch (_canvas.gridGeometryType) {
       case GridGeometryType.Square:
         return _getClosestSquarePoint(x, y);
       case GridGeometryType.Isometric:
@@ -88,12 +81,12 @@ class Grid extends Sprite {
 
     //if its an even line the y needs to be shifted up by half a step
     num cy;
-    if(isEven) {
+    if (isEven) {
       y -= _canvas.gridStep / 2;
 
       //find the closest horizontal line
       cy = y - (y % _canvas.gridStep);
-      if((y - cy) * 2 > _canvas.gridStep) {
+      if ((y - cy) * 2 > _canvas.gridStep) {
         cy += _canvas.gridStep;
       }
 
@@ -101,7 +94,7 @@ class Grid extends Sprite {
     } else {
       //find the closest horizontal line
       cy = y - (y % _canvas.gridStep);
-      if((y - cy) * 2 > _canvas.gridStep) {
+      if ((y - cy) * 2 > _canvas.gridStep) {
         cy += _canvas.gridStep;
       }
     }
@@ -112,71 +105,76 @@ class Grid extends Sprite {
   Point _getClosestSquarePoint(num x, num y) {
     //find the closest vertical line
     num cx = x - (x % _canvas.gridStep);
-    if((x - cx) * 2 > _canvas.gridStep) {
+    if ((x - cx) * 2 > _canvas.gridStep) {
       cx += _canvas.gridStep;
     }
-    
+
     //find the closest horizontal line
     num cy = y - (y % _canvas.gridStep);
-    if((y - cy) * 2 > _canvas.gridStep) {
+    if ((y - cy) * 2 > _canvas.gridStep) {
       cy += _canvas.gridStep;
     }
-    
+
     return Point(cx, cy);
   }
 
   void _refreshSquareLines() {
-    num xDelta = _canvas.gridStep;
-    while (xDelta < _canvas.canvasWidth) {
+    num gridStep = _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
+
+    num xDelta = gridStep;
+    while (xDelta < _canvas.width) {
       graphics.beginPath();
       graphics.moveTo(xDelta, 0);
-      graphics.lineTo(xDelta, _canvas.canvasHeight);
+      graphics.lineTo(xDelta, _canvas.height);
       graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
       graphics.closePath();
 
-      xDelta += _canvas.gridStep;
+      xDelta += gridStep;
     }
 
-    num yDelta = _canvas.gridStep;
-    while (yDelta < _canvas.canvasHeight) {
+    num yDelta = gridStep;
+    while (yDelta < _canvas.height) {
       graphics.beginPath();
       graphics.moveTo(0, yDelta);
-      graphics.lineTo(_canvas.canvasWidth, yDelta);
+      graphics.lineTo(_canvas.width, yDelta);
       graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
       graphics.closePath();
 
-      yDelta += _canvas.gridStep;
+      yDelta += gridStep;
     }
   }
 
   void _refreshSquareDots() {
-    num yDelta = _canvas.gridStep;
+    num gridStep = _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
 
-    while (yDelta < _canvas.canvasHeight) {
-      num xDelta = _canvas.gridStep;
-      while (xDelta < _canvas.canvasWidth) {
+    num yDelta = 0;
+
+    while (yDelta <= _canvas.height + 1) {
+      num xDelta = 0;
+
+      while (xDelta <= _canvas.width + 1) {
         graphics.beginPath();
         graphics.circle(xDelta, yDelta, _canvas.gridThickness);
-        graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
+        graphics.fillColor(_canvas.gridColor);
         graphics.closePath();
 
-        xDelta += _canvas.gridStep;
+        xDelta += gridStep;
       }
 
-      yDelta += _canvas.gridStep;
+      yDelta += gridStep;
     }
   }
 
   void _refreshIsometricLines() {
-    num horizontalStep = 0.866 * _canvas.gridStep;
+    num horizontalStep = 0.866 * _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
     num doubleHorizontalStep = horizontalStep * 2;
-    num verticalStep = _canvas.gridStep;
+    num verticalStep = _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
 
     //xDelta is the position along the top of the screen
     num xDelta = horizontalStep;
-    while (xDelta <= _canvas.canvasWidth) {
+    while (xDelta <= _canvas.width) {
       graphics.moveTo(xDelta, 0);
-      graphics.lineTo(xDelta, _canvas.canvasHeight);
+      graphics.lineTo(xDelta, _canvas.height);
       graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
       xDelta += horizontalStep;
@@ -186,7 +184,7 @@ class Grid extends Sprite {
 
     //yDelta is the position along the left edge of the screen
     num yDelta = verticalStep / 2;
-    while (xDelta <= _canvas.canvasWidth && yDelta <= _canvas.canvasHeight) {
+    while (xDelta <= _canvas.width && yDelta <= _canvas.height) {
       graphics.moveTo(0, yDelta);
       graphics.lineTo(xDelta, 0);
       graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
@@ -195,13 +193,13 @@ class Grid extends Sprite {
       yDelta += verticalStep;
     }
 
-    if (xDelta >= _canvas.canvasWidth) {
+    if (xDelta >= _canvas.width) {
       //yDelta2 is the position along the right edge of the screen
-      num yDelta2 = yDelta - _canvas.canvasWidth * 0.577;
+      num yDelta2 = yDelta - _canvas.width * 0.577;
 
-      while (yDelta <= _canvas.canvasHeight) {
+      while (yDelta <= _canvas.height) {
         graphics.moveTo(0, yDelta);
-        graphics.lineTo(_canvas.canvasWidth, yDelta2);
+        graphics.lineTo(_canvas.width, yDelta2);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         yDelta += verticalStep;
@@ -214,25 +212,25 @@ class Grid extends Sprite {
       //now we run along the bottom side
       //xDelta2 is the position along the bottom of the screen
       num xDelta2 =
-          _canvas.canvasWidth - (_canvas.canvasHeight - yDelta2) * 1.732;
+          _canvas.width - (_canvas.height - yDelta2) * 1.732;
 
-      while (xDelta2 <= _canvas.canvasWidth) {
-        graphics.moveTo(xDelta2, _canvas.canvasHeight);
-        graphics.lineTo(_canvas.canvasWidth, yDelta2);
+      while (xDelta2 <= _canvas.width) {
+        graphics.moveTo(xDelta2, _canvas.height);
+        graphics.lineTo(_canvas.width, yDelta2);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta2 += doubleHorizontalStep;
         yDelta2 += verticalStep;
       }
     } else {
-       //we have hit the bottom left of the screen
+      //we have hit the bottom left of the screen
       //so we go along the top and bottom now
 
       //xDelta2 is the position along the bottom of the screen
-      num xDelta2 = xDelta - _canvas.canvasHeight * 1.732;
-      while(xDelta <= _canvas.canvasWidth) {
+      num xDelta2 = xDelta - _canvas.height * 1.732;
+      while (xDelta <= _canvas.width) {
         graphics.moveTo(xDelta, 0);
-        graphics.lineTo(xDelta2, _canvas.canvasHeight);
+        graphics.lineTo(xDelta2, _canvas.height);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta += doubleHorizontalStep;
@@ -240,10 +238,11 @@ class Grid extends Sprite {
       }
 
       //we have now hit the right edge, so we need to start going down it
-      num yDelta2 = _canvas.canvasHeight - (_canvas.canvasWidth - xDelta2) * 0.577;
-      while (xDelta2 <= _canvas.canvasWidth) {
-        graphics.moveTo(xDelta2, _canvas.canvasHeight);
-        graphics.lineTo(_canvas.canvasWidth, yDelta2);
+      num yDelta2 =
+          _canvas.height - (_canvas.width - xDelta2) * 0.577;
+      while (xDelta2 <= _canvas.width) {
+        graphics.moveTo(xDelta2, _canvas.height);
+        graphics.lineTo(_canvas.width, yDelta2);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta2 += doubleHorizontalStep;
@@ -256,15 +255,15 @@ class Grid extends Sprite {
     //the vertical lines start one horizontal step in
     //and then we get diagonal lines on every other vertical line
     //so we set xDelta to be the last vertical line that gets a horizontal line
-    xDelta = _canvas.canvasWidth -
-        ((_canvas.canvasWidth - horizontalStep) % (horizontalStep * 2));
+    xDelta = _canvas.width -
+        ((_canvas.width - horizontalStep) % (horizontalStep * 2));
 
     //then we find its corresonding point on the right edge
-    num yDelta2 = (_canvas.canvasWidth - xDelta) * 0.577;
+    num yDelta2 = (_canvas.width - xDelta) * 0.577;
 
-    while (xDelta >= 0 && yDelta2 <= _canvas.canvasHeight) {
+    while (xDelta >= 0 && yDelta2 <= _canvas.height) {
       graphics.moveTo(xDelta, 0);
-      graphics.lineTo(_canvas.canvasWidth, yDelta2);
+      graphics.lineTo(_canvas.width, yDelta2);
       graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
       xDelta -= doubleHorizontalStep;
@@ -274,9 +273,9 @@ class Grid extends Sprite {
     //if we hit the left edge first, we start going down the screen
     if (xDelta < 0) {
       yDelta = verticalStep / 2;
-      while (yDelta2 <= _canvas.canvasHeight) {
+      while (yDelta2 <= _canvas.height) {
         graphics.moveTo(0, yDelta);
-        graphics.lineTo(_canvas.canvasWidth, yDelta2);
+        graphics.lineTo(_canvas.width, yDelta2);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         yDelta += verticalStep;
@@ -285,11 +284,11 @@ class Grid extends Sprite {
 
       //now we have hit the bottom right corner
       //so we travel down the left edge and left along the bottom
-      num xDelta2 = (_canvas.canvasHeight - yDelta) * 1.732;
-      
+      num xDelta2 = (_canvas.height - yDelta) * 1.732;
+
       while (xDelta2 >= 0) {
         graphics.moveTo(0, yDelta);
-        graphics.lineTo(xDelta2, _canvas.canvasHeight);
+        graphics.lineTo(xDelta2, _canvas.height);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta2 -= doubleHorizontalStep;
@@ -300,11 +299,11 @@ class Grid extends Sprite {
       //we now go along the top and bottom edges
 
       //xDelta2 is the position along the bottom of the screen
-      num xDelta2 = xDelta + _canvas.canvasHeight * 1.732;
+      num xDelta2 = xDelta + _canvas.height * 1.732;
 
-      while(xDelta >= 0) {
+      while (xDelta >= 0) {
         graphics.moveTo(xDelta, 0);
-        graphics.lineTo(xDelta2, _canvas.canvasHeight);
+        graphics.lineTo(xDelta2, _canvas.height);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta -= doubleHorizontalStep;
@@ -313,9 +312,9 @@ class Grid extends Sprite {
 
       //and finally we go along the left edge and bottom edge
       yDelta = verticalStep / 2;
-      while(yDelta < _canvas.canvasHeight) {
+      while (yDelta < _canvas.height) {
         graphics.moveTo(0, yDelta);
-        graphics.lineTo(xDelta2, _canvas.canvasHeight);
+        graphics.lineTo(xDelta2, _canvas.height);
         graphics.strokeColor(_canvas.gridColor, _canvas.gridThickness);
 
         xDelta2 -= doubleHorizontalStep;
@@ -325,20 +324,20 @@ class Grid extends Sprite {
   }
 
   void _refreshIsometricDots() {
-    num horizontalStep = 0.866 * _canvas.gridStep;
+    num horizontalStep = 0.866 * _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
     num doubleHorizontalStep = horizontalStep * 2;
-    num verticalStep = _canvas.gridStep;
+    num verticalStep = _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
 
     //we do this in two parts
     //first every other vertical line
     //then those in between
     //this helps as we don't need to worry about yDelta's starting at different places
-    
+
     num xDelta = 0;
-    while(xDelta <= _canvas.canvasWidth) {
+    while (xDelta <= _canvas.width) {
       num yDelta = verticalStep / 2;
 
-      while(yDelta <= _canvas.canvasHeight) {
+      while (yDelta <= _canvas.height) {
         graphics.beginPath();
         graphics.circle(xDelta, yDelta, _canvas.gridThickness);
         graphics.fillColor(_canvas.gridColor);
@@ -355,10 +354,10 @@ class Grid extends Sprite {
     //its the only change
 
     xDelta = horizontalStep;
-    while(xDelta <= _canvas.canvasWidth) {
+    while (xDelta <= _canvas.width) {
       num yDelta = 0;
 
-      while(yDelta <= _canvas.canvasHeight) {
+      while (yDelta <= _canvas.height) {
         graphics.beginPath();
         graphics.circle(xDelta, yDelta, _canvas.gridThickness);
         graphics.fillColor(_canvas.gridColor);

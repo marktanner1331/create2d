@@ -30,11 +30,9 @@ class CanvasMouseEventsController extends EventDispatcher {
   ///and will fire the onMouseOverVertex event
   Vertex get currentMouseOverVertex => _currentMouseOverVertex;
 
-  Toolbox _toolbox;
   Canvas _canvas;
 
-  CanvasMouseEventsController(Toolbox toolbox, Canvas canvas) {
-    this._toolbox = toolbox;
+  CanvasMouseEventsController(Canvas canvas) {
     this._canvas = canvas;
 
     _canvas.onMouseDown.listen(_onMouseDown);
@@ -45,6 +43,9 @@ class CanvasMouseEventsController extends EventDispatcher {
   ///returns the current mouse point, with all the different snapping options applied to it
   Point _getSnappedMousePoint() {
     Point p = _canvas.mousePosition;
+
+    p.x *= _canvas.canvasSpaceToDrawingSpace;
+    p.y *= _canvas.canvasSpaceToDrawingSpace;
 
     if (_canvas.snapToGrid) {
       return _canvas.grid.getClosestPoint(p.x, p.y);
@@ -63,13 +64,17 @@ class CanvasMouseEventsController extends EventDispatcher {
 
   void _onMouseDown(MouseEvent e) {
     Point p = _getSnappedMousePoint();
-    _toolbox.currentTool.onMouseDown(p.x, p.y);
+    Toolbox.currentTool.onMouseDown(p.x, p.y);
   }
 
   void _onMouseMove(MouseEvent e) {
     if (detectMouseOverVertex) {
+      Point p = _canvas.mousePosition;
+      p.x *= _canvas.canvasSpaceToDrawingSpace;
+      p.y *= _canvas.canvasSpaceToDrawingSpace;
+      
       Vertex v = _canvas.currentGraphics
-          .getFirstVertexUnderPoint(_canvas.mousePosition, 100);
+          .getFirstVertexUnderPoint(p, 100);
 
       if (v != _currentMouseOverVertex) {
         _currentMouseOverVertex = v;
@@ -77,14 +82,14 @@ class CanvasMouseEventsController extends EventDispatcher {
       }
     }
 
-    if (_toolbox.currentTool.isActive) {
+    if (Toolbox.currentTool.isActive) {
       Point p = _getSnappedMousePoint();
-      _toolbox.currentTool.onMouseMove(p.x, p.y);
+      Toolbox.currentTool.onMouseMove(p.x, p.y);
     }
   }
 
   void _onMouseUp(MouseEvent e) {
     Point p = _getSnappedMousePoint();
-    _toolbox.currentTool.onMouseUp(p.x, p.y);
+    Toolbox.currentTool.onMouseUp(p.x, p.y);
   }
 }

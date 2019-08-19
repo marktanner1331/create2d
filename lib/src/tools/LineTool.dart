@@ -15,10 +15,10 @@ class LineTool extends ITool {
     super.onMouseDown(x, y);
 
     _currentLine = Line(Vertex(x, y), Vertex(x, y));
-    _currentGraphics = MainWindow.currentCanvas.generateTemporaryLayer();
+    _currentGraphics = MainWindow.canvas.generateTemporaryLayer();
 
     _currentGraphics.addShape(_currentLine, false);
-    MainWindow.currentCanvas.invalidateVertices();
+    MainWindow.canvas.invalidateVertices();
   }
 
   @override
@@ -36,9 +36,9 @@ class LineTool extends ITool {
     super.onMouseUp(x, y);
 
     _currentLine = null;
-    MainWindow.currentCanvas.mergeInTemporaryLayer(_currentGraphics);
+    MainWindow.canvas.mergeInTemporaryLayer(_currentGraphics);
     _currentGraphics = null;
-    MainWindow.currentCanvas.invalidateVertices();
+    MainWindow.canvas.invalidateVertices();
   }
 
   @override
@@ -48,6 +48,6 @@ class LineTool extends ITool {
     _currentLine.end.x = x;
     _currentLine.end.y = y;
 
-    MainWindow.currentCanvas.invalidateVertexPositions();
+    MainWindow.canvas.invalidateVertexPositions();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:stagexl/stagexl.dart';
-import './SetSizeMixin.dart';
+import '../helpers/SetSizeMixin.dart';
 import '../Styles.dart';
 
 class ToolboxButton extends Sprite with SetSizeMixin {
@@ -39,7 +39,7 @@ class ToolboxButton extends Sprite with SetSizeMixin {
   }
 
   @override
-  void refresh() {
+  void setSize(num width, num height) {
     _redrawBG();
 
     num ratio1 = width / height;

@@ -1,17 +1,14 @@
-import 'dart:collection';
-
 import 'package:stagexl/stagexl.dart';
 
+import './Canvas.dart';
 import '../stateful_graphics/Vertex.dart';
 
-typedef Matrix GetMatrix();
-
 class SelectionLayer extends Sprite {
-  GetMatrix _vectorToUserSpace;
+  Canvas _canvas;
   List<Vertex> _selectedVertices;
 
-  SelectionLayer(GetMatrix vectorToUserSpace) {
-    _vectorToUserSpace = vectorToUserSpace;
+  SelectionLayer(Canvas canvas) {
+    _canvas = canvas;
     _selectedVertices = List();
 
     mouseEnabled = false;
@@ -43,11 +40,10 @@ class SelectionLayer extends Sprite {
     graphics.clear();
 
     for (Vertex v in _selectedVertices) {
-      Point p = _vectorToUserSpace().transformPoint(v);
-
       graphics
         ..beginPath()
-        ..circle(p.x, p.y, 2)
+        ..circle(v.x * _canvas.drawingSpaceToCanvasSpace,
+            v.y * _canvas.drawingSpaceToCanvasSpace, 2)
         ..fillColor(0xffaa0000)
         ..closePath();
     }
