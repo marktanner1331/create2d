@@ -31,6 +31,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     _propertyWindow = TabbedPropertyWindow();
     addChild(_propertyWindow);
+
+    _toolbox.selectFirstTool();
   }
 
   @override

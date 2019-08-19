@@ -65,7 +65,9 @@ class Toolbox extends Sprite {
 
     _line = LineTool();
     _addButtonForTool(_line)..y = deltaY;
+  }
 
+  void selectFirstTool() {
     currentTool = _line;
   }
 
@@ -78,9 +80,7 @@ class Toolbox extends Sprite {
     return button;
   }
 
-  static ITool get currentTool {
-    return _currentTool;
-  }
+  static ITool get currentTool => _currentTool;
 
   static void set currentTool(ITool value) {
     _currentTool = value;
