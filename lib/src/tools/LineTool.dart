@@ -54,4 +54,7 @@ class LineTool extends ITool with LinePropertiesMixin {
       ..width = tf.textWidth
       ..height = tf.textHeight;
   }
+
+  @override
+  String get name => "Line";
 }

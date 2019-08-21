@@ -13,8 +13,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static Canvas _canvas;
   static Canvas get canvas => _canvas;
 
-  static Toolbox _toolbox;
-
   TabbedPropertyWindow _propertyWindow;
 
   static MainWindow _instance;
@@ -26,13 +24,13 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _canvas = Canvas();
     addChild(_canvas);
 
-    _toolbox = Toolbox();
-    addChild(_toolbox);
+    Toolbox();
+    addChild(Toolbox.instance);
 
     _propertyWindow = TabbedPropertyWindow();
     addChild(_propertyWindow);
 
-    _toolbox.selectFirstTool();
+    Toolbox.selectFirstTool();
   }
 
   @override
@@ -47,7 +45,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x = width - _propertyWindow.width - 5
       ..y = 5;
 
-    _toolbox
+    Toolbox.instance
       ..x = 5
       ..y = 5;
   }

@@ -4,7 +4,9 @@ import '../Styles.dart';
 
 class ToolboxButton extends Sprite with SetSizeMixin {
   DisplayObject _child;
+
   bool _isHovered = false;
+  bool _isSelected = false;
 
   num _width;
   num _height;
@@ -29,13 +31,18 @@ class ToolboxButton extends Sprite with SetSizeMixin {
     setSize(_child.width, _child.height);
   }
 
+  void set isSelected(bool value) {
+    _isSelected = value;
+    _redrawBG();
+  }
+
   void _redrawBG() {
     graphics
       ..clear()
       ..beginPath()
       ..rect(0, 0, _width, _height)
       ..fillColor(
-          _isHovered ? Styles.toolButtonHovered : Styles.toolButtonUnhovered)
+          _isHovered || _isSelected ? Styles.toolButtonHovered : Styles.toolButtonUnhovered)
       ..closePath()
       ..rect(0, 0, _width, _height)
       ..strokeColor(0xff000000, 2);

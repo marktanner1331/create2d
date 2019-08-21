@@ -11,6 +11,10 @@ import '../Styles.dart';
 
 class Toolbox extends Sprite {
   static Toolbox _instance;
+  static Toolbox get instance => _instance;
+  static ITool _currentTool;
+  static Map<String, ToolboxButton> _buttons;
+
   static LineTool _line;
 
   Sprite _titleBar;
@@ -21,11 +25,11 @@ class Toolbox extends Sprite {
   num _panelWidth = 50;
   num _panelHeight = 400;
 
-  static ITool _currentTool;
-
   Toolbox() {
     assert(_instance == null);
     _instance = this;
+
+    _buttons = Map();
 
     _titleBar = Sprite()..mouseCursor = MouseCursor.POINTER;
     addChild(_titleBar);
@@ -67,15 +71,17 @@ class Toolbox extends Sprite {
     _addButtonForTool(_line)..y = deltaY;
   }
 
-  void selectFirstTool() {
+  static void selectFirstTool() {
     currentTool = _line;
   }
 
   ToolboxButton _addButtonForTool(ITool tool) {
     ToolboxButton button = ToolboxButton(tool.getIcon());
-
+    
     button.setSize(25, 25);
     addChild(button);
+
+    _buttons[tool.name] = button;
 
     return button;
   }
@@ -83,7 +89,13 @@ class Toolbox extends Sprite {
   static ITool get currentTool => _currentTool;
 
   static void set currentTool(ITool value) {
+    if(_currentTool != null) {
+      _buttons[_currentTool.name].isSelected = false;
+    }
+
     _currentTool = value;
+    _buttons[_currentTool.name].isSelected = true;
+
     ContextPropertiesWindow.currentObject = _currentTool;
   }
 }

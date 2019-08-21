@@ -20,4 +20,6 @@ abstract class ITool with ContextPropertyMixin {
 
   //only called if _isActive is set to true
   void onMouseMove(num x, num y);
+
+  String get name;
 }
