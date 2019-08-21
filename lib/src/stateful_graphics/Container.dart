@@ -1,3 +1,5 @@
+import 'package:stagexl/src/drawing.dart';
+
 import './Vertex.dart';
 import './IShape.dart';
 import 'package:stagexl/src/geom/point.dart';
@@ -100,5 +102,12 @@ class Container extends IShape {
     }
 
     return vertices;
+  }
+
+  @override
+  void renderToStageXL(Graphics graphics) {
+    for(IShape shape in _shapes) {
+      shape.renderToStageXL(graphics);
+    }
   }
 }

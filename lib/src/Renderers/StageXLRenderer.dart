@@ -16,16 +16,6 @@ class StageXLRenderer {
 
   ///renders the given container and all of its children onto the canvas
   void renderContainer(Container container) {
-    for(IShape shape in container.shapes) {
-      if(shape is Line) {
-        _renderLine(shape);
-      }
-    }
-  }
-
-  void _renderLine(Line line) {
-    _canvas.graphics.moveTo(line.start.x, line.start.y);
-    _canvas.graphics.lineTo(line.end.x, line.end.y);
-    _canvas.graphics.strokeColor(line.strokeColor);
+    container.renderToStageXL(_canvas.graphics);
   }
 }

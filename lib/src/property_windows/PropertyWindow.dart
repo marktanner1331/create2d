@@ -1,7 +1,7 @@
 import 'package:stagexl/stagexl.dart';
 import 'package:meta/meta.dart';
 
-import './groups/PropertyGroup.dart';
+import '../property_groups/PropertyGroup.dart';
 
 abstract class PropertyWindow extends Sprite {
   String get displayName;
@@ -33,7 +33,8 @@ abstract class PropertyWindow extends Sprite {
   void addPropertyGroup(PropertyGroup group) {
     group
       ..x = 3
-      ..isOpen = true;
+      ..isOpen = true
+      ..preferredWidth = _preferredWidth - 6;
     _groups.add(group);
     addChild(group);
 

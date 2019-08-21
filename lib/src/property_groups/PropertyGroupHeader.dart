@@ -1,6 +1,6 @@
 import 'package:stagexl/stagexl.dart';
 
-import '../../Styles.dart';
+import '../Styles.dart';
 import './PropertyGroup.dart';
 
 class PropertyGroupHeader extends Sprite {

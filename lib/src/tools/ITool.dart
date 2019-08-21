@@ -1,6 +1,8 @@
 import 'package:stagexl/stagexl.dart';
 
-abstract class ITool {
+import '../property_mixins/ContextPropertyMixin.dart';
+
+abstract class ITool with ContextPropertyMixin {
   //when set to true, the tool is active
   //it receives mouse updates from the canvas such as onMouseMove
   bool _isActive = false;

@@ -1,10 +1,10 @@
 import './PropertyGroup.dart';
-import '../../property_mixins/GridPropertiesMixin.dart';
-import '../../model/GridDisplayType.dart';
-import '../../model/GridGeometryType.dart';
+import '../property_mixins/GridPropertiesMixin.dart';
+import '../model/GridDisplayType.dart';
+import '../model/GridGeometryType.dart';
 
-import '../../widgets/NumberFieldWithLabel.dart';
-import '../../widgets/RadioButtonGroup.dart';
+import '../widgets/NumberFieldWithLabel.dart';
+import '../widgets/RadioButtonGroup.dart';
 
 class GridPropertiesGroup extends PropertyGroup {
   GridPropertiesMixin _properties;
@@ -15,7 +15,7 @@ class GridPropertiesGroup extends PropertyGroup {
   RadioButtonGroup _displayType;
   RadioButtonGroup _geometryType;
 
-  GridPropertiesGroup(num preferredWidth) : super("Grid", preferredWidth) {
+  GridPropertiesGroup() : super("Grid") {
     _thickness = NumberFieldWithLabel("Thickness");
     _thickness.onValueChanged.listen(_onThicknessChanged);
     addChild(_thickness);

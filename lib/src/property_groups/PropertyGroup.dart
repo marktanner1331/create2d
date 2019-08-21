@@ -25,21 +25,19 @@ abstract class PropertyGroup extends Sprite {
   PropertyGroupHeader _header;
   Sprite _inner;
 
-  num _preferredWidth;
+  num _preferredWidth = 0;
   num get preferredWidth => _preferredWidth;
   void set preferredWidth(num value) {
     _preferredWidth = value;
     _redraw();
   }
 
-  PropertyGroup(String title, num preferredWidth) {
+  PropertyGroup(String title) {
     _title = title;
-    _preferredWidth = preferredWidth;
 
     _header = PropertyGroupHeader(this);
     _header.onMouseClick.listen(_onHeaderClick);
     super.addChild(_header);
-     _header.redraw();
 
     _inner = Sprite();
     _inner.y = _header.preferredHeight;
@@ -69,6 +67,7 @@ abstract class PropertyGroup extends Sprite {
   }
 
   void _redraw() {
+    _header.redraw();
     relayout();
   }
 

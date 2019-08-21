@@ -61,3 +61,16 @@ but we want to put as much as possible on the main Window
                 mainWindow still needs to be a thing
                     as it handles the property panels, toolbox, etc
                 sorted!
+
+
+mental dart code for dynamically crawling shapes to see what PropertyMixins they have
+can also put in a 'T extends PropertyMixin'
+    void main() {
+        hasType<Iterable>();
+    }
+
+    void hasType<T>() {
+        if(List() is T) {
+            print("yay");
+        }
+    }

@@ -1,7 +1,7 @@
 import './PropertyGroup.dart';
-import '../../property_mixins/SnappingPropertiesMixin.dart';
+import '../property_mixins/SnappingPropertiesMixin.dart';
 
-import '../../widgets/CheckboxWithLabel.dart';
+import '../widgets/CheckboxWithLabel.dart';
 
 class SnappingPropertiesGroup extends PropertyGroup {
   SnappingPropertiesMixin _properties;
@@ -9,7 +9,7 @@ class SnappingPropertiesGroup extends PropertyGroup {
   CheckboxWithLabel _grid;
   CheckboxWithLabel _vertex;
 
-  SnappingPropertiesGroup(num preferredWidth) : super("Grid", preferredWidth) {
+  SnappingPropertiesGroup() : super("Grid") {
     _grid = CheckboxWithLabel("Snap to grid");
     _grid.onCheckChanged.listen(_onGridChanged);
     addChild(_grid);

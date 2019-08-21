@@ -1,6 +1,6 @@
 import './PropertyWindow.dart';
-import './groups/GridPropertiesGroup.dart';
-import './groups/SnappingPropertiesGroup.dart';
+import '../property_groups/GridPropertiesGroup.dart';
+import '../property_groups/SnappingPropertiesGroup.dart';
 import '../view/MainWindow.dart';
 
 class CanvasPropertiesWindow extends PropertyWindow {
@@ -8,12 +8,12 @@ class CanvasPropertiesWindow extends PropertyWindow {
   SnappingPropertiesGroup _snapping;
 
   CanvasPropertiesWindow() {
-    _grid = GridPropertiesGroup(preferredWidth);
+    _grid = GridPropertiesGroup();
     _grid.isOpen = true;
     addPropertyGroup(_grid);
 
-    _snapping = SnappingPropertiesGroup(preferredWidth);
-    _snapping.isOpen = false;
+    _snapping = SnappingPropertiesGroup();
+    _snapping.isOpen = true;
     addPropertyGroup(_snapping);
   }
 

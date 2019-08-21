@@ -1,15 +1,7 @@
 import './Vertex.dart';
-import '../model/Properties.dart';
-import 'package:stagexl/src/geom/point.dart';
+import 'package:stagexl/stagexl.dart' show Point, Graphics;
 
 abstract class IShape {
-  int strokeColor;
-
-  //initializes the shape with default values from Properties.dart
-  IShape() {
-    this.strokeColor = Properties.strokeColor;
-  }
-
   ///returns true if the shape contains the given vertex
   bool hasVertex(Vertex vertex);
 
@@ -29,4 +21,6 @@ abstract class IShape {
 
   ///returns a collection containing all vertices used in the shape
   Iterable<Vertex> getVertices();
+
+  void renderToStageXL(Graphics graphics);
 }

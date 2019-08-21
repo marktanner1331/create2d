@@ -6,7 +6,9 @@ import '../stateful_graphics/Line.dart';
 import '../stateful_graphics/Vertex.dart';
 import '../stateful_graphics/Container.dart';
 
-class LineTool extends ITool {
+import '../property_mixins/LinePropertiesMixin.dart';
+
+class LineTool extends ITool with LinePropertiesMixin {
   Line _currentLine;
   Container _currentGraphics;
 
@@ -15,20 +17,12 @@ class LineTool extends ITool {
     super.onMouseDown(x, y);
 
     _currentLine = Line(Vertex(x, y), Vertex(x, y));
+    _currentLine.fromLinePropertiesMixin(this);
+
     _currentGraphics = MainWindow.canvas.generateTemporaryLayer();
-
     _currentGraphics.addShape(_currentLine, false);
-    MainWindow.canvas.invalidateVertices();
-  }
 
-  @override
-  DisplayObject getIcon() {
-    TextField tf = TextField("L");
-    
-    return tf
-      ..autoSize = TextFieldAutoSize.NONE
-      ..width = tf.textWidth
-      ..height = tf.textHeight;
+    MainWindow.canvas.invalidateVertices();
   }
 
   @override
@@ -49,5 +43,15 @@ class LineTool extends ITool {
     _currentLine.end.y = y;
 
     MainWindow.canvas.invalidateVertexPositions();
+  }
+
+  @override
+  DisplayObject getIcon() {
+    TextField tf = TextField("L");
+    
+    return tf
+      ..autoSize = TextFieldAutoSize.NONE
+      ..width = tf.textWidth
+      ..height = tf.textHeight;
   }
 }
