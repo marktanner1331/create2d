@@ -7,8 +7,6 @@ import '../widgets/TabButtonRow.dart';
 import '../helpers/DraggableController.dart';
 
 import './PropertyWindow.dart';
-import './CanvasPropertiesWindow.dart';
-import './ContextProperties.dart';
 
 class TabbedPropertyWindow extends Sprite {
   Sprite _titleBar;
@@ -25,7 +23,7 @@ class TabbedPropertyWindow extends Sprite {
   num get preferredWidth => 250;
   num get preferredHeight => 500;
 
-  TabbedPropertyWindow() {
+  TabbedPropertyWindow(String title) {
     _titleBar = Sprite()
       ..mouseCursor = MouseCursor.POINTER;
     addChild(_titleBar);
@@ -35,7 +33,7 @@ class TabbedPropertyWindow extends Sprite {
     _titleLabel = TextField()
       ..x = 5
       ..y = 2
-      ..text = "Properties"
+      ..text = title
       ..textColor = Styles.panelHeadText
       ..mouseEnabled = false
       ..autoSize = TextFieldAutoSize.NONE;
@@ -57,20 +55,18 @@ class TabbedPropertyWindow extends Sprite {
 
     _inner = Sprite();
     addChild(_inner);
-    
-    addTab(CanvasPropertiesWindow());
-    addTab(ContextPropertiesWindow());
-    switchToTab(_tabs[_tabs.keys.first].modelName);
-
-    _refresh();
   }
 
   void _onTabButtonChanged(_) {
     switchToTab(_tabButtons.selectedTabModelName);
   }
 
+  void switchToFirstTab() {
+    switchToTab(_tabs[_tabs.keys.first].modelName);
+  }
+
   void switchToTab(String modelName) {
-    if(numChildren == 1) {
+    if(_inner.numChildren == 1) {
       DisplayObject child = _inner.getChildAt(0);
       assert(child is PropertyWindow);
       (child as PropertyWindow).onExit();
@@ -90,7 +86,7 @@ class TabbedPropertyWindow extends Sprite {
     _tabs[propertyWindow.modelName] = propertyWindow;
   }
 
-  void _refresh() {
+  void relayout() {
     num panelWidth = preferredWidth;
     graphics
       ..clear()

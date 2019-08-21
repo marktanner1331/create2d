@@ -1,4 +1,4 @@
 mixin SnappingPropertiesMixin {
-  bool snapToGrid = true;
+  bool snapToGrid = false;
   bool snapToVertex = true;
 }

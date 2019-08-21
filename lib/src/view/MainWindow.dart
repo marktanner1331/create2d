@@ -7,6 +7,9 @@ import './Canvas.dart';
 import '../property_windows/TabbedPropertyWindow.dart';
 import '../helpers/AspectFit.dart';
 
+import '../property_windows/CanvasPropertiesWindow.dart';
+import '../property_windows/ContextProperties.dart';
+
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   int _backgroundColor = 0xff3333aa;
 
@@ -27,8 +30,13 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Toolbox();
     addChild(Toolbox.instance);
 
-    _propertyWindow = TabbedPropertyWindow();
+    _propertyWindow = TabbedPropertyWindow("Properties");
+    _propertyWindow.addTab(CanvasPropertiesWindow());
+    _propertyWindow.addTab(ContextPropertiesWindow());
+    _propertyWindow.relayout();
     addChild(_propertyWindow);
+
+    _propertyWindow.switchToFirstTab();
 
     Toolbox.selectFirstTool();
   }

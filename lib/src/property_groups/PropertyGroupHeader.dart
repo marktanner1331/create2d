@@ -13,7 +13,7 @@ class PropertyGroupHeader extends Sprite {
 
   PropertyGroupHeader(PropertyGroup group) {
     _myGroup = group;
-
+    
     _titleField = TextField()
       ..textColor = Styles.groupHeadText
       ..text = group.title

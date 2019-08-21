@@ -7,7 +7,7 @@ class LinePropertiesGroup extends PropertyGroup {
 
   NumberFieldWithLabel _thickness;
 
-  LinePropertiesGroup(LinePropertiesMixin myMixin) : super("Grid") {
+  LinePropertiesGroup(LinePropertiesMixin myMixin) : super("Line") {
     this._myMixin = myMixin;
 
     _thickness = NumberFieldWithLabel("Thickness");

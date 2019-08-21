@@ -9,7 +9,7 @@ class SnappingPropertiesGroup extends PropertyGroup {
   CheckboxWithLabel _grid;
   CheckboxWithLabel _vertex;
 
-  SnappingPropertiesGroup() : super("Grid") {
+  SnappingPropertiesGroup() : super("Snapping") {
     _grid = CheckboxWithLabel("Snap to grid");
     _grid.onCheckChanged.listen(_onGridChanged);
     addChild(_grid);

@@ -6,7 +6,7 @@ import '../model/GridGeometryType.dart';
 mixin GridPropertiesMixin {
   Grid get grid;
 
-   GridDisplayType _gridDisplayType = GridDisplayType.Dots;
+   GridDisplayType _gridDisplayType = GridDisplayType.None;
    GridDisplayType get gridDisplayType => _gridDisplayType;
    void set gridDisplayType(GridDisplayType value) {
     _gridDisplayType = value;

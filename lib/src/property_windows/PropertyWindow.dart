@@ -34,6 +34,7 @@ abstract class PropertyWindow extends Sprite {
     group
       ..x = 3
       ..isOpen = true
+      ..onIsOpenChanged.listen((_) => _relayoutGroups())
       ..preferredWidth = _preferredWidth - 6;
     _groups.add(group);
     addChild(group);
@@ -45,7 +46,7 @@ abstract class PropertyWindow extends Sprite {
     num deltaY = 0;
     for(PropertyGroup group in _groups) {
       group.y = deltaY;
-      deltaY += group.height;
+      deltaY += group.height + 2;
     }
   }
 
