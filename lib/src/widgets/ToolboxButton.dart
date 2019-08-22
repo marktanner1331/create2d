@@ -8,9 +8,6 @@ class ToolboxButton extends Sprite with SetSizeMixin {
   bool _isHovered = false;
   bool _isSelected = false;
 
-  num _width;
-  num _height;
-
   ToolboxButton(DisplayObject child) {
     this._child = child;
     addChild(_child);
@@ -40,18 +37,16 @@ class ToolboxButton extends Sprite with SetSizeMixin {
     graphics
       ..clear()
       ..beginPath()
-      ..rect(0, 0, _width, _height)
+      ..rect(0, 0, width, height)
       ..fillColor(
           _isHovered || _isSelected ? Styles.toolButtonHovered : Styles.toolButtonUnhovered)
       ..closePath()
-      ..rect(0, 0, _width, _height)
+      ..rect(0, 0, width, height)
       ..strokeColor(0xff000000, 2);
   }
 
   @override
-  void setSize(num width, num height) {
-    _width = width;
-    _height = height;
+  void refresh() {
     _redrawBG();
 
     num ratio1 = width / height;

@@ -12,6 +12,7 @@ import '../Styles.dart';
 class Toolbox extends Sprite {
   static Toolbox _instance;
   static Toolbox get instance => _instance;
+  
   static ITool _currentTool;
   static Map<String, ToolboxButton> _buttons;
 

@@ -69,18 +69,6 @@ class Canvas extends Sprite
     refreshCanvasBackground();
   }
 
-  ///this represents the size that the program wants us to display the canvas at
-  ///i am tracking these manually as i cant rely on the intrinsic width and height
-  /// there might be shapes outside the bounds of the canvas which will throw off its size
-  num _width = 0;
-  num _height = 0;
-
-  @override
-  num get width => _width;
-
-  @override
-  num get height => _height;
-
   ///represents both the xScale and yScale that maps from drawing space (using canvasWidth and canvasHeight)
   ///into canvas space (using width and height)
   num _drawingSpaceToCanvasSpace = 0;
@@ -117,7 +105,7 @@ class Canvas extends Sprite
 
   void refreshCanvasBackground() {
     graphics.clear();
-    graphics.rect(0, 0, _width, _height);
+    graphics.rect(0, 0, width, height);
     graphics.fillColor(backgroundColor);
   }
 
@@ -152,10 +140,7 @@ class Canvas extends Sprite
   }
 
   @override
-  void setSize(num width, num height) {
-    this._width = width;
-    this._height = height;
-
+  void refresh() {
     _drawingSpaceToCanvasSpace = width / canvasWidth;
     _canvasSpaceToDrawingSpace = canvasWidth / width;
     

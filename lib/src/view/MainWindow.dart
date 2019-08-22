@@ -10,6 +10,8 @@ import '../helpers/AspectFit.dart';
 import '../property_windows/CanvasPropertiesWindow.dart';
 import '../property_windows/ContextProperties.dart';
 
+import './color_picker/ColorPicker.dart';
+
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   int _backgroundColor = 0xff3333aa;
 
@@ -30,13 +32,15 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Toolbox();
     addChild(Toolbox.instance);
 
-    _propertyWindow = TabbedPropertyWindow("Properties");
-    _propertyWindow.addTab(CanvasPropertiesWindow());
-    _propertyWindow.addTab(ContextPropertiesWindow());
-    _propertyWindow.relayout();
+    _propertyWindow = TabbedPropertyWindow("Properties")
+      ..addTab(CanvasPropertiesWindow())
+      ..addTab(ContextPropertiesWindow())
+      ..relayout()
+      ..switchToFirstTab();
     addChild(_propertyWindow);
 
-    _propertyWindow.switchToFirstTab();
+    ColorPicker();
+    addChild(ColorPicker.instance);
 
     Toolbox.selectFirstTool();
   }
