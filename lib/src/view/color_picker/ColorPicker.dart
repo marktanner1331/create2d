@@ -2,6 +2,7 @@ import 'package:stagexl/stagexl.dart';
 
 import './ColorPickerTabMixin.dart';
 import './ColorWheel.dart';
+import './ColorComponents.dart';
 import './ColorBox.dart';
 
 import '../../Styles.dart';
@@ -13,6 +14,8 @@ import '../../helpers/DraggableController.dart';
 class ColorPicker extends Sprite {
   static ColorPicker _instance;
   static ColorPicker get instance => _instance;
+
+  static int get currentColor => _instance._selectedBox.color;
 
   Sprite _titleBar;
   DraggableController _draggableController;
@@ -29,7 +32,7 @@ class ColorPicker extends Sprite {
   ColorBox _selectedBox;
 
   num get preferredWidth => 250;
-  num get preferredHeight => 550;
+  num get preferredHeight => 500;
 
   ColorPicker() {
     assert(_instance == null);
@@ -59,7 +62,9 @@ class ColorPicker extends Sprite {
     addChild(_closeButton);
     
     _tabButtons = TabButtonRow();
-    _tabButtons.onTabChanged.listen(_onTabButtonChanged);
+    _tabButtons
+      ..x = 1
+      ..onTabChanged.listen(_onTabButtonChanged);
     addChild(_tabButtons);
 
     _tabs = Map();
@@ -68,25 +73,41 @@ class ColorPicker extends Sprite {
     addChild(_inner);
 
     addTab(ColorWheel(this, preferredWidth));
-    switchToFirstTab();
+    addTab(ColorComponents(this, preferredWidth));
 
-    num deltaY = 300;
+    num deltaY = 400;
 
     _previewBox = ColorBox("Preview Color")
       ..setSize(preferredWidth / 2 - 10, 75)
-      ..x = 5
-      ..y = deltaY;
+      ..x = 5;
 
     addChild(_previewBox);
 
     _selectedBox = ColorBox("Selected Color")
       ..setSize(preferredWidth / 2 - 10, 75)
-      ..x = preferredWidth / 2 + 5
-      ..y = deltaY;
+      ..x = preferredWidth / 2 + 5;
 
     addChild(_selectedBox);
 
     relayout();
+    switchToFirstTab();
+  }
+
+  void _resetHeight() {
+    num deltaY = _inner.y + _inner.height + 25;
+
+    _previewBox.y = deltaY;
+    _selectedBox.y = deltaY;
+
+    deltaY = _previewBox.y + _previewBox.height + 10;
+
+    graphics
+      ..clear()
+      ..beginPath()
+      ..rect(0, 0, preferredWidth, deltaY)
+      ..fillColor(Styles.panelBG)
+      ..strokeColor(0xff000000, 0.5)
+      ..closePath();
   }
 
   void setPreviewPixelColor(int color) {
@@ -94,6 +115,7 @@ class ColorPicker extends Sprite {
   }
 
   void setSelectedPixelColor(int color) {
+    _previewBox.color = color;
     _selectedBox.color = color;
   }
   
@@ -105,7 +127,13 @@ class ColorPicker extends Sprite {
     switchToTab(_tabs[_tabs.keys.first].modelName);
   }
 
+  static void invalidateHeight() {
+    _instance._resetHeight();
+  }
+
   void switchToTab(String modelName) {
+    _previewBox.color = _selectedBox.color;
+
     if(_inner.numChildren == 1) {
       DisplayObject child = _inner.getChildAt(0);
       assert(child is ColorPickerTabMixin);
@@ -119,6 +147,7 @@ class ColorPicker extends Sprite {
     tab.onEnter();
 
     _tabButtons.switchToTab(modelName);
+    _resetHeight();
   }
 
   void addTab(ColorPickerTabMixin tab) {
@@ -128,12 +157,6 @@ class ColorPicker extends Sprite {
 
   void relayout() {
     num panelWidth = preferredWidth;
-    graphics
-      ..clear()
-      ..beginPath()
-      ..rect(0, 0, panelWidth, 400)
-      ..fillColor(Styles.panelBG)
-      ..closePath();
   
     num deltaY = _titleLabel.height + 5;
 
@@ -149,9 +172,9 @@ class ColorPicker extends Sprite {
     deltaY += 5;
     _tabButtons.y = deltaY;
 
-    deltaY = _tabButtons.y + _tabButtons.height + 5;
+    deltaY = _tabButtons.y + _tabButtons.height + 10;
     _inner.y = deltaY;
 
-    deltaY += 400;
+    _resetHeight();
   }
 }

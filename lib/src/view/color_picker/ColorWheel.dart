@@ -2,6 +2,7 @@ import 'package:stagexl/stagexl.dart';
 
 import './ColorPickerTabMixin.dart';
 import './ColorPicker.dart';
+import './ColorHelper.dart';
 
 class ColorWheel extends Sprite with ColorPickerTabMixin {
   num _preferredWidth;
@@ -32,6 +33,8 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
 
     onMouseMove.listen(_onMouseMove);
     onMouseClick.listen(_onMouseClick);
+
+    ColorPicker.invalidateHeight();
   }
 
   void _onMouseClick(_) {
@@ -41,11 +44,8 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
 
     int pixel = _bitmapData.getPixel32(p.x, p.y);
 
-    //make sure its not transparent
-    if((pixel >> 24) != 0) {
-      //remove any transparency
-      pixel |= 0xff000000;
-
+    if(ColorHelper.isCompletelyTransparent(pixel) == false) {
+      pixel = ColorHelper.removeTransparency(pixel);
       _colorPicker.setSelectedPixelColor(pixel);
     }
   }
@@ -63,6 +63,8 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
       pixel |= 0xff000000;
 
       _colorPicker.setPreviewPixelColor(pixel);
+    } else {
+      _colorPicker.setPreviewPixelColor(ColorPicker.currentColor);
     }
   }
 

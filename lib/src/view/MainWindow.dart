@@ -13,7 +13,7 @@ import '../property_windows/ContextProperties.dart';
 import './color_picker/ColorPicker.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
-  int _backgroundColor = 0xff3333aa;
+  int _backgroundColor = 0xff7ab1e3;
 
   static Canvas _canvas;
   static Canvas get canvas => _canvas;

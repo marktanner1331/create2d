@@ -109,7 +109,7 @@ class TabbedPropertyWindow extends Sprite {
     deltaY += 5;
     _tabButtons.y = deltaY;
 
-    deltaY = _tabButtons.y + _tabButtons.height + 5;
+    deltaY = _tabButtons.y + _tabButtons.height + 10;
     _inner.y = deltaY;
 
     deltaY += 400;

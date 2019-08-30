@@ -24,7 +24,7 @@ class TabButton extends Sprite {
       ..color = 0xffffffff;
 
     _label
-      ..x = 2
+      ..x = 5
       ..y = 2
       ..textColor = Styles.tabButtonText
       ..defaultTextFormat = format
@@ -55,7 +55,7 @@ class TabButton extends Sprite {
     graphics
       ..clear()
       ..beginPath()
-      ..rect(0, 0, width, height);
+      ..rect(0, 0, _label.width + 10, height);
 
     if (_isHovered || _isSelected) {
       graphics.fillColor(Styles.tabButtonHovered);

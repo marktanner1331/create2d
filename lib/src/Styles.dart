@@ -7,7 +7,7 @@ class Styles {
   static int panelHeadBG = 0xff444444;
   static int panelHeadText = 0xff000000;
 
-  static int panelBG = 0xff777777;
+  static int panelBG = 0xff999999;
   static int panelText = 0xff000000;
 
   static int closeButtonUnhovered = 0xff555555;
