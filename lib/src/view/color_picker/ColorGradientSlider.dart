@@ -77,7 +77,7 @@ class ColorGradientSlider extends Sprite with SetSizeMixin {
       ..colorStops.clear()
       ..addColorStop(0, start)
       ..addColorStop(1, end);
-
+    
     refresh();
   }
 
