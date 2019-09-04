@@ -5,6 +5,7 @@ import './ColorWheel.dart';
 import './ColorComponents.dart';
 import './Color3D.dart';
 import './ColorBox.dart';
+import './ColorPalette.dart';
 
 import '../../Styles.dart';
 
@@ -76,6 +77,7 @@ class ColorPicker extends Sprite {
     addTab(ColorWheel(this, preferredWidth));
     addTab(ColorComponents(this, preferredWidth));
     addTab(Color3D(this, preferredWidth));
+    addTab(ColorPalette(this, preferredWidth));
 
     num deltaY = 400;
 

@@ -4,26 +4,27 @@ import './ColorPickerTabMixin.dart';
 import './ColorPicker.dart';
 import './ColorHelper.dart';
 
-class ColorWheel extends Sprite with ColorPickerTabMixin {
+class ColorPalette extends Sprite with ColorPickerTabMixin {
   num _preferredWidth;
   ColorPicker _colorPicker;
 
   BitmapData _bitmapData;
   Bitmap _bitmap;
 
-  ColorWheel(ColorPicker colorPicker, num preferredWidth) {
+  ColorPalette(ColorPicker colorPicker, num preferredWidth) {
     this._colorPicker = colorPicker;
     _preferredWidth = preferredWidth;
 
     var rm = new ResourceManager();
-    rm.addBitmapData("COLOR_WHEEL", "/img/color_wheel.png");
-    rm.load().then(_onImageLoaded);
+    rm.addBitmapData("PALETTE", "/img/palette.png");
+    rm.addBitmapData("PALETTE_NO_BORDER", "/img/palette_no_border.png");
+    rm.load().then(_onImagesLoaded);
   }
 
-  void _onImageLoaded(ResourceManager rm) {
-    _bitmapData = rm.getBitmapData("COLOR_WHEEL");
+  void _onImagesLoaded(ResourceManager rm) {
+    _bitmapData = rm.getBitmapData("PALETTE");
     _bitmap = Bitmap(_bitmapData);
-
+    
     num ratio = _bitmapData.width / _bitmapData.height;
 
     _bitmap.width = _preferredWidth;
@@ -35,6 +36,11 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
     onMouseClick.listen(_onMouseClick);
 
     ColorPicker.invalidateHeight();
+
+    //we replace the original _bitmapData to one without borders
+    //that way if a user clicks on the white border around the color box
+    //they will still get the desired color
+    _bitmapData = rm.getBitmapData("PALETTE_NO_BORDER");
   }
 
   void _onMouseClick(_) {
@@ -63,21 +69,21 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
       pixel |= 0xff000000;
 
       _colorPicker.setPreviewPixelColor(pixel);
-      mouseCursor = MouseCursor.POINTER;
+          mouseCursor = MouseCursor.POINTER;
     } else {
       _colorPicker.setPreviewPixelColor(ColorPicker.currentColor);
-      mouseCursor = MouseCursor.DEFAULT;
+          mouseCursor = MouseCursor.DEFAULT;
     }
   }
 
   @override
-  String get displayName => "Wheel";
+  String get displayName => "Palette";
 
   @override
   DisplayObject getDisplayObject() => this;
 
   @override
-  String get modelName => "WHEEL";
+  String get modelName => "PALETTE";
 
   @override
   void onEnter() {
