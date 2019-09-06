@@ -14,6 +14,10 @@ class Styles {
   static int closeButtonHovered = 0xff999999;
   static int closeButtonGraphics = 0xff000000;
 
+  static int colorPickerCloseButtonUnhovered = 0xff555555;
+  static int colorPickerCloseButtonHovered = 0xff999999;
+  static int colorPickerCloseButtonGraphics = 0xffffffff;
+
   static int tabButtonUnhovered = 0xff555555;
   static int tabButtonHovered = 0xff999999;
   static int tabButtonText = 0xff000000;
@@ -27,7 +31,7 @@ class Styles {
   static int checkboxBG = 0xffffffff;
   static int checkboxSelected = 0xff55cc55;
 
-  static int button = 0xff555555;
-  static int buttonHover = 0xff999999;
+  static int buttonUnhovered = 0xff555555;
+  static int buttonHovered = 0xff999999;
   static int buttonText = 0xff000000;
 }

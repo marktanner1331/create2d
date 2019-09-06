@@ -35,7 +35,7 @@ class ColorPalette extends Sprite with ColorPickerTabMixin {
     onMouseMove.listen(_onMouseMove);
     onMouseClick.listen(_onMouseClick);
 
-    ColorPicker.invalidateHeight();
+    _colorPicker.invalidateHeight();
 
     //we replace the original _bitmapData to one without borders
     //that way if a user clicks on the white border around the color box

@@ -6,6 +6,7 @@ import './ColorComponents.dart';
 import './Color3D.dart';
 import './ColorBox.dart';
 import './ColorPalette.dart';
+import './ColorSwatches.dart';
 
 import '../../Styles.dart';
 
@@ -78,6 +79,7 @@ class ColorPicker extends Sprite {
     addTab(ColorComponents(this, preferredWidth));
     addTab(Color3D(this, preferredWidth));
     addTab(ColorPalette(this, preferredWidth));
+    addTab(ColorSwatches(this, preferredWidth));
 
     num deltaY = 400;
 
@@ -131,8 +133,8 @@ class ColorPicker extends Sprite {
     switchToTab(_tabs[_tabs.keys.first].modelName);
   }
 
-  static void invalidateHeight() {
-    _instance._resetHeight();
+  void invalidateHeight() {
+    _resetHeight();
   }
 
   void switchToTab(String modelName) {

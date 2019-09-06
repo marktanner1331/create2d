@@ -34,7 +34,7 @@ class ColorWheel extends Sprite with ColorPickerTabMixin {
     onMouseMove.listen(_onMouseMove);
     onMouseClick.listen(_onMouseClick);
 
-    ColorPicker.invalidateHeight();
+    _colorPicker.invalidateHeight();
   }
 
   void _onMouseClick(_) {

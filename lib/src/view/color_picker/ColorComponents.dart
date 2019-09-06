@@ -356,7 +356,7 @@ class ColorComponents extends Sprite with ColorPickerTabMixin {
   }
 
   @override
-  String get displayName => "Components";
+  String get displayName => "RGB";
 
   @override
   DisplayObject getDisplayObject() {
