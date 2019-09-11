@@ -54,7 +54,9 @@ class SelectableTextButton extends Sprite {
       _refresh();
     });
 
-    onMouseClick.listen((_) {
+    onMouseClick.listen((MouseEvent e) {
+      e.stopImmediatePropagation();
+      
       _selected = ! _selected;
       _refresh();
       dispatchEvent(Event(SELECTED_CHANGED));

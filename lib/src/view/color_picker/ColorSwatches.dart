@@ -7,6 +7,7 @@ import '../../widgets/TextButton.dart';
 import '../../widgets/SelectableTextButton.dart';
 
 import './ColorPickerTabMixin.dart';
+import './EyeDropper.dart';
 
 class ColorSwatches extends Sprite with ColorPickerTabMixin {
   ColorPicker _colorPicker;
@@ -36,6 +37,7 @@ class ColorSwatches extends Sprite with ColorPickerTabMixin {
     addChild(_eyeDropperlabel);
 
     _eyeDropper = SelectableTextButton("Launch Eye Dropper");
+    _eyeDropper.onSelectedChanged.listen(_onEyeDropperClick);
     addChild(_eyeDropper);
 
     _label = TextField("Swatches");
@@ -49,6 +51,21 @@ class ColorSwatches extends Sprite with ColorPickerTabMixin {
     addChild(_addSwatch);
 
     _swatches = List();
+  }
+
+  void _onEyeDropperClick(_) {
+    if(_eyeDropper.selected == false) {
+      return;
+    }
+
+    EyeDropper dropper = EyeDropper(stage, _colorPicker);
+
+    dropper.onFinished.listen((_) {
+      dropper.dispose();
+      _eyeDropper.selected = false;
+    });
+
+    dropper.start();
   }
 
   _onAddSwatchClick(_) {
