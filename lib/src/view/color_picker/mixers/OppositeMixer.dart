@@ -8,7 +8,7 @@ class OppositeMixer extends ColorMixerGroup {
   ColorSwatch _same;
   ColorSwatch _opposite;
 
-  OppositeMixer(ColorPicker colorPicker) : super(colorPicker, "Opposite") {
+  OppositeMixer(ColorPicker colorPicker) : super(colorPicker, "Complementary") {
     _same = addSwatch();
     _opposite = addSwatch();
   }

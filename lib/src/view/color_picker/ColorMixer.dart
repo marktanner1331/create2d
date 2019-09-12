@@ -8,6 +8,7 @@ import './mixers/OppositeMixer.dart';
 import './mixers/AnalogousMixer.dart';
 import './mixers/TriadicMixer.dart';
 import './mixers/SplitComplementaryMixer.dart';
+import './mixers/TetradicMixer.dart';
 
 class ColorMixer extends Sprite with ColorPickerTabMixin {
   EventStreamSubscription _currentColorChangedSubscription;
@@ -24,14 +25,16 @@ class ColorMixer extends Sprite with ColorPickerTabMixin {
     _addGroup(AnalogousMixer(colorPicker));
     _addGroup(TriadicMixer(colorPicker));
     _addGroup(SplitComplementaryMixer(colorPicker));
+    _addGroup(TetradicMixer(colorPicker));
   }
 
   void _addGroup(ColorMixerGroup group) {
     num preferredHeight = group.preferredHeightForWidth(_preferredWidth);
     
-    group.setSize(_preferredWidth, preferredHeight);
-    
-    group.y = _deltaY;
+    group
+      ..setSize(_preferredWidth - 10, preferredHeight)
+      ..x = 5
+      ..y = _deltaY;
     _deltaY += preferredHeight;
 
     _groups.add(group);
