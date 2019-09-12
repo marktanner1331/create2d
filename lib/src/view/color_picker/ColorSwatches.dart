@@ -69,7 +69,7 @@ class ColorSwatches extends Sprite with ColorPickerTabMixin {
   }
 
   _onAddSwatchClick(_) {
-    ColorSwatch swatch = ColorSwatch(ColorPicker.currentColor);
+    ColorSwatch swatch = ColorSwatch(ColorPicker.currentColor, true);
 
     swatch
       ..onMouseOver.listen(_onSwatchMouseOver)
@@ -148,6 +148,8 @@ class ColorSwatches extends Sprite with ColorPickerTabMixin {
     if(deltaX != 5) {
       deltaY += swatchSize + 5;
     }
+
+    deltaY += 5;
 
     _addSwatch
       ..x = (_preferredWidth - _addSwatch.width) / 2

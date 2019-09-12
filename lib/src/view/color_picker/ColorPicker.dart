@@ -7,6 +7,7 @@ import './Color3D.dart';
 import './ColorBox.dart';
 import './ColorPalette.dart';
 import './ColorSwatches.dart';
+import './ColorMixer.dart';
 
 import '../../Styles.dart';
 
@@ -19,6 +20,13 @@ class ColorPicker extends Sprite {
   static ColorPicker get instance => _instance;
 
   static int get currentColor => _instance._selectedBox.color;
+
+  static const String CURRENT_COLOR_CHANGED = "CURRENT_COLOR_CHANGED";
+
+  static const EventStreamProvider<Event> _currentColorChangedEvent =
+      const EventStreamProvider<Event>(CURRENT_COLOR_CHANGED);
+
+  static EventStream<Event> get onCurrentColorChanged => _currentColorChangedEvent.forTarget(_instance);
 
   Sprite _titleBar;
   DraggableController _draggableController;
@@ -34,7 +42,7 @@ class ColorPicker extends Sprite {
   ColorBox _previewBox;
   ColorBox _selectedBox;
 
-  num get preferredWidth => 250;
+  num get preferredWidth => 275;
   num get preferredHeight => 500;
 
   ColorPicker() {
@@ -80,6 +88,7 @@ class ColorPicker extends Sprite {
     addTab(Color3D(this, preferredWidth));
     addTab(ColorPalette(this, preferredWidth));
     addTab(ColorSwatches(this, preferredWidth));
+    addTab(ColorMixer(this, preferredWidth));
 
     num deltaY = 400;
 
@@ -123,6 +132,7 @@ class ColorPicker extends Sprite {
   void setSelectedPixelColor(int color) {
     _previewBox.color = color;
     _selectedBox.color = color;
+    dispatchEvent(Event(CURRENT_COLOR_CHANGED));
   }
   
   void _onTabButtonChanged(_) {

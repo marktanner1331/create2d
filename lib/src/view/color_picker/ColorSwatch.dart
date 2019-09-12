@@ -5,14 +5,13 @@ import '../../helpers/SetSizeMixin.dart';
 import './ColorSwatchCloseButton.dart';
 import './ColorHelper.dart';
 
-class ColorSwatch extends Sprite with SetSizeMixin  {
+class ColorSwatch extends Sprite with SetSizeMixin {
   static const String CLOSE_CLICKED = "CLOSE_CLICKED";
 
   static const EventStreamProvider<Event> _closeClickEvent =
       const EventStreamProvider<Event>(CLOSE_CLICKED);
-  
-  EventStream<Event> get onCloseClicked =>
-      _closeClickEvent.forTarget(this);
+
+  EventStream<Event> get onCloseClicked => _closeClickEvent.forTarget(this);
 
   int _color = 0x00000000;
   int get color => _color;
@@ -23,22 +22,24 @@ class ColorSwatch extends Sprite with SetSizeMixin  {
 
   ColorSwatchCloseButton _closeButton;
 
-  ColorSwatch(int color) {
+  ColorSwatch(int color, bool showCloseButton) {
     _color = color;
     mouseCursor = MouseCursor.POINTER;
 
-    _closeButton = ColorSwatchCloseButton();
-    _closeButton.visible = false;
-    _closeButton.onMouseClick.listen(_onCloseClick);
-    addChild(_closeButton);
-
-    onMouseOver.listen((_) {
-      _closeButton.visible = true;
-    });
-
-    onMouseOut.listen((_) {
+    if (showCloseButton) {
+      _closeButton = ColorSwatchCloseButton();
       _closeButton.visible = false;
-    });
+      _closeButton.onMouseClick.listen(_onCloseClick);
+      addChild(_closeButton);
+
+      onMouseOver.listen((_) {
+        _closeButton.visible = true;
+      });
+
+      onMouseOut.listen((_) {
+        _closeButton.visible = false;
+      });
+    }
 
     refresh();
   }
@@ -50,11 +51,13 @@ class ColorSwatch extends Sprite with SetSizeMixin  {
 
   @override
   void refresh() {
-    _closeButton.setSize(width / 3, width / 3);
+    if (_closeButton != null) {
+      _closeButton.setSize(width / 3, width / 3);
 
-    _closeButton
-      ..x = width - _closeButton.width / 2
-      ..y = -_closeButton.height / 2;
+      _closeButton
+        ..x = width - _closeButton.width / 2
+        ..y = -_closeButton.height / 2;
+    }
 
     int temp = ColorHelper.removeTransparency(color);
 
