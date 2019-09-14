@@ -2,8 +2,9 @@ import 'package:stagexl/stagexl.dart';
 import 'package:meta/meta.dart';
 
 import '../property_groups/PropertyGroup.dart';
+import '../helpers/IOnEnterExit.dart';
 
-abstract class PropertyWindow extends Sprite {
+abstract class PropertyWindow extends Sprite implements IOnEnterExit {
   String get displayName;
   String get modelName;
 
@@ -24,10 +25,6 @@ abstract class PropertyWindow extends Sprite {
     _groups.clear();
     removeChildren();
   }
-
-  void onEnter();
-
-  void onExit();
 
   @protected
   void addPropertyGroup(PropertyGroup group) {

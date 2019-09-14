@@ -29,7 +29,7 @@ class SnappingPropertiesGroup extends PropertyGroup {
     _properties.snapToGrid = _grid.checked;
   }
 
-  void set myGridProperties(SnappingPropertiesMixin properties) {
+  void set mySnappingProperties(SnappingPropertiesMixin properties) {
     _properties = properties;
 
     _grid.checked = _properties.snapToGrid;

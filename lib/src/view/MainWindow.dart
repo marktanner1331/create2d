@@ -41,6 +41,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     ColorPicker();
     addChild(ColorPicker.instance);
+    ColorPicker.hide();
 
     Toolbox.selectFirstTool();
   }

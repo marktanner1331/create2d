@@ -4,6 +4,8 @@ mixin CanvasPropertiesMixin {
   int _backgroundColor = 0xffffffff;
   int get backgroundColor => _backgroundColor;
   set backgroundColor(int value) {
+    _backgroundColor = value;
+
     assert(this is Canvas);
     (this as Canvas).refreshCanvasBackground();
   }
@@ -17,6 +19,8 @@ mixin CanvasPropertiesMixin {
   void setCanvasSize(num canvasWidth, num canvasHeight) {
     _canvasWidth = canvasWidth;
     _canvasHeight = canvasHeight;
+
+    assert(this is Canvas);
     (this as Canvas).refreshCanvasBackground();
   }
 }

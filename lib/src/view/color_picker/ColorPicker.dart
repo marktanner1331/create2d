@@ -22,11 +22,23 @@ class ColorPicker extends Sprite {
   static int get currentColor => _instance._selectedBox.color;
 
   static const String CURRENT_COLOR_CHANGED = "CURRENT_COLOR_CHANGED";
+  static const String CLOSED = "CLOSED";
 
   static const EventStreamProvider<Event> _currentColorChangedEvent =
       const EventStreamProvider<Event>(CURRENT_COLOR_CHANGED);
+  static const EventStreamProvider<Event> _closedEvent =
+      const EventStreamProvider<Event>(CURRENT_COLOR_CHANGED);
 
   static EventStream<Event> get onCurrentColorChanged => _currentColorChangedEvent.forTarget(_instance);
+  static EventStream<Event> get onClosed => _closedEvent.forTarget(_instance);
+  
+  static void hide()
+  {
+    _instance.dispatchEvent(Event(CLOSED));
+    _instance.visible = false;
+  }
+
+  static void show() => _instance.visible = true;
 
   Sprite _titleBar;
   DraggableController _draggableController;
@@ -70,6 +82,7 @@ class ColorPicker extends Sprite {
     addChild(_titleLabel);
 
     _closeButton = CloseButton();
+    _closeButton.onMouseClick.listen((_) => dispatchEvent(Event(CLOSED)));
     addChild(_closeButton);
     
     _tabButtons = TabButtonRow();
