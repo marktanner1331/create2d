@@ -22,12 +22,12 @@ class ColorPicker extends Sprite {
   static int get currentColor => _instance._selectedBox.color;
 
   static const String CURRENT_COLOR_CHANGED = "CURRENT_COLOR_CHANGED";
-  static const String CLOSED = "CLOSED";
+  static const String CLOSED = "COLOR_PICKER_CLOSED";
 
   static const EventStreamProvider<Event> _currentColorChangedEvent =
       const EventStreamProvider<Event>(CURRENT_COLOR_CHANGED);
   static const EventStreamProvider<Event> _closedEvent =
-      const EventStreamProvider<Event>(CURRENT_COLOR_CHANGED);
+      const EventStreamProvider<Event>(CLOSED);
 
   static EventStream<Event> get onCurrentColorChanged => _currentColorChangedEvent.forTarget(_instance);
   static EventStream<Event> get onClosed => _closedEvent.forTarget(_instance);

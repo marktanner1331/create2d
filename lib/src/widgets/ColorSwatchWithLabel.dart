@@ -47,7 +47,7 @@ class ColorSwatchWithLabel extends Sprite implements IOnEnterExit {
     dispatchEvent(Event(COLOR_CHANGED));
   }
 
-  void _onColorPickerClosed(_) {
+  void _onColorPickerClosed(Event e) {
     _colorPickerChangedSubscription.cancel();
     _colorPickerClosedSubscription.cancel();
   }
