@@ -27,6 +27,8 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
       return;
     }
 
+    
+
     selectedVertices.clear();
     if(v != null) {
       selectedVertices.add(v);
@@ -62,7 +64,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
       MainWindow.canvas.invalidateVertexPositions();
 
       //so the property windows update
-      //invalidateProperties();
+      invalidateProperties();
     }
   }
 
@@ -78,4 +80,12 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
 
   @override
   String get name => "Select";
+
+  @override
+  void onEnter() {
+  }
+
+  @override
+  void onExit() {
+  }
 }

@@ -96,10 +96,12 @@ class Toolbox extends Sprite {
   static void set currentTool(ITool value) {
     if(_currentTool != null) {
       _buttons[_currentTool.name].isSelected = false;
+      _currentTool.onExit();
     }
 
     _currentTool = value;
     _buttons[_currentTool.name].isSelected = true;
+    _currentTool.onEnter();
 
     ContextPropertiesWindow.currentObject = _currentTool;
   }

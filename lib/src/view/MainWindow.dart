@@ -3,6 +3,7 @@ import 'package:stagexl_ui_components/ui_components.dart';
 
 import './Toolbox.dart';
 import './Canvas.dart';
+import './KeyboardController.dart';
 
 import '../property_windows/TabbedPropertyWindow.dart';
 import '../helpers/AspectFit.dart';
@@ -18,6 +19,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static Canvas _canvas;
   static Canvas get canvas => _canvas;
 
+  static KeyboardController _keyboardController;
+  static KeyboardController get keyboardController => _keyboardController;
+
   TabbedPropertyWindow _propertyWindow;
 
   static MainWindow _instance;
@@ -25,6 +29,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   MainWindow() {
     assert(_instance == null);
     _instance = this;
+    
+    _keyboardController = KeyboardController(this);
 
     _canvas = Canvas();
     addChild(_canvas);
