@@ -53,12 +53,17 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
 
   @override
   void onMouseMove(num x, num y) {
-    assert(isActive == false);
-    
-    // _currentLine.end.x = x;
-    // _currentLine.end.y = y;
+    if(selectedVertices.length == 1) {
+      Vertex v = selectedVertices.first;
+      v.x = x;
+      v.y = y;
 
-    // MainWindow.canvas.invalidateVertexPositions();
+      //so the canvas redraws
+      MainWindow.canvas.invalidateVertexPositions();
+
+      //so the property windows update
+      //invalidateProperties();
+    }
   }
 
   @override

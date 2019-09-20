@@ -9,18 +9,23 @@ class SelectedSingleVertexGroup extends PropertyGroup {
 
   SelectedSingleVertexGroup(SelectedSingleVertexMixin myMixin) : super("Vertex") {
     _myMixin = myMixin;
+    //_myMixin.onPropertiesChanged.listen((_) => _refreshProperties());
 
     _xField = NumberFieldWithLabel("X");
     _xField.onValueChanged.listen(_onXChanged);
-    _xField.value = _myMixin.x;
     addChild(_xField);
 
     _yField = NumberFieldWithLabel("Y");
     _yField.onValueChanged.listen(_onYChanged);
-    _yField.value = _myMixin.y;
     addChild(_yField);
 
     relayout();
+    _refreshProperties();
+  }
+
+  void _refreshProperties() {
+    _xField.value = _myMixin.x;
+    _yField.value = _myMixin.y;
   }
 
   void _onXChanged(_) {

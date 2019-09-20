@@ -57,7 +57,7 @@ class SelectionLayer extends Sprite {
         graphics
           ..beginPath()
           ..circle(v.x * _canvas.drawingSpaceToCanvasSpace,
-              v.y * _canvas.drawingSpaceToCanvasSpace, 2)
+              v.y * _canvas.drawingSpaceToCanvasSpace, 3)
           ..fillColor(0xffaa0000)
           ..closePath();
       }
