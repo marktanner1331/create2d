@@ -1,6 +1,7 @@
 import 'package:stagexl/stagexl.dart';
 
 import '../tools/LineTool.dart';
+import '../tools/SelectTool.dart';
 import '../tools/ITool.dart';
 import '../widgets/ToolboxButton.dart';
 import '../helpers/DraggableController.dart';
@@ -14,9 +15,8 @@ class Toolbox extends Sprite {
   static Toolbox get instance => _instance;
   
   static ITool _currentTool;
+  static List<ITool> _tools;
   static Map<String, ToolboxButton> _buttons;
-
-  static LineTool _line;
 
   Sprite _titleBar;
   DraggableController _draggableController;
@@ -29,8 +29,6 @@ class Toolbox extends Sprite {
   Toolbox() {
     assert(_instance == null);
     _instance = this;
-
-    _buttons = Map();
 
     _titleBar = Sprite()..mouseCursor = MouseCursor.POINTER;
     addChild(_titleBar);
@@ -66,25 +64,31 @@ class Toolbox extends Sprite {
       ..fillColor(Styles.panelHeadBG)
       ..closePath();
 
-    deltaY += 5;
+    _tools = List();    
+    _buttons = Map();
 
-    _line = LineTool();
-    _addButtonForTool(_line)..y = deltaY;
+    _addTool(LineTool());
+    _addTool(SelectTool());
   }
 
   static void selectFirstTool() {
-    currentTool = _line;
+    currentTool = _tools.first;
   }
 
-  ToolboxButton _addButtonForTool(ITool tool) {
-    ToolboxButton button = ToolboxButton(tool.getIcon());
-    
-    button.setSize(25, 25);
+  void _addTool(ITool tool) {
+    int column = _tools.length & 1;
+    int row = (_tools.length / 2).floor();
+    num deltaY = _titleLabel.height + 10;
+
+    ToolboxButton button = ToolboxButton(tool.getIcon())
+      ..setSize(25, 25)
+      ..x = column * 25
+      ..y = deltaY + row * 25
+      ..onMouseClick.listen((_) => currentTool = tool);
     addChild(button);
 
     _buttons[tool.name] = button;
-
-    return button;
+    _tools.add(tool);
   }
 
   static ITool get currentTool => _currentTool;

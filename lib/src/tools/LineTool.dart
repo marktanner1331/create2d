@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:stagexl/src/events.dart';
 import 'package:stagexl/stagexl.dart';
 
 import '../view/MainWindow.dart';
@@ -57,4 +60,10 @@ class LineTool extends ITool with LinePropertiesMixin {
 
   @override
   String get name => "Line";
+
+  @override
+  StreamSubscription<T> addEventListener<T extends Event>(String eventType, EventListener<T> eventListener, {bool useCapture = false, int priority = 0}) {
+    // TODO: implement addEventListener
+    return null;
+  }
 }

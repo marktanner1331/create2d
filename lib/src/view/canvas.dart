@@ -49,6 +49,7 @@ class Canvas extends Sprite
 
   CanvasMouseEventsController _canvasEvents;
   SelectionLayer _selectionLayer;
+  SelectionLayer get selectionLayer => _selectionLayer;
 
   Canvas() {
     _graphicsContainer = Container();
@@ -78,13 +79,11 @@ class Canvas extends Sprite
   num get canvasSpaceToDrawingSpace => _canvasSpaceToDrawingSpace;
 
   void _refreshSelectedVertices() {
-    List<Vertex> vertices = List();
+    _selectionLayer.deselectAllVertices("MOUSE_OVER_VERTICES");
 
     if (_canvasEvents.currentMouseOverVertex != null) {
-      vertices.add(_canvasEvents.currentMouseOverVertex);
+      _selectionLayer.addVertexToSelection("MOUSE_OVER_VERTICES", _canvasEvents.currentMouseOverVertex);
     }
-    
-    _selectionLayer.deselectAllAndSelectVertices(vertices);
   }
 
   Container generateTemporaryLayer() {

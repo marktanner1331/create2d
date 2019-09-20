@@ -41,24 +41,27 @@ class ToolboxButton extends Sprite with SetSizeMixin {
       ..fillColor(
           _isHovered || _isSelected ? Styles.toolButtonHovered : Styles.toolButtonUnhovered)
       ..closePath()
-      ..rect(0, 0, width, height)
-      ..strokeColor(0xff000000, 2);
+      ..rect(1, 1, width - 2, height - 2)
+      ..strokeColor(0xff000000, 1);
   }
 
   @override
   void refresh() {
     _redrawBG();
 
-    num ratio1 = width / height;
+    num paddedWidth = width - 2;
+    num paddedHeight = height - 2;
+
+    num ratio1 = paddedWidth / paddedHeight;
     num ratio2 = _child.width / _child.height;
 
     if (ratio1 < ratio2) {
-      _child.scaleX = _child.scaleY = (width / _child.width);
+      _child.scaleX = _child.scaleY = (paddedWidth / _child.width);
     } else {
-      _child.scaleX = _child.scaleY = (height / _child.height);
+      _child.scaleX = _child.scaleY = (paddedHeight / _child.height);
     }
 
-    _child.x = (width - _child.width) / 2;
-    _child.y = (height - _child.height) / 2;
+    _child.x = (width - _child.width * _child.scaleX) / 2;
+    _child.y = (height - _child.height * _child.scaleY) / 2;
   }
 }

@@ -12,7 +12,7 @@ class NumberFieldWithLabel extends Sprite {
   num get value => _value;
   void set value(num value) {
     _value = value;
-    _valueField.text = value.toString();
+    _valueField.text = value.toStringAsFixed(1);
   }
 
   TextField _valueField;
@@ -33,7 +33,7 @@ class NumberFieldWithLabel extends Sprite {
       ..textColor = 0xff000000
       ..onMouseClick.listen(_onClick)
       ..type = TextFieldType.INPUT
-      ..text = "0000"
+      ..text = "00000"
       ..backgroundColor = 0xffffffff
       ..background = true
       ..border = true

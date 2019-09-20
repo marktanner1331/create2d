@@ -9,7 +9,7 @@ class LinePropertiesGroup extends PropertyGroup {
 
   LinePropertiesGroup(LinePropertiesMixin myMixin) : super("Line") {
     this._myMixin = myMixin;
-
+    
     _thickness = NumberFieldWithLabel("Thickness");
     _thickness.onValueChanged.listen(_onThicknessChanged);
     _thickness.value = _myMixin.thickness;

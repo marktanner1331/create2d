@@ -5,47 +5,62 @@ import '../stateful_graphics/Vertex.dart';
 
 class SelectionLayer extends Sprite {
   Canvas _canvas;
-  List<Vertex> _selectedVertices;
+  Map<String, List<Vertex>> _selectedVerticesGroups;
 
   SelectionLayer(Canvas canvas) {
     _canvas = canvas;
-    _selectedVertices = List();
+    _selectedVerticesGroups = Map();
 
     mouseEnabled = false;
   }
 
-  ///removes all selected vertices and selects the vertices given
-  void deselectAllAndSelectVertices(Iterable<Vertex> vertices) {
-    _selectedVertices.clear();
-    _selectedVertices.addAll(vertices);
+  ///removes all selected vertices for the given group and selects the vertex given
+  void deselectAllAndSelectVertex(String groupName, Vertex vertex) {
+    _selectedVerticesGroups[groupName] = [vertex].toList();
+    refresh();
+  } 
+
+  ///removes all selected vertices for the given group and selects the vertices given
+  void deselectAllAndSelectVertices(String groupName, Iterable<Vertex> vertices) {
+    _selectedVerticesGroups[groupName] = vertices.toList();
     refresh();
   }
 
-  void addVertexToSelection(Vertex v) {
-    _selectedVertices.add(v);
+  void addVertexToSelection(String groupName, Vertex v) {
+    if(_selectedVerticesGroups.containsKey(groupName) == false) {
+      _selectedVerticesGroups[groupName] = List();
+    }
+
+    _selectedVerticesGroups[groupName].add(v);
     refresh();
   }
 
-  void deselectAllVertices() {
-    _selectedVertices.clear();
+  void deselectAllVertices(String groupName) {
+    _selectedVerticesGroups.remove(groupName);
     refresh();
   }
 
-  void deselectVertex(Vertex v) {
-    _selectedVertices.remove(v);
+  void deselectVertex(String groupName, Vertex v) {
+    if(_selectedVerticesGroups.containsKey(groupName) == false) {
+      return;
+    }
+
+    _selectedVerticesGroups[groupName].remove(v);
     refresh();
   }
 
   void refresh() {
     graphics.clear();
 
-    for (Vertex v in _selectedVertices) {
-      graphics
-        ..beginPath()
-        ..circle(v.x * _canvas.drawingSpaceToCanvasSpace,
-            v.y * _canvas.drawingSpaceToCanvasSpace, 2)
-        ..fillColor(0xffaa0000)
-        ..closePath();
+    for(List<Vertex> _selectedVertices in _selectedVerticesGroups.values) {
+      for (Vertex v in _selectedVertices) {
+        graphics
+          ..beginPath()
+          ..circle(v.x * _canvas.drawingSpaceToCanvasSpace,
+              v.y * _canvas.drawingSpaceToCanvasSpace, 2)
+          ..fillColor(0xffaa0000)
+          ..closePath();
+      }
     }
   }
 }
