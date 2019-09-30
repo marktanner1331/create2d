@@ -3,7 +3,7 @@ import 'package:stagexl/stagexl.dart';
 import '../model/GridGeometryType.dart';
 import '../model/GridDisplayType.dart';
 
-import '../view/Canvas.dart';
+import './Canvas.dart';
 import '../ErrorLogger.dart';
 
 class Grid extends Sprite {

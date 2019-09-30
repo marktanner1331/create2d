@@ -13,10 +13,10 @@ class LineTool extends ITool with LinePropertiesMixin {
   Container _currentGraphics;
 
   @override
-  void onMouseDown(num x, num y) {
-    super.onMouseDown(x, y);
-
-    _currentLine = Line(Vertex(x, y), Vertex(x, y));
+  void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
+    super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
+    
+    _currentLine = Line(Vertex.fromPoint(snappedMousePosition), Vertex.fromPoint(snappedMousePosition));
     _currentLine.fromLinePropertiesMixin(this);
 
     _currentGraphics = MainWindow.canvas.generateTemporaryLayer();

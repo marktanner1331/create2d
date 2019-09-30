@@ -13,11 +13,11 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   }
 
   @override
-  void onMouseDown(num x, num y) {
-    super.onMouseDown(x, y);
+  void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
+    super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
     
     Vertex v = MainWindow.canvas.currentGraphics
-          .getFirstVertexUnderPoint(Point(x, y), 100);
+          .getFirstVertexUnderPoint(unsnappedMousePosition, 100);
 
     if(v == null && selectedVertices.length == 0) {
       //nothing changed
@@ -26,8 +26,6 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
       //nothing changed
       return;
     }
-
-    
 
     selectedVertices.clear();
     if(v != null) {

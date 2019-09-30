@@ -52,8 +52,8 @@ class CanvasMouseEventsController extends EventDispatcher {
     }
 
     if (_canvas.snapToVertex) {
-      Vertex v =
-          _canvas.currentGraphics.getFirstVertexUnderPoint(Point(p.x, p.y), 100);
+      Vertex v = _canvas.currentGraphics
+          .getFirstVertexUnderPoint(Point(p.x, p.y), 100);
       if (v != null) {
         return v;
       }
@@ -62,9 +62,18 @@ class CanvasMouseEventsController extends EventDispatcher {
     return p;
   }
 
+  Point _getUnsnappedMousePoint() {
+    Point p = _canvas.mousePosition;
+
+    p.x *= _canvas.canvasSpaceToDrawingSpace;
+    p.y *= _canvas.canvasSpaceToDrawingSpace;
+
+    return p;
+  }
+
   void _onMouseDown(MouseEvent e) {
-    Point p = _getSnappedMousePoint();
-    Toolbox.currentTool.onMouseDown(p.x, p.y);
+    Toolbox.currentTool
+        .onMouseDown(_getUnsnappedMousePoint(), _getSnappedMousePoint());
   }
 
   void _onMouseMove(MouseEvent e) {
@@ -72,9 +81,8 @@ class CanvasMouseEventsController extends EventDispatcher {
       Point p = _canvas.mousePosition;
       p.x *= _canvas.canvasSpaceToDrawingSpace;
       p.y *= _canvas.canvasSpaceToDrawingSpace;
-      
-      Vertex v = _canvas.currentGraphics
-          .getFirstVertexUnderPoint(p, 100);
+
+      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(p, 100);
 
       if (v != _currentMouseOverVertex) {
         _currentMouseOverVertex = v;
