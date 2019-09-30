@@ -48,6 +48,7 @@ class Canvas extends Sprite
   Grid get grid => _grid;
 
   CanvasMouseEventsController _canvasEvents;
+
   SelectionLayer _selectionLayer;
   SelectionLayer get selectionLayer => _selectionLayer;
 
