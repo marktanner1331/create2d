@@ -1,7 +1,7 @@
 import 'package:stagexl/stagexl.dart';
 
 class KeyboardController {
-  bool shiftIsDown;
+  bool shiftIsDown = false;
 
   //the interactive object passed in must be added to the stage at some point
   KeyboardController(InteractiveObject interactiveObject) {

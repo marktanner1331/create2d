@@ -12,7 +12,7 @@ mixin ContextPropertyMixin {
   EventDispatcher _dispatcher = EventDispatcher();
 
   static const String PROPERTIES_CHANGED = "PROPERTIES_CHANGED";
-  static const String CONTEXT_CHANGED = "PROPERTIES_CHANGED";
+  static const String CONTEXT_CHANGED = "CONTEXT_CHANGED";
 
   static const EventStreamProvider<Event> _propertiesChangedEvent =
       const EventStreamProvider<Event>(PROPERTIES_CHANGED);

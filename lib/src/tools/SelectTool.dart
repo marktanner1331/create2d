@@ -30,7 +30,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
     }
 
     bool hasBlacklisted = false;
-
+    
     //if the user is holding down shift then we add to the selection
     //otherwise we just clear it
     if (MainWindow.keyboardController.shiftIsDown) {
