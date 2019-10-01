@@ -59,6 +59,9 @@ class LineTool extends ITool with LinePropertiesMixin {
   String get name => "Line";
 
   @override
+  String get tooltipText => "Line Tool";
+
+  @override
   void onEnter() {
   }
 

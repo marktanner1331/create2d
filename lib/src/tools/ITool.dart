@@ -25,4 +25,5 @@ abstract class ITool with ContextPropertyMixin {
   void onExit();
 
   String get name;
+  String get tooltipText;
 }

@@ -5,7 +5,7 @@ import '../tools/SelectTool.dart';
 import '../tools/ITool.dart';
 import '../widgets/ToolboxButton.dart';
 import '../helpers/DraggableController.dart';
-
+import './TooltipLayer.dart';
 import '../property_windows/ContextProperties.dart';
 
 import '../Styles.dart';
@@ -89,6 +89,8 @@ class Toolbox extends Sprite {
 
     _buttons[tool.name] = button;
     _tools.add(tool);
+
+    TooltipLayer.addTooltip(button, tool.tooltipText);
   }
 
   static ITool get currentTool => _currentTool;

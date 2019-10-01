@@ -82,6 +82,9 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   String get name => "Select";
 
   @override
+  String get tooltipText => "Select Tool";
+
+  @override
   void onEnter() {
   }
 

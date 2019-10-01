@@ -4,6 +4,7 @@ import 'package:stagexl_ui_components/ui_components.dart';
 import './Toolbox.dart';
 import './Canvas.dart';
 import './KeyboardController.dart';
+import './TooltipLayer.dart';
 
 import '../property_windows/TabbedPropertyWindow.dart';
 import '../helpers/AspectFit.dart';
@@ -32,6 +33,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     
     _keyboardController = KeyboardController(this);
 
+    //initialize the tooltip layer singleton
+    TooltipLayer();
+
     _canvas = Canvas();
     addChild(_canvas);
 
@@ -48,6 +52,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     ColorPicker();
     addChild(ColorPicker.instance);
     ColorPicker.hide();
+
+    addChild(TooltipLayer.instance);
 
     Toolbox.selectFirstTool();
   }
