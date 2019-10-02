@@ -1,16 +1,15 @@
-import './PropertyGroup.dart';
+import './ContextPropertyGroup.dart';
 import '../property_mixins/SelectedSingleVertexMixin.dart';
 import '../widgets/NumberFieldWithLabel.dart';
 
-class SelectedSingleVertexGroup extends PropertyGroup {
+class SelectedSingleVertexGroup extends ContextPropertyGroup {
   SelectedSingleVertexMixin _myMixin;
   NumberFieldWithLabel _xField;
   NumberFieldWithLabel _yField;
 
-  SelectedSingleVertexGroup(SelectedSingleVertexMixin myMixin) : super("Vertex") {
+  SelectedSingleVertexGroup(SelectedSingleVertexMixin myMixin) : super(myMixin, "Vertex") {
     _myMixin = myMixin;
-    _myMixin.onPropertiesChanged.listen((_) => _refreshProperties());
-
+    
     _xField = NumberFieldWithLabel("X");
     _xField.onValueChanged.listen(_onXChanged);
     addChild(_xField);
@@ -20,10 +19,9 @@ class SelectedSingleVertexGroup extends PropertyGroup {
     addChild(_yField);
 
     relayout();
-    _refreshProperties();
   }
 
-  void _refreshProperties() {
+  void refreshProperties() {
     _xField.value = _myMixin.x;
     _yField.value = _myMixin.y;
   }

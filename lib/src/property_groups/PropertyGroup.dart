@@ -2,6 +2,7 @@ import 'package:stagexl/stagexl.dart';
 import 'package:meta/meta.dart';
 
 import './PropertyGroupHeader.dart';
+import '../property_mixins/ContextPropertyMixin.dart';
 
 abstract class PropertyGroup extends Sprite {
   static const String IS_OPEN_CHANGED = "IS_OPEN_CHANGED";
