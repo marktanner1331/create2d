@@ -116,7 +116,6 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   void onEnter() {
   }
-  void onEnter() {}
 
   @override
   void onExit() {}
