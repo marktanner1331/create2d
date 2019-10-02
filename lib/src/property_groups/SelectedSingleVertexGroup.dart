@@ -9,7 +9,7 @@ class SelectedSingleVertexGroup extends PropertyGroup {
 
   SelectedSingleVertexGroup(SelectedSingleVertexMixin myMixin) : super("Vertex") {
     _myMixin = myMixin;
-    //_myMixin.onPropertiesChanged.listen((_) => _refreshProperties());
+    _myMixin.onPropertiesChanged.listen((_) => _refreshProperties());
 
     _xField = NumberFieldWithLabel("X");
     _xField.onValueChanged.listen(_onXChanged);

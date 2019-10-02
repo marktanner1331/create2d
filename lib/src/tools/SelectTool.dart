@@ -13,35 +13,64 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   }
 
   @override
-  void onMouseDown(num x, num y) {
-    super.onMouseDown(x, y);
-    
+  void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
+    super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
+
     Vertex v = MainWindow.canvas.currentGraphics
-          .getFirstVertexUnderPoint(Point(x, y), 100);
+        .getFirstVertexUnderPoint(unsnappedMousePosition, 100);
 
-    if(v == null && selectedVertices.length == 0) {
+    if (v == null && selectedVertices.length == 0) {
       //nothing changed
       return;
-    } else if(v != null && selectedVertices.length == 1 && selectedVertices.first == v) {
+    } else if (v != null &&
+        selectedVertices.length == 1 &&
+        selectedVertices.first == v) {
       //nothing changed
       return;
     }
 
+    bool hasBlacklisted = false;
     
+    //if the user is holding down shift then we add to the selection
+    //otherwise we just clear it
+    if (MainWindow.keyboardController.shiftIsDown) {
+      if (v != null) {
+        //if the selected vertex is already selected then we deselect it
+        if (selectedVertices.contains(v)) {
+          selectedVertices.remove(v);
 
-    selectedVertices.clear();
-    if(v != null) {
-      selectedVertices.add(v);
+          //we want to remove the vertex from the selection
+          //which is fine
+          //but the user will still think its selected 
+          //because the mouse is over it, causing a highight
+          //adding it to the blacklist temporarily will stop that
+          hasBlacklisted = true;
+          MainWindow.canvas.selectionLayer.selectedBlacklist.add(v);
+        } else {
+          selectedVertices.add(v);
+        }
+      }
+    } else {
+      selectedVertices.clear();
+      if (v != null) {
+        selectedVertices.add(v);
+      }
     }
 
-    MainWindow.canvas.selectionLayer.deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
-    
+    MainWindow.canvas.selectionLayer
+        .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
+
+    if(hasBlacklisted) {
+      MainWindow.canvas.selectionLayer.selectedBlacklist.remove(v);
+    }
+      
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
     invalidateContext();
   }
 
-  void invalidateVertexPositions() => MainWindow.canvas.invalidateVertexPositions();
+  void invalidateVertexPositions() =>
+      MainWindow.canvas.invalidateVertexPositions();
 
   @override
   void onMouseUp(num x, num y) {
@@ -55,7 +84,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
 
   @override
   void onMouseMove(num x, num y) {
-    if(selectedVertices.length == 1) {
+    if (selectedVertices.length == 1) {
       Vertex v = selectedVertices.first;
       v.x = x;
       v.y = y;
@@ -71,7 +100,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   DisplayObject getIcon() {
     TextField tf = TextField("S");
-    
+
     return tf
       ..autoSize = TextFieldAutoSize.NONE
       ..width = tf.textWidth
@@ -87,8 +116,8 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   void onEnter() {
   }
+  void onEnter() {}
 
   @override
-  void onExit() {
-  }
+  void onExit() {}
 }

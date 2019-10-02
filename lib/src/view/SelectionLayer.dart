@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:stagexl/stagexl.dart';
 
 import './Canvas.dart';
@@ -7,9 +9,15 @@ class SelectionLayer extends Sprite {
   Canvas _canvas;
   Map<String, List<Vertex>> _selectedVerticesGroups;
 
+  List<Vertex> _selectedBlacklist;
+
+  //any vertices that appear here will never be selected
+  List<Vertex> get selectedBlacklist => _selectedBlacklist;
+
   SelectionLayer(Canvas canvas) {
     _canvas = canvas;
     _selectedVerticesGroups = Map();
+    _selectedBlacklist = List();
 
     mouseEnabled = false;
   }
@@ -52,8 +60,12 @@ class SelectionLayer extends Sprite {
   void refresh() {
     graphics.clear();
 
-    for(List<Vertex> _selectedVertices in _selectedVerticesGroups.values) {
-      for (Vertex v in _selectedVertices) {
+    for(MapEntry<String, List<Vertex>> group in _selectedVerticesGroups.entries) {
+      for (Vertex v in group.value) {
+        if(selectedBlacklist.contains(v)) {
+          continue;
+        }
+
         graphics
           ..beginPath()
           ..circle(v.x * _canvas.drawingSpaceToCanvasSpace,

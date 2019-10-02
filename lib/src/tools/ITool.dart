@@ -10,7 +10,7 @@ abstract class ITool with ContextPropertyMixin {
 
   DisplayObject getIcon();
 
-  void onMouseDown(num x, num y) {
+  void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     _isActive = true;
   }
 

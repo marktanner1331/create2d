@@ -34,7 +34,7 @@ class ContextPropertiesWindow extends PropertyWindow {
     if (_currentObject == null) {
       return;
     }
-
+    
     _contextChangedSubscription = _currentObject.onContextChanged.listen((_) {
       _refreshPropertyGroups();
     });
@@ -44,7 +44,6 @@ class ContextPropertiesWindow extends PropertyWindow {
 
   void _refreshPropertyGroups() {
     clearPropertyGroups();
-
     for (PropertyGroup propertyGroup in _currentObject.getPropertyGroups()) {
       addPropertyGroup(propertyGroup);
     }

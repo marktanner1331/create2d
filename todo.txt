@@ -4,7 +4,6 @@ in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
 
-custom cursors that actually snap
 vertex snapping tolerance needs to be calculated from the canvas scale
     right now its hardcoded in canvas space, so a smaller canvas would have stronger snapping than a larger one
 
