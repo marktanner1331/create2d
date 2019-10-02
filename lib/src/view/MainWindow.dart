@@ -5,6 +5,7 @@ import './Toolbox.dart';
 import './Canvas.dart';
 import './KeyboardController.dart';
 import './TooltipLayer.dart';
+import './DialogLayer.dart';
 
 import '../property_windows/TabbedPropertyWindow.dart';
 import '../helpers/AspectFit.dart';
@@ -33,8 +34,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     
     _keyboardController = KeyboardController(this);
 
-    //initialize the tooltip layer singleton
+    //initialize the singletons
     TooltipLayer();
+    DialogLayer();
 
     _canvas = Canvas();
     addChild(_canvas);
@@ -54,6 +56,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     ColorPicker.hide();
 
     addChild(TooltipLayer.instance);
+    addChild(DialogLayer.instance);
 
     Toolbox.selectFirstTool();
   }
@@ -73,6 +76,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Toolbox.instance
       ..x = 5
       ..y = 5;
+
+    DialogLayer.setSize(width, height);
   }
 
   ///resets the canvas back to the default size and centers it
