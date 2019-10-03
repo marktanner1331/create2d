@@ -5,7 +5,6 @@ import '../stateful_graphics/Vertex.dart';
 
 mixin SelectedSingleVertexMixin on ContextPropertyMixin {
   List<Vertex> get selectedVertices;
-  void invalidateVertexPositions();
 
   @override
   List<ContextPropertyGroup> getPropertyGroups() {
@@ -20,12 +19,12 @@ mixin SelectedSingleVertexMixin on ContextPropertyMixin {
   num get x => selectedVertices.first.x;
   void set x(num value) {
     selectedVertices.first.x = value;
-    invalidateVertexPositions();
+    invalidateProperties();
   }
 
   num get y => selectedVertices.first.y;
   void set y(num value) {
     selectedVertices.first.y = value;
-    invalidateVertexPositions();
+    invalidateProperties();
   }
 }

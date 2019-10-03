@@ -10,6 +10,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
 
   SelectTool() {
     selectedVertices = List();
+    onPropertiesChanged.listen(_onPropertiesChanged);
   }
 
   @override
@@ -69,9 +70,6 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
     invalidateContext();
   }
 
-  void invalidateVertexPositions() =>
-      MainWindow.canvas.invalidateVertexPositions();
-
   @override
   void onMouseUp(num x, num y) {
     super.onMouseUp(x, y);
@@ -89,12 +87,14 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
       v.x = x;
       v.y = y;
 
-      //so the canvas redraws
-      MainWindow.canvas.invalidateVertexPositions();
-
-      //so the property windows update
+      //so the property windows update and teh canvas redraws
       invalidateProperties();
     }
+  }
+
+  void _onPropertiesChanged(_) {
+    //so the canvas redraws
+    MainWindow.canvas.invalidateVertexPositions();
   }
 
   @override
