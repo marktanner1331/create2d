@@ -1,7 +1,7 @@
 import 'package:stagexl/stagexl.dart';
 
 import './PropertyWindow.dart';
-import '../property_groups/PropertyGroup.dart';
+import '../property_groups/ContextPropertyGroup.dart';
 import '../property_mixins/ContextPropertyMixin.dart';
 
 class ContextPropertiesWindow extends PropertyWindow {
@@ -44,7 +44,7 @@ class ContextPropertiesWindow extends PropertyWindow {
 
   void _refreshPropertyGroups() {
     clearPropertyGroups();
-    for (PropertyGroup propertyGroup in _currentObject.getPropertyGroups()) {
+    for (ContextPropertyGroup propertyGroup in _currentObject.getPropertyGroups()) {
       addPropertyGroup(propertyGroup);
     }
   }

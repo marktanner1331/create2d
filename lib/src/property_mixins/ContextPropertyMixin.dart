@@ -1,6 +1,6 @@
 import 'package:stagexl/stagexl.dart';
 
-import '../property_groups/PropertyGroup.dart';
+import '../property_groups/ContextPropertyGroup.dart';
 
 ///PROPERTIES_CHANGED is fired when the value of one or more properties inside the context changes
 /// e.g. the lineWidth
@@ -24,7 +24,7 @@ mixin ContextPropertyMixin {
   EventStream<Event> get onContextChanged =>
       _contextChangedEvent.forTarget(_dispatcher);
 
-  List<PropertyGroup> getPropertyGroups() {
+  List<ContextPropertyGroup> getPropertyGroups() {
     return List();
   }
 

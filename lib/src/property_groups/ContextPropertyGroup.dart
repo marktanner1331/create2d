@@ -11,10 +11,12 @@ abstract class ContextPropertyGroup extends PropertyGroup {
     this._myMixin = myMixin;
   }
 
+  @override
   void onEnter() {
     _propertyChangedSubscription = _myMixin.onPropertiesChanged.listen((_) => refreshProperties());
   }
 
+  @override
   void onExit() {
     _propertyChangedSubscription.cancel();
   }

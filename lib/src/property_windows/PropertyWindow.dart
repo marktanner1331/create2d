@@ -20,6 +20,7 @@ abstract class PropertyWindow extends Sprite implements IOnEnterExit {
   void clearPropertyGroups() {
     for(PropertyGroup group in _groups) {
       group.onIsOpenChanged.cancelSubscriptions();
+      group.onExit();
     }
 
     _groups.clear();
@@ -35,6 +36,8 @@ abstract class PropertyWindow extends Sprite implements IOnEnterExit {
       ..preferredWidth = _preferredWidth - 6;
     _groups.add(group);
     addChild(group);
+
+    group.onEnter();
 
     _relayoutGroups();
   }

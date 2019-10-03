@@ -1,4 +1,4 @@
-import '../property_groups/PropertyGroup.dart';
+import '../property_groups/ContextPropertyGroup.dart';
 import '../property_groups/LinePropertiesGroup.dart';
 import './ContextPropertyMixin.dart';
 
@@ -7,7 +7,7 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
   int strokeColor = 0xff000000;
 
   @override
-  List<PropertyGroup> getPropertyGroups() {
+  List<ContextPropertyGroup> getPropertyGroups() {
     return super.getPropertyGroups()
       ..add(LinePropertiesGroup(this));
   }

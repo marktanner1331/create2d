@@ -74,4 +74,7 @@ abstract class PropertyGroup extends Sprite {
 
   @protected
   void relayout();
+
+  void onEnter() {}
+  void onExit() {}
 }

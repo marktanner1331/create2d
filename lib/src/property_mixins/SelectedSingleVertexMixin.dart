@@ -1,4 +1,4 @@
-import '../property_groups/PropertyGroup.dart';
+import '../property_groups/ContextPropertyGroup.dart';
 import '../property_groups/SelectedSingleVertexGroup.dart';
 import './ContextPropertyMixin.dart';
 import '../stateful_graphics/Vertex.dart';
@@ -8,7 +8,7 @@ mixin SelectedSingleVertexMixin on ContextPropertyMixin {
   void invalidateVertexPositions();
 
   @override
-  List<PropertyGroup> getPropertyGroups() {
+  List<ContextPropertyGroup> getPropertyGroups() {
     if(selectedVertices.length == 1) {
       return super.getPropertyGroups()
         ..add(SelectedSingleVertexGroup(this));
