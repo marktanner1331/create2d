@@ -1,13 +1,13 @@
-import './PropertyGroup.dart';
+import './ContextPropertyGroup.dart';
 import '../widgets/NumberFieldWithLabel.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
 
-class LinePropertiesGroup extends PropertyGroup {
+class LinePropertiesGroup extends ContextPropertyGroup {
   LinePropertiesMixin _myMixin;
 
   NumberFieldWithLabel _thickness;
 
-  LinePropertiesGroup(LinePropertiesMixin myMixin) : super("Line") {
+  LinePropertiesGroup(LinePropertiesMixin myMixin) : super(myMixin, "Line") {
     this._myMixin = myMixin;
     
     _thickness = NumberFieldWithLabel("Thickness");
@@ -27,5 +27,10 @@ class LinePropertiesGroup extends PropertyGroup {
     _thickness
       ..x = (preferredWidth / 2) - 10 - _thickness.width
       ..y = 5;
+  }
+
+  @override
+  void refreshProperties() {
+    _thickness.value = _myMixin.thickness;
   }
 }
