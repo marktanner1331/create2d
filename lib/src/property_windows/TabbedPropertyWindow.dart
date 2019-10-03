@@ -45,6 +45,9 @@ class TabbedPropertyWindow extends Sprite {
     addChild(_titleLabel);
 
     _closeButton = CloseButton();
+    _closeButton.onMouseClick.listen((_) {
+      visible = false;
+    });
     addChild(_closeButton);
     
     _tabButtons = TabButtonRow();

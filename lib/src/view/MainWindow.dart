@@ -26,7 +26,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static KeyboardController get keyboardController => _keyboardController;
 
   MainMenu _menu;
-  TabbedPropertyWindow _propertyWindow;
+
+  static TabbedPropertyWindow _propertyWindow;
+  static TabbedPropertyWindow get propertyWindow => _propertyWindow;
 
   static MainWindow _instance;
 
