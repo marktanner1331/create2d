@@ -82,7 +82,7 @@ class ColorPicker extends Sprite {
     addChild(_titleLabel);
 
     _closeButton = CloseButton();
-    _closeButton.onMouseClick.listen((_) => dispatchEvent(Event(CLOSED)));
+    _closeButton.onMouseClick.listen((_) => hide());
     addChild(_closeButton);
     
     _tabButtons = TabButtonRow();
@@ -102,8 +102,6 @@ class ColorPicker extends Sprite {
     addTab(ColorPalette(this, preferredWidth));
     addTab(ColorSwatches(this, preferredWidth));
     addTab(ColorMixer(this, preferredWidth));
-
-    num deltaY = 400;
 
     _previewBox = ColorBox("Preview Color")
       ..setSize(preferredWidth / 2 - 10, 75)

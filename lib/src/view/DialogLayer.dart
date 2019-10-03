@@ -14,8 +14,6 @@ class DialogLayer extends Sprite {
     
     _blockers = List();
     _dialogs = List();
-
-    print("finished initializing the dialog layer");
   }
 
   static Sprite _createBlocker() {
@@ -41,7 +39,7 @@ class DialogLayer extends Sprite {
 
   static void pushDialog(DisplayObject dialog) {
     Sprite blocker = _createBlocker();
-    print(_instance);
+    
     _instance.addChild(blocker);
     _blockers.add(blocker);
 
