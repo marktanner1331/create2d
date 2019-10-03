@@ -34,4 +34,9 @@ class Styles {
   static int buttonUnhovered = 0xff555555;
   static int buttonHovered = 0xff999999;
   static int buttonText = 0xff000000;
+
+  static int dialogTitleText = 0xff000000;
+  static int dialogTitleBG = 0xff444444;
+  static int dialogText = 0xff000000;
+  static int dialogBG = 0xff999999;
 }

@@ -77,7 +77,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x = 5
       ..y = 5;
 
-    DialogLayer.setSize(width, height);
+    DialogLayer.relayout();
+    DialogLayer.alert("Hello, World!", () => print("onComplete"));
   }
 
   ///resets the canvas back to the default size and centers it

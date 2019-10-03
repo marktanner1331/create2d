@@ -12,5 +12,6 @@ dependencies:
   stagexl: ^1.4.0+3
   stagexl_ui_components:
     git: https://github.com/marktanner1331/stagexl_ui_components.git
+  stagexl_main_menu: ^1.0.1
   js: any
   test: ^1.5.3
