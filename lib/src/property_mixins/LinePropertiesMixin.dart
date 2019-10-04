@@ -3,8 +3,19 @@ import '../property_groups/LinePropertiesGroup.dart';
 import './ContextPropertyMixin.dart';
 
 mixin LinePropertiesMixin on ContextPropertyMixin {
-  num thickness = 5;
-  int strokeColor = 0xff000000;
+  num _thickness = 5;
+  num get thickness => _thickness;
+  void set thickness(num value) {
+    _thickness = value;
+    invalidateProperties();
+  }
+
+  int _strokeColor = 0xff000000;
+  num get strokeColor => _strokeColor;
+  void set strokeColor(num value) {
+    _strokeColor = value;
+    invalidateProperties();
+  }
 
   @override
   List<ContextPropertyGroup> getPropertyGroups() {
@@ -13,7 +24,10 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
   }
 
   void fromLinePropertiesMixin(LinePropertiesMixin other) {
-    this.thickness = other.thickness;
-    this.strokeColor = other.strokeColor;
+    this._thickness = other._thickness;
+    this._strokeColor = other._strokeColor;
+    invalidateProperties();
   }
+
+
 }
