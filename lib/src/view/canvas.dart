@@ -21,19 +21,6 @@ class Canvas extends Sprite
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
-  // static const String VERTICES_MOVED = "VERTICES_MOVED";
-  // static const String VERTICES_CHANGED = "VERTICES_CHANGED";
-
-  // static const EventStreamProvider<Event> _verticesMovedEvent =
-  //     const EventStreamProvider<Event>(VERTICES_MOVED);
-  // static const EventStreamProvider<Event> _verticesChangedEvent =
-  //     const EventStreamProvider<Event>(VERTICES_CHANGED);
-
-  // EventStream<Event> get onVerticesMoved =>
-  //     _verticesMovedEvent.forTarget(this);
-  // EventStream<Event> get onVerticesChanged =>
-  //     _verticesChangedEvent.forTarget(this);
-
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
@@ -47,7 +34,8 @@ class Canvas extends Sprite
   Grid _grid;
   Grid get grid => _grid;
 
-  CanvasMouseEventsController _canvasEvents;
+  CanvasMouseEventsController _canvasMouseEventsController;
+  CanvasMouseEventsController get canvasMouseEventsController => _canvasMouseEventsController;
 
   SelectionLayer _selectionLayer;
   SelectionLayer get selectionLayer => _selectionLayer;
@@ -64,9 +52,9 @@ class Canvas extends Sprite
     _selectionLayer = SelectionLayer(this);
     addChild(_selectionLayer);
 
-    _canvasEvents = CanvasMouseEventsController(this);
-    _canvasEvents.detectMouseOverVertex = true;
-    _canvasEvents.onMouseOverVertex.listen((_) => _refreshSelectedVertices());
+    _canvasMouseEventsController = CanvasMouseEventsController(this);
+    _canvasMouseEventsController.detectMouseOverVertex = true;
+    _canvasMouseEventsController.onMouseOverVertex.listen((_) => _refreshSelectedVertices());
 
     refreshCanvasBackground();
   }
@@ -82,8 +70,8 @@ class Canvas extends Sprite
   void _refreshSelectedVertices() {
     _selectionLayer.deselectAllVertices("MOUSE_OVER_VERTICES");
 
-    if (_canvasEvents.currentMouseOverVertex != null) {
-      _selectionLayer.addVertexToSelection("MOUSE_OVER_VERTICES", _canvasEvents.currentMouseOverVertex);
+    if (_canvasMouseEventsController.currentMouseOverVertex != null) {
+      _selectionLayer.addVertexToSelection("MOUSE_OVER_VERTICES", _canvasMouseEventsController.currentMouseOverVertex);
     }
   }
 

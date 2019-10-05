@@ -17,7 +17,7 @@ abstract class IShape {
   ///otherwise null is returned instead
   ///the tolerance is given in its squared form
   ///this is so it works more efficiently with pythagorus
-  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance);
+  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance, bool ignoreLockedVertices);
 
   ///returns a collection containing all vertices used in the shape
   Iterable<Vertex> getVertices();

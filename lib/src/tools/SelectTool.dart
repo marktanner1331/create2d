@@ -43,8 +43,11 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
           MainWindow.canvas.selectionLayer.selectedBlacklist.add(v);
         } else {
           selectedVertices.add(v);
+          MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = v;
         }
       } else {
+        MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = v;
+        
         if(selectedVertices.contains(v)) {
           //do nothing, user wants to move selected vertices
         } else {
@@ -86,17 +89,11 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   void onMouseUp(num x, num y) {
     super.onMouseUp(x, y);
-
-    // _currentLine = null;
-    // MainWindow.canvas.mergeInTemporaryLayer(_currentGraphics);
-    // _currentGraphics = null;
-    // MainWindow.canvas.invalidateVertices();
+    MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = null;
   }
 
   @override
   void onMouseMove(num x, num y) {
-    print(_mouseDownPoint);
-
     if (selectedVertices.length == 1) {
       Vertex v = selectedVertices.first;
       v.x = x;
@@ -115,7 +112,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
 
       _mouseDownPoint.x = x;
       _mouseDownPoint.y = y;
-      
+
       //so the property windows update and teh canvas redraws
       invalidateProperties();
     }

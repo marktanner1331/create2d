@@ -54,6 +54,7 @@ class CanvasMouseEventsController extends EventDispatcher {
     if (_canvas.snapToVertex) {
       Vertex v = _canvas.currentGraphics
           .getFirstVertexUnderPoint(Point(p.x, p.y), 100);
+      
       if (v != null) {
         return v;
       }

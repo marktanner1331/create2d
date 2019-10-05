@@ -14,6 +14,7 @@ abstract class ContextPropertyGroup extends PropertyGroup {
   @override
   void onEnter() {
     _propertyChangedSubscription = _myMixin.onPropertiesChanged.listen((_) => refreshProperties());
+    refreshProperties();
   }
 
   @override

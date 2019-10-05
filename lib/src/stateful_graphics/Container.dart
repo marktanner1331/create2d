@@ -16,7 +16,7 @@ class Container extends IShape {
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
       for(Vertex vertex in shape.getVertices()) {
-        Vertex existingVertex = getFirstVertexUnderPoint(vertex, 1);
+        Vertex existingVertex = getFirstVertexUnderPoint(vertex, 1, true);
 
         if(existingVertex != null) {
           shape.swapVertex(vertex, existingVertex);
@@ -33,14 +33,15 @@ class Container extends IShape {
 
   ///returns the first vertex found which is close enough to the given point with the given tolerance
   ///or null if one cannot be found
-  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance) {
+  @override
+  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance, bool ignoreLockedVertices) {
     for (IShape shape in _shapes) {
-      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance);
+      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance, ignoreLockedVertices);
       if (v != null) {
         return v;
       }
     }
-
+    
     return null;
   }
 
