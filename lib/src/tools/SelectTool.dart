@@ -26,7 +26,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
     _mouseDownPoint = unsnappedMousePosition;
 
     Vertex v = MainWindow.canvas.currentGraphics
-        .getFirstVertexUnderPoint(unsnappedMousePosition, 100, true);
+        .getFirstVertexUnderPoint(unsnappedMousePosition, squareTolerance: 100, ignoreLockedVertices: true);
     
     if(v != null) {
       if(MainWindow.keyboardController.shiftIsDown) {
@@ -95,8 +95,9 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   void onMouseUp(num x, num y) {
     super.onMouseUp(x, y);
-    for(Vertex oldVertex in selectedVertices) {
-      oldVertex.locked = false;
+    for(Vertex vertex in selectedVertices) {
+      vertex.locked = false;
+      MainWindow.canvas.currentGraphics.mergeVerticesUnderVertex(vertex);
     }
   }
 

@@ -53,7 +53,7 @@ class CanvasMouseEventsController extends EventDispatcher {
 
     if (_canvas.snapToVertex) {
       Vertex v = _canvas.currentGraphics
-          .getFirstVertexUnderPoint(Point(p.x, p.y), 100, true);
+          .getFirstVertexUnderPoint(Point(p.x, p.y), squareTolerance: 100, ignoreLockedVertices: true);
       
       if (v != null) {
         return v;
@@ -83,7 +83,7 @@ class CanvasMouseEventsController extends EventDispatcher {
       p.x *= _canvas.canvasSpaceToDrawingSpace;
       p.y *= _canvas.canvasSpaceToDrawingSpace;
 
-      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(p, 100, true);
+      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(p, squareTolerance: 100, ignoreLockedVertices: true);
 
       if (v != _currentMouseOverVertex) {
         _currentMouseOverVertex = v;

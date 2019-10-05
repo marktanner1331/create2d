@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:stagexl/src/drawing.dart';
 
 import './Vertex.dart';
@@ -16,7 +18,7 @@ class Container extends IShape {
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
       for(Vertex vertex in shape.getVertices()) {
-        Vertex existingVertex = getFirstVertexUnderPoint(vertex, 1, true);
+        Vertex existingVertex = getFirstVertexUnderPoint(vertex, ignoreLockedVertices: true);
 
         if(existingVertex != null) {
           shape.swapVertex(vertex, existingVertex);
@@ -31,18 +33,47 @@ class Container extends IShape {
     }
   }
 
+  ///swaps out any vertices under thr given vertex with the given vertex
+  void mergeVerticesUnderVertex(Vertex v) {
+    Iterable<Vertex> vertices = getVerticesUnderPoint(v);
+    for(Vertex w in vertices) {
+      if(identical(w, v)) {
+        continue;
+      }
+
+      swapVertex(w, v);
+    }
+  }
+
   ///returns the first vertex found which is close enough to the given point with the given tolerance
   ///or null if one cannot be found
   @override
-  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance, bool ignoreLockedVertices) {
+  Vertex getFirstVertexUnderPoint(Point p, {num squareTolerance = 0, bool ignoreLockedVertices = false}) {
     for (IShape shape in _shapes) {
-      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance, ignoreLockedVertices);
+      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance: squareTolerance, ignoreLockedVertices: ignoreLockedVertices);
       if (v != null) {
         return v;
       }
     }
     
     return null;
+  }
+
+  Iterable<Vertex> getVerticesUnderPoint(Point p) {
+    List<Vertex> vertices = List();
+    HashSet<int> identities = HashSet();
+
+    for(IShape shape in _shapes) {
+      for(Vertex v in shape.getVerticesUnderPoint(p)) {
+        int identity = identityHashCode(v);
+        if(identities.contains(identity) == false) {
+          identities.add(identity);
+          vertices.add(v);
+        }
+      }
+    }
+
+    return vertices;
   }
 
   List<IShape> getAllShapesThatHaveVertex(Vertex vertex) {
@@ -109,6 +140,15 @@ class Container extends IShape {
   void renderToStageXL(Graphics graphics) {
     for(IShape shape in _shapes) {
       shape.renderToStageXL(graphics);
+    }
+  }
+
+  @override
+  bool hasVertexAtPoint(Point<num> p) {
+    for (IShape shape in _shapes) {
+      if (shape.hasVertexAtPoint(p)) {
+        return true;
+      }
     }
   }
 }
