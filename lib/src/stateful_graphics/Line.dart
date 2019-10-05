@@ -41,11 +41,11 @@ class Line extends IShape with ContextPropertyMixin, LinePropertiesMixin {
   }
 
   @override
-  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance) {
+  Vertex getFirstVertexUnderPoint(Point p, num squareTolerance, bool ignoreLockedVertices) {
     assert(_end != null);
-    if(_start.squaredDistanceTo(p) <= squareTolerance) {
+    if((ignoreLockedVertices == false || _start.locked == false) && _start.squaredDistanceTo(p) <= squareTolerance) {
       return _start;
-    } else if(_end.squaredDistanceTo(p) <= squareTolerance) {
+    } else if((ignoreLockedVertices == false || _end.locked == false) && _end.squaredDistanceTo(p) <= squareTolerance) {
       return _end;
     } else {
       return null;

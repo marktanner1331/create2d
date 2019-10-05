@@ -26,7 +26,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
     _mouseDownPoint = unsnappedMousePosition;
 
     Vertex v = MainWindow.canvas.currentGraphics
-        .getFirstVertexUnderPoint(unsnappedMousePosition, 100);
+        .getFirstVertexUnderPoint(unsnappedMousePosition, 100, true);
     
     if(v != null) {
       if(MainWindow.keyboardController.shiftIsDown) {
@@ -37,23 +37,26 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
           //we want to remove the vertex from the selection
           //which is fine
           //but the user will still think its selected 
-          //because the mouse is over it, causing a highight
-          //adding it to the blacklist temporarily will stop that
+          //because the mouse is over it, causing a highlight
+          //keeping it locked until the selection layer code has run will stop that
           hasBlacklisted = true;
-          MainWindow.canvas.selectionLayer.selectedBlacklist.add(v);
         } else {
           selectedVertices.add(v);
-          MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = v;
+          v.locked = true;
         }
       } else {
-        MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = v;
-        
         if(selectedVertices.contains(v)) {
           //do nothing, user wants to move selected vertices
+          v.locked = true;
         } else {
+          for(Vertex oldVertex in selectedVertices) {
+            oldVertex.locked = false;
+          }
+
           //we are selecting a new vertex
           selectedVertices.clear();
           selectedVertices.add(v);
+          v.locked = true;
         }
       }
     } else {
@@ -65,6 +68,9 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
       } else {
         //user has clicked part of the background
         //so we deselect all
+        for(Vertex oldVertex in selectedVertices) {
+          oldVertex.locked = false;
+        }
         selectedVertices.clear();
       }
     }
@@ -89,7 +95,9 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   @override
   void onMouseUp(num x, num y) {
     super.onMouseUp(x, y);
-    MainWindow.canvas.canvasMouseEventsController.ignoreVertexWhenSnapping = null;
+    for(Vertex oldVertex in selectedVertices) {
+      oldVertex.locked = false;
+    }
   }
 
   @override
