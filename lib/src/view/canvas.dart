@@ -21,6 +21,9 @@ class Canvas extends Sprite
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
+  //used by mixins to get a reference to the canvas
+  Canvas get myCanvas => this;
+
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
