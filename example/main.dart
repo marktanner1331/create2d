@@ -19,11 +19,13 @@ Future<Null> main() async {
   var renderLoop = RenderLoop();
   renderLoop.addStage(stage);
 
-  mainWindow = MainWindow();
-  stage.addChild(mainWindow);
+  Properties propertyWindow = Properties();
 
-  stage.onResize.listen(onResized);
-  onResized(null);
+  // mainWindow = MainWindow();
+  // stage.addChild(mainWindow);
+
+  // stage.onResize.listen(onResized);
+  // onResized(null);
 }
 
 void onResized(Event e) {

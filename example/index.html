@@ -12,8 +12,36 @@
 </head>
 
 <body>
-
     <canvas id="stage" class="stage--fullscreen"></canvas>
-
+    <div id="properties" class="property_window">
+        <div class="title_bar no_select">
+            <span class="title">Properties</span>
+            <span class="close_button">x</span>
+        </div>
+        <div class="tab_buttons">
+            <span target="canvasTab" class="tab_button no_select">Canvas</span>
+            <span target="propertiesTab" class="tab_button no_select">Properties</span>
+        </div>
+        <div class="tabs">
+            <div class="tab" id="canvasTab">
+                <div id="Size" class="property_group">
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Size</div>
+                    <div class="number_box">
+                        <label>Canvas Width:</label><input id="canvasWidth" type="text" />
+                    </div>
+                    <br />
+                    <div class="number_box">
+                        <label>Canvas Height:</label><input id="canvasHeight" type="text" />
+                    </div>
+                    <br />
+                    <div></div>
+                    <div class="color_box">
+                        <label>background Color:</label><input type="text" disabled=true id="backgroundColor"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tab" id="propertiesTab">Properties</div>
+        </div>
+    </div>
 </body>
 </html>
