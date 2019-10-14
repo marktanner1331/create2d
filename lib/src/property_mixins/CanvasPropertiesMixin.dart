@@ -1,8 +1,15 @@
+import 'dart:math';
+
 import '../view/Canvas.dart';
+import '../helpers/UnitsHelper.dart';
 import '../model/CanvasUnitType.dart';
 
 mixin CanvasPropertiesMixin {
   Canvas get myCanvas;
+
+  UnitsHelper _helper = UnitsHelper.getUnitsHelper(CanvasUnitType.PIXEL);
+
+  num pixelsPerUnit = 1;
 
   int _backgroundColor = 0xffffffff;
   int get backgroundColor => _backgroundColor;
@@ -18,19 +25,32 @@ mixin CanvasPropertiesMixin {
   num _canvasHeight = 1000;
   num get canvasHeight => _canvasHeight;
 
-  num _dpi = 72;
-  num get dpi => _dpi;
+  CanvasUnitType get units => _helper.type;
+  void set units(CanvasUnitType value) {
+    if(_helper.type == value) {
+      return;
+    }
 
-  CanvasUnitType _units = CanvasUnitType.PIXEL;
-  CanvasUnitType get units => _units;
+    _helper = UnitsHelper.getUnitsHelper(value);
+  }
 
-  bool _maintainAspectRatio = true;
-  bool get maintainAspectRatio => _maintainAspectRatio;
+  //given a measurement in pixels, this method will return its value in units using the current unit type and the current pixels per unit value
+  String pixelsToUnits(num pixels) {
+    //if we have 1000 pixels, and 100 pixels per unit, we want 10 units
+    pixels /= pixelsPerUnit;
 
-  bool _scaleContent = true;
-  bool get scaleContent => _scaleContent;
+    return _helper.pixelsToUnits(pixels);
+  }
 
-  void setCanvasSize(num canvasWidth, num canvasHeight) {
+  //given a string representing a unit in the current unit type, e.g. feet: 5'5" this method will return its value in pixels using the current pixels per unit
+  num unitsToPixels(String units) {
+    num pixels = _helper.unitsToPixels(units);
+
+    //if we have 10 units and 100 pixels per unit, then we want 1000 pixels
+    return pixels * pixelsPerUnit;
+  }
+  
+  void setCanvasSize(num unitWidth, num unitHeight) {
     _canvasWidth = canvasWidth;
     _canvasHeight = canvasHeight;
 

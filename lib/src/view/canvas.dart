@@ -39,7 +39,6 @@ class Canvas extends Sprite
 
   CanvasMouseEventsController _canvasMouseEventsController;
   CanvasMouseEventsController get canvasMouseEventsController => _canvasMouseEventsController;
-
   SelectionLayer _selectionLayer;
   SelectionLayer get selectionLayer => _selectionLayer;
 

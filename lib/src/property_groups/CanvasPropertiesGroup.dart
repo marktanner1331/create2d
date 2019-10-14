@@ -1,7 +1,9 @@
 import './PropertyGroup.dart';
 import '../widgets/NumberFieldWithLabel.dart';
 import '../widgets/ColorSwatchWithLabel.dart';
+import '../widgets/RadioButtonGroup.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
+import '../model/CanvasUnitType.dart';
 
 class CanvasPropertiesGroup extends PropertyGroup {
   CanvasPropertiesMixin _properties;
@@ -10,6 +12,8 @@ class CanvasPropertiesGroup extends PropertyGroup {
   NumberFieldWithLabel _height;
 
   ColorSwatchWithLabel _bgColor;
+  RadioButtonGroup _units;
+  NumberFieldWithLabel _ppu;
 
   CanvasPropertiesGroup() : super("Canvas") {
     _width = NumberFieldWithLabel("Canvas Width")
@@ -24,6 +28,21 @@ class CanvasPropertiesGroup extends PropertyGroup {
       ..onColorChanged.listen(_onBGColorChanged);
     addChild(_bgColor);
 
+    _units = RadioButtonGroup("Measurement Units");
+    _units.addRow(CanvasUnitType.PIXEL, "Pixels");
+    _units.addRow(CanvasUnitType.MM, "Millimeters");
+    _units.addRow(CanvasUnitType.CM, "Centimeters");
+    _units.addRow(CanvasUnitType.M, "Meters");
+    _units.addRow(CanvasUnitType.KM, "Kilometers");
+    _units.addRow(CanvasUnitType.INCH, "Inches");
+    _units.addRow(CanvasUnitType.FOOT, "Feet");
+    _units.addRow(CanvasUnitType.MILE, "Miles");
+    addChild(_units);
+
+    _ppu = NumberFieldWithLabel("Pixels Per Unit")
+      ..onValueChanged.listen(_onPPUChanged);
+    addChild(_ppu);
+
     relayout();
   }
 
@@ -33,6 +52,10 @@ class CanvasPropertiesGroup extends PropertyGroup {
     _width.value = _properties.canvasWidth;
     _height.value = _properties.canvasHeight;
     _bgColor.color = _properties.backgroundColor;
+  }
+
+   void _onPPUChanged(_) {
+    
   }
 
   void _onWidthChanged(_) {
