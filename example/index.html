@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="scaffolded-by" content="https://github.com/google/stagehand">
-    <title>untitled</title>
+    <title>Create 2D</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="main.dart.js"></script>
 </head>
@@ -24,23 +24,70 @@
         </div>
         <div class="tabs">
             <div class="tab" id="canvasTab">
-                <div id="Size" class="property_group">
+                <div id="size" class="property_group">
                     <div class="group_header no_select"><span class="group_header_arrow">►</span> Size</div>
-                    <div class="number_box">
-                        <label>Canvas Width:</label><input id="canvasWidth" type="text" />
+                    <div class="group_content">
+                        <div class="number_box">
+                            <label>Canvas Width:</label><input id="canvasWidth" type="text" />
+                        </div>
+                        <br />
+                        <div class="number_box">
+                            <label>Canvas Height:</label><input id="canvasHeight" type="text" />
+                        </div>
+                        <br />
+                        <div class="spacer"></div>
+                        <div class="color_box">
+                            <label>background Color:</label><input type="text" disabled=true id="backgroundColor"></span>
+                        </div>
                     </div>
-                    <br />
-                    <div class="number_box">
-                        <label>Canvas Height:</label><input id="canvasHeight" type="text" />
-                    </div>
-                    <br />
-                    <div></div>
-                    <div class="color_box">
-                        <label>background Color:</label><input type="text" disabled=true id="backgroundColor"></span>
+                </div>
+                <div id="grid" class="property_group">
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Grid</div>
+                    <div class="group_content">
+                        <div class="number_box">
+                            <label>Thickness:</label><input id="gridThickness" type="text" />
+                        </div>
+                        <br />
+                        <div class="number_box">
+                            <label>Step:</label><input id="gridStep" type="text" />
+                        </div>
+                        <br />
+                        <div>
+                            <span style="float:left;margin-right: 25px;margin-top:5px;">
+                                Display:
+                                <div style="padding-left:5px;">
+                                    <input type="radio" name="display" id="none" /><label for="none">None</label>
+                                    <br />
+                                    <input type="radio" name="display" id="lines" /><label for="lines">Lines</label>
+                                    <br />
+                                    <input type="radio" name="display" id="dots" /><label for="dots">Dots</label>
+                                </div>
+                            </span>
+                            <span style="float:right;margin-top:5px;">
+                                Geometry:
+                                <div style="padding-left:5px;">
+                                    <input type="radio" name="geometry" id="isometric" /><label for="isometric">Isometric</label>
+                                    <br />
+                                    <input type="radio" name="geometry" id="square" /><label for="square">Square</label>
+                                </div>
+                            </span>
+                        </div>
+                        </div>
+                </div>
+                <div id="snapping" class="property_group">
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Snapping</div>
+                    <div class="group_content">
+                        <div>
+                            <input id="snapToGrid" type="checkbox" /><label for="snapToGrid">Snap to grid</label>
+                        </div>
+                        <br />
+                        <div>
+                            <input id="snapToVertices" type="checkbox" /><label for="snapToVertices">Snap to vertices</label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="tab" id="propertiesTab">Properties</div>
+            <div class="tab" id="contextTab">Properties</div>
         </div>
     </div>
 </body>

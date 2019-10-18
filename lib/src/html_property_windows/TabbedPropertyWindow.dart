@@ -1,14 +1,11 @@
 import 'dart:html';
+import './DraggablePropertyWindow.dart';
 
-import './Draggable.dart';
-
-class Properties {
+abstract class TabbedPropertyWindow extends DraggablePropertyWindow {
   Element _div;
 
-  Properties() {
-    _div = document.querySelector("#properties");
-    Element titleBar = _div.querySelector(".title_bar");
-    Draggable(_div, titleBar);
+  TabbedPropertyWindow(Element div) : super(div) {
+    _div = div;
 
     List<Element> tabButtons = _div.querySelector(".tab_buttons").children;
     for(Element tabButton in tabButtons) {

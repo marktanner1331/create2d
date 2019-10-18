@@ -25,7 +25,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static KeyboardController _keyboardController;
   static KeyboardController get keyboardController => _keyboardController;
 
-  MainMenu _menu;
+  static MainMenu _menu;
 
   static TabbedPropertyWindow _propertyWindow;
   static TabbedPropertyWindow get propertyWindow => _propertyWindow;
@@ -76,7 +76,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     _menu.width = width;
 
-    _resetCanvasZoomAndPosition();
+    resetCanvasZoomAndPosition();
 
     _propertyWindow
       ..x = width - _propertyWindow.width - 5
@@ -96,8 +96,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   }
 
   ///resets the canvas back to the default size and centers it
-  void _resetCanvasZoomAndPosition() {
-    Rectangle rect = aspectFitChildInsideParent(width, height - _menu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
+  static void resetCanvasZoomAndPosition() {
+    Rectangle rect = aspectFitChildInsideParent(_instance.width, _instance.height - _menu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
     
     canvas
       ..x = rect.left

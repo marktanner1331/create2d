@@ -1,4 +1,5 @@
 import '../view/Canvas.dart';
+import '../view/MainWindow.dart';
 
 mixin CanvasPropertiesMixin {
   int _backgroundColor = 0xffffffff;
@@ -12,7 +13,7 @@ mixin CanvasPropertiesMixin {
 
   num _canvasWidth = 1000;
   num get canvasWidth => _canvasWidth;
-
+  
   num _canvasHeight = 1000;
   num get canvasHeight => _canvasHeight;
 
@@ -20,7 +21,6 @@ mixin CanvasPropertiesMixin {
     _canvasWidth = canvasWidth;
     _canvasHeight = canvasHeight;
 
-    assert(this is Canvas);
-    (this as Canvas).refreshCanvasBackground();
+    MainWindow.resetCanvasZoomAndPosition();
   }
 }

@@ -19,13 +19,13 @@ Future<Null> main() async {
   var renderLoop = RenderLoop();
   renderLoop.addStage(stage);
 
-  Properties propertyWindow = Properties();
+  mainWindow = MainWindow();
+  stage.addChild(mainWindow);
 
-  // mainWindow = MainWindow();
-  // stage.addChild(mainWindow);
+  TabbedPropertyWindow propertyWindow = PropertyWindow(html.querySelector("#properties"));
 
-  // stage.onResize.listen(onResized);
-  // onResized(null);
+  stage.onResize.listen(onResized);
+  onResized(null);
 }
 
 void onResized(Event e) {
