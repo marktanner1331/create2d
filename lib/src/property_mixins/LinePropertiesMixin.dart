@@ -1,5 +1,5 @@
 import '../html_property_windows/property_groups/ContextGroup.dart';
-import '../html_property_windows/property_groups/LineGroup.dart';
+import '../html_property_windows/property_groups/LineViewController.dart';
 
 import './ContextPropertyMixin.dart';
 
@@ -21,7 +21,7 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
   @override
   List<ContextGroup> getPropertyGroups() {
     return super.getPropertyGroups()
-      ..add(LineGroup.instance..properties = this);
+      ..add(LineViewController.instance..properties = this);
   }
 
   void fromLinePropertiesMixin(LinePropertiesMixin other) {

@@ -41,7 +41,7 @@ class ContextTab extends Tab {
     if (_currentObject == null) {
       return;
     }
-    
+    print("here");
     _contextChangedSubscription = _currentObject.onContextChanged.listen((_) {
       _refreshPropertyGroups();
     });

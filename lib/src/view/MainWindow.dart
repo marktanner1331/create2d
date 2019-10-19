@@ -1,5 +1,6 @@
 import 'package:stagexl/stagexl.dart';
 import 'package:stagexl_ui_components/ui_components.dart';
+import 'dart:html' as html;
 
 import './Toolbox.dart';
 import './Canvas.dart';
@@ -8,7 +9,7 @@ import './TooltipLayer.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
 
-import '../html_property_windows/PropertyWindow.dart';
+import '../html_property_windows/PropertyWindowController.dart';
 import '../helpers/AspectFit.dart';
 import './color_picker/ColorPicker.dart';
 
@@ -23,8 +24,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static MainMenu _menu;
 
-  static PropertyWindow _propertyWindow;
-  static PropertyWindow get propertyWindow => _propertyWindow;
+  static PropertyWindowController _propertyWindow;
+  static PropertyWindowController get propertyWindow => _propertyWindow;
 
   static MainWindow _instance;
 
@@ -47,7 +48,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Toolbox();
     addChild(Toolbox.instance);
 
-    _propertyWindow = PropertyWindow(div);
+    _propertyWindow = PropertyWindowController(html.querySelector("#properties"));
 
     ColorPicker();
     addChild(ColorPicker.instance);

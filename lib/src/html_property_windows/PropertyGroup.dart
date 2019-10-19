@@ -9,7 +9,9 @@ abstract class PropertyGroup {
     _groupContent = div.querySelector(".group_content");
 
     Element groupHeader = div.querySelector(".group_header");
-    groupHeader.onClick.listen((_) => open = !open);
+    groupHeader.onClick.listen((_) {
+      open = !open;
+    });
   }
 
   bool get open => _groupContent.style.display == "block";

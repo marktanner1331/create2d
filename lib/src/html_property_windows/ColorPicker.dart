@@ -1,8 +1,8 @@
 import 'dart:html';
-import './TabbedPropertyWindow.dart';
+import './Draggable.dart';
 
-class ColorPicker extends TabbedPropertyWindow {
-  ColorPicker(Element div) : super(div) {
-    
+class ColorPicker {
+  ColorPicker(Element view) {
+    Draggable(view, view.querySelector(".title_bar"));
   }
 }

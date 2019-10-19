@@ -6,6 +6,7 @@ import '../tools/ITool.dart';
 import '../widgets/ToolboxButton.dart';
 import '../helpers/DraggableController.dart';
 import './TooltipLayer.dart';
+import '../html_property_windows/ContextTab.dart';
 
 import '../Styles.dart';
 
@@ -103,7 +104,7 @@ class Toolbox extends Sprite {
     _currentTool = value;
     _buttons[_currentTool.name].isSelected = true;
     _currentTool.onEnter();
-
-    ContextPropertiesWindow.currentObject = _currentTool;
+    
+    ContextTab.currentObject = _currentTool;
   }
 }

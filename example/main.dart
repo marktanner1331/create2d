@@ -22,8 +22,6 @@ Future<Null> main() async {
   mainWindow = MainWindow();
   stage.addChild(mainWindow);
 
-  TabbedPropertyWindow propertyWindow = PropertyWindow(html.querySelector("#properties"));
-
   stage.onResize.listen(onResized);
   onResized(null);
 }

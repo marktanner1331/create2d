@@ -3,16 +3,16 @@ import 'dart:html';
 import '../../property_mixins/LinePropertiesMixin.dart';
 import './ContextGroup.dart';
 
-class LineGroup extends ContextGroup {
-  static LineGroup get instance =>
+class LineViewController extends ContextGroup {
+  static LineViewController get instance =>
       _instance ??
-      (_instance = LineGroup(document.querySelector("#contextTab #line")));
-  static LineGroup _instance;
+      (_instance = LineViewController(document.querySelector("#contextTab #line")));
+  static LineViewController _instance;
 
   LinePropertiesMixin _properties;
   InputElement _thickness;
 
-  LineGroup(Element div) : super(div) {
+  LineViewController(Element div) : super(div) {
     this._thickness = div.querySelector("#thickness");
     _thickness.onInput.listen(_onThicknessChanged);
   }
