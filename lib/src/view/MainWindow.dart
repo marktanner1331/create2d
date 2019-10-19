@@ -2,7 +2,6 @@ import 'package:stagexl/stagexl.dart';
 import 'package:stagexl_ui_components/ui_components.dart';
 import 'dart:html' as html;
 
-import './Toolbox.dart';
 import './Canvas.dart';
 import './KeyboardController.dart';
 import './TooltipLayer.dart';
@@ -10,6 +9,8 @@ import './DialogLayer.dart';
 import './MainMenu.dart';
 
 import '../html_property_windows/PropertyWindowController.dart';
+import '../html_property_windows/ToolboxController.dart';
+
 import '../helpers/AspectFit.dart';
 import './color_picker/ColorPicker.dart';
 
@@ -24,8 +25,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static MainMenu _menu;
 
-  static PropertyWindowController _propertyWindow;
-  static PropertyWindowController get propertyWindow => _propertyWindow;
+  static final PropertyWindowController propertyWindow = PropertyWindowController(html.querySelector("#properties"));
+  static final ToolboxController toolbox = ToolboxController(html.querySelector("#toolbox"));
 
   static MainWindow _instance;
 
@@ -45,11 +46,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _menu = MainMenu();
     addChild(_menu);
 
-    Toolbox();
-    addChild(Toolbox.instance);
-
-    _propertyWindow = PropertyWindowController(html.querySelector("#properties"));
-
     ColorPicker();
     addChild(ColorPicker.instance);
     ColorPicker.hide();
@@ -57,7 +53,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     addChild(TooltipLayer.instance);
     addChild(DialogLayer.instance);
 
-    Toolbox.selectFirstTool();
+    toolbox.selectFirstTool();
   }
 
   @override
@@ -70,18 +66,18 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     resetCanvasZoomAndPosition();
 
-    _propertyWindow
-      ..x = width - _propertyWindow.width - 5
+    propertyWindow
+      ..x = width - propertyWindow.width - 5
       ..y = _menu.height + 5;
 
-    Toolbox.instance
+    toolbox
       ..x = 5
       ..y = _menu.height + 5;
 
     if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
       ColorPicker.instance
-        ..x = _propertyWindow.x - ColorPicker.instance.width - 5
-        ..y = _propertyWindow.y;
+        ..x = propertyWindow.x - ColorPicker.instance.width - 5
+        ..y = propertyWindow.y;
     }
 
     DialogLayer.relayout();

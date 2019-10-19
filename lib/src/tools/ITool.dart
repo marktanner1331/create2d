@@ -7,9 +7,7 @@ abstract class ITool with ContextPropertyMixin {
   //it receives mouse updates from the canvas such as onMouseMove
   bool _isActive = false;
   bool get isActive => _isActive;
-
-  DisplayObject getIcon();
-
+  
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     _isActive = true;
   }
@@ -24,6 +22,6 @@ abstract class ITool with ContextPropertyMixin {
   void onEnter();
   void onExit();
 
-  String get name;
+  String get id;
   String get tooltipText;
 }

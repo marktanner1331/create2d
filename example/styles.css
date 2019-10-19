@@ -114,3 +114,21 @@ html, body, .stage--fullscreen {
     border-radius: 5px;
     cursor: pointer;
 }
+
+#toolbox > table {
+    width:100%;
+}
+
+.tool_button {
+    border: 1px solid #888888;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tool_button:hover {
+    background-color: #666666;
+}
+
+.tool_button_selected {
+    background-color: #666666;
+}

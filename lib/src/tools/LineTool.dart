@@ -46,17 +46,7 @@ class LineTool extends ITool with LinePropertiesMixin {
   }
 
   @override
-  DisplayObject getIcon() {
-    TextField tf = TextField("L");
-    
-    return tf
-      ..autoSize = TextFieldAutoSize.NONE
-      ..width = tf.textWidth
-      ..height = tf.textHeight;
-  }
-
-  @override
-  String get name => "Line";
+  String get id => "lineTool";
 
   @override
   String get tooltipText => "Line Tool";

@@ -76,33 +76,33 @@ class Toolbox extends Sprite {
   }
 
   void _addTool(ITool tool) {
-    int column = _tools.length & 1;
-    int row = (_tools.length / 2).floor();
-    num deltaY = _titleLabel.height + 10;
+    // int column = _tools.length & 1;
+    // int row = (_tools.length / 2).floor();
+    // num deltaY = _titleLabel.height + 10;
 
-    ToolboxButton button = ToolboxButton(tool.getIcon())
-      ..setSize(25, 25)
-      ..x = column * 25
-      ..y = deltaY + row * 25
-      ..onMouseClick.listen((_) => currentTool = tool);
-    addChild(button);
+    // ToolboxButton button = ToolboxButton(tool.getIcon())
+    //   ..setSize(25, 25)
+    //   ..x = column * 25
+    //   ..y = deltaY + row * 25
+    //   ..onMouseClick.listen((_) => currentTool = tool);
+    // addChild(button);
 
-    _buttons[tool.name] = button;
-    _tools.add(tool);
+    // _buttons[tool.id] = button;
+    // _tools.add(tool);
 
-    TooltipLayer.addTooltip(button, tool.tooltipText);
+    // TooltipLayer.addTooltip(button, tool.tooltipText);
   }
 
   static ITool get currentTool => _currentTool;
 
   static void set currentTool(ITool value) {
     if(_currentTool != null) {
-      _buttons[_currentTool.name].isSelected = false;
+      _buttons[_currentTool.id].isSelected = false;
       _currentTool.onExit();
     }
 
     _currentTool = value;
-    _buttons[_currentTool.name].isSelected = true;
+    _buttons[_currentTool.id].isSelected = true;
     _currentTool.onEnter();
     
     ContextTab.currentObject = _currentTool;

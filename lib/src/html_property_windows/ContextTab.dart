@@ -7,6 +7,7 @@ import '../property_mixins/ContextPropertyMixin.dart';
 
 class ContextTab extends Tab {
   static ContextTab _instance;
+  static bool _isActive = false;
 
   static ContextPropertyMixin _currentObject;
   static EventStreamSubscription<Event> _contextChangedSubscription;
@@ -14,7 +15,6 @@ class ContextTab extends Tab {
   List<ContextGroup> _activeGroups;
 
   Element _div;
-  bool _isActive = false;
 
   ContextTab(Element div) : super(div) {
     assert(_instance == null);
@@ -25,7 +25,7 @@ class ContextTab extends Tab {
   }
 
   static void set currentObject(ContextPropertyMixin value) {
-    if (_instance._isActive) {
+    if (_isActive) {
       _instance.onExit();
       _currentObject = value;
       _instance.onEnter();
@@ -41,7 +41,7 @@ class ContextTab extends Tab {
     if (_currentObject == null) {
       return;
     }
-    print("here");
+
     _contextChangedSubscription = _currentObject.onContextChanged.listen((_) {
       _refreshPropertyGroups();
     });

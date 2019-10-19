@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:html';
 
 class Draggable {
-  StreamSubscription<MouseEvent> _objectDownSubscription;
   StreamSubscription<MouseEvent> _documentMoveSubscription;
   StreamSubscription<MouseEvent> _documentUpSubscription;
 
