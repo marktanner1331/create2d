@@ -8,12 +8,8 @@ import './TooltipLayer.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
 
-import '../property_windows/TabbedPropertyWindow.dart';
+import '../html_property_windows/PropertyWindow.dart';
 import '../helpers/AspectFit.dart';
-
-import '../property_windows/CanvasPropertiesWindow.dart';
-import '../property_windows/ContextProperties.dart';
-
 import './color_picker/ColorPicker.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
@@ -27,8 +23,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static MainMenu _menu;
 
-  static TabbedPropertyWindow _propertyWindow;
-  static TabbedPropertyWindow get propertyWindow => _propertyWindow;
+  static PropertyWindow _propertyWindow;
+  static PropertyWindow get propertyWindow => _propertyWindow;
 
   static MainWindow _instance;
 
@@ -51,12 +47,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Toolbox();
     addChild(Toolbox.instance);
 
-    _propertyWindow = TabbedPropertyWindow("Properties")
-      ..addTab(CanvasPropertiesWindow())
-      ..addTab(ContextPropertiesWindow())
-      ..relayout()
-      ..switchToFirstTab();
-    addChild(_propertyWindow);
+    _propertyWindow = PropertyWindow(div);
 
     ColorPicker();
     addChild(ColorPicker.instance);
