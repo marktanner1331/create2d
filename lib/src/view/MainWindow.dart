@@ -4,7 +4,7 @@ import 'dart:html' as html;
 
 import './Canvas.dart';
 import './KeyboardController.dart';
-import './TooltipLayer.dart';
+import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
 
@@ -37,7 +37,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _keyboardController = KeyboardController(this);
 
     //initialize the singletons
-    TooltipLayer();
+    TooltipController(html.document.querySelector("#tooltip"));
     DialogLayer();
 
     _canvas = Canvas();
@@ -50,7 +50,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     addChild(ColorPicker.instance);
     ColorPicker.hide();
 
-    addChild(TooltipLayer.instance);
     addChild(DialogLayer.instance);
 
     toolbox.selectFirstTool();

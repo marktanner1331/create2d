@@ -4,7 +4,7 @@ import './Draggable.dart';
 import './HTMLViewController.dart';
 import '../tools/ITool.dart';
 import './ContextTab.dart';
-
+import '../view/TooltipController.dart';
 import '../tools/LineTool.dart';
 import '../tools/SelectTool.dart';
 
@@ -23,6 +23,11 @@ class ToolboxController with HTMLViewController {
 
     _tools.add(LineTool());
     _tools.add(SelectTool());
+  }
+
+  void _addTool(ITool tool) {
+    _tools.add(tool);
+    TooltipController.addHTMLTooltip(tool, tool.view);
   }
 
   void _onButtonClick(MouseEvent e) {

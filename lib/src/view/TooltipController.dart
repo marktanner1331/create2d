@@ -9,14 +9,18 @@ class TooltipController {
 
   static StreamSubscription<html.MouseEvent> _documentMoveSubscription;
 
-  TooltipController() {
-    _tooltip = html.document.querySelector("#tooltip")
+  TooltipController(html.Element view) {
+    _tooltip = view
       ..style.display = "none";
     
     _tooltipTextMap = Map();
   }
 
-  static void addTooltip(InteractiveObject child, String tooltip) {
+  static void addHTMLTooltip(html.Element element, String tooltip) {
+
+  }
+
+  static void addStageXLTooltip(InteractiveObject child, String tooltip) {
     _tooltipTextMap[child] = tooltip;
     child.onMouseOver.listen(_onMouseOver);
     child.onMouseOut.listen(_onMouseOut);
