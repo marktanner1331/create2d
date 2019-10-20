@@ -21,18 +21,18 @@ class ToolboxController with HTMLViewController {
       button.onClick.listen(_onButtonClick);
     }
 
-    _tools.add(LineTool());
-    _tools.add(SelectTool());
+    _addTool(LineTool(view.querySelector("#lineTool")));
+    _addTool(SelectTool(view.querySelector("#selectTool")));
   }
 
   void _addTool(ITool tool) {
     _tools.add(tool);
-    TooltipController.addHTMLTooltip(tool, tool.view);
+    TooltipController.addHTMLTooltip(tool.view, tool.tooltipText);
   }
 
   void _onButtonClick(MouseEvent e) {
     String id =  (e.currentTarget as Element).id;
-    currentTool = _tools.firstWhere((tool) => tool.id == id);
+    currentTool = _tools.firstWhere((tool) => tool.view.id == id);
   }
 
   void selectFirstTool() {
@@ -43,13 +43,13 @@ class ToolboxController with HTMLViewController {
 
   void set currentTool(ITool value) {
     if(_currentTool != null) {
-      view.querySelector("#" + _currentTool.id).classes.remove("tool_button_selected");
+      _currentTool.view.classes.remove("tool_button_selected");
       _currentTool.onExit();
     }
     
     _currentTool = value;
     
-    view.querySelector("#" + _currentTool.id).classes.add("tool_button_selected");
+    _currentTool.view.classes.add("tool_button_selected");
     _currentTool.onEnter();
     
     ContextTab.currentObject = _currentTool;

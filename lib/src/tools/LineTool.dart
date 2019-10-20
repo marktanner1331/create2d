@@ -1,4 +1,5 @@
 import 'package:stagexl/stagexl.dart';
+import 'dart:html' as html;
 
 import '../view/MainWindow.dart';
 import './ITool.dart';
@@ -11,6 +12,8 @@ import '../property_mixins/LinePropertiesMixin.dart';
 class LineTool extends ITool with LinePropertiesMixin {
   Line _currentLine;
   Container _currentGraphics;
+
+  LineTool(html.Element view) : super(view);
 
   @override
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {

@@ -1,8 +1,13 @@
 import 'package:stagexl/stagexl.dart';
+import 'dart:html' as html;
 
 import '../property_mixins/ContextPropertyMixin.dart';
 
 abstract class ITool with ContextPropertyMixin {
+  final html.Element view;
+
+  ITool(this.view);
+
   //when set to true, the tool is active
   //it receives mouse updates from the canvas such as onMouseMove
   bool _isActive = false;
@@ -22,6 +27,5 @@ abstract class ITool with ContextPropertyMixin {
   void onEnter();
   void onExit();
 
-  String get id;
   String get tooltipText;
 }

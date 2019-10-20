@@ -1,4 +1,5 @@
 import 'package:stagexl/stagexl.dart';
+import 'dart:html' as html;
 
 import './ITool.dart';
 import '../view/MainWindow.dart';
@@ -13,7 +14,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin {
   //only really used when moving multiple vertices at once
   Point _mouseDownPoint;
 
-  SelectTool() {
+  SelectTool(html.Element view) : super(view) {
     selectedVertices = List();
     onPropertiesChanged.listen(_onPropertiesChanged);
   }

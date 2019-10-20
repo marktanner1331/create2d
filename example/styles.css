@@ -132,3 +132,7 @@ html, body, .stage--fullscreen {
 .tool_button_selected {
     background-color: #666666;
 }
+
+#tooltip {
+    position: absolute;
+}
