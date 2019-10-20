@@ -15,10 +15,6 @@ html, body, .stage--fullscreen {
     vertical-align:middle;
 }
 
-/* .stage--fullscreen {
-    display: none;
-} */
-
 .no_select {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
@@ -29,7 +25,7 @@ html, body, .stage--fullscreen {
                                     supported by Chrome, Opera and Firefox */
   }
 
-.property_window {
+.floating_window {
     position: absolute;
     top: 0;
     left: 0;
@@ -37,32 +33,32 @@ html, body, .stage--fullscreen {
     color: white;
 }
 
-.property_window .title_bar {
+.floating_window .title_bar {
     width: 100%;
     background-color: #444444;
     cursor: pointer;
 }
 
-.property_window .title {
+.floating_window .title {
     display: inline-block;
     padding: 5px;
 }
 
-.property_window .close_button {
+.floating_window .close_button {
     padding: 5px;
     float: right;
 }
 
-.property_window .close_button:hover {
+.floating_window .close_button:hover {
     background-color:#aaaaaa;
 }
 
-.property_window .tab_buttons {
+.tab_button_container {
     margin-top: 5px;
     padding: 0px 5px;
 }
 
-.property_window .tab_button {
+.tab_button {
     padding: 5px;
     background-color: #444444;
     display: inline-block;
@@ -70,32 +66,32 @@ html, body, .stage--fullscreen {
 
 }
 
-.property_window .tab {
+.floating_window .tab {
     display: none;
     padding: 5px 10px;
 }
 
-.property_window .group_header {
+.group_header {
     background-color: #666666;
     margin: 5px -5px;
     cursor: pointer;
 }
 
-.property_window .group_header_arrow {
+.group_header_arrow {
     margin-left: 2px;
 }
 
-.property_window .group_content {
+.group_content {
     display: none;
 }
 
-.property_window .property_group > div > div:not(.group_header) {
+ .property_group > div > div:not(.group_header) {
     display: inline-block;
     width: 100%;
     margin-bottom: 5px;
 }
 
-.property_window .spacer {
+.group_content .spacer {
     display: block !important;
 }
 
@@ -135,4 +131,9 @@ html, body, .stage--fullscreen {
 
 #tooltip {
     position: absolute;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    opacity: 0.9;
+    padding: 1px 4px;
 }
