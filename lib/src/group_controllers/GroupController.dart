@@ -1,10 +1,10 @@
 import 'dart:html';
 
-abstract class PropertyGroup {
+abstract class GroupController {
   Element _groupHeaderArrow;
   Element _groupContent;
 
-  PropertyGroup(Element div) {
+  GroupController(Element div) {
     _groupHeaderArrow = div.querySelector(".group_header_arrow");
     _groupContent = div.querySelector(".group_content");
 

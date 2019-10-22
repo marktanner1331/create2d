@@ -1,5 +1,5 @@
 import 'dart:html';
-import './Draggable.dart';
+import '../helpers/Draggable.dart';
 
 class ColorPicker {
   ColorPicker(Element view) {

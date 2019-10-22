@@ -2,7 +2,7 @@ import 'dart:html';
 import 'package:stagexl/stagexl.dart';
 
 import './Tab.dart';
-import './property_groups/ContextGroup.dart';
+import '../group_controllers/ContextController.dart';
 import '../property_mixins/ContextPropertyMixin.dart';
 
 class ContextTab extends Tab {
@@ -12,7 +12,7 @@ class ContextTab extends Tab {
   static ContextPropertyMixin _currentObject;
   static EventStreamSubscription<Event> _contextChangedSubscription;
   
-  List<ContextGroup> _activeGroups;
+  List<ContextController> _activeGroups;
 
   Element _div;
 
@@ -51,13 +51,13 @@ class ContextTab extends Tab {
 
   void _refreshPropertyGroups() {
     clearPropertyGroups();
-    for (ContextGroup group in _currentObject.getPropertyGroups()) {
+    for (ContextController group in _currentObject.getPropertyGroups()) {
       group.div.style.display = "block";
     }
   }
 
   void clearPropertyGroups() {
-    for(ContextGroup group in _activeGroups) {
+    for(ContextController group in _activeGroups) {
       group.div.style.display = "none";
       group.onExit();
     }

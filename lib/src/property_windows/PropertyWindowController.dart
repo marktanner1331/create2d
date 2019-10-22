@@ -2,9 +2,9 @@ import 'dart:html';
 
 import './CanvasTab.dart';
 import './ContextTab.dart';
-import './Draggable.dart';
+import '../helpers/Draggable.dart';
 import './TabController.dart';
-import './HTMLViewController.dart';
+import '../helpers/HTMLViewController.dart';
 
 class PropertyWindowController with HTMLViewController {
   final Element view;

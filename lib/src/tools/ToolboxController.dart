@@ -1,9 +1,9 @@
 import 'dart:html';
 
-import './Draggable.dart';
-import './HTMLViewController.dart';
+import '../helpers/Draggable.dart';
+import '../helpers/HTMLViewController.dart';
 import '../tools/ITool.dart';
-import './ContextTab.dart';
+import '../property_windows/ContextTab.dart';
 import '../view/TooltipController.dart';
 import '../tools/LineTool.dart';
 import '../tools/SelectTool.dart';

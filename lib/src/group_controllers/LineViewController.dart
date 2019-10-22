@@ -1,9 +1,9 @@
 import 'dart:html';
 
-import '../../property_mixins/LinePropertiesMixin.dart';
-import './ContextGroup.dart';
+import './ContextController.dart';
+import '../property_mixins/LinePropertiesMixin.dart';
 
-class LineViewController extends ContextGroup {
+class LineViewController extends ContextController {
   static LineViewController get instance =>
       _instance ??
       (_instance = LineViewController(document.querySelector("#contextTab #line")));

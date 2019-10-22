@@ -1,9 +1,9 @@
 import 'dart:html';
 
-import '../PropertyGroup.dart';
-import '../../property_mixins/SnappingPropertiesMixin.dart';
+import './GroupController.dart';
+import '../property_mixins/SnappingPropertiesMixin.dart';
 
-class SnappingGroup extends PropertyGroup {
+class SnappingViewController extends GroupController {
   SnappingPropertiesMixin _properties;
   InputElement _grid;
 
@@ -11,7 +11,7 @@ class SnappingGroup extends PropertyGroup {
   //when hovering over a vertex while drawing
   InputElement _vertices;
 
-  SnappingGroup(Element div) : super(div) {
+  SnappingViewController(Element div) : super(div) {
     _grid = div.querySelector("#snapToGrid") as InputElement;
     _grid.onInput.listen(_onGridChanged);
 

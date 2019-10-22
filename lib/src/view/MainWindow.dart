@@ -8,8 +8,8 @@ import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
 
-import '../html_property_windows/PropertyWindowController.dart';
-import '../html_property_windows/ToolboxController.dart';
+import '../property_windows/PropertyWindowController.dart';
+import '../tools/ToolboxController.dart';
 
 import '../helpers/AspectFit.dart';
 import './color_picker/ColorPicker.dart';

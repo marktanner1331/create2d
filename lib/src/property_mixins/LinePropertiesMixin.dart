@@ -1,5 +1,5 @@
-import '../html_property_windows/property_groups/ContextGroup.dart';
-import '../html_property_windows/property_groups/LineViewController.dart';
+import '../group_controllers/ContextController.dart';
+import '../group_controllers/LineViewController.dart';
 
 import './ContextPropertyMixin.dart';
 
@@ -19,7 +19,7 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
   }
 
   @override
-  List<ContextGroup> getPropertyGroups() {
+  List<ContextController> getPropertyGroups() {
     return super.getPropertyGroups()
       ..add(LineViewController.instance..properties = this);
   }

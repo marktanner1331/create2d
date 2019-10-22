@@ -1,5 +1,5 @@
-import '../html_property_windows/property_groups/ContextGroup.dart';
-import '../html_property_windows/property_groups/SelectedSingleVertexGroup.dart';
+import '../group_controllers/ContextController.dart';
+import '../group_controllers/SelectedSingleVertexViewController.dart';
 import './ContextPropertyMixin.dart';
 import '../stateful_graphics/Vertex.dart';
 
@@ -7,10 +7,10 @@ mixin SelectedSingleVertexMixin on ContextPropertyMixin {
   List<Vertex> get selectedVertices;
 
   @override
-  List<ContextGroup> getPropertyGroups() {
+  List<ContextController> getPropertyGroups() {
     if(selectedVertices.length == 1) {
       return super.getPropertyGroups()
-        ..add(SelectedSingleVertexGroup.instance..properties = this);
+        ..add(SelectedSingleVertexViewController.instance..properties = this);
     } else {
       return super.getPropertyGroups();
     }

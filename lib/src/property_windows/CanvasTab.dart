@@ -1,22 +1,22 @@
 import 'dart:html';
 
 import './Tab.dart';
-import './property_groups/CanvasSizeGroup.dart';
-import './property_groups/GridGroup.dart';
-import './property_groups/SnappingGroup.dart';
+import '../group_controllers/CanvasSizeViewController.dart';
+import '../group_controllers/GridViewController.dart';
+import '../group_controllers/SnappingViewController.dart';
 import '../view/MainWindow.dart';
 
 class CanvasTab extends Tab {
   CanvasTab(Element div) : super(div) {
-    CanvasSizeGroup(div.querySelector("#size"))
+    CanvasSizeViewController(div.querySelector("#size"))
       ..myCanvasProperties = MainWindow.canvas
       ..open = true;
 
-    GridGroup(div.querySelector("#grid"))
+    GridViewController(div.querySelector("#grid"))
       ..myGridProperties = MainWindow.canvas
       ..open = true;
 
-    SnappingGroup(div.querySelector("#snapping"))
+    SnappingViewController(div.querySelector("#snapping"))
       ..mySnappingProperties = MainWindow.canvas
       ..open = true;
   }

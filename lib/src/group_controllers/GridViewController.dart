@@ -1,11 +1,11 @@
 import 'dart:html';
 
-import '../PropertyGroup.dart';
-import '../../model/GridDisplayType.dart';
-import '../../model/GridGeometryType.dart';
-import '../../property_mixins/GridPropertiesMixin.dart';
+import './GroupController.dart';
+import '../model/GridDisplayType.dart';
+import '../model/GridGeometryType.dart';
+import '../property_mixins/GridPropertiesMixin.dart';
 
-class GridGroup extends PropertyGroup {
+class GridViewController extends GroupController {
   GridPropertiesMixin _properties;
 
   TextInputElement _thickness;
@@ -18,7 +18,7 @@ class GridGroup extends PropertyGroup {
   InputElement _geometryIsometric;
   InputElement _geometrySquare;
 
-  GridGroup(Element div) : super(div) {
+  GridViewController(Element div) : super(div) {
     _thickness = div.querySelector("#gridThickness") as InputElement;
     _thickness.onInput.listen(_onThicknessChanged);
 

@@ -1,9 +1,9 @@
 import 'dart:html';
 
-import '../PropertyGroup.dart';
-import '../../property_mixins/CanvasPropertiesMixin.dart';
+import './GroupController.dart';
+import '../property_mixins/CanvasPropertiesMixin.dart';
 
-class CanvasSizeGroup extends PropertyGroup {
+class CanvasSizeViewController extends GroupController {
   // static CanvasSizeGroup get instance => _instance ?? (_instance = CanvasSizeGroup(document.querySelector("#canvasTab #size")));
   // static CanvasSizeGroup _instance;
 
@@ -11,7 +11,7 @@ class CanvasSizeGroup extends PropertyGroup {
   InputElement _width;
   InputElement _height;
 
-  CanvasSizeGroup(Element div) : super(div) {
+  CanvasSizeViewController(Element div) : super(div) {
     _width = div.querySelector("#canvasWidth") as InputElement;
     _width.onInput.listen(_onInput);
 
