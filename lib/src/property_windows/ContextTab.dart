@@ -51,8 +51,11 @@ class ContextTab extends Tab {
 
   void _refreshPropertyGroups() {
     clearPropertyGroups();
+
     for (ContextController group in _currentObject.getPropertyGroups()) {
       group.div.style.display = "block";
+      group.open = true;
+      group.onEnter();
     }
   }
 
