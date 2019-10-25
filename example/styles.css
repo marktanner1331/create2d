@@ -85,6 +85,10 @@ html, body, .stage--fullscreen {
     display: none;
 }
 
+#contextTab .property_group {
+    display: none;
+}
+
  .property_group > div > div:not(.group_header) {
     display: inline-block;
     width: 100%;

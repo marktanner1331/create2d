@@ -29,15 +29,12 @@ class LineViewController extends ContextController {
     }
   }
 
-  void set properties(LinePropertiesMixin value) {
+   void set properties(LinePropertiesMixin value) {
     _properties = value;
   }
 
   @override
-  void onEnter() {
+  void refreshProperties() {
     _thickness.value = _properties.thickness.toString();
   }
-
-  @override
-  void onExit() {}
 }

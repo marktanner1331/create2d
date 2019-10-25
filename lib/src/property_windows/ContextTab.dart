@@ -11,7 +11,8 @@ class ContextTab extends Tab {
 
   static ContextPropertyMixin _currentObject;
   static EventStreamSubscription<Event> _contextChangedSubscription;
-  
+  static EventStreamSubscription<Event> _propertyChangedSubscription;
+
   List<ContextController> _activeGroups;
 
   Element _div;
@@ -46,6 +47,12 @@ class ContextTab extends Tab {
       _refreshPropertyGroups();
     });
 
+    _propertyChangedSubscription = _currentObject.onPropertiesChanged.listen((_) {
+      for(ContextController group in _activeGroups) {
+        group.refreshProperties();
+      }
+    });
+  
     _refreshPropertyGroups();
   }
 
@@ -55,14 +62,13 @@ class ContextTab extends Tab {
     for (ContextController group in _currentObject.getPropertyGroups()) {
       group.div.style.display = "block";
       group.open = true;
-      group.onEnter();
+      _activeGroups.add(group);
     }
   }
 
   void clearPropertyGroups() {
     for(ContextController group in _activeGroups) {
       group.div.style.display = "none";
-      group.onExit();
     }
 
     _activeGroups.clear();
@@ -72,6 +78,10 @@ class ContextTab extends Tab {
   void onExit() {
     if (_contextChangedSubscription != null) {
       _contextChangedSubscription.cancel();
+    }
+
+    if (_propertyChangedSubscription != null) {
+      _propertyChangedSubscription.cancel();
     }
 
     _isActive = false;
