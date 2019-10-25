@@ -7,6 +7,9 @@ abstract class IShape {
 
   bool hasVertexAtPoint(Point p);
 
+  ///swaps out any vertices under thr given vertex with the given vertex
+  void mergeVerticesUnderVertex(Vertex v);
+
   ///removes the oldVertex from the shape and replaces it with the new vertex
   void swapVertex(Vertex oldVertex, Vertex newVertex);
 

@@ -21,6 +21,9 @@ class Canvas extends Sprite
         GridPropertiesMixin,
         SnappingPropertiesMixin,
         CanvasPropertiesMixin {
+  //used by mixins to get a reference to the canvas
+  Canvas get myCanvas => this;
+
   Container _graphicsContainer;
   Container get currentGraphics => _graphicsContainer;
 
@@ -36,7 +39,6 @@ class Canvas extends Sprite
 
   CanvasMouseEventsController _canvasMouseEventsController;
   CanvasMouseEventsController get canvasMouseEventsController => _canvasMouseEventsController;
-
   SelectionLayer _selectionLayer;
   SelectionLayer get selectionLayer => _selectionLayer;
 

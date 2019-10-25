@@ -95,4 +95,13 @@ class Line extends IShape with ContextPropertyMixin, LinePropertiesMixin {
   bool hasVertexAtPoint(Point p) {
     return p == _start || p == _end;
   }
+
+  @override
+  void mergeVerticesUnderVertex(Vertex v) {
+    if(v == _start) {
+      _start = v;
+    } else if(v == _end) {
+      _end = v;
+    }
+  }
 }

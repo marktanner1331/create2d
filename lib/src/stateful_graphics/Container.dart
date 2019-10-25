@@ -33,15 +33,10 @@ class Container extends IShape {
     }
   }
 
-  ///swaps out any vertices under thr given vertex with the given vertex
+  @override
   void mergeVerticesUnderVertex(Vertex v) {
-    Iterable<Vertex> vertices = getVerticesUnderPoint(v);
-    for(Vertex w in vertices) {
-      if(identical(w, v)) {
-        continue;
-      }
-
-      swapVertex(w, v);
+    for (IShape shape in _shapes) {
+      shape.mergeVerticesUnderVertex(v);
     }
   }
 
