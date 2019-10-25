@@ -15,13 +15,8 @@ class ContextTab extends Tab {
 
   List<ContextController> _activeGroups;
 
-  Element _div;
-
   ContextTab(Element div) : super(div) {
-    assert(_instance == null);
     _instance = this;
-
-    this._div = div;
     _activeGroups = List();
   }
 
@@ -43,31 +38,34 @@ class ContextTab extends Tab {
       return;
     }
 
-    _contextChangedSubscription = _currentObject.onContextChanged.listen((_) {
-      _refreshPropertyGroups();
-    });
+    _contextChangedSubscription =
+        _currentObject.onContextChanged.listen((_) => _refreshContext());
+    
+    _propertyChangedSubscription =
+        _currentObject.onPropertiesChanged.listen((_) => _refreshProperties());
 
-    _propertyChangedSubscription = _currentObject.onPropertiesChanged.listen((_) {
-      for(ContextController group in _activeGroups) {
-        group.refreshProperties();
-      }
-    });
-  
-    _refreshPropertyGroups();
+    _refreshContext();
   }
 
-  void _refreshPropertyGroups() {
+  void _refreshProperties() {
+    for (ContextController group in _activeGroups) {
+      group.refreshProperties();
+    }
+  }
+
+  void _refreshContext() {
     clearPropertyGroups();
 
     for (ContextController group in _currentObject.getPropertyGroups()) {
       group.div.style.display = "block";
       group.open = true;
       _activeGroups.add(group);
+      group.refreshProperties();
     }
   }
 
   void clearPropertyGroups() {
-    for(ContextController group in _activeGroups) {
+    for (ContextController group in _activeGroups) {
       group.div.style.display = "none";
     }
 
