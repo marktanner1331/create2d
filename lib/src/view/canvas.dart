@@ -94,6 +94,12 @@ class Canvas extends Sprite
   }
 
   void refreshCanvasBackground() {
+    //the width and height here are inherited from setSizeMixin
+    //these are different from canvasWidth and canvasHeight
+    //this is because we want the grid lines to be a constant width regardless of the scale (which is relative to canvasWidth)
+    //instead, MainWindow.resetCanvasZoomAndPosition() looks at all the variables to figure out what the width and height should be and 
+    //calls setSize() on the canvas, which then calls this
+
     graphics.clear();
     graphics.rect(0, 0, width, height);
     graphics.fillColor(backgroundColor);

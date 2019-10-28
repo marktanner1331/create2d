@@ -22,6 +22,5 @@ abstract class ContextPropertyGroup extends PropertyGroup {
     _propertyChangedSubscription.cancel();
   }
 
-  
   void refreshProperties();
 }

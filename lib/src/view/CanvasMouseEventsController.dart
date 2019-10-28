@@ -1,6 +1,6 @@
+import 'package:design2D/design2D.dart';
 import 'package:stagexl/stagexl.dart';
 
-import './Toolbox.dart';
 import './Canvas.dart';
 import '../stateful_graphics/Vertex.dart';
 
@@ -73,7 +73,7 @@ class CanvasMouseEventsController extends EventDispatcher {
   }
 
   void _onMouseDown(MouseEvent e) {
-    Toolbox.currentTool
+    MainWindow.toolbox.currentTool
         .onMouseDown(_getUnsnappedMousePoint(), _getSnappedMousePoint());
   }
 
@@ -91,14 +91,14 @@ class CanvasMouseEventsController extends EventDispatcher {
       }
     }
 
-    if (Toolbox.currentTool.isActive) {
+    if (MainWindow.toolbox.currentTool.isActive) {
       Point p = _getSnappedMousePoint();
-      Toolbox.currentTool.onMouseMove(p.x, p.y);
+      MainWindow.toolbox.currentTool.onMouseMove(p.x, p.y);
     }
   }
 
   void _onMouseUp(MouseEvent e) {
     Point p = _getSnappedMousePoint();
-    Toolbox.currentTool.onMouseUp(p.x, p.y);
+    MainWindow.toolbox.currentTool.onMouseUp(p.x, p.y);
   }
 }

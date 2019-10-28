@@ -4,7 +4,7 @@ enum CanvasUnitType {
   CM,
   M,
   INCH,
-  FEET,
+  FOOT,
   KM,
   MILE
 }

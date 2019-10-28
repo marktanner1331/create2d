@@ -1,19 +1,17 @@
 import 'package:stagexl/stagexl.dart';
 import 'package:stagexl_ui_components/ui_components.dart';
+import 'dart:html' as html;
 
-import './Toolbox.dart';
 import './Canvas.dart';
 import './KeyboardController.dart';
-import './TooltipLayer.dart';
+import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
 
-import '../property_windows/TabbedPropertyWindow.dart';
+import '../property_windows/PropertyWindowController.dart';
+import '../tools/ToolboxController.dart';
+
 import '../helpers/AspectFit.dart';
-
-import '../property_windows/CanvasPropertiesWindow.dart';
-import '../property_windows/ContextProperties.dart';
-
 import './color_picker/ColorPicker.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
@@ -25,10 +23,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static KeyboardController _keyboardController;
   static KeyboardController get keyboardController => _keyboardController;
 
-  MainMenu _menu;
+  static MainMenu _menu;
 
-  static TabbedPropertyWindow _propertyWindow;
-  static TabbedPropertyWindow get propertyWindow => _propertyWindow;
+  static final PropertyWindowController propertyWindow = PropertyWindowController(html.querySelector("#properties"));
+  static final ToolboxController toolbox = ToolboxController(html.querySelector("#toolbox"));
 
   static MainWindow _instance;
 
@@ -39,7 +37,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _keyboardController = KeyboardController(this);
 
     //initialize the singletons
-    TooltipLayer();
+    TooltipController(html.document.querySelector("#tooltip"));
     DialogLayer();
 
     _canvas = Canvas();
@@ -48,24 +46,13 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _menu = MainMenu();
     addChild(_menu);
 
-    Toolbox();
-    addChild(Toolbox.instance);
-
-    _propertyWindow = TabbedPropertyWindow("Properties")
-      ..addTab(CanvasPropertiesWindow())
-      ..addTab(ContextPropertiesWindow())
-      ..relayout()
-      ..switchToFirstTab();
-    addChild(_propertyWindow);
-
     ColorPicker();
     addChild(ColorPicker.instance);
     ColorPicker.hide();
 
-    addChild(TooltipLayer.instance);
     addChild(DialogLayer.instance);
 
-    Toolbox.selectFirstTool();
+    toolbox.selectFirstTool();
   }
 
   @override
@@ -76,28 +63,28 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     _menu.width = width;
 
-    _resetCanvasZoomAndPosition();
+    resetCanvasZoomAndPosition();
 
-    _propertyWindow
-      ..x = width - _propertyWindow.width - 5
+    propertyWindow
+      ..x = width - propertyWindow.width - 5
       ..y = _menu.height + 5;
 
-    Toolbox.instance
+    toolbox
       ..x = 5
       ..y = _menu.height + 5;
 
     if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
       ColorPicker.instance
-        ..x = _propertyWindow.x - ColorPicker.instance.width - 5
-        ..y = _propertyWindow.y;
+        ..x = propertyWindow.x - ColorPicker.instance.width - 5
+        ..y = propertyWindow.y;
     }
 
     DialogLayer.relayout();
   }
 
   ///resets the canvas back to the default size and centers it
-  void _resetCanvasZoomAndPosition() {
-    Rectangle rect = aspectFitChildInsideParent(width, height - _menu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
+  static void resetCanvasZoomAndPosition() {
+    Rectangle rect = aspectFitChildInsideParent(_instance.width, _instance.height - _menu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
     
     canvas
       ..x = rect.left

@@ -1,5 +1,6 @@
-import '../property_groups/ContextPropertyGroup.dart';
-import '../property_groups/LinePropertiesGroup.dart';
+import '../group_controllers/ContextController.dart';
+import '../group_controllers/LineViewController.dart';
+
 import './ContextPropertyMixin.dart';
 
 mixin LinePropertiesMixin on ContextPropertyMixin {
@@ -18,9 +19,9 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
   }
 
   @override
-  List<ContextPropertyGroup> getPropertyGroups() {
+  List<ContextController> getPropertyGroups() {
     return super.getPropertyGroups()
-      ..add(LinePropertiesGroup(this));
+      ..add(LineViewController.instance..properties = this);
   }
 
   void fromLinePropertiesMixin(LinePropertiesMixin other) {
@@ -28,6 +29,4 @@ mixin LinePropertiesMixin on ContextPropertyMixin {
     this._strokeColor = other._strokeColor;
     invalidateProperties();
   }
-
-
 }

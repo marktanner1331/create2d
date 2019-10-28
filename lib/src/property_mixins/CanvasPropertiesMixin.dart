@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import '../view/MainWindow.dart';
 import '../view/Canvas.dart';
 import '../helpers/UnitsHelper.dart';
 import '../model/CanvasUnitType.dart';
@@ -21,7 +22,7 @@ mixin CanvasPropertiesMixin {
 
   num _canvasWidth = 1000;
   num get canvasWidth => _canvasWidth;
-
+  
   num _canvasHeight = 1000;
   num get canvasHeight => _canvasHeight;
 
@@ -54,6 +55,6 @@ mixin CanvasPropertiesMixin {
     _canvasWidth = canvasWidth;
     _canvasHeight = canvasHeight;
 
-    myCanvas.refreshCanvasBackground();
+    MainWindow.resetCanvasZoomAndPosition();
   }
 }
