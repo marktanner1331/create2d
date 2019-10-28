@@ -29,7 +29,7 @@ abstract class UnitsHelper {
         return _MHelper();
       case CanvasUnitType.KM:
         return _KMHelper();
-      case CanvasUnitType.FEET:
+      case CanvasUnitType.FOOT:
         return _FeetHelper();
       case CanvasUnitType.MILE:
         return _MileHelper();
@@ -63,7 +63,7 @@ class _MileHelper extends UnitsHelper {
 
 class _FeetHelper extends UnitsHelper {
   @override
-  CanvasUnitType get type => CanvasUnitType.FEET;
+  CanvasUnitType get type => CanvasUnitType.FOOT;
 
   @override
   num unitsToPixels(String s) {

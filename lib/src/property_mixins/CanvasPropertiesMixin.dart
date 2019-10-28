@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import '../view/MainWindow.dart';
 import '../view/Canvas.dart';
 import '../helpers/UnitsHelper.dart';
 import '../model/CanvasUnitType.dart';

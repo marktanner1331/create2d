@@ -1,25 +1,23 @@
 import 'dart:html';
 
 import './GroupController.dart';
+import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
 class CanvasSizeViewController extends GroupController {
-  // static CanvasSizeGroup get instance => _instance ?? (_instance = CanvasSizeGroup(document.querySelector("#canvasTab #size")));
-  // static CanvasSizeGroup _instance;
-
   CanvasPropertiesMixin _properties;
   InputElement _width;
   InputElement _height;
 
   CanvasSizeViewController(Element div) : super(div) {
     _width = div.querySelector("#canvasWidth") as InputElement;
-    _width.onInput.listen(_onInput);
+    _width.onInput.listen(_onWidthOrHeightChange);
 
     _height = div.querySelector("#canvasHeight") as InputElement;
-    _height.onInput.listen(_onInput);
+    _height.onInput.listen(_onWidthOrHeightChange);
   }
 
-  void _onInput(_) {
+  void _onWidthOrHeightChange(_) {
     num newWidth = num.tryParse(_width.value);
     num newHeight = num.tryParse(_height.value);
 

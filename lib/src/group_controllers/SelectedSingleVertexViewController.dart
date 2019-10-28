@@ -1,7 +1,7 @@
 import 'dart:html';
 
+import '../view/MainWindow.dart';
 import './ContextController.dart';
-import '../helpers/ToStringRounded.dart';
 import '../property_mixins/SelectedSingleVertexMixin.dart';
 
 class SelectedSingleVertexViewController extends ContextController {  
@@ -33,7 +33,7 @@ class SelectedSingleVertexViewController extends ContextController {
       return;
     }
 
-    num newX = num.tryParse(_x.value);
+    num newX = MainWindow.canvas.unitsToPixels(_x.value);
 
     if (newX != null) {
       _properties.x = newX;
@@ -44,8 +44,8 @@ class SelectedSingleVertexViewController extends ContextController {
     if (_properties == null) {
       return;
     }
-
-    num newY = num.tryParse(_y.value);
+    
+    num newY = MainWindow.canvas.unitsToPixels(_y.value);
 
     if (newY != null) {
       _properties.y = newY;
@@ -54,7 +54,7 @@ class SelectedSingleVertexViewController extends ContextController {
 
   @override
   void refreshProperties() {
-    _x.value = toStringRounded(_properties.x);
-    _y.value = toStringRounded(_properties.y);
+    _x.value = MainWindow.canvas.pixelsToUnits(_properties.x);
+    _y.value = MainWindow.canvas.pixelsToUnits(_properties.y);
   }
 }
