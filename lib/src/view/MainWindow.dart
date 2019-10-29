@@ -7,12 +7,12 @@ import './KeyboardController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
+import '../color_picker/ColorPicker.dart';
 
 import '../property_windows/PropertyWindowController.dart';
 import '../tools/ToolboxController.dart';
 
 import '../helpers/AspectFit.dart';
-import './color_picker/ColorPicker.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   int _backgroundColor = 0xff7ab1e3;
@@ -27,6 +27,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static final PropertyWindowController propertyWindow = PropertyWindowController(html.querySelector("#properties"));
   static final ToolboxController toolbox = ToolboxController(html.querySelector("#toolbox"));
+  static final ColorPicker colorPicker = ColorPicker(html.querySelector("#colorPicker"));
 
   static MainWindow _instance;
 
@@ -46,13 +47,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _menu = MainMenu();
     addChild(_menu);
 
-    ColorPicker();
-    addChild(ColorPicker.instance);
-    ColorPicker.hide();
-
     addChild(DialogLayer.instance);
 
     toolbox.selectFirstTool();
+    colorPicker.show();
   }
 
   @override
@@ -73,11 +71,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x = 5
       ..y = _menu.height + 5;
 
-    if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
-      ColorPicker.instance
-        ..x = propertyWindow.x - ColorPicker.instance.width - 5
-        ..y = propertyWindow.y;
-    }
+    // if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
+    //   ColorPicker.instance
+    //     ..x = propertyWindow.x - ColorPicker.instance.width - 5
+    //     ..y = propertyWindow.y;
+    // }
 
     DialogLayer.relayout();
   }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,7 +38,8 @@
                         <br />
                         <div class="spacer"></div>
                         <div class="color_box">
-                            <label>background Color:</label><input type="text" disabled=true id="backgroundColor"></span>
+                            <label>background Color:</label><input type="text" disabled=true
+                                id="backgroundColor"></span>
                         </div>
                     </div>
                 </div>
@@ -91,7 +93,8 @@
                                 <div style="padding-left:5px;">
                                     <input type="radio" name="grid_display" id="none" /><label for="none">None</label>
                                     <br />
-                                    <input type="radio" name="grid_display" id="lines" /><label for="lines">Lines</label>
+                                    <input type="radio" name="grid_display" id="lines" /><label
+                                        for="lines">Lines</label>
                                     <br />
                                     <input type="radio" name="grid_display" id="dots" /><label for="dots">Dots</label>
                                 </div>
@@ -99,13 +102,14 @@
                             <span style="float:right;margin-top:5px;">
                                 Geometry:
                                 <div style="padding-left:5px;">
-                                    <input type="radio" name="geometry" id="isometric" /><label for="isometric">Isometric</label>
+                                    <input type="radio" name="geometry" id="isometric" /><label
+                                        for="isometric">Isometric</label>
                                     <br />
                                     <input type="radio" name="geometry" id="square" /><label for="square">Square</label>
                                 </div>
                             </span>
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div id="snapping" class="property_group">
                     <div class="group_header no_select"><span class="group_header_arrow">►</span> Snapping</div>
@@ -115,7 +119,8 @@
                         </div>
                         <br />
                         <div>
-                            <input id="snapToVertices" type="checkbox" /><label for="snapToVertices">Snap to vertices</label>
+                            <input id="snapToVertices" type="checkbox" /><label for="snapToVertices">Snap to
+                                vertices</label>
                         </div>
                     </div>
                 </div>
@@ -158,6 +163,26 @@
             </tr>
         </table>
     </div>
+    <div id="colorPicker" class="floating_window">
+        <div class="title_bar no_select">
+            <span class="title">Color Picker</span>
+            <span class="close_button">x</span>
+        </div>
+        <div class="tab_button_container">
+            <span id="wheelButton" class="tab_button no_select">Wheel</span>
+            <span id="componentsButton" class="tab_button no_select">RGB</span>
+        </div>
+        <div class="tabs">
+            <div class="tab" id="wheelTab"></div>
+            <div class="tab" id="componentsTab">
+            </div>
+        </div>
+        <div id="previewBox" class="big_color_preview_box" style="float:left;margin-right:2px;">
+        </div>
+        <div id="selectedBox" class="big_color_preview_box" style="float:right;margin-left:2px;">
+        </div>
+    </div>
     <div id="tooltip"></div>
 </body>
+
 </html>

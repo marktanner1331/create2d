@@ -1,8 +1,8 @@
 import 'dart:html';
 import '../property_windows/Tab.dart';
 
-class ColorPickerWheel extends Tab {
-  ColorPickerWheel(Element view) : super(view) {
+class ColorPickerComponents extends Tab {
+  ColorPickerComponents(Element view) : super(view) {
     
   }
 

@@ -1,5 +1,7 @@
 move the logic in Property Window into its own controller to move objects
 
+rename the html ids for the canvasTabButton to just canvasButton and others
+
 in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
