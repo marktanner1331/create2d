@@ -173,13 +173,22 @@
             <span id="componentsButton" class="tab_button no_select">RGB</span>
         </div>
         <div class="tabs">
-            <div class="tab" id="wheelTab"></div>
+            <div class="tab" id="wheelTab">
+                <img id="hiddenWheel" style="display:none" />
+                <canvas id="wheelCanvas"></canvas>
+            </div>
             <div class="tab" id="componentsTab">
             </div>
         </div>
-        <div id="previewBox" class="big_color_preview_box" style="float:left;margin-right:2px;">
+        <div style="float:left;" class="big_color_preview_box_outer">
+            Preview Color
+            <div id="previewBox" class="big_color_preview_box">
+            </div>
         </div>
-        <div id="selectedBox" class="big_color_preview_box" style="float:right;margin-left:2px;">
+        <div style="float:right;" class="big_color_preview_box_outer">
+            Selected Color
+            <div id="selectedBox" class="big_color_preview_box">
+            </div>
         </div>
     </div>
     <div id="tooltip"></div>

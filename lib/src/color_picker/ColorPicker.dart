@@ -63,6 +63,9 @@ class ColorPicker {
 
     _currentTab = _tabs.first;
     _currentTab.onEnter();
+
+    _previewBox = ColorBox(_view.querySelector("#previewBox"));
+    _selectedBox = ColorBox(_view.querySelector("#selectedBox"));
   }
 
   void _onTabChanged(_) {
@@ -82,5 +85,15 @@ class ColorPicker {
     }
 
     _view.style.display = "block";
+  }
+
+  void setPreviewPixelColor(int color) {
+    _previewBox.color = color;
+  }
+
+  void setSelectedPixelColor(int color) {
+    _previewBox.color = color;
+    _selectedBox.color = color;
+    _dispatcher.dispatchEvent(stageXL.Event(CURRENT_COLOR_CHANGED));
   }
 }

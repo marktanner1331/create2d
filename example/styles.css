@@ -142,11 +142,19 @@ html, body, .stage--fullscreen {
     padding: 1px 4px;
 }
 
-.big_color_preview_box {
+.big_color_preview_box_outer {
     width: 50%;
+    text-align: center;
+}
+
+.big_color_preview_box {
     height: 75px;
     background-color: red;
     border: 2px solid white;
     margin: 5px;
-    width: calc(50% - 12px)
+}
+
+#colorPicker #wheelTab canvas {
+    width: 200px;
+
 }

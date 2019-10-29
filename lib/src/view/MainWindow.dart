@@ -7,6 +7,7 @@ import './KeyboardController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
+import './color_picker/ColorPicker.dart' as cp;
 import '../color_picker/ColorPicker.dart';
 
 import '../property_windows/PropertyWindowController.dart';
@@ -43,6 +44,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     _canvas = Canvas();
     addChild(_canvas);
+
+    addChild(cp.ColorPicker());
 
     _menu = MainMenu();
     addChild(_menu);
