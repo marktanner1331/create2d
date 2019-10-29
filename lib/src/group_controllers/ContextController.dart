@@ -5,6 +5,4 @@ abstract class ContextController extends GroupController {
   final Element div;
   
   ContextController(this.div) : super(div);
-
-  void refreshProperties();
 }

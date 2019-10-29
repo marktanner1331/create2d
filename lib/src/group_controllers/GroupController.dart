@@ -14,6 +14,8 @@ abstract class GroupController {
     });
   }
 
+  void refreshProperties();
+
   bool get open => _groupContent.style.display == "block";
   void set open(bool value) {
     _groupContent.style.display = value ? "block" : "none";

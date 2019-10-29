@@ -1,12 +1,13 @@
 import 'dart:html';
 
 import './GroupController.dart';
+import '../view/MainWindow.dart';
 import '../model/GridDisplayType.dart';
 import '../model/GridGeometryType.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
 
 class GridViewController extends GroupController {
-  GridPropertiesMixin _properties;
+  GridPropertiesMixin _model;
 
   TextInputElement _thickness;
   TextInputElement _step;
@@ -44,19 +45,19 @@ class GridViewController extends GroupController {
 
   void _onGeometryChanged(_) {
     if(_geometryIsometric.checked) {
-      _properties.gridGeometryType = GridGeometryType.Isometric;
+      _model.gridGeometryType = GridGeometryType.Isometric;
     } else {
-      _properties.gridGeometryType = GridGeometryType.Square;
+      _model.gridGeometryType = GridGeometryType.Square;
     }
   }
 
   void _onDisplayChanged(_) {
     if(_displayNone.checked) {
-      _properties.gridDisplayType = GridDisplayType.None;
+      _model.gridDisplayType = GridDisplayType.None;
     } else if(_displayLines.checked) {
-      _properties.gridDisplayType = GridDisplayType.Lines;
+      _model.gridDisplayType = GridDisplayType.Lines;
     } else {
-      _properties.gridDisplayType = GridDisplayType.Dots;
+      _model.gridDisplayType = GridDisplayType.Dots;
     }
   }
 
@@ -64,31 +65,35 @@ class GridViewController extends GroupController {
     num thickness = num.tryParse(_thickness.value);
 
     if(thickness != null) {
-      _properties.gridThickness = thickness;
+      _model.gridThickness = thickness;
     }
   }
 
   void _onStepFocusOut(_) {
-    _step.value = _properties.gridStep.toString();
+    _step.value = MainWindow.canvas.pixelsToUnits(_model.gridStep);
   }
 
   void _onStepChanged(_) {
-    num step = num.tryParse(_step.value);
+    num step = MainWindow.canvas.unitsToPixels(_step.value);
     
     if(step == null) {
       return;
     }
 
-    _properties.gridStep = step;
+    _model.gridStep = step;
   }
 
-  void set myGridProperties(GridPropertiesMixin properties) {
-    _properties = properties;
-    
-    _thickness.value = _properties.gridThickness.toString();
-    _step.value = _properties.gridStep.toString();
+  void set model(GridPropertiesMixin value) {
+    _model = value;
+    refreshProperties();
+  }
 
-    switch(_properties.gridDisplayType) {
+  @override
+  void refreshProperties() {
+    _thickness.value = _model.gridThickness.toString();
+    _step.value = MainWindow.canvas.pixelsToUnits(_model.gridStep);
+
+    switch(_model.gridDisplayType) {
       case GridDisplayType.None:
         _displayNone.checked = true;
         break;
@@ -98,15 +103,19 @@ class GridViewController extends GroupController {
       case GridDisplayType.Lines:
         _displayLines.checked = true;
         break;
+      default:
+        throw Error();
     }
 
-    switch(_properties.gridGeometryType) {
+    switch(_model.gridGeometryType) {
       case GridGeometryType.Isometric:
         _geometryIsometric.checked = true;
         break;
       case GridGeometryType.Square:
         _geometrySquare.checked = true;
         break;
+      default:
+        throw Error();
     }
   }
 }

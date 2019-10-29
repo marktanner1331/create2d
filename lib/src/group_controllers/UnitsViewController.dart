@@ -1,11 +1,22 @@
 import 'dart:html';
+import 'package:stagexl/stagexl.dart' as stageXL;
 
 import './GroupController.dart';
 import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
-class UnitsController extends GroupController {
-  CanvasPropertiesMixin _properties;
+class UnitsViewController extends GroupController {
+  stageXL.EventDispatcher _dispatcher = stageXL.EventDispatcher();
+
+  static const String UNITS_CHANGED = "UNITS_CHANGED";
+
+  static const stageXL.EventStreamProvider<stageXL.Event> _unitsChangedEvent =
+      const stageXL.EventStreamProvider<stageXL.Event>(UNITS_CHANGED);
+
+  stageXL.EventStream<stageXL.Event> get onUnitsChanged =>
+      _unitsChangedEvent.forTarget(_dispatcher);
+
+  CanvasPropertiesMixin _model;
   
   InputElement _ppu;
 
@@ -18,7 +29,7 @@ class UnitsController extends GroupController {
   InputElement _km;
   InputElement _mile;
 
-  UnitsController(Element div) : super(div) {
+  UnitsViewController(Element div) : super(div) {
     _ppu = div.querySelector("#ppu") as InputElement;
     _ppu.onInput.listen(_onPPUChange);
 
@@ -49,24 +60,26 @@ class UnitsController extends GroupController {
 
   void _onUnitTypeChange(_) {
     if(_pixel.checked) {
-      _properties.units = CanvasUnitType.PIXEL;
+      _model.units = CanvasUnitType.PIXEL;
     } else if(_mm.checked) {
-      _properties.units = CanvasUnitType.MM;
+      _model.units = CanvasUnitType.MM;
     } else if(_cm.checked) {
-      _properties.units = CanvasUnitType.CM;
+      _model.units = CanvasUnitType.CM;
     } else if(_m.checked) {
-      _properties.units = CanvasUnitType.M;
+      _model.units = CanvasUnitType.M;
     } else if(_inch.checked) {
-      _properties.units = CanvasUnitType.INCH;
+      _model.units = CanvasUnitType.INCH;
     } else if(_foot.checked) {
-      _properties.units = CanvasUnitType.FOOT;
+      _model.units = CanvasUnitType.FOOT;
     } else if(_km.checked) {
-      _properties.units = CanvasUnitType.KM;
+      _model.units = CanvasUnitType.KM;
     } else if(_mile.checked) {
-      _properties.units = CanvasUnitType.MILE;
+      _model.units = CanvasUnitType.MILE;
     } else {
       throw Error();
     }
+
+    _dispatcher.dispatchEvent(stageXL.Event(UNITS_CHANGED));
   }
 
   void _onPPUChange(_) {
@@ -75,15 +88,20 @@ class UnitsController extends GroupController {
       return;
     }
 
-    _properties.pixelsPerUnit = newPPU;
+    _model.pixelsPerUnit = newPPU;
+    _dispatcher.dispatchEvent(stageXL.Event(UNITS_CHANGED));
   }
 
-  void set myCanvasProperties(CanvasPropertiesMixin properties) {
-    _properties = properties;
+  void set model(CanvasPropertiesMixin value) {
+    _model = value;
+    refreshProperties();
+  }
 
-    _ppu.value = _properties.pixelsPerUnit.toString();
+  @override
+  void refreshProperties() {
+    _ppu.value = _model.pixelsPerUnit.toString();
     
-    switch(_properties.units) {
+    switch(_model.units) {
       case CanvasUnitType.PIXEL:
         _pixel.checked = true;
         break;

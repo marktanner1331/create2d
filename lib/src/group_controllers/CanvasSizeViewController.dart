@@ -5,7 +5,7 @@ import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
 class CanvasSizeViewController extends GroupController {
-  CanvasPropertiesMixin _properties;
+  CanvasPropertiesMixin _model;
   InputElement _width;
   InputElement _height;
 
@@ -25,14 +25,18 @@ class CanvasSizeViewController extends GroupController {
       return;
     }
     
-    _properties.setCanvasSize(newWidth, newHeight);
+    _model.setCanvasSize(newWidth, newHeight);
   }
 
-  void set myCanvasProperties(CanvasPropertiesMixin properties) {
-    _properties = properties;
-    
-    _width.value = _properties.canvasWidth.toString();
-    _height.value = _properties.canvasHeight.toString();
+  void set model(CanvasPropertiesMixin value) {
+    _model = value;
+    refreshProperties();
+  }
+
+  @override
+  void refreshProperties() {
+    _width.value = _model.canvasWidth.toString();
+    _height.value = _model.canvasHeight.toString();
     //_bgColor.color = _properties.backgroundColor;
   }
 }

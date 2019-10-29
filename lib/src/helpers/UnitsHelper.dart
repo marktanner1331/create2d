@@ -2,7 +2,7 @@ import '../model/CanvasUnitType.dart';
 import 'package:meta/meta.dart';
 
 String _toStringRounded(num number) {
-  String s = number.toStringAsPrecision(2);
+  String s = number.toStringAsFixed(2);
   if (s.endsWith('.00')) {
     return s.substring(0, s.length - 3);
   } else if (s.endsWith('0')) {
@@ -95,7 +95,7 @@ class _FeetHelper extends UnitsHelper {
   String pixelsToUnits(num p) {
     num feet = p.floor();
     num inches = (p % 1) * 12;
-    return "${feet}ft" + _toStringRounded(inches);
+    return "${feet}ft " + _toStringRounded(inches);
   }
 }
 
@@ -208,7 +208,5 @@ class _PixelHelper extends UnitsHelper {
   }
 
   @override
-  String pixelsToUnits(num p) {
-    return _toStringRounded(p) + "px";
-  }
+  String pixelsToUnits(num p) => _toStringRounded(p);
 }

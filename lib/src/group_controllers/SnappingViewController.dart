@@ -4,7 +4,7 @@ import './GroupController.dart';
 import '../property_mixins/SnappingPropertiesMixin.dart';
 
 class SnappingViewController extends GroupController {
-  SnappingPropertiesMixin _properties;
+  SnappingPropertiesMixin _model;
   InputElement _grid;
 
   //TODO: when snapping to vertices is false, we probably shouldnt do the red dot overlays
@@ -20,17 +20,21 @@ class SnappingViewController extends GroupController {
   }
 
   void _onGridChanged(_) {
-    _properties.snapToGrid = _grid.checked;
+    _model.snapToGrid = _grid.checked;
   }
 
   void _onVerticesChanged(_) {
-    _properties.snapToVertex = _vertices.checked;
+    _model.snapToVertex = _vertices.checked;
   }
 
-  void set mySnappingProperties(SnappingPropertiesMixin properties) {
-    _properties = properties;
-    
-    _grid.checked = _properties.snapToGrid;
-    _vertices.checked = _properties.snapToVertex;
+  void set model(SnappingPropertiesMixin value) {
+    _model = value;
+    refreshProperties();
+  }
+
+  @override
+  void refreshProperties() {
+    _grid.checked = _model.snapToGrid;
+    _vertices.checked = _model.snapToVertex;
   }
 }
