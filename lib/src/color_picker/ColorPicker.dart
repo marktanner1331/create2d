@@ -5,16 +5,17 @@ import '../helpers/Draggable.dart';
 import '../property_windows/Tab.dart';
 import '../property_windows/TabController.dart';
 
-import './CollorPickerWheel.dart';
+import './ColorPickerWheel.dart';
 import './ColorPickerComponents.dart';
 import './ColorPicker3D.dart';
+import './ColorPickerPalette.dart';
 import './ColorBox.dart';
 
 class ColorPicker {
   int get currentColor => _initialized ? _selectedBox.color : 0;
 
   stageXL.EventDispatcher _dispatcher = stageXL.EventDispatcher();
-  
+
   static const String CURRENT_COLOR_CHANGED = "CURRENT_COLOR_CHANGED";
   static const String CLOSED = "COLOR_PICKER_CLOSED";
 
@@ -56,14 +57,17 @@ class ColorPicker {
           _view.querySelector("#wheelButton"), _view.querySelector("#wheelTab"))
       ..addTab(_view.querySelector("#componentsButton"),
           _view.querySelector("#componentsTab"))
-      ..addTab(_view.querySelector("#_3DButton"),
-          _view.querySelector("#_3DTab"))
+      ..addTab(
+          _view.querySelector("#_3DButton"), _view.querySelector("#_3DTab"))
+      ..addTab(_view.querySelector("#paletteButton"),
+          _view.querySelector("#paletteTab"))
       ..onTabChangedChanged.listen(_onTabChanged);
 
     _tabs = List();
     _tabs.add(ColorPickerWheel(_view.querySelector("#wheelTab")));
     _tabs.add(ColorPickerComponents(_view.querySelector("#componentsTab")));
     _tabs.add(ColorPicker3D(_view.querySelector("#_3DTab")));
+    _tabs.add(ColorPickerPalette(_view.querySelector("#paletteTab")));
 
     _currentTab = _tabs.first;
     _currentTab.onEnter();

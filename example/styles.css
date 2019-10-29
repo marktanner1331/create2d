@@ -176,3 +176,7 @@ html, body, .stage--fullscreen {
 #colorPicker #_3DTab canvas {
     width: 250px;
 }
+
+#colorPicker #paletteTab canvas {
+    width: 250px;
+}
