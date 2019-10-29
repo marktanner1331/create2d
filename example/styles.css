@@ -172,3 +172,7 @@ html, body, .stage--fullscreen {
     text-align: center;
     width: 75px;
 }
+
+#colorPicker #_3DTab canvas {
+    width: 250px;
+}

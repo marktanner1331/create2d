@@ -7,6 +7,8 @@ import '../view/MainWindow.dart';
 
 class ColorPickerComponents extends Tab {
   html.InputElement _hexBox;
+  RenderLoop _renderLoop;
+  Stage _stage;
 
   TextField _rgbLabel;
   ColorGradientSliderWithLabel _rSlider;
@@ -37,11 +39,9 @@ class ColorPickerComponents extends Tab {
     canvas.width = 200;
     canvas.height = 300;
 
-    Stage stage = Stage(canvas, width: 200, height: 300, options: options);
-
-    var renderLoop = RenderLoop();
-    renderLoop.addStage(stage);
-
+    _stage = Stage(canvas, width: 200, height: 300, options: options);
+    _renderLoop = RenderLoop();
+    
     num deltaY = 0;
 
     _rgbLabel = TextField("RGB");
@@ -51,7 +51,7 @@ class ColorPickerComponents extends Tab {
       ..textColor = 0xffffffff
       ..width = _rgbLabel.textWidth
       ..height = _rgbLabel.textHeight;
-    stage.addChild(_rgbLabel);
+    _stage.addChild(_rgbLabel);
 
     deltaY = _rgbLabel.y + _rgbLabel.height + 5;
 
@@ -61,7 +61,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
-    stage.addChild(_rSlider);
+    _stage.addChild(_rSlider);
 
     deltaY = _rSlider.y + _rSlider.height + 10;
 
@@ -71,7 +71,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
-    stage.addChild(_gSlider);
+    _stage.addChild(_gSlider);
 
     deltaY = _gSlider.y + _gSlider.height + 10;
 
@@ -81,7 +81,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
-    stage.addChild(_bSlider);
+    _stage.addChild(_bSlider);
 
     deltaY = _bSlider.y + _bSlider.height + 5;
     deltaY += 15;
@@ -93,7 +93,7 @@ class ColorPickerComponents extends Tab {
       ..textColor = 0xffffffff
       ..width = _hsvLabel.textWidth
       ..height = _hsvLabel.textHeight;
-    stage.addChild(_hsvLabel);
+    _stage.addChild(_hsvLabel);
 
     deltaY = _hsvLabel.y + _hsvLabel.height + 5;
 
@@ -112,7 +112,7 @@ class ColorPickerComponents extends Tab {
         GraphicsGradientColorStop(5 / 6, 0xffff00ff),
         GraphicsGradientColorStop(1, 0xffff0000),
       ]);
-    stage.addChild(_hSlider);
+    _stage.addChild(_hSlider);
 
     deltaY = _hSlider.y + _hSlider.height + 10;
 
@@ -122,7 +122,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_hsvSlidersChanged)
       ..onFinishedChanging.listen(_hsvSlidersFinished);
-    stage.addChild(_sSlider);
+    _stage.addChild(_sSlider);
 
     deltaY = _sSlider.y + _sSlider.height + 10;
 
@@ -132,7 +132,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_hsvSlidersChanged)
       ..onFinishedChanging.listen(_hsvSlidersFinished);
-    stage.addChild(_vSlider);
+    _stage.addChild(_vSlider);
 
     deltaY = _vSlider.y + _vSlider.height + 5;
     deltaY += 15;
@@ -144,7 +144,7 @@ class ColorPickerComponents extends Tab {
       ..textColor = 0xffffffff
       ..width = _alphaLabel.textWidth
       ..height = _alphaLabel.textHeight;
-    stage.addChild(_alphaLabel);
+    _stage.addChild(_alphaLabel);
 
     deltaY = _alphaLabel.y + _alphaLabel.height + 5;
 
@@ -154,7 +154,7 @@ class ColorPickerComponents extends Tab {
       ..setSize(190, 22)
       ..onValueChanged.listen(_aSliderChanged)
       ..onFinishedChanging.listen(_aSliderFinished);
-    stage.addChild(_aSlider);
+    _stage.addChild(_aSlider);
   }
 
   void _onTextInput(_) {
@@ -331,9 +331,14 @@ class ColorPickerComponents extends Tab {
     _resetRGBSliders(color);
     _resetASlider(color);
     _resetHSVSliders(color);
+
+    if(_stage.renderLoop == null) {
+      _renderLoop.addStage(_stage);
+    }
   }
 
   @override
   void onExit() {
+    _renderLoop.removeStage(_stage);
   }
 }

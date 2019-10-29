@@ -7,6 +7,7 @@ import '../property_windows/TabController.dart';
 
 import './CollorPickerWheel.dart';
 import './ColorPickerComponents.dart';
+import './ColorPicker3D.dart';
 import './ColorBox.dart';
 
 class ColorPicker {
@@ -55,11 +56,14 @@ class ColorPicker {
           _view.querySelector("#wheelButton"), _view.querySelector("#wheelTab"))
       ..addTab(_view.querySelector("#componentsButton"),
           _view.querySelector("#componentsTab"))
+      ..addTab(_view.querySelector("#_3DButton"),
+          _view.querySelector("#_3DTab"))
       ..onTabChangedChanged.listen(_onTabChanged);
 
     _tabs = List();
     _tabs.add(ColorPickerWheel(_view.querySelector("#wheelTab")));
     _tabs.add(ColorPickerComponents(_view.querySelector("#componentsTab")));
+    _tabs.add(ColorPicker3D(_view.querySelector("#_3DTab")));
 
     _currentTab = _tabs.first;
     _currentTab.onEnter();
