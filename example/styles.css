@@ -31,12 +31,16 @@ html, body, .stage--fullscreen {
     left: 0;
     background-color: #222222;
     color: white;
+    border-radius: 5px;
+    box-shadow: -1px 1px 3px black;
 }
 
 .floating_window .title_bar {
     width: 100%;
     background-color: #444444;
     cursor: pointer;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .floating_window .title {
@@ -156,5 +160,15 @@ html, body, .stage--fullscreen {
 
 #colorPicker #wheelTab canvas {
     width: 200px;
+}
 
+#colorPicker #componentsTab canvas {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+#colorPicker #componentsTab input {
+    text-align: center;
+    width: 75px;
 }

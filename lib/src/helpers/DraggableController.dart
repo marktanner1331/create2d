@@ -1,29 +1,27 @@
 import 'package:stagexl/stagexl.dart';
 import 'dart:math' as math;
+import 'dart:html' as html;
+import 'dart:async';
 
 class DraggableController extends EventDispatcher {
   static const String POSITION_CHANGED = "POSITION_CHANGED";
   static const String FINISHED_DRAG = "FINISHED_DRAG";
 
-  static const EventStreamProvider<Event> _positionChangedEvent =
-      const EventStreamProvider<Event>(POSITION_CHANGED);
-      static const EventStreamProvider<Event> _finishedDragEvent =
-      const EventStreamProvider<Event>(FINISHED_DRAG);
-  
   EventStream<Event> get onPositionChanged =>
-      _positionChangedEvent.forTarget(this);
+      this.on(POSITION_CHANGED);
   EventStream<Event> get onFinishedDrag =>
-      _finishedDragEvent.forTarget(this);
+      this.on(FINISHED_DRAG);
 
   Point _mouseOffset = Point(0, 0);
 
   EventStreamSubscription<MouseEvent> _objectDownSubscription;
   EventStreamSubscription<MouseEvent> _stageMoveSubscription;
   EventStreamSubscription<MouseEvent> _stageUpSubscription;
+  StreamSubscription<html.MouseEvent> _documentUpSubscription;
 
   DisplayObject _objectToDrag;
   InteractiveObject _objectToListenTo;
-
+  
   bool horizontal;
   bool vertical;
 
@@ -56,6 +54,7 @@ class DraggableController extends EventDispatcher {
     if(_stageMoveSubscription == null) {
       _stageMoveSubscription = _objectToDrag.stage.onMouseMove.listen(stageMove);
       _stageUpSubscription = _objectToDrag.stage.onMouseUp.listen(stageUp);
+      _documentUpSubscription = html.document.onMouseUp.listen(stageUp);
     }
   }
 
@@ -97,6 +96,9 @@ class DraggableController extends EventDispatcher {
 
     _stageMoveSubscription.cancel();
     _stageMoveSubscription = null;
+
+    _documentUpSubscription.cancel();
+    _documentUpSubscription = null;
 
     dispatchEvent(Event(FINISHED_DRAG));
   }
