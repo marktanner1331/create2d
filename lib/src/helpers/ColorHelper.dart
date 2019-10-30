@@ -1,8 +1,26 @@
 import 'dart:math' as math;
 
 class ColorHelper {
+  static final RegExp _rgbColorExplicitRegExp = new RegExp("^rgb\\(\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*,\\s*(\\d{1,3})\\s*\\)\$");
+  
+
+  static int parseCssColor(String color) {
+    return parseHexColor(color) ?? parseRgbColor(color);
+  }
+
+  static int parseRgbColor(String color) {
+    if (_rgbColorExplicitRegExp.hasMatch(color)) {
+      Match match = _rgbColorExplicitRegExp.allMatches(color).first;
+      return colorFromRGB(int.parse(match.group(1)), int.parse(match.group(2)), int.parse(match.group(3)));
+    }
+
+    return null;
+  }
+
   static int parseHexColor(String hexColor) {
-    hexColor = hexColor.replaceAll(new RegExp(r"[^0-9a-fA-F]"), "");
+    if(hexColor.startsWith("#")) {
+      hexColor = hexColor.substring(1);
+    }
 
     if (hexColor.length != 6 && hexColor.length != 8) {
       return null;

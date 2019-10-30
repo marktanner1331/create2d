@@ -5,14 +5,15 @@ import '../helpers/Draggable.dart';
 import '../property_windows/Tab.dart';
 import '../property_windows/TabController.dart';
 
-import './ColorPickerWheel.dart';
 import './ColorPickerComponents.dart';
 import './ColorPicker3D.dart';
 import './ColorPickerPalette.dart';
 import './ColorBox.dart';
+import './ColorPickerMixer.dart';
+import './ColorPickerSwatches.dart';
 
 class ColorPicker {
-  int get currentColor => _initialized ? _selectedBox.color : 0;
+  int get currentColor => _initialized ? _selectedBox.color : 0xff000000;
 
   stageXL.EventDispatcher _dispatcher = stageXL.EventDispatcher();
 
@@ -49,30 +50,34 @@ class ColorPicker {
   }
 
   void initialize() {
-    _initialized = true;
     Draggable(_view, _view.querySelector(".title_bar"));
 
     _tabController = TabController()
-      ..addTab(
-          _view.querySelector("#wheelButton"), _view.querySelector("#wheelTab"))
+      ..addTab(_view.querySelector("#paletteButton"),
+          _view.querySelector("#paletteTab"))
       ..addTab(_view.querySelector("#componentsButton"),
           _view.querySelector("#componentsTab"))
       ..addTab(
           _view.querySelector("#_3DButton"), _view.querySelector("#_3DTab"))
-      ..addTab(_view.querySelector("#paletteButton"),
-          _view.querySelector("#paletteTab"))
+      ..addTab(
+          _view.querySelector("#mixerButton"), _view.querySelector("#mixerTab"))
+      ..addTab(_view.querySelector("#swatchesButton"),
+          _view.querySelector("#swatchesTab"))
       ..onTabChangedChanged.listen(_onTabChanged);
 
     _tabs = List();
-    _tabs.add(ColorPickerWheel(_view.querySelector("#wheelTab")));
     _tabs.add(ColorPickerComponents(_view.querySelector("#componentsTab")));
     _tabs.add(ColorPicker3D(_view.querySelector("#_3DTab")));
     _tabs.add(ColorPickerPalette(_view.querySelector("#paletteTab")));
-
+    _tabs.add(ColorPickerMixer(_view.querySelector("#mixerTab")));
+    _tabs.add(ColorPickerSwatches(_view.querySelector("#swatchesTab")));
+    
     _tabController.switchToFirstTab();
 
     _previewBox = ColorBox(_view.querySelector("#previewBox"));
     _selectedBox = ColorBox(_view.querySelector("#selectedBox"));
+
+    _initialized = true;
   }
 
   void _onTabChanged(_) {
