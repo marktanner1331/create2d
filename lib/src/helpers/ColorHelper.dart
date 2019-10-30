@@ -1,6 +1,20 @@
 import 'dart:math' as math;
 
 class ColorHelper {
+  static int parseHexColor(String hexColor) {
+    hexColor = hexColor.replaceAll(new RegExp(r"[^0-9a-fA-F]"), "");
+
+    if (hexColor.length != 6 && hexColor.length != 8) {
+      return null;
+    }
+
+    if (hexColor.length == 6) {
+      hexColor = "ff" + hexColor;
+    }
+
+    return int.tryParse(hexColor, radix: 16);
+  }
+
   static int removeTransparency(int color) {
     return color | 0xff000000;
   }

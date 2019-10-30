@@ -27,12 +27,11 @@ class PropertyWindowController with HTMLViewController {
     _tabs.add(CanvasTab(view.querySelector("#canvasTab")));
     _tabs.add(ContextTab(view.querySelector("#contextTab")));
 
-    _currentTab = _tabs.first;
-    _currentTab.onEnter();
+    _tabController.switchToFirstTab();
   }
 
   void _onTabChanged(_) {
-    _currentTab.onExit();
+    _currentTab?.onExit();
     _currentTab = _tabs.firstWhere((tab) => tab.view == _tabController.currentTab);
     _currentTab.onEnter();
   }

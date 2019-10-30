@@ -36,10 +36,10 @@ class ColorPickerComponents extends Tab {
     html.CanvasElement canvas =
         view.querySelector('#componentsCanvas') as html.CanvasElement;
 
-    canvas.width = 200;
+    canvas.width = 250;
     canvas.height = 300;
 
-    _stage = Stage(canvas, width: 200, height: 300, options: options);
+    _stage = Stage(canvas, width: 250, height: 300, options: options);
     _renderLoop = RenderLoop();
     
     num deltaY = 0;
@@ -58,7 +58,7 @@ class ColorPickerComponents extends Tab {
     _rSlider = ColorGradientSliderWithLabel("R:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
     _stage.addChild(_rSlider);
@@ -68,7 +68,7 @@ class ColorPickerComponents extends Tab {
     _gSlider = ColorGradientSliderWithLabel("G:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
     _stage.addChild(_gSlider);
@@ -78,7 +78,7 @@ class ColorPickerComponents extends Tab {
     _bSlider = ColorGradientSliderWithLabel("B:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_rgbSlidersChanged)
       ..onFinishedChanging.listen(_rgbSlidersFinished);
     _stage.addChild(_bSlider);
@@ -100,7 +100,7 @@ class ColorPickerComponents extends Tab {
     _hSlider = ColorGradientSliderWithLabel("H:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_hsvSlidersChanged)
       ..onFinishedChanging.listen(_hsvSlidersFinished)
       ..setColors2([
@@ -119,7 +119,7 @@ class ColorPickerComponents extends Tab {
     _sSlider = ColorGradientSliderWithLabel("S:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_hsvSlidersChanged)
       ..onFinishedChanging.listen(_hsvSlidersFinished);
     _stage.addChild(_sSlider);
@@ -129,7 +129,7 @@ class ColorPickerComponents extends Tab {
     _vSlider = ColorGradientSliderWithLabel("V:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_hsvSlidersChanged)
       ..onFinishedChanging.listen(_hsvSlidersFinished);
     _stage.addChild(_vSlider);
@@ -151,28 +151,15 @@ class ColorPickerComponents extends Tab {
     _aSlider = ColorGradientSliderWithLabel("A:")
       ..x = 5
       ..y = deltaY
-      ..setSize(190, 22)
+      ..setSize(240, 22)
       ..onValueChanged.listen(_aSliderChanged)
       ..onFinishedChanging.listen(_aSliderFinished);
     _stage.addChild(_aSlider);
   }
 
   void _onTextInput(_) {
-    String text = _hexBox.value;
-    text = text.replaceAll(new RegExp(r"[^0-9a-fA-F]"), "");
-
-    _hexBox.text = text;
-
-    if (text.length != 6 && text.length != 8) {
-      return; //not finished writing hex value
-    }
-
-    if (text.length == 6) {
-      text = "ff" + text;
-    }
-
-    int color = int.tryParse(text, radix: 16);
-    if (color == null) {
+    int color = ColorHelper.parseHexColor(_hexBox.value);
+    if(color == null) {
       return;
     }
 

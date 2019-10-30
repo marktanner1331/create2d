@@ -32,14 +32,18 @@ class TabController extends stageXL.EventDispatcher {
     }
   }
 
+  void switchToFirstTab() => _tabs.first.key.click();
+
   void _onTabButtonClick(MouseEvent e) {
     Element tabButton = e.currentTarget as Element;
 
     for(MapEntry<Element, Element> tab in _tabs) {
       if(tabButton == tab.key) {
+        tab.key.classes.add("tab_button_selected");
         tab.value.style.display = "block";
         _currentTab = tab.value;
       }else {
+        tab.key.classes.remove("tab_button_selected");
         tab.value.style.display = "none";
       }
     }

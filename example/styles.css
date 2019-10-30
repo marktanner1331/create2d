@@ -60,6 +60,7 @@ html, body, .stage--fullscreen {
 .tab_button_container {
     margin-top: 5px;
     padding: 0px 5px;
+    text-align: center;
 }
 
 .tab_button {
@@ -67,7 +68,14 @@ html, body, .stage--fullscreen {
     background-color: #444444;
     display: inline-block;
     cursor: pointer;
+}
 
+.tab_button:hover {
+    background-color: #666666;
+}
+
+.tab_button_selected {
+    background-color: #666666;
 }
 
 .floating_window .tab {
@@ -159,24 +167,34 @@ html, body, .stage--fullscreen {
 }
 
 #colorPicker #wheelTab canvas {
-    width: 200px;
+    width: 250px;
 }
 
 #colorPicker #componentsTab canvas {
-    margin-top: 10px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 250px;
 }
 
 #colorPicker #componentsTab input {
     text-align: center;
     width: 75px;
+    margin-right: 4px;
 }
 
 #colorPicker #_3DTab canvas {
     width: 250px;
 }
 
-#colorPicker #paletteTab canvas {
-    width: 250px;
+#colorPicker #paletteTab table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    margin: 0 -3px;
+}
+
+#colorPicker #paletteTab .palette_swatch {
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 1px solid white;
 }

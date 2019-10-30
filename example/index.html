@@ -173,14 +173,17 @@
             <span id="componentsButton" class="tab_button no_select">RGB</span>
             <span id="_3DButton" class="tab_button no_select">3D</span>
             <span id="paletteButton" class="tab_button no_select">Palette</span>
+            <span id="mixerButton" class="tab_button no_select">Mixer</span>
         </div>
         <div class="tabs">
             <div class="tab" id="wheelTab">
                 <img id="hiddenWheel" style="display:none" />
-                <canvas id="wheelCanvas"></canvas>
+                <canvas width="232" height="232" id="wheelCanvas"></canvas>
             </div>
             <div class="tab" id="componentsTab">
-                Hex Code: <div style="float:right;">#<input type="text" id="hexBox" /></div>
+                <div style="margin-top:10px">
+                    Hex Code: <div style="float:right;">#<input type="text" id="hexBox" /></div>
+                </div>
                 <br />
                 <canvas id="componentsCanvas"></canvas>
             </div>
@@ -188,7 +191,7 @@
                 <canvas id="_3DCanvas"></canvas>
             </div>
             <div class="tab" id="paletteTab">
-                <canvas id="paletteCanvas"></canvas>
+                <table></table>
             </div>
         </div>
         <div style="float:left;" class="big_color_preview_box_outer no_select">

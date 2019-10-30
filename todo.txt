@@ -6,6 +6,10 @@ rename the html ids for the canvasTabButton to just canvasButton and others
 
 rename draggable/draggableController for something more sensible (i.e. stageXL/html)
 
+tabs should highlight when selected
+
+color picker needs consistent width
+
 in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
