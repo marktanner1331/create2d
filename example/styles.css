@@ -180,7 +180,7 @@ html, body, .stage--fullscreen {
 }
 
 .color_picker_button_selected {
-    background-color: #666666;
+    background-color: #888888 !important;
 }
 
 #colorPicker #componentsTab canvas {

@@ -83,6 +83,11 @@ class EyeDropper extends EventDispatcher {
       _stageResizeSubscription.cancel();
     }
 
+    if(_blocker != null) {
+      _blocker.removeFromParent();
+      _blocker = null;
+    }
+
     onFinished.cancelSubscriptions();
   }
 }
