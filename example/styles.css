@@ -228,3 +228,11 @@ html, body, .stage--fullscreen {
     border: 1px solid white;
     display: inline-block;
 }
+
+#colorPicker #swatchesTab > div {
+    margin: 10px 0;
+}
+
+#colorPicker #swatchesTab .color_picker_button {
+    margin: 10px 0;
+}

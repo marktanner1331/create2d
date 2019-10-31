@@ -71,13 +71,17 @@ class ColorPicker {
     _tabs.add(ColorPickerPalette(_view.querySelector("#paletteTab")));
     _tabs.add(ColorPickerMixer(_view.querySelector("#mixerTab")));
     _tabs.add(ColorPickerSwatches(_view.querySelector("#swatchesTab")));
-    
+
     _tabController.switchToFirstTab();
 
     _previewBox = ColorBox(_view.querySelector("#previewBox"));
     _selectedBox = ColorBox(_view.querySelector("#selectedBox"));
 
     _initialized = true;
+  }
+
+  void resetPreviewColor() {
+    _previewBox.color = _selectedBox.color;
   }
 
   void _onTabChanged(_) {

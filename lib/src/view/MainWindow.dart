@@ -31,6 +31,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static final ColorPicker colorPicker = ColorPicker(html.querySelector("#colorPicker"));
 
   static MainWindow _instance;
+  static MainWindow get instance => _instance;
 
   MainWindow() {
     assert(_instance == null);
