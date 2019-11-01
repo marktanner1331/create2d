@@ -161,7 +161,6 @@ html, body, .stage--fullscreen {
 
 .big_color_preview_box {
     height: 50px;
-    background-color: red;
     border: 2px solid white;
     margin: 5px;
 }
@@ -229,10 +228,28 @@ html, body, .stage--fullscreen {
     display: inline-block;
 }
 
+#colorPicker #swatchesTab {
+    width: 250px;
+}
+
 #colorPicker #swatchesTab > div {
     margin: 10px 0;
 }
 
 #colorPicker #swatchesTab .color_picker_button {
     margin: 10px 0;
+}
+
+#colorPicker #swatchesTab #swatches {
+    padding: 5px;
+}
+
+#colorPicker #swatchesTab .swatch {
+    background-color: red;
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border: 1px solid white;
+    display: inline-block;
 }

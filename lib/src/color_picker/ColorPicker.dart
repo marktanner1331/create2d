@@ -80,10 +80,6 @@ class ColorPicker {
     _initialized = true;
   }
 
-  void resetPreviewColor() {
-    _previewBox.color = _selectedBox.color;
-  }
-
   void _onTabChanged(_) {
     _currentTab?.onExit();
     _currentTab =
@@ -101,6 +97,10 @@ class ColorPicker {
     }
 
     _view.style.display = "block";
+  }
+
+  void resetPreviewColor() {
+    _previewBox.color = _selectedBox.color;
   }
 
   void setPreviewPixelColor(int color) {
