@@ -253,3 +253,13 @@ html, body, .stage--fullscreen {
     border: 1px solid white;
     display: inline-block;
 }
+
+#colorPicker #swatchesTab .swatch_close_button {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}

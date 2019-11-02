@@ -24,8 +24,8 @@ class ColorPickerSwatches extends Tab {
   }
 
   void _onAddSwatchClick(_) {
-    _swatches.insertAdjacentHtml("beforeEnd", "<div class=\"swatch\" id=\"swatch_$_swatchCounter\"></div>");
-
+    _swatches.insertAdjacentHtml("beforeEnd", "<div class=\"swatch\" id=\"swatch_$_swatchCounter\"><div class=\"swatch_close_button\">x</div></div>");
+    
     String color = ColorHelper.colorToHex(MainWindow.colorPicker.currentColor);
     
     Element swatch = view.querySelector("#swatch_$_swatchCounter")
