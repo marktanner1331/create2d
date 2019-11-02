@@ -60,13 +60,14 @@ class ContextTab extends Tab {
       group.div.style.display = "block";
       group.open = true;
       _activeGroups.add(group);
-      group.refreshProperties();
+      group.onEnter();
     }
   }
 
   void clearPropertyGroups() {
     for (ContextController group in _activeGroups) {
       group.div.style.display = "none";
+      group.onExit();
     }
 
     _activeGroups.clear();

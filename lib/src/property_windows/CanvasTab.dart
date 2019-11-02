@@ -39,8 +39,16 @@ class CanvasTab extends Tab {
   }
 
   @override
-  void onEnter() {}
+  void onEnter() {
+    for(GroupController controller in _controllers) {
+      controller.onEnter();
+    }
+  }
 
   @override
-  void onExit() {}
+  void onExit() {
+    for(GroupController controller in _controllers) {
+      controller.onExit();
+    }
+  }
 }

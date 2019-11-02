@@ -45,6 +45,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _canvas = Canvas();
     addChild(_canvas);
 
+    colorPicker.hide();
+
     _menu = MainMenu();
     addChild(_menu);
 
@@ -70,12 +72,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     toolbox
       ..x = 5
       ..y = _menu.height + 5;
-
-    if(colorPicker.x == 0 && colorPicker.y == 0) {
-      colorPicker
-        ..x = propertyWindow.x - colorPicker.width - 5
-        ..y = propertyWindow.y;
-    }
 
     DialogLayer.relayout();
   }

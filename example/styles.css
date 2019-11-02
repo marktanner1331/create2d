@@ -117,11 +117,11 @@ html, body, .stage--fullscreen {
     margin-left: 5px;
 }
 
-.color_box input {
+.color_box div {
     width: 20px;
+    height: 17px;
     float: right;
     margin-left: 10px;
-    background-color: red;
     border: 1px solid white;
     border-radius: 5px;
     cursor: pointer;

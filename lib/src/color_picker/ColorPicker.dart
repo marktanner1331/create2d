@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'package:design2D/src/view/MainWindow.dart';
 import 'package:stagexl/stagexl.dart' as stageXL;
 
 import '../helpers/HTMLViewController.dart';
@@ -46,7 +47,7 @@ class ColorPicker with HTMLViewController {
   //this class is lazy initialized
   //everything is set up the first time it is shown
   ColorPicker(this.view) {
-    hide();
+    
   }
 
   void initialize() {
@@ -76,6 +77,12 @@ class ColorPicker with HTMLViewController {
 
     _previewBox = ColorBox(view.querySelector("#previewBox"));
     _selectedBox = ColorBox(view.querySelector("#selectedBox"));
+
+    //magic number here isn't great
+    //but the color picker hasnt initialized enough to have
+    //a real width yet
+    x = MainWindow.propertyWindow.x - 275;
+    y = MainWindow.propertyWindow.y;
 
     _initialized = true;
   }

@@ -1,20 +1,28 @@
 import 'dart:html';
 
+import '../helpers/ColorSwatchController.dart';
 import './GroupController.dart';
-import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
 class CanvasSizeViewController extends GroupController {
   CanvasPropertiesMixin _model;
   InputElement _width;
   InputElement _height;
+  ColorSwatchController _bgColorController;
 
-  CanvasSizeViewController(Element div) : super(div) {
-    _width = div.querySelector("#canvasWidth") as InputElement;
+  CanvasSizeViewController(Element view) : super(view) {
+    _width = view.querySelector("#canvasWidth") as InputElement;
     _width.onInput.listen(_onWidthOrHeightChange);
 
-    _height = div.querySelector("#canvasHeight") as InputElement;
+    _height = view.querySelector("#canvasHeight") as InputElement;
     _height.onInput.listen(_onWidthOrHeightChange);
+
+    _bgColorController = ColorSwatchController(view.querySelector("#backgroundColor"));
+    _bgColorController.onColorChanged.listen(_onBGColorChanged);
+  }
+
+  void _onBGColorChanged(_) {
+    _model.backgroundColor = _bgColorController.color;
   }
 
   void _onWidthOrHeightChange(_) {
@@ -37,6 +45,11 @@ class CanvasSizeViewController extends GroupController {
   void refreshProperties() {
     _width.value = _model.canvasWidth.toString();
     _height.value = _model.canvasHeight.toString();
-    //_bgColor.color = _properties.backgroundColor;
+    _bgColorController.color = _model.backgroundColor;
+  }
+
+  @override
+  void onExit() {
+    _bgColorController.onExit();
   }
 }
