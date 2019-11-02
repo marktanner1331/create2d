@@ -5,6 +5,10 @@ abstract class HTMLViewController {
 
   int get x {
     String s = view.style.left;
+    if(s == "") {
+      return 0;
+    }
+    
     s = s.substring(0, s.length - 2);
     return int.parse(s);
   }
@@ -15,6 +19,10 @@ abstract class HTMLViewController {
 
   int get y {
     String s = view.style.top;
+    if(s == "") {
+      return 0;
+    }
+
     s = s.substring(0, s.length - 2);
     return int.parse(s);
   }

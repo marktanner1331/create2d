@@ -7,7 +7,6 @@ import './KeyboardController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
 import './MainMenu.dart';
-import './color_picker/ColorPicker.dart' as cp;
 import '../color_picker/ColorPicker.dart';
 
 import '../property_windows/PropertyWindowController.dart';
@@ -46,15 +45,12 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _canvas = Canvas();
     addChild(_canvas);
 
-    addChild(cp.ColorPicker());
-
     _menu = MainMenu();
     addChild(_menu);
 
     addChild(DialogLayer.instance);
 
     toolbox.selectFirstTool();
-    colorPicker.show();
   }
 
   @override
@@ -75,11 +71,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x = 5
       ..y = _menu.height + 5;
 
-    // if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
-    //   ColorPicker.instance
-    //     ..x = propertyWindow.x - ColorPicker.instance.width - 5
-    //     ..y = propertyWindow.y;
-    // }
+    if(colorPicker.x == 0 && colorPicker.y == 0) {
+      colorPicker
+        ..x = propertyWindow.x - colorPicker.width - 5
+        ..y = propertyWindow.y;
+    }
 
     DialogLayer.relayout();
   }
