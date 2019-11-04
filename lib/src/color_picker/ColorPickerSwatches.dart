@@ -14,6 +14,10 @@ class ColorPickerSwatches extends Tab {
   int _swatchCounter = 0;
 
   ColorPickerSwatches(Element view) : super(view) {
+  }
+
+  @override
+  void initialize() {
     _eyeDropperButton = view.querySelector("#eyeDropper");
     _eyeDropperButton.onClick.listen(_onEyeDropperClick);
 
@@ -79,10 +83,6 @@ class ColorPickerSwatches extends Tab {
     }
 
     _eyeDropperActive = active;
-  }
-
-  @override
-  void onEnter() {
   }
 
   @override

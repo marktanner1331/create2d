@@ -23,6 +23,10 @@ class ColorPicker3D extends Tab {
   EventStreamSubscription<MouseEvent> _stageClickSubscription;
 
   ColorPicker3D(html.Element view) : super(view) {
+  }
+
+  @override
+  void initialize() {
     StageOptions options = StageOptions()
       ..backgroundColor = 0xff222222
       ..renderEngine = RenderEngine.WebGL
@@ -192,6 +196,8 @@ class ColorPicker3D extends Tab {
 
   @override
   void onEnter() {
+    super.onEnter();
+    
     if (_stage.renderLoop == null) {
       _renderLoop.addStage(_stage);
     }

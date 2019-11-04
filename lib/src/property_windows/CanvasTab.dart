@@ -11,22 +11,26 @@ import '../view/MainWindow.dart';
 class CanvasTab extends Tab {
   List<GroupController> _controllers;
 
-  CanvasTab(Element div) : super(div) {
+  CanvasTab(Element view) : super(view) {
+  }
+
+  @override
+  void initialize() {
     _controllers = List();
 
-    _controllers.add(CanvasSizeViewController(div.querySelector("#size"))
+    _controllers.add(CanvasSizeViewController(view.querySelector("#size"))
       ..model = MainWindow.canvas
       ..open = true);
 
-    _controllers.add(GridViewController(div.querySelector("#grid"))
+    _controllers.add(GridViewController(view.querySelector("#grid"))
       ..model = MainWindow.canvas
       ..open = true);
 
-    _controllers.add(SnappingViewController(div.querySelector("#snapping"))
+    _controllers.add(SnappingViewController(view.querySelector("#snapping"))
       ..model = MainWindow.canvas
       ..open = true);
 
-    _controllers.add(UnitsViewController(div.querySelector("#units"))
+    _controllers.add(UnitsViewController(view.querySelector("#units"))
       ..model = MainWindow.canvas
       ..open = true
       ..onUnitsChanged.listen(_onUnitsChanged));
@@ -37,9 +41,6 @@ class CanvasTab extends Tab {
       controller.refreshProperties();
     }
   }
-
-  @override
-  void onEnter() {}
 
   @override
   void onExit() {}

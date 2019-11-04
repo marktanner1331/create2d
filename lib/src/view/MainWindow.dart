@@ -54,7 +54,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     addChild(DialogLayer.instance);
 
     toolbox.selectFirstTool();
-    colorPicker.show();
+    colorPicker.hide();
   }
 
   @override

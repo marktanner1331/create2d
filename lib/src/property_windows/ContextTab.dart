@@ -17,7 +17,11 @@ class ContextTab extends Tab {
 
   ContextTab(Element div) : super(div) {
     _instance = this;
-    _activeGroups = List();
+  }
+
+  @override
+  void initialize() {
+      _activeGroups = List();
   }
 
   static void set currentObject(ContextPropertyMixin value) {
@@ -32,6 +36,8 @@ class ContextTab extends Tab {
 
   @override
   void onEnter() {
+    super.onEnter();
+
     _isActive = true;
 
     if (_currentObject == null) {

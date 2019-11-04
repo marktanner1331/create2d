@@ -24,6 +24,11 @@ class ColorPickerComponents extends Tab {
   ColorGradientSliderWithLabel _aSlider;
 
   ColorPickerComponents(html.Element view) : super(view) {
+    
+  }
+
+  @override
+  void initialize() {
     _hexBox = view.querySelector("#hexBox") as html.InputElement;
     _hexBox.onInput.listen(_onTextInput);
 
@@ -313,6 +318,7 @@ class ColorPickerComponents extends Tab {
 
   @override
   void onEnter() {
+    super.onEnter();
     int color = MainWindow.colorPicker.currentColor;
     _hexBox.value = ColorHelper.colorToHex(color);
     _resetRGBSliders(color);

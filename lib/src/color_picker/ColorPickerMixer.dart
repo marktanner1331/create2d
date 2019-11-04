@@ -15,6 +15,10 @@ class ColorPickerMixer extends Tab {
   Element _tetradic;
 
   ColorPickerMixer(Element view) : super(view) {
+  }
+
+  @override
+  void initialize() {
     _complementary = view.querySelector("#complementary");
     _analogous = view.querySelector("#analogous");
     _triadic = view.querySelector("#triadic");
@@ -276,6 +280,8 @@ class ColorPickerMixer extends Tab {
 
   @override
   void onEnter() {
+    super.onEnter();
+
     _currentColorChangedSubscription = MainWindow
         .colorPicker.onCurrentColorChanged
         .listen(_onCurrentColorChanged);

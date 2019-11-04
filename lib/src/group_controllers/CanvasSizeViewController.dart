@@ -1,7 +1,6 @@
 import 'dart:html';
 
 import './GroupController.dart';
-import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
 
 class CanvasSizeViewController extends GroupController {

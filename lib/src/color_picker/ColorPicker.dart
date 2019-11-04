@@ -46,7 +46,6 @@ class ColorPicker {
   //everything is set up the first time it is shown
   ColorPicker(Element view) {
     _view = view;
-    hide();
   }
 
   void initialize() {
