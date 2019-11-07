@@ -18,6 +18,9 @@ class PropertyWindowController with HTMLViewController {
   PropertyWindowController(this.view) {
     Draggable(view, view.querySelector(".title_bar"));
 
+    Element closeButton = view.querySelector(".close_button");
+    closeButton.onClick.listen(_onCloseButtonClick);
+
     _tabController = TabController()
       ..addTab(view.querySelector("#canvasTabButton"), view.querySelector("#canvasTab"))
       ..addTab(view.querySelector("#contextTabButton"), view.querySelector("#contextTab"))
@@ -28,6 +31,10 @@ class PropertyWindowController with HTMLViewController {
     _tabs.add(ContextTab(view.querySelector("#contextTab")));
 
     _tabController.switchToFirstTab();
+  }
+
+  void _onCloseButtonClick(_) {
+    view.style.display = "none";
   }
 
   void _onTabChanged(_) {

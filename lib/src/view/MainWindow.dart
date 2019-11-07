@@ -6,10 +6,8 @@ import './Canvas.dart';
 import './KeyboardController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
-import './MainMenu.dart';
-import './color_picker/ColorPicker.dart' as cp;
 import '../color_picker/ColorPicker.dart';
-
+import '../file_menu/FileMenu.dart';
 import '../property_windows/PropertyWindowController.dart';
 import '../tools/ToolboxController.dart';
 
@@ -24,11 +22,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static KeyboardController _keyboardController;
   static KeyboardController get keyboardController => _keyboardController;
 
-  static MainMenu _menu;
-
   static final PropertyWindowController propertyWindow = PropertyWindowController(html.querySelector("#properties"));
   static final ToolboxController toolbox = ToolboxController(html.querySelector("#toolbox"));
   static final ColorPicker colorPicker = ColorPicker(html.querySelector("#colorPicker"));
+
+  static FileMenu _fileMenu;
 
   static MainWindow _instance;
   static MainWindow get instance => _instance;
@@ -43,13 +41,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     TooltipController(html.document.querySelector("#tooltip"));
     DialogLayer();
 
+    _fileMenu = FileMenu();
+
     _canvas = Canvas();
     addChild(_canvas);
-
-    addChild(cp.ColorPicker());
-
-    _menu = MainMenu();
-    addChild(_menu);
 
     addChild(DialogLayer.instance);
 
@@ -63,34 +58,32 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     graphics.rect(0, 0, width, height);
     graphics.fillColor(_backgroundColor);
 
-    _menu.width = width;
-
     resetCanvasZoomAndPosition();
 
     propertyWindow
       ..x = width - propertyWindow.width - 5
-      ..y = _menu.height + 5;
+      ..y = _fileMenu.height + 5;
 
     toolbox
       ..x = 5
-      ..y = _menu.height + 5;
+      ..y = _fileMenu.height + 5;
 
-    // if(ColorPicker.instance.x == 0 && ColorPicker.instance.y == 0) {
-    //   ColorPicker.instance
-    //     ..x = propertyWindow.x - ColorPicker.instance.width - 5
-    //     ..y = propertyWindow.y;
-    // }
+    if(colorPicker.x == 0 && colorPicker.y == 0) {
+      colorPicker
+        ..x = propertyWindow.x - colorPicker.width - 5
+        ..y = propertyWindow.y;
+    }
 
     DialogLayer.relayout();
   }
 
   ///resets the canvas back to the default size and centers it
   static void resetCanvasZoomAndPosition() {
-    Rectangle rect = aspectFitChildInsideParent(_instance.width, _instance.height - _menu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
+    Rectangle rect = aspectFitChildInsideParent(_instance.width, _instance.height - _fileMenu.height, canvas.canvasWidth, canvas.canvasHeight, padding: 20);
     
     canvas
       ..x = rect.left
-      ..y = rect.top + _menu.height
+      ..y = rect.top + _fileMenu.height
       ..setSize(rect.width, rect.height); 
   }
 }

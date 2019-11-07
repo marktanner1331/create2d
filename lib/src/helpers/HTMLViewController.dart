@@ -5,7 +5,13 @@ abstract class HTMLViewController {
 
   int get x {
     String s = view.style.left;
-    s = s.substring(0, s.length - 2);
+
+    if(s.endsWith("px")) {
+      s = s.substring(0, s.length - 2);
+    } else if(s == "") {
+      return 0;
+    }
+    
     return int.parse(s);
   }
 
@@ -15,7 +21,13 @@ abstract class HTMLViewController {
 
   int get y {
     String s = view.style.top;
-    s = s.substring(0, s.length - 2);
+
+    if(s.endsWith("px")) {
+      s = s.substring(0, s.length - 2);
+    } else if(s == "") {
+      return 0;
+    }
+    
     return int.parse(s);
   }
 
@@ -24,7 +36,8 @@ abstract class HTMLViewController {
   }
 
   int get width => view.clientWidth;
+  int get height => view.clientHeight;
 
-  bool get visible => view.style.display == "block";
+  bool get visible => view.style.display != "none";
   void set visible(bool value) => view.style.display = value ? "block" : "none";
 }

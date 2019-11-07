@@ -263,3 +263,56 @@ html, body, .stage--fullscreen {
     top: 0;
     display: none;
 }
+
+#fileMenu {
+    width: 100%;
+    background-color: #333333;
+    position: absolute;
+    padding-left: 2px;
+    top: 0;
+    left: 0;
+}
+
+#fileMenu > div {
+    display: inline-block;
+}
+
+.file_menu_button {
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.file_menu_button:hover {
+    background-color: #555555;
+}
+
+.file_menu_button_selected {
+    background-color: #555555;
+}
+
+.file_menu_items {
+    display:none;
+    background-color: rgb(34, 34, 34);
+    position: absolute;
+    min-width: 100px;
+    padding: 5px 0;
+}
+
+.file_menu_item {
+    padding: 5px;
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.file_menu_item:hover {
+    background-color: #555555;
+}
+
+.file_menu_item > input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}

@@ -4,6 +4,7 @@ import 'package:stagexl/stagexl.dart' as stageXL;
 import '../helpers/Draggable.dart';
 import '../property_windows/Tab.dart';
 import '../property_windows/TabController.dart';
+import '../helpers/HTMLViewController.dart';
 
 import './ColorPickerComponents.dart';
 import './ColorPicker3D.dart';
@@ -12,7 +13,7 @@ import './ColorBox.dart';
 import './ColorPickerMixer.dart';
 import './ColorPickerSwatches.dart';
 
-class ColorPicker {
+class ColorPicker with HTMLViewController {
   int get currentColor => _initialized ? _selectedBox.color : 0xff000000;
 
   stageXL.EventDispatcher _dispatcher = stageXL.EventDispatcher();
@@ -32,6 +33,8 @@ class ColorPicker {
       _closedEvent.forTarget(_dispatcher);
 
   Element _view;
+  Element get view => _view;
+
   List<Tab> _tabs;
 
   Tab _currentTab;
