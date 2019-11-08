@@ -5,8 +5,9 @@ import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
 import '../property_mixins/SelectedSingleVertexMixin.dart';
+import '../property_mixins/SelectedMultipleVerticesMixin.dart';
 
-class SelectTool extends ITool with SelectedSingleVertexMixin {
+class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleVerticesMixin {
   List<Vertex> selectedVertices;
 
   //tracks the point in canvas space that the user mouse downed at

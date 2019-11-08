@@ -83,6 +83,10 @@ html, body, .stage--fullscreen {
     padding: 5px 10px;
 }
 
+#properties {
+    width: 220px;
+}
+
 .group_header {
     background-color: #666666;
     margin: 5px -5px;

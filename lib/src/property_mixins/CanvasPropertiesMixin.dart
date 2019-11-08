@@ -43,6 +43,10 @@ mixin CanvasPropertiesMixin {
 
   //given a string representing a unit in the current unit type, e.g. feet: 5'5" this method will return its value in pixels using the current pixels per unit
   num unitsToPixels(String units) {
+    if(units == null || units == "") {
+      return null;
+    }
+
     num pixels = _helper.unitsToPixels(units);
 
     //if we have 10 units and 100 pixels per unit, then we want 1000 pixels
