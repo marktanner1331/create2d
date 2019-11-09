@@ -1,6 +1,7 @@
 import 'dart:html';
+import '../helpers/IOnEnterExit.dart';
 
-abstract class GroupController {
+abstract class GroupController implements IOnEnterExit {
   Element _groupHeaderArrow;
   Element _groupContent;
 
@@ -20,5 +21,10 @@ abstract class GroupController {
   void set open(bool value) {
     _groupContent.style.display = value ? "block" : "none";
     _groupHeaderArrow.innerHtml = value ? "▼" : "►";
+  }
+
+  void onExit() {}
+  void onEnter() {
+    refreshProperties();
   }
 }

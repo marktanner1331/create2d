@@ -33,22 +33,37 @@ class ColorPickerSwatches extends Tab {
     String color = ColorHelper.colorToHex(MainWindow.colorPicker.currentColor);
     
     Element swatch = view.querySelector("#swatch_$_swatchCounter")
-      ..style.backgroundColor = color
+      ..style.backgroundColor = "#" + color
       ..onClick.listen(_onSwatchClick)
       ..onMouseOver.listen(_onSwatchMouseOver)
       ..onMouseOut.listen(_onSwatchMouseOut);
 
+    Element closeButton = swatch.querySelector(".swatch_close_button");
+    closeButton.onClick.listen(_onCloseClick);
+
     _swatchCounter++;
   }
 
-  void _onSwatchMouseOut(_) {
+  void _onCloseClick(MouseEvent e) {
+    Element closeButton = e.currentTarget as Element;
+    closeButton.parent.remove();
+  }
+
+  void _onSwatchMouseOut(MouseEvent e) {
     MainWindow.colorPicker.setPreviewPixelColor(MainWindow.colorPicker.currentColor);
+
+    Element swatch = e.currentTarget as Element;
+    swatch.querySelector(".swatch_close_button").style.display = "none";
   }
 
   void _onSwatchMouseOver(MouseEvent e) {
     Element swatch = e.currentTarget as Element;
     int color = ColorHelper.parseCssColor(swatch.style.backgroundColor);
+    print(swatch.style.backgroundColor);
+    print(color);
     MainWindow.colorPicker.setPreviewPixelColor(color);
+
+    swatch.querySelector(".swatch_close_button").style.display = "table";
   }
 
   void _onSwatchClick(MouseEvent e) {

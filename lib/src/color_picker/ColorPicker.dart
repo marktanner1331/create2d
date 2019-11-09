@@ -1,6 +1,8 @@
 import 'dart:html';
+import 'package:design2D/src/view/MainWindow.dart';
 import 'package:stagexl/stagexl.dart' as stageXL;
 
+import '../helpers/HTMLViewController.dart';
 import '../helpers/Draggable.dart';
 import '../property_windows/Tab.dart';
 import '../property_windows/TabController.dart';
@@ -52,32 +54,38 @@ class ColorPicker with HTMLViewController {
   }
 
   void initialize() {
-    Draggable(_view, _view.querySelector(".title_bar"));
+    Draggable(view, view.querySelector(".title_bar"));
 
     _tabController = TabController()
-      ..addTab(_view.querySelector("#paletteButton"),
-          _view.querySelector("#paletteTab"))
-      ..addTab(_view.querySelector("#componentsButton"),
-          _view.querySelector("#componentsTab"))
+      ..addTab(view.querySelector("#paletteButton"),
+          view.querySelector("#paletteTab"))
+      ..addTab(view.querySelector("#componentsButton"),
+          view.querySelector("#componentsTab"))
       ..addTab(
-          _view.querySelector("#_3DButton"), _view.querySelector("#_3DTab"))
+          view.querySelector("#_3DButton"), view.querySelector("#_3DTab"))
       ..addTab(
-          _view.querySelector("#mixerButton"), _view.querySelector("#mixerTab"))
-      ..addTab(_view.querySelector("#swatchesButton"),
-          _view.querySelector("#swatchesTab"))
+          view.querySelector("#mixerButton"), view.querySelector("#mixerTab"))
+      ..addTab(view.querySelector("#swatchesButton"),
+          view.querySelector("#swatchesTab"))
       ..onTabChangedChanged.listen(_onTabChanged);
 
     _tabs = List();
-    _tabs.add(ColorPickerComponents(_view.querySelector("#componentsTab")));
-    _tabs.add(ColorPicker3D(_view.querySelector("#_3DTab")));
-    _tabs.add(ColorPickerPalette(_view.querySelector("#paletteTab")));
-    _tabs.add(ColorPickerMixer(_view.querySelector("#mixerTab")));
-    _tabs.add(ColorPickerSwatches(_view.querySelector("#swatchesTab")));
+    _tabs.add(ColorPickerComponents(view.querySelector("#componentsTab")));
+    _tabs.add(ColorPicker3D(view.querySelector("#_3DTab")));
+    _tabs.add(ColorPickerPalette(view.querySelector("#paletteTab")));
+    _tabs.add(ColorPickerMixer(view.querySelector("#mixerTab")));
+    _tabs.add(ColorPickerSwatches(view.querySelector("#swatchesTab")));
 
     _tabController.switchToFirstTab();
 
-    _previewBox = ColorBox(_view.querySelector("#previewBox"));
-    _selectedBox = ColorBox(_view.querySelector("#selectedBox"));
+    _previewBox = ColorBox(view.querySelector("#previewBox"));
+    _selectedBox = ColorBox(view.querySelector("#selectedBox"));
+
+    //magic number here isn't great
+    //but the color picker hasnt initialized enough to have
+    //a real width yet
+    x = MainWindow.propertyWindow.x - 275;
+    y = MainWindow.propertyWindow.y;
 
     _initialized = true;
   }
@@ -90,7 +98,7 @@ class ColorPicker with HTMLViewController {
   }
 
   void hide() {
-    _view.style.display = "none";
+    view.style.display = "none";
   }
 
   void show() {
@@ -98,7 +106,7 @@ class ColorPicker with HTMLViewController {
       initialize();
     }
 
-    _view.style.display = "block";
+    view.style.display = "block";
   }
 
   void resetPreviewColor() {

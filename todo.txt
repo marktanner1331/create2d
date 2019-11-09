@@ -8,6 +8,12 @@ rename draggable/draggableController for something more sensible (i.e. stageXL/h
 
 color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
 
+lazy load the color picker tabs
+
+color picker close button doesnt work
+
+group controllers need onEnter/onExit as they might have open color pickers that need cleaning up
+
 in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
