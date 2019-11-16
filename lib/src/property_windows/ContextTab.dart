@@ -72,7 +72,7 @@ class ContextTab extends Tab {
 
   void clearPropertyGroups() {
     for (ContextController group in _activeGroups) {
-      group.div.style.display = "none";
+      group.view.style.display = "none";
       group.onExit();
     }
 

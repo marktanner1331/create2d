@@ -44,6 +44,8 @@ class CanvasTab extends Tab {
 
   @override
   void onEnter() {
+    super.onEnter();
+
     for(GroupController controller in _controllers) {
       controller.onEnter();
     }
