@@ -14,7 +14,7 @@ import '../tools/ToolboxController.dart';
 import '../helpers/AspectFit.dart';
 
 class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
-  int _backgroundColor = 0xff476784;
+  int _backgroundColor = 0xff6D8FA6;
 
   static Canvas _canvas;
   static Canvas get canvas => _canvas;

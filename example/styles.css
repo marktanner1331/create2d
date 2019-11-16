@@ -7,7 +7,7 @@ html, body, .stage--fullscreen {
     padding: 0;
     border: 0;
     overflow: hidden;
-    background-color: #7ab1e3;
+    background-color: #547A9C;
 }
 
 [type="checkbox"]
@@ -84,7 +84,7 @@ html, body, .stage--fullscreen {
 }
 
 #properties {
-    width: 220px;
+    width: 225px;
 }
 
 .group_header {
