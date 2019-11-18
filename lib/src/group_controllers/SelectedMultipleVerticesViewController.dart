@@ -2,14 +2,14 @@ import 'dart:html';
 
 import '../view/MainWindow.dart';
 import './ContextController.dart';
-import '../property_mixins/SelectedMultipleVerticesMixin.dart';
+import '../property_mixins/SelectedVerticesMixin.dart';
 
 class SelectedMultipleVerticesViewController extends ContextController {
   static SelectedMultipleVerticesViewController get instance =>
       _instance ?? (_instance = SelectedMultipleVerticesViewController());
   static SelectedMultipleVerticesViewController _instance;
 
-  SelectedMultipleVerticesMixin _properties;
+  SelectedVerticesMixin _properties;
 
   InputElement _numVertices;
   InputElement _x;
@@ -35,7 +35,7 @@ class SelectedMultipleVerticesViewController extends ContextController {
     _height.onInput.listen(_onHeightChanged);
   }
 
-  void set properties(SelectedMultipleVerticesMixin value) {
+  void set properties(SelectedVerticesMixin value) {
     _properties = value;
   }
 

@@ -48,7 +48,10 @@ mixin CanvasPropertiesMixin {
     }
 
     num pixels = _helper.unitsToPixels(units);
-
+    if(pixels == null) {
+      return pixels;
+    }
+    
     //if we have 10 units and 100 pixels per unit, then we want 1000 pixels
     return pixels * pixelsPerUnit;
   }
