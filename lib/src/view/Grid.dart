@@ -22,6 +22,11 @@ class Grid extends Sprite {
       return;
     }
 
+    num numLines = _canvas.canvasWidth + _canvas.canvasHeight;
+    if(numLines / _canvas.gridStep > 100) {
+      return;
+    }
+
     switch (_canvas.gridGeometryType) {
       case GridGeometryType.Isometric:
         switch (_canvas.gridDisplayType) {
@@ -168,11 +173,6 @@ class Grid extends Sprite {
   }
 
   void _refreshIsometricLines() {
-    num numLines = _canvas.canvasWidth + _canvas.canvasHeight;
-    if(numLines / _canvas.gridStep > 100) {
-      return;
-    }
-
     num horizontalStep = 0.866 * _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
     num doubleHorizontalStep = horizontalStep * 2;
     num verticalStep = _canvas.gridStep * _canvas.drawingSpaceToCanvasSpace;
