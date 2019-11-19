@@ -9,10 +9,17 @@ import '../property_mixins/SelectedVerticesMixin.dart';
 class SelectTool extends ITool with SelectedVerticesMixin {
   List<Vertex> selectedVertices;
 
+  //the vertex we are currently dragging, or null if we aren't
+  Vertex _currentVertex;
+
   //tracks the point in canvas space that the user mouse downed at
   //sometimes also updated on every onMouseMove to track the mouses position
   //only really used when moving multiple vertices at once
   Point _mouseDownPoint;
+
+  //tracks every vertex that is connected to the current vertex
+  //more of a performance increase than a functionality one
+  Iterable<Vertex> _connectedVerticesCache;
 
   SelectTool(html.Element view) : super(view) {
     selectedVertices = List();
@@ -44,6 +51,7 @@ class SelectTool extends ITool with SelectedVerticesMixin {
         } else {
           selectedVertices.add(v);
           v.locked = true;
+          _currentVertex = v;
         }
       } else {
         if(selectedVertices.contains(v)) {
@@ -58,6 +66,7 @@ class SelectTool extends ITool with SelectedVerticesMixin {
           selectedVertices.clear();
           selectedVertices.add(v);
           v.locked = true;
+          _currentVertex = v;
         }
       }
     } else {
@@ -73,6 +82,7 @@ class SelectTool extends ITool with SelectedVerticesMixin {
           oldVertex.locked = false;
         }
         selectedVertices.clear();
+        _currentVertex = null;
       }
     }
 
@@ -87,6 +97,12 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     if(hasBlacklisted) {
       MainWindow.canvas.selectionLayer.selectedBlacklist.remove(v);
     }
+
+    if(_currentVertex != null) {
+      _connectedVerticesCache = MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
+    } else {
+      _connectedVerticesCache = [];
+    }
       
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
@@ -100,6 +116,9 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       vertex.locked = false;
       MainWindow.canvas.currentGraphics.mergeVerticesUnderVertex(vertex);
     }
+
+    _currentVertex = null;
+    _connectedVerticesCache = [];
   }
 
   @override
@@ -151,5 +170,14 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     
     //wont worry about invalidating the context
     //as what ever is about be be onEntered will do it instead
+  }
+
+  @override
+  Iterable<Point<num>> getSnappablePoints() {
+    if(_currentVertex == null) {
+      return [];
+    }
+
+    return MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
   }
 }

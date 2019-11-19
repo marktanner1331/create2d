@@ -27,5 +27,7 @@ abstract class ITool with ContextPropertyMixin {
   void onEnter();
   void onExit();
 
+  Iterable<Point> getSnappablePoints(); 
+
   String get tooltipText;
 }

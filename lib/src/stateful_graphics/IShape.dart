@@ -30,5 +30,12 @@ abstract class IShape {
   ///returns a collection containing all vertices used in the shape
   Iterable<Vertex> getVertices();
 
+  ///iterates over each vertex in the shape
+  ///if the callback returns false then the iteration is cancelled immediately
+  ///this method returns false if the iteration was cancelled
+  bool foreachVertex(Function(Vertex) callback);
+
   void renderToStageXL(Graphics graphics);
+
+  Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v);
 }

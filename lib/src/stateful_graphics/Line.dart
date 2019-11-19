@@ -104,4 +104,22 @@ class Line extends IShape with ContextPropertyMixin, LinePropertiesMixin {
       _end = v;
     }
   }
+
+  @override
+  bool foreachVertex(callback) {
+    return callback(_start) && callback(_end);
+  }
+
+  @override
+  Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v) {
+    if(v == _start) {
+      return [_end];
+    }
+
+    if(v == _end) {
+      return [_start];
+    }
+
+    return [];
+  }
 }

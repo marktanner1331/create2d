@@ -20,7 +20,7 @@ class CanvasMouseEventsController extends EventDispatcher {
   void set detectMouseOverVertex(bool value) {
     _detectMouseOverVertex = value;
     if (value == false) {
-      _detectMouseOverVertex = null;
+      _currentMouseOverVertex = null;
     }
   }
 
@@ -52,11 +52,39 @@ class CanvasMouseEventsController extends EventDispatcher {
     }
 
     if (_canvas.snapToVertex) {
-      Vertex v = _canvas.currentGraphics
-          .getFirstVertexUnderPoint(Point(p.x, p.y), squareTolerance: 100, ignoreLockedVertices: true);
-      
+      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(
+          Point(p.x, p.y),
+          squareTolerance: 100,
+          ignoreLockedVertices: true);
+
       if (v != null) {
         return v;
+      }
+    }
+
+    if (MainWindow.toolbox.currentTool.isActive) {
+      const num MAX_NUM = 1000000;
+      num closestX = MAX_NUM;
+      num closestY = MAX_NUM;
+
+      for (Point toolP in MainWindow.toolbox.currentTool.getSnappablePoints()) {
+        num diffX = (toolP.x - p.x).abs();
+        if (diffX < 10 && diffX < closestX) {
+          closestX = toolP.x;
+        }
+
+        num diffY = (toolP.y - p.y).abs();
+        if (diffY < 10 && diffY < closestY) {
+          closestY = toolP.y;
+        }
+      }
+
+      if (closestX != MAX_NUM) {
+        p.x = closestX;
+      }
+
+      if (closestY != MAX_NUM) {
+        p.y = closestY;
       }
     }
 
@@ -83,7 +111,8 @@ class CanvasMouseEventsController extends EventDispatcher {
       p.x *= _canvas.canvasSpaceToDrawingSpace;
       p.y *= _canvas.canvasSpaceToDrawingSpace;
 
-      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(p, squareTolerance: 100, ignoreLockedVertices: true);
+      Vertex v = _canvas.currentGraphics.getFirstVertexUnderPoint(p,
+          squareTolerance: 100, ignoreLockedVertices: true);
 
       if (v != _currentMouseOverVertex) {
         _currentMouseOverVertex = v;

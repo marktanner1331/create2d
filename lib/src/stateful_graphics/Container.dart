@@ -15,6 +15,16 @@ class Container extends IShape {
     _shapes = List();
   }
 
+  bool foreachVertex(Function(Vertex) callback) {
+    for(IShape shape in _shapes) {
+      if(shape.foreachVertex(callback) == false) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
       for(Vertex vertex in shape.getVertices()) {
@@ -145,5 +155,15 @@ class Container extends IShape {
         return true;
       }
     }
+  }
+
+  @override
+  Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v) {
+    List<Vertex> vertices = List();
+    for (IShape shape in _shapes) {
+      vertices.addAll(shape.getAllVerticesConnectedToVertex(v));
+    }
+    
+    return vertices;
   }
 }
