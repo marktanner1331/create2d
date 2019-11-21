@@ -1,16 +1,21 @@
+import 'dart:collection';
+
 import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 
+import '../stateful_graphics/IShape.dart';
 import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
 import '../property_mixins/SelectedVerticesMixin.dart';
 
 class SelectTool extends ITool with SelectedVerticesMixin {
-  List<Vertex> selectedVertices;
+  HashSet<Vertex> selectedVertices;
 
   //the vertex we are currently dragging, or null if we aren't
   Vertex _currentVertex;
+
+  List<IShape> selectedShapes;
 
   //tracks the point in canvas space that the user mouse downed at
   //sometimes also updated on every onMouseMove to track the mouses position
@@ -22,7 +27,8 @@ class SelectTool extends ITool with SelectedVerticesMixin {
   Iterable<Vertex> _connectedVerticesCache;
 
   SelectTool(html.Element view) : super(view) {
-    selectedVertices = List();
+    selectedVertices = HashSet();
+    selectedShapes = List();
     onPropertiesChanged.listen(_onPropertiesChanged);
   }
 
@@ -70,11 +76,8 @@ class SelectTool extends ITool with SelectedVerticesMixin {
         }
       }
     } else {
-      //check shapes
-
       if(MainWindow.keyboardController.shiftIsDown) {
         //do nothing
-        return;
       } else {
         //user has clicked part of the background
         //so we deselect all
@@ -83,6 +86,18 @@ class SelectTool extends ITool with SelectedVerticesMixin {
         }
         selectedVertices.clear();
         _currentVertex = null;
+      }
+
+      //now its time for selecting shapes
+      IShape shape = MainWindow.canvas.currentGraphics.getFirstShapeUnderPoint(unsnappedMousePosition);
+      
+      if(shape != null) {
+        selectedShapes.clear();
+        selectedShapes.add(shape);
+
+        selectedVertices.addAll(shape.getVertices());
+      } else {
+        selectedShapes.clear();
       }
     }
 
@@ -103,6 +118,11 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     } else {
       _connectedVerticesCache = [];
     }
+
+    MainWindow.canvas.selectionLayer
+        .deselectAllAndSelectShapes(selectedShapes);
+
+    MainWindow.canvas.invalidateGraphics();
       
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group

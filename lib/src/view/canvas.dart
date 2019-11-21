@@ -112,6 +112,9 @@ class Canvas extends Sprite
     _temporaryLayer = null;
   }
 
+  //called when none of the vertices have changed but the graphics need to be redrawn anyway
+  void invalidateGraphics() => _renderGraphics();
+
   ///called when the caller believes the positons of the vertices have changed and the rest
   ///of the program should know about it
   void invalidateVertexPositions() {

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:stagexl/stagexl.dart';
 import 'dart:math';
 
@@ -8,7 +10,7 @@ import './ContextPropertyMixin.dart';
 import '../stateful_graphics/Vertex.dart';
 
 mixin SelectedVerticesMixin on ContextPropertyMixin {
-  List<Vertex> get selectedVertices;
+  HashSet<Vertex> get selectedVertices;
 
   @override
   List<ContextController> getPropertyGroups() {

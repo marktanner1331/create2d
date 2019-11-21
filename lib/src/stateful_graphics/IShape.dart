@@ -2,6 +2,8 @@ import './Vertex.dart';
 import 'package:stagexl/stagexl.dart' show Point, Graphics;
 
 abstract class IShape {
+  bool selected = false;
+
   ///returns true if the shape contains the same instance of the given vertex
   bool hasVertex(Vertex vertex);
 
@@ -38,4 +40,6 @@ abstract class IShape {
   void renderToStageXL(Graphics graphics);
 
   Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v);
+
+  bool hitTest(Point p);
 }

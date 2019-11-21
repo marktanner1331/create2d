@@ -166,4 +166,44 @@ class Container extends IShape {
     
     return vertices;
   }
+
+  @override
+  bool hitTest(Point<num> p) {
+    for (IShape shape in _shapes) {
+      if(shape.hitTest(p)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  ///returns the shape under the given point
+  ///the point should be in canvas space
+  ///the returned shape will not be a container
+  IShape getFirstShapeUnderPoint(Point p) {
+    for (IShape shape in _shapes) {
+      if(shape is Container) {
+        IShape subShape = shape.getFirstShapeUnderPoint(p);
+        if(subShape != null) {
+          return subShape;
+        }
+      } else {
+        if(shape.hitTest(p)) {
+          return shape;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  @override
+  void set selected(bool value) {
+    super.selected = value;
+    
+    for (IShape shape in _shapes) {
+      shape.selected = value;
+    }
+  }
 }

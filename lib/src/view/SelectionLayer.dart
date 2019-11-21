@@ -1,7 +1,7 @@
 import 'dart:collection';
-
 import 'package:stagexl/stagexl.dart';
 
+import '../stateful_graphics/IShape.dart';
 import './Canvas.dart';
 import '../stateful_graphics/Vertex.dart';
 
@@ -14,12 +14,28 @@ class SelectionLayer extends Sprite {
   //any vertices that appear here will never be selected
   List<Vertex> get selectedBlacklist => _selectedBlacklist;
 
+  List<IShape> _selectedShapes;
+
   SelectionLayer(Canvas canvas) {
     _canvas = canvas;
     _selectedVerticesGroups = Map();
     _selectedBlacklist = List();
+    _selectedShapes = List();
 
     mouseEnabled = false;
+  }
+
+  void deselectAllAndSelectShapes(List<IShape> shapes) {
+    for(IShape shape in _selectedShapes) {
+      shape.selected = false;
+    }
+
+    _selectedShapes.clear();
+    _selectedShapes.addAll(shapes);
+
+    for(IShape shape in _selectedShapes) {
+      shape.selected = true;
+    }
   }
 
   ///removes all selected vertices for the given group and selects the vertex given
