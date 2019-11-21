@@ -1,4 +1,5 @@
 import 'package:stagexl/stagexl.dart';
+import 'package:meta/meta.dart';
 
 import '../group_controllers/ContextController.dart';
 
@@ -24,6 +25,9 @@ mixin ContextPropertyMixin {
   EventStream<Event> get onContextChanged =>
       _contextChangedEvent.forTarget(_dispatcher);
 
+  
+
+  @mustCallSuper
   List<ContextController> getPropertyGroups() {
     return List();
   }
