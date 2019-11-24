@@ -18,13 +18,17 @@ mixin SelectedSingleVertexMixin on ContextPropertyMixin {
 
   num get x => selectedVertices.first.x;
   void set x(num value) {
-    selectedVertices.first.x = value;
-    invalidateProperties();
+    if((selectedVertices.first.x - value).abs() > 0.01) {
+      selectedVertices.first.x = value;
+      invalidateProperties();
+    }
   }
 
   num get y => selectedVertices.first.y;
   void set y(num value) {
-    selectedVertices.first.y = value;
-    invalidateProperties();
+    if((selectedVertices.first.y - value).abs() > 0.01) {
+      selectedVertices.first.y = value;
+      invalidateProperties();
+    }
   }
 }
