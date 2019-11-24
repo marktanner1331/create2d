@@ -64,4 +64,13 @@ class MultiObjectEngine {
   //  and is itself a controller
   //  so what do we call it
   //  PropertyEngine.dart sounds good to me
+  //  lets not have a hardcoded list of mixins to check each object for
+  //  instead
+  //  we onExit() all current view controllers
+  //  then we spin through each selected shape
+  //  which registers itself with each view controller it supports
+  //  and returns a hashset of view controllers
+  //  then we spin through that list
+  //  and call onEnter()
+  //  and it already has all its models sorted
 }

@@ -45,6 +45,10 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     Rectangle box = getBoundingBox();
     num diff = value - box.left;
 
+    if(diff.abs() < 0.01) {
+      return;
+    }
+
     for (Vertex v in selectedVertices) {
       v.x += diff;
     }
@@ -55,6 +59,10 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
   void set y(num value) {
     Rectangle box = getBoundingBox();
     num diff = value - box.top;
+
+    if(diff.abs() < 0.01) {
+      return;
+    }
 
     for (Vertex v in selectedVertices) {
       v.y += diff;
@@ -67,6 +75,10 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     Rectangle box = getBoundingBox();
     num multiplier = value / box.width;
 
+    if((1 - multiplier).abs() < 0.01) {
+      return;
+    }
+
     for (Vertex v in selectedVertices) {
       v.x = box.left + (v.x - box.left) * multiplier;
     }
@@ -77,6 +89,10 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
   void set height(num value) {
     Rectangle box = getBoundingBox();
     num multiplier = value / box.height;
+
+    if((1 - multiplier).abs() < 0.01) {
+      return;
+    }
 
     for (Vertex v in selectedVertices) {
       v.y = box.top + (v.y - box.top) * multiplier;
