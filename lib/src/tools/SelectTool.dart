@@ -1,22 +1,34 @@
+import 'dart:collection';
+
 import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 
+import '../stateful_graphics/IShape.dart';
 import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
-import '../property_mixins/SelectedSingleVertexMixin.dart';
-import '../property_mixins/SelectedMultipleVerticesMixin.dart';
+import '../property_mixins/SelectedVerticesMixin.dart';
 
-class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleVerticesMixin {
-  List<Vertex> selectedVertices;
+class SelectTool extends ITool with SelectedVerticesMixin {
+  HashSet<Vertex> selectedVertices;
+
+  //the vertex we are currently dragging, or null if we aren't
+  Vertex _currentVertex;
+
+  List<IShape> selectedShapes;
 
   //tracks the point in canvas space that the user mouse downed at
   //sometimes also updated on every onMouseMove to track the mouses position
   //only really used when moving multiple vertices at once
   Point _mouseDownPoint;
 
+  //tracks every vertex that is connected to the current vertex
+  //more of a performance increase than a functionality one
+  Iterable<Vertex> _connectedVerticesCache;
+
   SelectTool(html.Element view) : super(view) {
-    selectedVertices = List();
+    selectedVertices = HashSet();
+    selectedShapes = List();
     onPropertiesChanged.listen(_onPropertiesChanged);
   }
 
@@ -45,6 +57,7 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
         } else {
           selectedVertices.add(v);
           v.locked = true;
+          _currentVertex = v;
         }
       } else {
         if(selectedVertices.contains(v)) {
@@ -59,14 +72,12 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
           selectedVertices.clear();
           selectedVertices.add(v);
           v.locked = true;
+          _currentVertex = v;
         }
       }
     } else {
-      //check shapes
-
       if(MainWindow.keyboardController.shiftIsDown) {
         //do nothing
-        return;
       } else {
         //user has clicked part of the background
         //so we deselect all
@@ -74,6 +85,19 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
           oldVertex.locked = false;
         }
         selectedVertices.clear();
+        _currentVertex = null;
+      }
+
+      //now its time for selecting shapes
+      IShape shape = MainWindow.canvas.currentGraphics.getFirstShapeUnderPoint(unsnappedMousePosition);
+      
+      if(shape != null) {
+        selectedShapes.clear();
+        selectedShapes.add(shape);
+
+        selectedVertices.addAll(shape.getVertices());
+      } else {
+        selectedShapes.clear();
       }
     }
 
@@ -88,6 +112,17 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
     if(hasBlacklisted) {
       MainWindow.canvas.selectionLayer.selectedBlacklist.remove(v);
     }
+
+    if(_currentVertex != null) {
+      _connectedVerticesCache = MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
+    } else {
+      _connectedVerticesCache = [];
+    }
+
+    MainWindow.canvas.selectionLayer
+        .deselectAllAndSelectShapes(selectedShapes);
+
+    MainWindow.canvas.invalidateGraphics();
       
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
@@ -101,6 +136,9 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
       vertex.locked = false;
       MainWindow.canvas.currentGraphics.mergeVerticesUnderVertex(vertex);
     }
+
+    _currentVertex = null;
+    _connectedVerticesCache = [];
   }
 
   @override
@@ -152,5 +190,14 @@ class SelectTool extends ITool with SelectedSingleVertexMixin, SelectedMultipleV
     
     //wont worry about invalidating the context
     //as what ever is about be be onEntered will do it instead
+  }
+
+  @override
+  Iterable<Point<num>> getSnappablePoints() {
+    if(_currentVertex == null) {
+      return [];
+    }
+
+    return MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
   }
 }

@@ -1,8 +1,10 @@
 import 'dart:html';
+import 'package:stagexl/stagexl.dart' as stageXL;
 
+import '../helpers/TextInputViewController.dart';
 import '../view/MainWindow.dart';
 import './ContextController.dart';
-import '../property_mixins/SelectedSingleVertexMixin.dart';
+import '../property_mixins/SelectedVerticesMixin.dart';
 
 class SelectedSingleVertexViewController extends ContextController {  
   static SelectedSingleVertexViewController get instance =>
@@ -11,24 +13,21 @@ class SelectedSingleVertexViewController extends ContextController {
           document.querySelector("#contextTab #selectedSingleVertex")));
   static SelectedSingleVertexViewController _instance;
 
-  SelectedSingleVertexMixin _properties;
+  SelectedVerticesMixin _properties;
 
-  InputElement _x;
-  InputElement _y;
+  TextInputViewController _x;
+  TextInputViewController _y;
 
   SelectedSingleVertexViewController(Element div) : super(div) {
-    this._x = div.querySelector("#x");
-    _x.onInput.listen(_onXChanged);
-
-    this._y = div.querySelector("#y");
-    _y.onInput.listen(_onYChanged);
+    this._x = TextInputViewController("#x", _onXChanged);
+    this._y = TextInputViewController("#y", _onYChanged);
   }
 
-  void set properties(SelectedSingleVertexMixin value) {
+  void set properties(SelectedVerticesMixin value) {
     _properties = value;
   }
 
-  void _onXChanged(_) {
+  void _onXChanged(String newValue) {
     if (_properties == null) {
       return;
     }
@@ -40,7 +39,7 @@ class SelectedSingleVertexViewController extends ContextController {
     }
   }
 
-  void _onYChanged(_) {
+  void _onYChanged(String newValue) {
     if (_properties == null) {
       return;
     }
@@ -54,7 +53,8 @@ class SelectedSingleVertexViewController extends ContextController {
 
   @override
   void refreshProperties() {
-    _x.value = MainWindow.canvas.pixelsToUnits(_properties.x);
-    _y.value = MainWindow.canvas.pixelsToUnits(_properties.y);
+    stageXL.Rectangle rect = _properties.getBoundingBox();
+    _x.value = MainWindow.canvas.pixelsToUnits(rect.left);
+    _y.value = MainWindow.canvas.pixelsToUnits(rect.top);
   }
 }
