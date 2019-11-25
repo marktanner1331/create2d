@@ -1,7 +1,9 @@
 import './Vertex.dart';
 import 'package:stagexl/stagexl.dart' show Point, Graphics;
 
-abstract class IShape {
+import '../property_mixins/IHavePropertyMixins.dart';
+
+abstract class IShape extends IHavePropertyMixins {
   bool selected = false;
 
   ///returns true if the shape contains the same instance of the given vertex

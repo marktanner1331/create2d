@@ -1,40 +1,42 @@
 import 'dart:html';
 
+import '../helpers/MostCommonValue.dart';
 import './ContextController.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
 
 class LineViewController extends ContextController {
   static LineViewController get instance =>
-      _instance ??
-      (_instance = LineViewController(document.querySelector("#contextTab #line")));
+      _instance ?? (_instance = LineViewController());
   static LineViewController _instance;
 
-  LinePropertiesMixin _properties;
+  List<LinePropertiesMixin> _models;
   InputElement _thickness;
 
-  LineViewController(Element div) : super(div) {
-    this._thickness = div.querySelector("#thickness");
+  LineViewController() : super(document.querySelector("#contextTab #line")) {
+    _models = List();
+
+    this._thickness = view.querySelector("#thickness");
     _thickness.onInput.listen(_onThicknessChanged);
   }
 
   void _onThicknessChanged(_) {
-    if (_properties == null) {
+    num newThickness = num.tryParse(_thickness.value);
+
+    if (newThickness == null) {
       return;
     }
 
-    num newThickness = num.tryParse(_thickness.value);
-
-    if (newThickness != null) {
-      _properties.thickness = newThickness;
+    for(LinePropertiesMixin model in _models) {
+      model.thickness = newThickness;
     }
-  }
-
-   void set properties(LinePropertiesMixin value) {
-    _properties = value;
   }
 
   @override
   void refreshProperties() {
-    _thickness.value = _properties.thickness.toString();
+    _thickness.value = mostCommonValue(_models.map((x) => x.thickness)).toString();
   }
+
+  void clearModels() => _models.clear();
+
+  void addModel(LinePropertiesMixin model) => _models.add(model);
 }

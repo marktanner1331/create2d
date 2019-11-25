@@ -5,4 +5,6 @@ abstract class ContextController extends GroupController {
   final Element view;
   
   ContextController(this.view) : super(view);
+
+  void clearModels();
 }

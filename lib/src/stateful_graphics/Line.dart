@@ -5,9 +5,8 @@ import 'dart:math';
 import './Vertex.dart';
 import './IShape.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
-import '../property_mixins/ContextPropertyMixin.dart';
 
-class Line extends IShape with ContextPropertyMixin, LinePropertiesMixin {
+class Line extends IShape with LinePropertiesMixin {
   Vertex _start;
   Vertex get start => _start;
 
@@ -88,8 +87,11 @@ class Line extends IShape with ContextPropertyMixin, LinePropertiesMixin {
       ..beginPath()
       ..moveTo(_start.x, _start.y)
       ..lineTo(_end.x, _end.y)
-      ..closePath()
-      ..strokeColor(strokeColor, thickness);
+      ..closePath();
+    
+    if(thickness > 0) {
+      graphics.strokeColor(strokeColor, thickness);
+    }
 
     if (selected) {
       graphics..strokeColor(0xffff0000, 1);

@@ -1,9 +1,9 @@
 import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 
-import '../property_mixins/ContextPropertyMixin.dart';
+import '../property_mixins/IHavePropertyMixins.dart';
 
-abstract class ITool with ContextPropertyMixin {
+abstract class ITool extends IHavePropertyMixins {
   final html.Element view;
 
   ITool(this.view);

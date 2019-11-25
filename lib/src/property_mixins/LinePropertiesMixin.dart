@@ -1,32 +1,23 @@
-import '../group_controllers/ContextController.dart';
+import 'dart:collection';
+
 import '../group_controllers/LineViewController.dart';
+import './IHavePropertyMixins.dart';
+import '../group_controllers/GroupController.dart';
 
-import './ContextPropertyMixin.dart';
-
-mixin LinePropertiesMixin on ContextPropertyMixin {
-  num _thickness = 5;
-  num get thickness => _thickness;
-  void set thickness(num value) {
-    _thickness = value;
-    invalidateProperties();
-  }
-
-  int _strokeColor = 0xff000000;
-  num get strokeColor => _strokeColor;
-  void set strokeColor(num value) {
-    _strokeColor = value;
-    invalidateProperties();
-  }
+mixin LinePropertiesMixin on IHavePropertyMixins {
+  num thickness = 5;
+  int strokeColor = 0xff000000;
 
   @override
-  List<ContextController> getPropertyGroups() {
-    return super.getPropertyGroups()
-      ..add(LineViewController.instance..properties = this);
+  HashSet<GroupController> registerAndReturnViewControllers() {
+    LineViewController.instance.addModel(this);
+
+    return super.registerAndReturnViewControllers()
+      ..add(LineViewController.instance);
   }
 
   void fromLinePropertiesMixin(LinePropertiesMixin other) {
-    this._thickness = other._thickness;
-    this._strokeColor = other._strokeColor;
-    invalidateProperties();
+    this.thickness = other.thickness;
+    this.strokeColor = other.strokeColor;
   }
 }
