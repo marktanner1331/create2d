@@ -29,6 +29,8 @@ class LineViewController extends ContextController {
     for(LinePropertiesMixin model in _models) {
       model.thickness = newThickness;
     }
+
+    dispatchChangeEvent();
   }
 
   @override

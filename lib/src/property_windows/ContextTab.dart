@@ -3,13 +3,13 @@ import 'package:stagexl/stagexl.dart';
 
 import './Tab.dart';
 import '../group_controllers/ContextController.dart';
-import '../property_mixins/ContextPropertyMixin.dart';
+import '../property_mixins/IHavePropertyMixins.dart';
 
 class ContextTab extends Tab {
   static ContextTab _instance;
   static bool _isActive = false;
 
-  static ContextPropertyMixin _currentObject;
+  static IHavePropertyMixins _currentObject;
   static EventStreamSubscription<Event> _contextChangedSubscription;
   static EventStreamSubscription<Event> _propertyChangedSubscription;
 
@@ -24,7 +24,7 @@ class ContextTab extends Tab {
       _activeGroups = List();
   }
 
-  static void set currentObject(ContextPropertyMixin value) {
+  static void set currentObject(IHavePropertyMixins value) {
     if (_isActive) {
       _instance.onExit();
       _currentObject = value;
