@@ -1,4 +1,6 @@
 import 'dart:html';
+import 'package:meta/meta.dart';
+
 import '../helpers/IOnEnterExit.dart';
 
 abstract class GroupController implements IOnEnterExit {
@@ -24,6 +26,8 @@ abstract class GroupController implements IOnEnterExit {
   }
 
   void onExit() {}
+
+  @override
   void onEnter() {
     refreshProperties();
   }

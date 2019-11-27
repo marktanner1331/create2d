@@ -29,7 +29,6 @@ class SelectTool extends ITool with SelectedVerticesMixin {
   SelectTool(html.Element view) : super(view) {
     selectedVertices = HashSet();
     selectedShapes = List();
-    onPropertiesChanged.listen(_onPropertiesChanged);
   }
 
   @override

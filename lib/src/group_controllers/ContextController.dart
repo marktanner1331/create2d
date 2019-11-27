@@ -15,6 +15,13 @@ abstract class ContextController extends GroupController {
   
   ContextController(this.view) : super(view);
 
+  @override
+  @mustCallSuper
+  void onExit() {
+    super.onExit();
+    clearModels();
+  }
+
   void clearModels();
 
   @protected

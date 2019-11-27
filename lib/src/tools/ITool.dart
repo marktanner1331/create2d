@@ -29,5 +29,7 @@ abstract class ITool extends IHavePropertyMixins {
 
   Iterable<Point> getSnappablePoints(); 
 
+  void contextPropertiesHaveChanged();
+
   String get tooltipText;
 }

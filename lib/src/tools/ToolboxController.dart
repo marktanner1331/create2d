@@ -52,6 +52,6 @@ class ToolboxController with HTMLViewController {
     _currentTool.view.classes.add("tool_button_selected");
     _currentTool.onEnter();
     
-    ContextTab.currentObject = _currentTool;
+    ContextTab.refreshContext();
   }
 }

@@ -66,4 +66,8 @@ class LineTool extends ITool with LinePropertiesMixin {
   Iterable<Point<num>> getSnappablePoints() {
     return [_currentLine.start];
   }
+
+  @override
+  void contextPropertiesHaveChanged() {
+  }
 }

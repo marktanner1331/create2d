@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import './IHavePropertyMixins.dart';
 import 'package:stagexl/stagexl.dart';
 import 'dart:math';
 
@@ -9,21 +10,22 @@ import '../group_controllers/SelectedSingleVertexViewController.dart';
 import './ContextPropertyMixin.dart';
 import '../stateful_graphics/Vertex.dart';
 
-mixin SelectedVerticesMixin on ContextPropertyMixin {
+mixin SelectedVerticesMixin on IHavePropertyMixins {
   HashSet<Vertex> get selectedVertices;
 
   @override
-  List<ContextController> getPropertyGroups() {
+  HashSet<ContextController> registerAndReturnViewControllers() {
     switch (selectedVertices.length) {
       case 0:
-        return super.getPropertyGroups();
+        return super.registerAndReturnViewControllers();
       case 1:
+        SelectedSingleVertexViewController.instance.addModel(this);
         return super.getPropertyGroups()
-          ..add(SelectedSingleVertexViewController.instance..properties = this);
+          ..add(SelectedSingleVertexViewController.instance);
       default:
+        SelectedMultipleVerticesViewController.instance.addModel(this);
         return super.getPropertyGroups()
-          ..add(SelectedMultipleVerticesViewController.instance
-            ..properties = this);
+          ..add(SelectedMultipleVerticesViewController.instance);
     }
   }
 
@@ -52,8 +54,6 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     for (Vertex v in selectedVertices) {
       v.x += diff;
     }
-
-    invalidateProperties();
   }
 
   void set y(num value) {
@@ -67,8 +67,6 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     for (Vertex v in selectedVertices) {
       v.y += diff;
     }
-
-    invalidateProperties();
   }
 
   void set width(num value) {
@@ -82,8 +80,6 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     for (Vertex v in selectedVertices) {
       v.x = box.left + (v.x - box.left) * multiplier;
     }
-
-    invalidateProperties();
   }
 
   void set height(num value) {
@@ -97,8 +93,6 @@ mixin SelectedVerticesMixin on ContextPropertyMixin {
     for (Vertex v in selectedVertices) {
       v.y = box.top + (v.y - box.top) * multiplier;
     }
-
-    invalidateProperties();
   }
 
   int get numVertices => selectedVertices.length;
