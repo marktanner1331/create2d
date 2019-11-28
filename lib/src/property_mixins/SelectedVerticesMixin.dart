@@ -7,7 +7,6 @@ import 'dart:math';
 import '../group_controllers/ContextController.dart';
 import '../group_controllers/SelectedMultipleVerticesViewController.dart';
 import '../group_controllers/SelectedSingleVertexViewController.dart';
-import './ContextPropertyMixin.dart';
 import '../stateful_graphics/Vertex.dart';
 
 mixin SelectedVerticesMixin on IHavePropertyMixins {
@@ -19,28 +18,32 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
       case 0:
         return super.registerAndReturnViewControllers();
       case 1:
-        SelectedSingleVertexViewController.instance.addModel(this);
-        return super.getPropertyGroups()
+        SelectedSingleVertexViewController.instance.properties = this;
+        return super.registerAndReturnViewControllers()
           ..add(SelectedSingleVertexViewController.instance);
       default:
-        SelectedMultipleVerticesViewController.instance.addModel(this);
-        return super.getPropertyGroups()
+        SelectedMultipleVerticesViewController.instance.properties = this;
+        return super.registerAndReturnViewControllers()
           ..add(SelectedMultipleVerticesViewController.instance);
     }
   }
 
   Rectangle getBoundingBox() {
     Vertex first = selectedVertices.first;
-    Rectangle box = Rectangle(first.x, first.y, 0, 0);
+    
+    num left = first.x;
+    num right = first.x;
+    num top = first.y;
+    num bottom = first.y;
 
     for (Vertex v in selectedVertices.skip(1)) {
-      box.left = min(box.left, v.x);
-      box.top = min(box.top, v.y);
-      box.right = max(box.right, v.x);
-      box.bottom = max(box.bottom, v.y);
+      left = min(left, v.x);
+      top = min(top, v.y);
+      right = max(right, v.x);
+      bottom = max(bottom, v.y);
     }
 
-    return box;
+    return Rectangle(left, top, right - left, bottom - top);
   }
 
   void set x(num value) {

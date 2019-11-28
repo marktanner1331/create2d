@@ -4,6 +4,7 @@ import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 
 import '../stateful_graphics/IShape.dart';
+import '../property_windows/ContextTab.dart';
 import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
@@ -125,7 +126,7 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
-    invalidateContext();
+    ContextTab.refreshContext();
   }
 
   @override
@@ -147,8 +148,9 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       v.x = x;
       v.y = y;
 
-      //so the property windows update and teh canvas redraws
-      invalidateProperties();
+      //so the property windows update and the canvas redraws
+      ContextTab.refreshProperties();
+      MainWindow.canvas.invalidateVertexPositions();
     } else if(selectedVertices.length != 0) {
       num deltaX = x - _mouseDownPoint.x;
       num deltaY = y - _mouseDownPoint.y;
@@ -161,19 +163,12 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       _mouseDownPoint.x = x;
       _mouseDownPoint.y = y;
 
-      //so the property windows update and teh canvas redraws
-      invalidateProperties();
+      //so the property windows update and the canvas redraws
+      ContextTab.refreshProperties();
+      MainWindow.canvas.invalidateVertexPositions();
     }
   }
-
-  void _onPropertiesChanged(_) {
-    //so the canvas redraws
-    MainWindow.canvas.invalidateVertexPositions();
-  }
   
-  @override
-  String get id => "selectTool";
-
   @override
   String get tooltipText => "Select Tool";
 
@@ -198,5 +193,10 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     }
 
     return MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
+  }
+
+  @override
+  void contextPropertiesHaveChanged() {
+    MainWindow.canvas.invalidateVertices();
   }
 }
