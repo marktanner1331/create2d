@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'package:meta/meta.dart';
 
+import '../helpers/ColorSwatchController.dart';
 import '../helpers/MostCommonValue.dart';
 import './ContextController.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
@@ -12,12 +13,24 @@ class LineViewController extends ContextController {
 
   List<LinePropertiesMixin> _models;
   InputElement _thickness;
+  ColorSwatchController _lineColorController;
 
   LineViewController() : super(document.querySelector("#contextTab #line")) {
     _models = List();
 
     this._thickness = view.querySelector("#thickness");
     _thickness.onInput.listen(_onThicknessChanged);
+
+    _lineColorController = ColorSwatchController(view.querySelector("#lineColor"));
+    _lineColorController.onColorChanged.listen(_onLineColorChanged);
+  }
+
+  void _onLineColorChanged(_) {
+    for(LinePropertiesMixin model in _models) {
+      model.strokeColor = _lineColorController.color;
+    }
+
+    dispatchChangeEvent();
   }
 
   void _onThicknessChanged(_) {

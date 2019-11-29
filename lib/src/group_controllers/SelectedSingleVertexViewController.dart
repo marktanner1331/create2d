@@ -37,6 +37,8 @@ class SelectedSingleVertexViewController extends ContextController {
     if (newX != null) {
       _properties.x = newX;
     }
+
+    dispatchChangeEvent();
   }
 
   void _onYChanged(String newValue) {
@@ -49,6 +51,8 @@ class SelectedSingleVertexViewController extends ContextController {
     if (newY != null) {
       _properties.y = newY;
     }
+
+    dispatchChangeEvent();
   }
 
   @override

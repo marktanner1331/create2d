@@ -40,9 +40,11 @@ class ContextTab extends Tab {
 
   //does not refresh the context, only the current active groups
   static void refreshProperties() {
-    for (ContextController group in _instance._activeGroups) {
-      group.refreshProperties();
-    }
+    if(_isActive) {
+      for (ContextController group in _instance._activeGroups) {
+        group.refreshProperties();
+      }
+    }    
   }
 
   void _onPropertiesChanged(_) {

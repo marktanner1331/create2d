@@ -9,6 +9,7 @@ import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
 import '../property_mixins/SelectedVerticesMixin.dart';
+import '../group_controllers/ContextController.dart';
 
 class SelectTool extends ITool with SelectedVerticesMixin {
   HashSet<Vertex> selectedVertices;
@@ -127,6 +128,17 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
     ContextTab.refreshContext();
+  }
+
+  @override
+  HashSet<ContextController> registerAndReturnViewControllers() {
+    HashSet<ContextController> controllers = super.registerAndReturnViewControllers();
+
+    for(IShape shape in selectedShapes) {
+      controllers.addAll(shape.registerAndReturnViewControllers());
+    }
+
+    return controllers;
   }
 
   @override

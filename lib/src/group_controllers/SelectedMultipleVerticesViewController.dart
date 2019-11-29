@@ -49,6 +49,8 @@ class SelectedMultipleVerticesViewController extends ContextController {
     if (newX != null) {
       _properties.x = newX;
     }
+
+    dispatchChangeEvent();
   }
 
   void _onYChanged(_) {
@@ -61,6 +63,8 @@ class SelectedMultipleVerticesViewController extends ContextController {
     if (newY != null) {
       _properties.y = newY;
     }
+
+    dispatchChangeEvent();
   }
 
   void _onWidthChanged(_) {
@@ -73,6 +77,8 @@ class SelectedMultipleVerticesViewController extends ContextController {
     if (newWidth != null) {
       _properties.width = newWidth;
     }
+
+    dispatchChangeEvent();
   }
 
   void _onHeightChanged(_) {
@@ -85,6 +91,8 @@ class SelectedMultipleVerticesViewController extends ContextController {
     if (newHeight != null) {
       _properties.height = newHeight;
     }
+
+    dispatchChangeEvent();
   }
 
   @override

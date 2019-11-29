@@ -49,7 +49,7 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
   void set x(num value) {
     Rectangle box = getBoundingBox();
     num diff = value - box.left;
-
+    
     if(diff.abs() < 0.01) {
       return;
     }
