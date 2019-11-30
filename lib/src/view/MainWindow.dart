@@ -24,7 +24,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static final PropertyWindowController propertyWindow = PropertyWindowController(html.querySelector("#properties"));
   static final ToolboxController toolbox = ToolboxController(html.querySelector("#toolbox"));
-  static final ColorPicker colorPicker = ColorPicker(html.querySelector("#colorPicker"));
+  static final ColorPicker colorPicker = ColorPicker();
 
   static FileMenu _fileMenu;
 

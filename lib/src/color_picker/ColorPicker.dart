@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:design2D/src/view/MainWindow.dart';
 import 'package:stagexl/stagexl.dart' as stageXL;
@@ -47,14 +48,16 @@ class ColorPicker with HTMLViewController {
 
   bool _initialized = false;
 
+  StreamSubscription<Event> _autoCloseSubscription;
+
   //this class is lazy initialized
   //everything is set up the first time it is shown
-  ColorPicker(Element view) {
-    _view = view;
-  }
-
   void initialize() {
+    _view = querySelector("#colorPicker");
     Draggable(view, view.querySelector(".title_bar"));
+
+    Element closeButton = view.querySelector(".close_button");
+    closeButton.onClick.listen(_onCloseButtonClick);
 
     _tabController = TabController()
       ..addTab(view.querySelector("#paletteButton"),
@@ -90,6 +93,8 @@ class ColorPicker with HTMLViewController {
     _initialized = true;
   }
 
+  void _onCloseButtonClick(_) => hide();
+
   void _onTabChanged(_) {
     _currentTab?.onExit();
     _currentTab =
@@ -106,7 +111,23 @@ class ColorPicker with HTMLViewController {
       initialize();
     }
 
+    if(_autoCloseSubscription == null) {
+      _addAutoCloseListener();
+    }
+
     view.style.display = "block";
+  }
+
+  void _addAutoCloseListener() {
+    _autoCloseSubscription = document.body.onClick.listen((e) {
+      HtmlElement element = e.currentTarget;
+      
+      if(element.matchesWithAncestors("#colorPicker")) {
+        _autoCloseSubscription.cancel();
+        _autoCloseSubscription = null;
+        hide();
+      }
+    });
   }
 
   void resetPreviewColor() {
