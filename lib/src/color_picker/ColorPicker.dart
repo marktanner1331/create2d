@@ -50,10 +50,13 @@ class ColorPicker with HTMLViewController {
 
   StreamSubscription<Event> _autoCloseSubscription;
 
+  ColorPicker() {
+    _view = querySelector("#colorPicker");
+  }
+
   //this class is lazy initialized
   //everything is set up the first time it is shown
   void initialize() {
-    _view = querySelector("#colorPicker");
     Draggable(view, view.querySelector(".title_bar"));
 
     Element closeButton = view.querySelector(".close_button");
@@ -120,9 +123,9 @@ class ColorPicker with HTMLViewController {
 
   void _addAutoCloseListener() {
     _autoCloseSubscription = document.body.onClick.listen((e) {
-      HtmlElement element = e.currentTarget;
+      HtmlElement element = e.target;
       
-      if(element.matchesWithAncestors("#colorPicker")) {
+      if(element.matchesWithAncestors("#colorPicker") == false) {
         _autoCloseSubscription.cancel();
         _autoCloseSubscription = null;
         hide();

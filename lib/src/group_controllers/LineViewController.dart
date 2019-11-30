@@ -50,6 +50,7 @@ class LineViewController extends ContextController {
   @override
   void refreshProperties() {
     _thickness.value = mostCommonValue(_models.map((x) => x.thickness)).toString();
+    _lineColorController.color = mostCommonValue(_models.map((x) => x.strokeColor));
   }
 
   void clearModels() => _models.clear();

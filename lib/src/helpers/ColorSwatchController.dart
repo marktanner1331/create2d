@@ -34,7 +34,9 @@ class ColorSwatchController implements IOnEnterExit {
     _colorPickerClosedSubscription.cancel();
   }
 
-  void _onClick(_) {
+  void _onClick(Event e) {
+    e.stopImmediatePropagation();
+
     //we hide it to begin with in case anything else is listening out for updates
     //we want to steal it completely, so we give them a chance to cancel themselves
     MainWindow.colorPicker.hide();

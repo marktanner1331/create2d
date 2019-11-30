@@ -93,12 +93,27 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       IShape shape = MainWindow.canvas.currentGraphics.getFirstShapeUnderPoint(unsnappedMousePosition);
       
       if(shape != null) {
-        selectedShapes.clear();
-        selectedShapes.add(shape);
-
-        selectedVertices.addAll(shape.getVertices());
+        if(MainWindow.keyboardController.shiftIsDown) {
+          if(selectedShapes.contains(shape)) {
+            selectedShapes.remove(shape);
+            
+            //TODO: remove all selectedVertices
+            //and then add all the ones that are part of the selected shapes
+          } else {
+            selectedShapes.add(shape);
+            selectedVertices.addAll(shape.getVertices());
+          }
+        } else {
+          selectedShapes.clear();
+            selectedShapes.add(shape);
+            selectedVertices.addAll(shape.getVertices());
+        }
       } else {
-        selectedShapes.clear();
+        if(MainWindow.keyboardController.shiftIsDown) {
+          //do nothing
+        } else {
+          selectedShapes.clear();
+        }
       }
     }
 
@@ -191,6 +206,10 @@ class SelectTool extends ITool with SelectedVerticesMixin {
   @override
   void onExit() {
     selectedVertices.clear();
+    selectedShapes.clear();
+    _currentVertex = null;
+    _connectedVerticesCache = null;
+
     MainWindow.canvas.selectionLayer
         .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
     
