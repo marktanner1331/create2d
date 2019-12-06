@@ -38,7 +38,8 @@
                         <br />
                         <div class="spacer"></div>
                         <div class="color_box">
-                            <label>background Color:</label><div id="backgroundColor"></div>
+                            <label>background Color:</label>
+                            <div id="backgroundColor"></div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +133,26 @@
                             <label>Thickness:</label><input id="thickness" type="text" />
                         </div>
                         <div class="color_box">
-                            <label>Line Color:</label><div id="lineColor"></div>
+                            <label>Line Color:</label>
+                            <div id="lineColor"></div>
+                        </div>
+                        <div>
+                            <label>Cap Style:</label>
+                            <select id="jointStyle">
+                                <option value="round">Round</option>
+                                <option value="bevel">Bevel</option>
+                                <option value="miter">Miter</option>
+                            </select>
+                        </div>
+                        <div class="spacer"></div>
+                        <div>
+                            <label for="dashed">Dashed</label><input id="dashed" type="checkbox" />
+                        </div>
+                        <div class="number_box" style="display:none;">
+                            <label>Dash Length:</label><input id="dashLength" type="text" />
+                        </div>
+                        <div class="number_box" style="display:none;">
+                            <label>Dash Spacing:</label><input id="dashSpacing" type="text" />
                         </div>
                     </div>
                 </div>
@@ -148,7 +168,8 @@
                     </div>
                 </div>
                 <div id="selectedMultipleVertices" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Multiple Vertices</div>
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Multiple Vertices
+                    </div>
                     <div class="group_content">
                         <div class="number_box">
                             <label>Selected Vertices:</label><input disabled id="numVertices" type="text" />

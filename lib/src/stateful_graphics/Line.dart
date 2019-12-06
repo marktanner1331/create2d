@@ -2,6 +2,7 @@ import 'package:stagexl/src/drawing.dart';
 import 'package:stagexl/src/geom/point.dart';
 import 'dart:math';
 
+import '../helpers/StageXLDrawingHelper.dart';
 import './Vertex.dart';
 import './IShape.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
@@ -83,14 +84,18 @@ class Line extends IShape with LinePropertiesMixin {
 
   @override
   void renderToStageXL(Graphics graphics) {
-    graphics
+    if(dashed == false) {
+      graphics
       ..beginPath()
       ..moveTo(_start.x, _start.y)
       ..lineTo(_end.x, _end.y)
       ..closePath();
+    } else {
+      drawDash(graphics, start, end, dashLength, dashSpacing);
+    }
     
     if(thickness > 0) {
-      graphics.strokeColor(strokeColor, thickness);
+      graphics.strokeColor(strokeColor, thickness, jointStyle);
     }
 
     if (selected) {

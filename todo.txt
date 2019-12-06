@@ -1,3 +1,11 @@
+rendering lines that are connected and have the same properties should have their join styles joined better
+    at the moment 'miter' and 'bevel' don't work
+    this can be solved by implementing a new interface for anything that implements the line mixin
+    maybe pass through a bool in renderToStageXL() which says don't paint paths
+    leaving path painting to the very end
+    i.e. the last path in the shape that has the same properties
+    it will mean slightly slower rendering, but shouldn't be too bad
+
 remove no_select class and make all text non selectable by default
 
 rename the html ids for the canvasTabButton to just canvasButton and others
@@ -7,12 +15,6 @@ remove old property groups
 rename draggable/draggableController for something more sensible (i.e. stageXL/html)
 
 color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
-
-lazy load the color picker tabs
-
-color picker close button doesnt work
-
-group controllers need onEnter/onExit as they might have open color pickers that need cleaning up
 
 in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
