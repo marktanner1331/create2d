@@ -8,6 +8,9 @@ import '../view/TooltipController.dart';
 import '../tools/LineTool.dart';
 import '../tools/SelectTool.dart';
 
+//TODO: others like this
+import './TextTool.dart';
+
 class ToolboxController with HTMLViewController {
   final Element view;
 
@@ -23,6 +26,9 @@ class ToolboxController with HTMLViewController {
 
     _addTool(LineTool(view.querySelector("#lineTool")));
     _addTool(SelectTool(view.querySelector("#selectTool")));
+
+    //TODO: others like this
+    _addTool(TextTool());
   }
 
   void _addTool(ITool tool) {

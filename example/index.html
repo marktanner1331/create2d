@@ -157,8 +157,7 @@
                     </div>
                 </div>
                 <div id="selected" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Multiple Vertices
-                    </div>
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Selected Object</div>
                     <div class="group_content">
                         <div class="number_box">
                             <label>Selected Vertices:</label><input disabled id="numVertices" type="text" />
@@ -183,6 +182,19 @@
                         </div>
                     </div>
                 </div>
+                <div id="textStyle" class="property_group">
+                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Text Style
+                    </div>
+                    <div class="group_content">
+                        <div class="number_box">
+                            <label>Text Size</label><input id="textSize" type="text" />
+                        </div>
+                        <div class="color_box">
+                            <label>Text Color:</label>
+                            <div id="textColor"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -196,7 +208,12 @@
                     Se
                 </td>
                 <td class="tool_button" id="lineTool">
-                    Li
+                    Ln
+                </td>
+            </tr>
+            <tr>
+                <td class="tool_button" id="textTool">
+                    Tx
                 </td>
             </tr>
         </table>

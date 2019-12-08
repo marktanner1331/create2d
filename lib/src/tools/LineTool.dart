@@ -1,19 +1,39 @@
-import 'package:stagexl/stagexl.dart';
 import 'dart:html' as html;
 
-import '../view/MainWindow.dart';
+import 'package:stagexl/stagexl.dart';
+
 import './ITool.dart';
+import '../property_mixins/LinePropertiesMixin.dart';
+import '../stateful_graphics/Container.dart';
 import '../stateful_graphics/Line.dart';
 import '../stateful_graphics/Vertex.dart';
-import '../stateful_graphics/Container.dart';
-
-import '../property_mixins/LinePropertiesMixin.dart';
+import '../view/MainWindow.dart';
 
 class LineTool extends ITool with LinePropertiesMixin {
   Line _currentLine;
   Container _currentGraphics;
 
   LineTool(html.Element view) : super(view);
+  
+  @override
+  String get tooltipText => "Line Tool";
+
+  @override
+  void contextPropertiesHaveChanged() {
+  }
+
+  @override
+  Iterable<Point<num>> getSnappablePoints() {
+    return [_currentLine.start];
+  }
+
+  @override
+  void onEnter() {
+  }
+
+  @override
+  void onExit() {
+  }
 
   @override
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
@@ -29,16 +49,6 @@ class LineTool extends ITool with LinePropertiesMixin {
   }
 
   @override
-  void onMouseUp(num x, num y) {
-    super.onMouseUp(x, y);
-
-    _currentLine = null;
-    MainWindow.canvas.mergeInTemporaryLayer(_currentGraphics);
-    _currentGraphics = null;
-    MainWindow.canvas.invalidateVertices();
-  }
-
-  @override
   void onMouseMove(num x, num y) {
     assert(isActive == false);
     
@@ -49,25 +59,12 @@ class LineTool extends ITool with LinePropertiesMixin {
   }
 
   @override
-  String get id => "lineTool";
+  void onMouseUp(num x, num y) {
+    super.onMouseUp(x, y);
 
-  @override
-  String get tooltipText => "Line Tool";
-
-  @override
-  void onEnter() {
-  }
-
-  @override
-  void onExit() {
-  }
-
-  @override
-  Iterable<Point<num>> getSnappablePoints() {
-    return [_currentLine.start];
-  }
-
-  @override
-  void contextPropertiesHaveChanged() {
+    _currentLine = null;
+    MainWindow.canvas.mergeInTemporaryLayer(_currentGraphics);
+    _currentGraphics = null;
+    MainWindow.canvas.invalidateVertices();
   }
 }

@@ -1,5 +1,5 @@
 import './Vertex.dart';
-import 'package:stagexl/stagexl.dart' show Point, Graphics;
+import 'package:stagexl/stagexl.dart' show Point, Sprite;
 
 import '../property_mixins/IHavePropertyMixins.dart';
 
@@ -39,7 +39,7 @@ abstract class IShape extends IHavePropertyMixins {
   ///this method returns false if the iteration was cancelled
   bool foreachVertex(Function(Vertex) callback);
 
-  void renderToStageXL(Graphics graphics);
+  void renderToStageXL(Sprite s);
 
   Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v);
 

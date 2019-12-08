@@ -1,10 +1,9 @@
 import 'dart:collection';
 
-import 'package:stagexl/src/drawing.dart';
+import 'package:stagexl/stagexl.dart' show Sprite, Point;
 
 import './Vertex.dart';
 import './IShape.dart';
-import 'package:stagexl/src/geom/point.dart';
 
 //the high level class that owns and manages the stateful graphics objects
 class Container extends IShape {
@@ -144,9 +143,9 @@ class Container extends IShape {
   }
 
   @override
-  void renderToStageXL(Graphics graphics) {
+  void renderToStageXL(Sprite s) {
     for(IShape shape in _shapes) {
-      shape.renderToStageXL(graphics);
+      shape.renderToStageXL(s);
     }
   }
 

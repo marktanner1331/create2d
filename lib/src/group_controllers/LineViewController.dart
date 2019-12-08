@@ -1,5 +1,4 @@
 import 'dart:html';
-import 'package:meta/meta.dart';
 import 'package:stagexl/stagexl.dart' show JointStyle;
 
 import '../helpers/ColorSwatchController.dart';

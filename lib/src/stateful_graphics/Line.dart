@@ -1,18 +1,15 @@
-import 'package:stagexl/src/drawing.dart';
-import 'package:stagexl/src/geom/point.dart';
 import 'dart:math';
 
-import '../helpers/StageXLDrawingHelper.dart';
-import './Vertex.dart';
+import 'package:stagexl/stagexl.dart' show Point, Sprite;
+
 import './IShape.dart';
+import './Vertex.dart';
+import '../helpers/StageXLDrawingHelper.dart';
 import '../property_mixins/LinePropertiesMixin.dart';
 
 class Line extends IShape with LinePropertiesMixin {
   Vertex _start;
-  Vertex get start => _start;
-
   Vertex _end;
-  Vertex get end => _end;
 
   Line(Vertex start, Vertex end)
       : assert(start != null),
@@ -20,27 +17,51 @@ class Line extends IShape with LinePropertiesMixin {
     this._start = start;
     this._end = end;
   }
+  Vertex get end => _end;
+
+  Vertex get start => _start;
 
   @override
-  bool hasVertex(Vertex vertex) {
-    return identical(vertex, _start) || identical(vertex, _end);
-  }
-
-  @override
-  bool isValid() {
-    //a line is valid if the two vertices are different
-    return _start != _end;
-  }
-
-  @override
-  void swapVertex(Vertex oldVertex, Vertex newVertex) {
-    assert(newVertex != null);
-
-    if (_start == oldVertex) {
-      _start = newVertex;
-    } else if (_end == oldVertex) {
-      _end = newVertex;
+  void deleteVertices(Iterable<Vertex> selectedVertices) {
+    //setting start and end to be the same vertex will make it invalid
+    //which will cause it to be removed
+    if(selectedVertices.contains(_start)) {
+      _start = _end;
+    } else if(selectedVertices.contains(_end)) {
+      _end = _start;
     }
+  }
+
+  num distanceSquaredToLineSegment2(
+      lx1, ly1, ldx, ldy, lineLengthSquared, px, py) {
+    //print("$lx1, $ly1, $ldx, $ldy, $lineLengthSquared, $px, $py");
+
+    var t = ((px - lx1) * ldx + (py - ly1) * ldy) / lineLengthSquared;
+
+    if (t < 0)
+      t = 0;
+    else if (t > 1) t = 1;
+
+    var lx = lx1 + t * ldx, ly = ly1 + t * ldy, dx = px - lx, dy = py - ly;
+    return dx * dx + dy * dy;
+  }
+
+  @override
+  bool foreachVertex(callback) {
+    return callback(_start) && callback(_end);
+  }
+
+  @override
+  Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v) {
+    if (v == _start) {
+      return [_end];
+    }
+
+    if (v == _end) {
+      return [_start];
+    }
+
+    return [];
   }
 
   @override
@@ -67,72 +88,29 @@ class Line extends IShape with LinePropertiesMixin {
     return null;
   }
 
+  @override
+  Iterable<Vertex> getVertices() {
+    return [_start, _end];
+  }
+
   Iterable<Vertex> getVerticesUnderPoint(Point p) {
     if (_start == p) {
       return [_start];
     } else if (_end == p) {
       return [_end];
     } else {
-      return [];
+      return Iterable.empty();
     }
   }
 
   @override
-  Iterable<Vertex> getVertices() {
-    return [_start, _end];
-  }
-
-  @override
-  void renderToStageXL(Graphics graphics) {
-    if(dashed == false) {
-      graphics
-      ..beginPath()
-      ..moveTo(_start.x, _start.y)
-      ..lineTo(_end.x, _end.y)
-      ..closePath();
-    } else {
-      drawDash(graphics, start, end, dashLength, dashSpacing);
-    }
-    
-    if(thickness > 0) {
-      graphics.strokeColor(strokeColor, thickness, jointStyle);
-    }
-
-    if (selected) {
-      graphics..strokeColor(0xffff0000, 1);
-    }
+  bool hasVertex(Vertex vertex) {
+    return identical(vertex, _start) || identical(vertex, _end);
   }
 
   @override
   bool hasVertexAtPoint(Point p) {
     return p == _start || p == _end;
-  }
-
-  @override
-  void mergeVerticesUnderVertex(Vertex v) {
-    if (v == _start) {
-      _start = v;
-    } else if (v == _end) {
-      _end = v;
-    }
-  }
-
-  @override
-  bool foreachVertex(callback) {
-    return callback(_start) && callback(_end);
-  }
-
-  @override
-  Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v) {
-    if (v == _start) {
-      return [_end];
-    }
-
-    if (v == _end) {
-      return [_start];
-    }
-
-    return [];
   }
 
   @override
@@ -168,29 +146,49 @@ class Line extends IShape with LinePropertiesMixin {
     return squareDistance <= squareThickness;
   }
 
-  //from: https://github.com/scottglz/distance-to-line-segment/blob/master/index.js
-  num distanceSquaredToLineSegment2(
-      lx1, ly1, ldx, ldy, lineLengthSquared, px, py) {
-    //print("$lx1, $ly1, $ldx, $ldy, $lineLengthSquared, $px, $py");
-
-    var t = ((px - lx1) * ldx + (py - ly1) * ldy) / lineLengthSquared;
-
-    if (t < 0)
-      t = 0;
-    else if (t > 1) t = 1;
-
-    var lx = lx1 + t * ldx, ly = ly1 + t * ldy, dx = px - lx, dy = py - ly;
-    return dx * dx + dy * dy;
+  @override
+  bool isValid() {
+    //a line is valid if the two vertices are different
+    return _start != _end;
   }
 
   @override
-  void deleteVertices(Iterable<Vertex> selectedVertices) {
-    //setting start and end to be the same vertex will make it invalid
-    //which will cause it to be removed
-    if(selectedVertices.contains(_start)) {
-      _start = _end;
-    } else if(selectedVertices.contains(_end)) {
-      _end = _start;
+  void mergeVerticesUnderVertex(Vertex v) {
+    if (v == _start) {
+      _start = v;
+    } else if (v == _end) {
+      _end = v;
+    }
+  }
+
+  //from: https://github.com/scottglz/distance-to-line-segment/blob/master/index.js
+  @override
+  void renderToStageXL(Sprite s) {
+    if(dashed == false) {
+      s.graphics
+      ..beginPath()
+      ..moveTo(_start.x, _start.y)
+      ..lineTo(_end.x, _end.y)
+      ..closePath();
+    } else {
+      drawDash(s.graphics, start, end, dashLength, dashSpacing);
+    }
+    
+    if(thickness > 0) {
+      s.graphics.strokeColor(strokeColor, thickness, jointStyle);
+    }
+
+    if (selected) {
+      s.graphics..strokeColor(0xffff0000, 1);
+    }
+  }
+
+  @override
+  void swapVertex(Vertex oldVertex, Vertex newVertex) {
+   if (_start == oldVertex) {
+      _start = newVertex;
+    } else if (_end == oldVertex) {
+      _end = newVertex;
     }
   }
 }

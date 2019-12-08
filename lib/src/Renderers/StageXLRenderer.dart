@@ -12,10 +12,11 @@ class StageXLRenderer {
   ///resets the renderer back to its initial state
   void reset() {
     _canvas.graphics.clear();
+    _canvas.removeChildren();
   }
 
   ///renders the given container and all of its children onto the canvas
   void renderContainer(Container container) {
-    container.renderToStageXL(_canvas.graphics);
+    container.renderToStageXL(_canvas);
   }
 }
