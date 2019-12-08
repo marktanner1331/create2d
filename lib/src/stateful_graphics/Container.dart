@@ -117,6 +117,8 @@ class Container extends IShape {
         return true;
       }
     }
+
+    return false;
   }
 
   @override
@@ -205,5 +207,15 @@ class Container extends IShape {
     for (IShape shape in _shapes) {
       shape.selected = value;
     }
+  }
+
+  @override
+  void deleteVertices(Iterable<Vertex> selectedVertices) {
+    for(IShape shape in _shapes.toList()) {
+      shape.deleteVertices(selectedVertices);
+    }
+
+    print("num invalid shapes: ${_shapes.where((shape) => shape.isValid() == false).length}");
+    _shapes.removeWhere((shape) => shape.isValid() == false);
   }
 }

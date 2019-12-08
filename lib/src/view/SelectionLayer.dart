@@ -38,6 +38,14 @@ class SelectionLayer extends Sprite {
     }
   }
 
+  void deselectAllShapes() {
+    for(IShape shape in _selectedShapes) {
+      shape.selected = false;
+    }
+
+    _selectedShapes.clear();
+  }
+
   ///removes all selected vertices for the given group and selects the vertex given
   void deselectAllAndSelectVertex(String groupName, Vertex vertex) {
     _selectedVerticesGroups[groupName] = [vertex].toList();

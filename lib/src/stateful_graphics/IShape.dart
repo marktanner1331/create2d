@@ -19,7 +19,7 @@ abstract class IShape extends IHavePropertyMixins {
 
   ///returns true if the shape is valid
   ///the shape may be invalid for a number of reasons
-  ///it doesn't have enough unique vertices
+  ///e.g. it doesn't have enough unique vertices
   bool isValid();
 
   ///if a vertex exists under the given point (or close enough with the given tolerance) then it is returned
@@ -44,4 +44,6 @@ abstract class IShape extends IHavePropertyMixins {
   Iterable<Vertex> getAllVerticesConnectedToVertex(Vertex v);
 
   bool hitTest(Point p);
+
+  void deleteVertices(Iterable<Vertex> selectedVertices);
 }

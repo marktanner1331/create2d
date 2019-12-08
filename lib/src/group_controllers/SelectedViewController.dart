@@ -1,26 +1,30 @@
 import 'dart:html';
 
+import '../property_mixins/SelectedObjectsMixin.dart';
 import '../view/MainWindow.dart';
 import './ContextController.dart';
-import '../property_mixins/SelectedVerticesMixin.dart';
 
-class SelectedMultipleVerticesViewController extends ContextController {
-  static SelectedMultipleVerticesViewController get instance =>
-      _instance ?? (_instance = SelectedMultipleVerticesViewController());
-  static SelectedMultipleVerticesViewController _instance;
+class SelectedViewController extends ContextController {
+  static SelectedViewController get instance =>
+      _instance ?? (_instance = SelectedViewController());
+  static SelectedViewController _instance;
 
-  SelectedVerticesMixin _properties;
+  SelectedObjectsMixin _properties;
+  set properties(SelectedObjectsMixin value) => _properties = value;
 
   InputElement _numVertices;
+  InputElement _numShapes;
   InputElement _x;
   InputElement _y;
   InputElement _width;
   InputElement _height;
+  ButtonInputElement _delete;
 
-  SelectedMultipleVerticesViewController()
-      : super(document.querySelector("#contextTab #selectedMultipleVertices")) {
-
+  SelectedViewController()
+      : super(document.querySelector("#contextTab #selected")) {
     this._numVertices = view.querySelector("#numVertices");
+
+    this._numShapes = view.querySelector("#numShapes");
 
     this._x = view.querySelector("#x");
     _x.onInput.listen(_onXChanged);
@@ -33,10 +37,9 @@ class SelectedMultipleVerticesViewController extends ContextController {
 
     this._height = view.querySelector("#height");
     _height.onInput.listen(_onHeightChanged);
-  }
 
-  void set properties(SelectedVerticesMixin value) {
-    _properties = value;
+    _delete = view.querySelector("#delete");
+    _delete.onClick.listen(_onDeleteClick);
   }
 
   void _onXChanged(_) {
@@ -98,17 +101,39 @@ class SelectedMultipleVerticesViewController extends ContextController {
   @override
   void refreshProperties() {
     _numVertices.value = _properties.numVertices.toString();
+    _numShapes.value = _properties.numShapes.toString();
 
     Rectangle box = _properties.getBoundingBox();
-    
-    _x.value = MainWindow.canvas.pixelsToUnits(box.left);
-    _y.value = MainWindow.canvas.pixelsToUnits(box.top);
-    _width.value = MainWindow.canvas.pixelsToUnits(box.width);
-    _height.value = MainWindow.canvas.pixelsToUnits(box.height);
+
+    if(_properties.numVertices > 0) {
+      _x.parent.style.display = "";
+      _y.parent.style.display = "";
+      _delete.parent.style.display = "";
+
+      _x.value = MainWindow.canvas.pixelsToUnits(box.left);
+      _y.value = MainWindow.canvas.pixelsToUnits(box.top);
+    } else {
+      _x.parent.style.display = "none";
+      _y.parent.style.display = "none";
+      _delete.parent.style.display = "none";
+    }
+
+    if(_properties.numVertices > 1) {
+      _width.parent.style.display = "";
+      _height.parent.style.display = "";
+
+      _width.value = MainWindow.canvas.pixelsToUnits(box.width);
+      _height.value = MainWindow.canvas.pixelsToUnits(box.height);
+    } else {
+      _width.parent.style.display = "none";
+      _height.parent.style.display = "none";
+    }
   }
 
   @override
-  void clearModels() {
-    
+  void clearModels() {}
+
+  void _onDeleteClick(_) {
+    _properties.deleteSelectedObjects();
   }
 }

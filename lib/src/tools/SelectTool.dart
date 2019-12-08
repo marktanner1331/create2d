@@ -1,17 +1,19 @@
 import 'dart:collection';
 
 import 'package:stagexl/stagexl.dart';
+import 'package:stagexl/stagexl.dart' as stageXL;
 import 'dart:html' as html;
+import 'dart:math';
 
 import '../stateful_graphics/IShape.dart';
 import '../property_windows/ContextTab.dart';
 import './ITool.dart';
 import '../view/MainWindow.dart';
 import '../stateful_graphics/Vertex.dart';
-import '../property_mixins/SelectedVerticesMixin.dart';
+import '../property_mixins/SelectedObjectsMixin.dart';
 import '../group_controllers/ContextController.dart';
 
-class SelectTool extends ITool with SelectedVerticesMixin {
+class SelectTool extends ITool with SelectedObjectsMixin {
   HashSet<Vertex> selectedVertices;
 
   //the vertex we are currently dragging, or null if we aren't
@@ -40,18 +42,20 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     bool hasBlacklisted = false;
     _mouseDownPoint = unsnappedMousePosition;
 
-    Vertex v = MainWindow.canvas.currentGraphics
-        .getFirstVertexUnderPoint(unsnappedMousePosition, squareTolerance: 100, ignoreLockedVertices: true);
+    Vertex v = MainWindow.canvas.currentGraphics.getFirstVertexUnderPoint(
+        unsnappedMousePosition,
+        squareTolerance: 100,
+        ignoreLockedVertices: true);
     
-    if(v != null) {
-      if(MainWindow.keyboardController.shiftIsDown) {
+    if (v != null) {
+      if (MainWindow.keyboardController.shiftIsDown) {
         //if the selected vertex is already selected then we deselect it
         if (selectedVertices.contains(v)) {
           selectedVertices.remove(v);
 
           //we want to remove the vertex from the selection
           //which is fine
-          //but the user will still think its selected 
+          //but the user will still think its selected
           //because the mouse is over it, causing a highlight
           //keeping it locked until the selection layer code has run will stop that
           hasBlacklisted = true;
@@ -61,11 +65,11 @@ class SelectTool extends ITool with SelectedVerticesMixin {
           _currentVertex = v;
         }
       } else {
-        if(selectedVertices.contains(v)) {
+        if (selectedVertices.contains(v)) {
           //do nothing, user wants to move selected vertices
           v.locked = true;
         } else {
-          for(Vertex oldVertex in selectedVertices) {
+          for (Vertex oldVertex in selectedVertices) {
             oldVertex.locked = false;
           }
 
@@ -74,15 +78,16 @@ class SelectTool extends ITool with SelectedVerticesMixin {
           selectedVertices.add(v);
           v.locked = true;
           _currentVertex = v;
+          selectedShapes.clear();
         }
       }
     } else {
-      if(MainWindow.keyboardController.shiftIsDown) {
+      if (MainWindow.keyboardController.shiftIsDown) {
         //do nothing
       } else {
         //user has clicked part of the background
         //so we deselect all
-        for(Vertex oldVertex in selectedVertices) {
+        for (Vertex oldVertex in selectedVertices) {
           oldVertex.locked = false;
         }
         selectedVertices.clear();
@@ -90,13 +95,14 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       }
 
       //now its time for selecting shapes
-      IShape shape = MainWindow.canvas.currentGraphics.getFirstShapeUnderPoint(unsnappedMousePosition);
-      
-      if(shape != null) {
-        if(MainWindow.keyboardController.shiftIsDown) {
-          if(selectedShapes.contains(shape)) {
+      IShape shape = MainWindow.canvas.currentGraphics
+          .getFirstShapeUnderPoint(unsnappedMousePosition);
+
+      if (shape != null) {
+        if (MainWindow.keyboardController.shiftIsDown) {
+          if (selectedShapes.contains(shape)) {
             selectedShapes.remove(shape);
-            
+
             //TODO: remove all selectedVertices
             //and then add all the ones that are part of the selected shapes
           } else {
@@ -105,11 +111,11 @@ class SelectTool extends ITool with SelectedVerticesMixin {
           }
         } else {
           selectedShapes.clear();
-            selectedShapes.add(shape);
-            selectedVertices.addAll(shape.getVertices());
+          selectedShapes.add(shape);
+          selectedVertices.addAll(shape.getVertices());
         }
       } else {
-        if(MainWindow.keyboardController.shiftIsDown) {
+        if (MainWindow.keyboardController.shiftIsDown) {
           //do nothing
         } else {
           selectedShapes.clear();
@@ -125,21 +131,21 @@ class SelectTool extends ITool with SelectedVerticesMixin {
     MainWindow.canvas.selectionLayer
         .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
 
-    if(hasBlacklisted) {
+    if (hasBlacklisted) {
       MainWindow.canvas.selectionLayer.selectedBlacklist.remove(v);
     }
 
-    if(_currentVertex != null) {
-      _connectedVerticesCache = MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
+    if (_currentVertex != null) {
+      _connectedVerticesCache = MainWindow.canvas.currentGraphics
+          .getAllVerticesConnectedToVertex(_currentVertex);
     } else {
       _connectedVerticesCache = [];
     }
 
-    MainWindow.canvas.selectionLayer
-        .deselectAllAndSelectShapes(selectedShapes);
+    MainWindow.canvas.selectionLayer.deselectAllAndSelectShapes(selectedShapes);
 
     MainWindow.canvas.invalidateGraphics();
-      
+
     //any changes to the selected vertices will need a total context refresh
     //as the vertex is stored in the property group
     ContextTab.refreshContext();
@@ -147,9 +153,10 @@ class SelectTool extends ITool with SelectedVerticesMixin {
 
   @override
   HashSet<ContextController> registerAndReturnViewControllers() {
-    HashSet<ContextController> controllers = super.registerAndReturnViewControllers();
+    HashSet<ContextController> controllers =
+        super.registerAndReturnViewControllers();
 
-    for(IShape shape in selectedShapes) {
+    for (IShape shape in selectedShapes) {
       controllers.addAll(shape.registerAndReturnViewControllers());
     }
 
@@ -159,7 +166,7 @@ class SelectTool extends ITool with SelectedVerticesMixin {
   @override
   void onMouseUp(num x, num y) {
     super.onMouseUp(x, y);
-    for(Vertex vertex in selectedVertices) {
+    for (Vertex vertex in selectedVertices) {
       vertex.locked = false;
       MainWindow.canvas.currentGraphics.mergeVerticesUnderVertex(vertex);
     }
@@ -178,11 +185,11 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       //so the property windows update and the canvas redraws
       ContextTab.refreshProperties();
       MainWindow.canvas.invalidateVertexPositions();
-    } else if(selectedVertices.length != 0) {
+    } else if (selectedVertices.length != 0) {
       num deltaX = x - _mouseDownPoint.x;
       num deltaY = y - _mouseDownPoint.y;
 
-      for(Point p in selectedVertices) {
+      for (Point p in selectedVertices) {
         p.x += deltaX;
         p.y += deltaY;
       }
@@ -195,13 +202,12 @@ class SelectTool extends ITool with SelectedVerticesMixin {
       MainWindow.canvas.invalidateVertexPositions();
     }
   }
-  
+
   @override
   String get tooltipText => "Select Tool";
 
   @override
-  void onEnter() {
-  }
+  void onEnter() {}
 
   @override
   void onExit() {
@@ -212,18 +218,39 @@ class SelectTool extends ITool with SelectedVerticesMixin {
 
     MainWindow.canvas.selectionLayer
         .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
-    
+
     //wont worry about invalidating the context
     //as what ever is about be be onEntered will do it instead
   }
 
   @override
-  Iterable<Point<num>> getSnappablePoints() {
-    if(_currentVertex == null) {
+  Iterable<stageXL.Point> getSnappablePoints() {
+    if (_currentVertex == null) {
       return [];
     }
 
-    return MainWindow.canvas.currentGraphics.getAllVerticesConnectedToVertex(_currentVertex);
+    return MainWindow.canvas.currentGraphics
+        .getAllVerticesConnectedToVertex(_currentVertex);
+  }
+
+  void deleteSelectedObjects() {
+    MainWindow.canvas.currentGraphics.deleteVertices(selectedVertices);
+    _deselectAll();
+    MainWindow.canvas.invalidateVertices();
+  }
+
+  void _deselectAll() {
+    for (Vertex oldVertex in selectedVertices) {
+      oldVertex.locked = false;
+    }
+
+    selectedVertices.clear();
+    selectedShapes.clear();
+    _currentVertex = null;
+    _connectedVerticesCache = [];
+
+    MainWindow.canvas.selectionLayer.deselectAllVertices("SELECT_TOOL");
+    MainWindow.canvas.selectionLayer.deselectAllShapes();
   }
 
   @override

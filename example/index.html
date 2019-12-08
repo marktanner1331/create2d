@@ -156,23 +156,15 @@
                         </div>
                     </div>
                 </div>
-                <div id="selectedSingleVertex" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Single Vertex</div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>X:</label><input id="x" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>Y:</label><input id="y" type="text" />
-                        </div>
-                    </div>
-                </div>
-                <div id="selectedMultipleVertices" class="property_group">
+                <div id="selected" class="property_group">
                     <div class="group_header no_select"><span class="group_header_arrow">►</span> Multiple Vertices
                     </div>
                     <div class="group_content">
                         <div class="number_box">
                             <label>Selected Vertices:</label><input disabled id="numVertices" type="text" />
+                        </div>
+                        <div class="number_box">
+                            <label>Selected Shapes:</label><input disabled id="numShapes" type="text" />
                         </div>
                         <div class="number_box">
                             <label>X:</label><input id="x" type="text" />
@@ -185,6 +177,9 @@
                         </div>
                         <div class="number_box">
                             <label>Height:</label><input id="height" type="text" />
+                        </div>
+                        <div class="number_box">
+                            <input id="delete" type="button" value="Delete" />
                         </div>
                     </div>
                 </div>

@@ -182,4 +182,15 @@ class Line extends IShape with LinePropertiesMixin {
     var lx = lx1 + t * ldx, ly = ly1 + t * ldy, dx = px - lx, dy = py - ly;
     return dx * dx + dy * dy;
   }
+
+  @override
+  void deleteVertices(Iterable<Vertex> selectedVertices) {
+    //setting start and end to be the same vertex will make it invalid
+    //which will cause it to be removed
+    if(selectedVertices.contains(_start)) {
+      _start = _end;
+    } else if(selectedVertices.contains(_end)) {
+      _end = _start;
+    }
+  }
 }

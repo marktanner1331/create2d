@@ -1,36 +1,39 @@
 import 'dart:collection';
 
+import '../stateful_graphics/IShape.dart';
+
 import './IHavePropertyMixins.dart';
 import 'package:stagexl/stagexl.dart';
 import 'dart:math';
 
 import '../group_controllers/ContextController.dart';
-import '../group_controllers/SelectedMultipleVerticesViewController.dart';
-import '../group_controllers/SelectedSingleVertexViewController.dart';
+import '../group_controllers/SelectedViewController.dart';
 import '../stateful_graphics/Vertex.dart';
 
-mixin SelectedVerticesMixin on IHavePropertyMixins {
+mixin SelectedObjectsMixin on IHavePropertyMixins {
   HashSet<Vertex> get selectedVertices;
+  List<IShape> get selectedShapes;
 
   @override
   HashSet<ContextController> registerAndReturnViewControllers() {
-    switch (selectedVertices.length) {
-      case 0:
-        return super.registerAndReturnViewControllers();
-      case 1:
-        SelectedSingleVertexViewController.instance.properties = this;
-        return super.registerAndReturnViewControllers()
-          ..add(SelectedSingleVertexViewController.instance);
-      default:
-        SelectedMultipleVerticesViewController.instance.properties = this;
-        return super.registerAndReturnViewControllers()
-          ..add(SelectedMultipleVerticesViewController.instance);
-    }
+    SelectedViewController.instance.properties = this;
+    return super.registerAndReturnViewControllers()
+      ..add(SelectedViewController.instance);
   }
 
+  void deleteSelectedObjects();
+
   Rectangle getBoundingBox() {
-    Vertex first = selectedVertices.first;
+    if(selectedVertices.length == 0) {
+      return Rectangle(0, 0, 0, 0);
+    }
     
+    Vertex first = selectedVertices.first;
+
+    if(selectedVertices.length  == 1) {
+      return Rectangle(first.x, first.y, 0, 0);
+    }
+
     num left = first.x;
     num right = first.x;
     num top = first.y;
@@ -49,8 +52,8 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
   void set x(num value) {
     Rectangle box = getBoundingBox();
     num diff = value - box.left;
-    
-    if(diff.abs() < 0.01) {
+
+    if (diff.abs() < 0.01) {
       return;
     }
 
@@ -63,7 +66,7 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
     Rectangle box = getBoundingBox();
     num diff = value - box.top;
 
-    if(diff.abs() < 0.01) {
+    if (diff.abs() < 0.01) {
       return;
     }
 
@@ -76,7 +79,7 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
     Rectangle box = getBoundingBox();
     num multiplier = value / box.width;
 
-    if((1 - multiplier).abs() < 0.01) {
+    if ((1 - multiplier).abs() < 0.01) {
       return;
     }
 
@@ -89,7 +92,7 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
     Rectangle box = getBoundingBox();
     num multiplier = value / box.height;
 
-    if((1 - multiplier).abs() < 0.01) {
+    if ((1 - multiplier).abs() < 0.01) {
       return;
     }
 
@@ -99,4 +102,5 @@ mixin SelectedVerticesMixin on IHavePropertyMixins {
   }
 
   int get numVertices => selectedVertices.length;
+  int get numShapes => selectedShapes.length;
 }
