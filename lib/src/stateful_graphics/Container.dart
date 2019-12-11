@@ -24,6 +24,21 @@ class Container extends IShape {
     return true;
   }
 
+  //removes all shapes that are invalid and not in the whitelist
+  void removeInvalidShapes(List<IShape> whiteList) {
+    Iterable<IShape> temp = _shapes.where((shape) => !whiteList.contains(shape));
+    
+    for(IShape shape in temp) {
+      if(shape is Container) {
+        shape.removeInvalidShapes(whiteList);
+      }
+      
+      if(shape.isValid() == false) {
+        _shapes.remove(shape);
+      }
+    }
+  }
+
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
       for(Vertex vertex in shape.getVertices()) {
@@ -214,7 +229,6 @@ class Container extends IShape {
       shape.deleteVertices(selectedVertices);
     }
 
-    print("num invalid shapes: ${_shapes.where((shape) => shape.isValid() == false).length}");
     _shapes.removeWhere((shape) => shape.isValid() == false);
   }
 }

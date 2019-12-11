@@ -126,6 +126,11 @@ html, body, .stage--fullscreen {
     cursor: pointer;
 }
 
+.group_content textArea {
+    width: calc(100% - 4px);
+    height: 75px;
+}
+
 .number_box input {
     width: 75px;
     float: right;

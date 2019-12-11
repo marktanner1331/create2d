@@ -45,6 +45,15 @@ class ToolboxController with HTMLViewController {
     currentTool = _tools.first;
   }
 
+  void switchToTool<T extends ITool>() {
+    for(ITool tool in _tools) {
+      if(tool is T) {
+        currentTool = tool;
+        break;
+      }
+    }
+  }
+
   ITool get currentTool => _currentTool;
 
   void set currentTool(ITool value) {

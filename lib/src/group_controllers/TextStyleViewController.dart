@@ -14,6 +14,10 @@ class TextStyleViewController extends ContextController {
 
   InputElement _textSize;
   ColorSwatchController _textColorController;
+  SelectElement _font;
+  CheckboxInputElement _bold;
+  CheckboxInputElement _italic;
+  CheckboxInputElement _underline;
 
   TextStyleViewController() : super(document.querySelector("#contextTab #textStyle")) {
     _models = List();
@@ -23,6 +27,50 @@ class TextStyleViewController extends ContextController {
 
     _textColorController = ColorSwatchController(view.querySelector("#textColor"));
     _textColorController.onColorChanged.listen(_onTextColorChanged);
+
+    _font = view.querySelector("#font");
+    _font.onChange.listen(_onFontChanged);
+
+    _bold = view.querySelector("#bold");
+    _bold.onInput.listen(_onBoldChanged);
+
+    _italic = view.querySelector("#italic");
+    _italic.onInput.listen(_onItalicChanged);
+
+    _underline = view.querySelector("#underline");
+    _underline.onInput.listen(_onUnderlineChanged);
+  }
+
+  void _onFontChanged(_) {
+    for(TextStyleMixin model in _models) {
+      model.font = _font.value;
+    }
+
+    dispatchChangeEvent();
+  }
+
+  void _onBoldChanged(_) {
+    for(TextStyleMixin model in _models) {
+      model.bold = _bold.checked;
+    }
+
+    dispatchChangeEvent();
+  }
+
+  void _onItalicChanged(_) {
+    for(TextStyleMixin model in _models) {
+      model.italic = _italic.checked;
+    }
+
+    dispatchChangeEvent();
+  }
+
+  void _onUnderlineChanged(_) {
+    for(TextStyleMixin model in _models) {
+      model.underline = _underline.checked;
+    }
+
+    dispatchChangeEvent();
   }
 
   void _onTextColorChanged(_) {

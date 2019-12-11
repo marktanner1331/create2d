@@ -3,13 +3,18 @@ import 'package:stagexl/stagexl.dart';
 
 import './IShape.dart';
 import '../property_mixins/TextStyleMixin.dart';
+import '../property_mixins/TextContentMixin.dart';
 
-class Text extends IShape with TextStyleMixin {
+class Text extends IShape with TextStyleMixin, TextContentMixin {
   //text only has one vertex that tracks the top left of the bounding box
   Vertex _topLeft;
 
+  //we cache the text field so that we can reuse it for hittesting
+  TextField _text;
+
   Text() {
     _topLeft = Vertex(0, 0);
+    _text = TextField();
   }
 
   Point get position => _topLeft;
@@ -75,9 +80,10 @@ class Text extends IShape with TextStyleMixin {
 
   @override
   bool hitTest(Point<num> p) {
-    //TODO need to keep the textfield around
-    //and then use its bounds
-    return false;
+    return p.x >= _topLeft.x 
+        && p.x < _topLeft.x + _text.width
+        && p.y >= _topLeft.y
+        && p.y < _topLeft.y + _text.height;
   }
 
   @override
@@ -95,23 +101,14 @@ class Text extends IShape with TextStyleMixin {
 
   @override
   void renderToStageXL(Sprite s) {
-    TextField text = TextField();
-    
-    TextFormat format = text.defaultTextFormat
-      ..color = textColor
-      ..size = textSize;
-
-    text
-      ..text = "hello world"
-      ..defaultTextFormat = format
+    _text
+      ..text = content == "" ? " " : content
       ..x = _topLeft.x
       ..y = _topLeft.y;
 
-    text
-      ..width = text.textWidth
-      ..height = text.textHeight;
+    applyStyleToText(_text);
 
-    s.addChild(text);
+    s.addChild(_text);
   }
 
   @override

@@ -143,6 +143,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     }
 
     MainWindow.canvas.selectionLayer.deselectAllAndSelectShapes(selectedShapes);
+    MainWindow.canvas.currentGraphics.removeInvalidShapes(selectedShapes);
 
     MainWindow.canvas.invalidateGraphics();
 
@@ -177,7 +178,11 @@ class SelectTool extends ITool with SelectedObjectsMixin {
 
   @override
   void onMouseMove(num x, num y) {
-    if (selectedVertices.length == 1) {
+    //TODO
+    //test if we can always rely on the else if
+    //we can't use the if anymore
+    //as some shapes only have a single vertex
+    if (false && selectedVertices.length == 1) {
       Vertex v = selectedVertices.first;
       v.x = x;
       v.y = y;

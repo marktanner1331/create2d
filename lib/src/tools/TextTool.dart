@@ -2,12 +2,15 @@ import 'dart:html';
 
 import 'package:stagexl/stagexl.dart' show Point;
 
+import './ToolboxController.dart';
+import './SelectTool.dart';
 import './ITool.dart';
 import '../stateful_graphics/Text.dart';
 import '../property_mixins/TextStyleMixin.dart';
+import '../property_mixins/TextContentMixin.dart';
 import '../view/MainWindow.dart';
 
-class TextTool extends ITool with TextStyleMixin {
+class TextTool extends ITool with TextStyleMixin, TextContentMixin {
   TextTool() : super(document.querySelector("#toolbox #textTool"));
 
   @override
@@ -20,18 +23,15 @@ class TextTool extends ITool with TextStyleMixin {
 
   @override
   Iterable<Point<num>> getSnappablePoints() {
-    // TODO: implement getSnappablePoints
     return Iterable.empty();
   }
 
   @override
   void onEnter() {
-    // TODO: implement onEnter
   }
 
   @override
   void onExit() {
-    // TODO: implement onExit
   }
 
   @override
@@ -40,11 +40,19 @@ class TextTool extends ITool with TextStyleMixin {
 
     Text text = Text()
       ..fromTextStyleMixin(this)
+      ..fromTextContentMixin(this)
       ..position = snappedMousePosition;
 
     MainWindow.canvas
       ..currentGraphics.addShape(text, true)
       ..invalidateVertices();
+
+    //if the text is empty then its going to be tricky for the user
+    //to select the text and edit it
+    //we select it for them to give them a chance to add text to it
+    if(content == "") {
+      MainWindow.toolbox.switchToTool<SelectTool>();
+    }
   }
 
   @override
