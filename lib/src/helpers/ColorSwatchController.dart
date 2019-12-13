@@ -12,6 +12,7 @@ class ColorSwatchController implements IOnEnterExit {
   stageXL.EventStream<stageXL.Event> get onColorChanged => _dispatcher.on(COLOR_CHANGED);
 
   Element _view;
+  Element get view => _view;
 
   stageXL.EventStreamSubscription<stageXL.Event> _colorPickerChangedSubscription;
   stageXL.EventStreamSubscription<stageXL.Event> _colorPickerClosedSubscription;

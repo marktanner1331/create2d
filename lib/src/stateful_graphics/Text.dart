@@ -2,10 +2,11 @@ import 'package:design2D/src/stateful_graphics/Vertex.dart';
 import 'package:stagexl/stagexl.dart';
 
 import './IShape.dart';
+import '../property_mixins/BoundingBoxMixin.dart';
 import '../property_mixins/TextStyleMixin.dart';
 import '../property_mixins/TextContentMixin.dart';
 
-class Text extends IShape with TextStyleMixin, TextContentMixin {
+class Text extends IShape with TextStyleMixin, TextContentMixin, BoundingBoxMixin {
   //text only has one vertex that tracks the top left of the bounding box
   Vertex _topLeft;
 

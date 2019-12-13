@@ -6,6 +6,16 @@ rendering lines that are connected and have the same properties should have thei
     i.e. the last path in the shape that has the same properties
     it will mean slightly slower rendering, but shouldn't be too bad
 
+ability to select a shape and 'disconnect' from other shapes
+
+every shape owns its own vertices, vertices cannot be shared among shapes
+    instead, every shape can have a set of insignificant vertices
+    which get moved when the significant vertices also moved
+    this way a line can join another line halfway along
+    and that is treated the same as if it was joined at the end
+
+we also have helper vertices, such as teh control point for bexier splines
+
 remove no_select class and make all text non selectable by default
 
 rename the html ids for the canvasTabButton to just canvasButton and others

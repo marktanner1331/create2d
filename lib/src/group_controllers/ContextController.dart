@@ -8,6 +8,8 @@ import './GroupController.dart';
 abstract class ContextController extends GroupController {
   final Element view;
 
+  bool get supportsMultipleModels => true;
+
   stageXL.EventDispatcher _dispatcher = stageXL.EventDispatcher();
  
   static const String PROPERTY_CHANGED = "PROPERTY_CHANGED";

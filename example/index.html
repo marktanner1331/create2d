@@ -2,373 +2,464 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="scaffolded-by" content="https://github.com/google/stagehand">
-    <title>Create 2D</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="main.dart.js"></script>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="scaffolded-by"
+            content="https://github.com/google/stagehand">
+        <title>Create 2D</title>
+        <link rel="stylesheet" href="styles.css">
+        <script defer src="main.dart.js"></script>
+    </head>
 
-<body>
-    <canvas id="stage" class="stage--fullscreen"></canvas>
-    <div id="properties" class="floating_window">
-        <div class="title_bar no_select">
-            <span class="title">Properties</span>
-            <span class="close_button">x</span>
-        </div>
-        <div class="tab_button_container">
-            <span id="canvasTabButton" class="tab_button no_select">Canvas</span>
-            <span id="contextTabButton" class="tab_button no_select">Properties</span>
-        </div>
-        <div class="tabs">
-            <div class="tab" id="canvasTab">
-                <div id="size" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Size</div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>Canvas Width:</label><input id="canvasWidth" type="text" />
-                        </div>
-                        <br />
-                        <div class="number_box">
-                            <label>Canvas Height:</label><input id="canvasHeight" type="text" />
-                        </div>
-                        <br />
-                        <div class="spacer"></div>
-                        <div class="color_box">
-                            <label>background Color:</label>
-                            <div id="backgroundColor"></div>
+    <body>
+        <canvas id="stage" class="stage--fullscreen"></canvas>
+        <div id="properties" class="floating_window">
+            <div class="title_bar no_select">
+                <span class="title">Properties</span>
+                <span class="close_button">x</span>
+            </div>
+            <div class="tab_button_container">
+                <span id="canvasTabButton" class="tab_button no_select">Canvas</span>
+                <span id="contextTabButton" class="tab_button no_select">Properties</span>
+            </div>
+            <div class="tabs">
+                <div class="tab" id="canvasTab">
+                    <div id="size" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Size</div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Canvas Width:</label><input
+                                    id="canvasWidth" type="text" />
+                            </div>
+                            <br />
+                            <div class="number_box">
+                                <label>Canvas Height:</label><input
+                                    id="canvasHeight" type="text" />
+                            </div>
+                            <br />
+                            <div class="spacer"></div>
+                            <div class="color_box">
+                                <label>background Color:</label>
+                                <div id="backgroundColor"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="units" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Units</div>
-                    <div class="group_content">
-                        <div class="spacer"></div>
-                        <div class="number_box">
-                            <label>Pixels Per Unit:</label><input id="ppu" type="text" />
+                    <div id="units" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Units</div>
+                        <div class="group_content">
+                            <div class="spacer"></div>
+                            <div class="number_box">
+                                <label>Pixels Per Unit:</label><input id="ppu"
+                                    type="text" />
+                            </div>
+                            <br />
+                            <div>
+                                Display Units:
+                                <div style="padding-top:5px;">
+                                    <span style="float:left;">
+                                        <input type="radio" name="units"
+                                            id="pixel" /><label for="pixel">Pixels</label>
+                                        <br />
+                                        <input type="radio" name="units" id="mm"
+                                            /><label for="mm">Millimeters</label>
+                                        <br />
+                                        <input type="radio" name="units" id="cm"
+                                            /><label for="cm">Centimeters</label>
+                                        <br />
+                                        <input type="radio" name="units" id="m"
+                                            /><label for="m">Meters</label>
+                                    </span>
+                                    <span style="float:right;margin-left:
+                                        10px;">
+                                        <input type="radio" name="units"
+                                            id="inch" /><label for="inch">Inches</label>
+                                        <br />
+                                        <input type="radio" name="units"
+                                            id="foot" /><label for="foot">Feet</label>
+                                        <br />
+                                        <input type="radio" name="units" id="km"
+                                            /><label for="km">Kilometers</label>
+                                        <br />
+                                        <input type="radio" name="units"
+                                            id="mile" /><label for="mile">Miles</label>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <br />
-                        <div>
-                            Display Units:
-                            <div style="padding-top:5px;">
-                                <span style="float:left;">
-                                    <input type="radio" name="units" id="pixel" /><label for="pixel">Pixels</label>
-                                    <br />
-                                    <input type="radio" name="units" id="mm" /><label for="mm">Millimeters</label>
-                                    <br />
-                                    <input type="radio" name="units" id="cm" /><label for="cm">Centimeters</label>
-                                    <br />
-                                    <input type="radio" name="units" id="m" /><label for="m">Meters</label>
+                    </div>
+                    <div id="grid" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Grid</div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Thickness:</label><input
+                                    id="gridThickness" type="text" />
+                            </div>
+                            <br />
+                            <div class="number_box">
+                                <label>Step:</label><input id="gridStep"
+                                    type="text" />
+                            </div>
+                            <br />
+                            <div>
+                                <span style="float:left;margin-right:
+                                    25px;margin-top:5px;">
+                                    Display:
+                                    <div style="padding-left:5px;">
+                                        <input type="radio" name="grid_display"
+                                            id="none" /><label for="none">None</label>
+                                        <br />
+                                        <input type="radio" name="grid_display"
+                                            id="lines" /><label
+                                            for="lines">Lines</label>
+                                        <br />
+                                        <input type="radio" name="grid_display"
+                                            id="dots" /><label for="dots">Dots</label>
+                                    </div>
                                 </span>
-                                <span style="float:right;margin-left: 10px;">
-                                    <input type="radio" name="units" id="inch" /><label for="inch">Inches</label>
-                                    <br />
-                                    <input type="radio" name="units" id="foot" /><label for="foot">Feet</label>
-                                    <br />
-                                    <input type="radio" name="units" id="km" /><label for="km">Kilometers</label>
-                                    <br />
-                                    <input type="radio" name="units" id="mile" /><label for="mile">Miles</label>
+                                <span style="float:right;margin-top:5px;">
+                                    Geometry:
+                                    <div style="padding-left:5px;">
+                                        <input type="radio" name="geometry"
+                                            id="isometric" /><label
+                                            for="isometric">Isometric</label>
+                                        <br />
+                                        <input type="radio" name="geometry"
+                                            id="square" /><label for="square">Square</label>
+                                    </div>
                                 </span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="grid" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Grid</div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>Thickness:</label><input id="gridThickness" type="text" />
-                        </div>
-                        <br />
-                        <div class="number_box">
-                            <label>Step:</label><input id="gridStep" type="text" />
-                        </div>
-                        <br />
-                        <div>
-                            <span style="float:left;margin-right: 25px;margin-top:5px;">
-                                Display:
-                                <div style="padding-left:5px;">
-                                    <input type="radio" name="grid_display" id="none" /><label for="none">None</label>
-                                    <br />
-                                    <input type="radio" name="grid_display" id="lines" /><label
-                                        for="lines">Lines</label>
-                                    <br />
-                                    <input type="radio" name="grid_display" id="dots" /><label for="dots">Dots</label>
-                                </div>
-                            </span>
-                            <span style="float:right;margin-top:5px;">
-                                Geometry:
-                                <div style="padding-left:5px;">
-                                    <input type="radio" name="geometry" id="isometric" /><label
-                                        for="isometric">Isometric</label>
-                                    <br />
-                                    <input type="radio" name="geometry" id="square" /><label for="square">Square</label>
-                                </div>
-                            </span>
+                    <div id="snapping" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Snapping</div>
+                        <div class="group_content">
+                            <div>
+                                <input id="snapToGrid" type="checkbox" /><label
+                                    for="snapToGrid">Snap to grid</label>
+                            </div>
+                            <br />
+                            <div>
+                                <input id="snapToVertices" type="checkbox" /><label
+                                    for="snapToVertices">Snap to
+                                    vertices</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="snapping" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Snapping</div>
-                    <div class="group_content">
-                        <div>
-                            <input id="snapToGrid" type="checkbox" /><label for="snapToGrid">Snap to grid</label>
-                        </div>
-                        <br />
-                        <div>
-                            <input id="snapToVertices" type="checkbox" /><label for="snapToVertices">Snap to
-                                vertices</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab" id="contextTab">
-                <div id="line" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Line</div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>Thickness:</label><input id="thickness" type="text" />
-                        </div>
-                        <div class="color_box">
-                            <label>Line Color:</label>
-                            <div id="lineColor"></div>
-                        </div>
-                        <div>
-                            <label>Cap Style:</label>
-                            <select id="jointStyle">
-                                <option value="round">Round</option>
-                                <option value="bevel">Bevel</option>
-                                <option value="miter">Miter</option>
-                            </select>
-                        </div>
-                        <div class="spacer"></div>
-                        <div>
-                            <label for="dashed">Dashed</label><input id="dashed" type="checkbox" />
-                        </div>
-                        <div class="number_box" style="display:none;">
-                            <label>Dash Length:</label><input id="dashLength" type="text" />
-                        </div>
-                        <div class="number_box" style="display:none;">
-                            <label>Dash Spacing:</label><input id="dashSpacing" type="text" />
+                <div class="tab" id="contextTab">
+                    <div id="selected" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Selected
+                            Object</div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Selected Vertices:</label><input disabled
+                                    id="numVertices" type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>Selected Shapes:</label><input disabled
+                                    id="numShapes" type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>X:</label><input id="x" type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>Y:</label><input id="y" type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>Width:</label><input id="width"
+                                    type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>Height:</label><input id="height"
+                                    type="text" />
+                            </div>
+                            <div class="number_box">
+                                <input id="delete" type="button" value="Delete"
+                                    />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="selected" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Selected Object</div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>Selected Vertices:</label><input disabled id="numVertices" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>Selected Shapes:</label><input disabled id="numShapes" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>X:</label><input id="x" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>Y:</label><input id="y" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>Width:</label><input id="width" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <label>Height:</label><input id="height" type="text" />
-                        </div>
-                        <div class="number_box">
-                            <input id="delete" type="button" value="Delete" />
-                        </div>
-                    </div>
-                </div>
-                <div id="textStyle" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Text Style
-                    </div>
-                    <div class="group_content">
-                        <div class="number_box">
-                            <label>Text Size</label><input id="textSize" type="text" />
-                        </div>
-                        <div class="color_box">
-                            <label>Text Color:</label>
-                            <div id="textColor"></div>
-                        </div>
-                        <div>
-                            <label>Font:</label>
-                            <select id="font">
-                                <option value="Arial">Arial</option>
-                                <option value="Roboto">Roboto</option>
-                                <option value="Times New Roman">Times New Roman</option>
-                                <option value="Times">Times</option>
-                                <option value="Courier New">Courier New</option>
-                                <option value="Courier">Courier</option>
-                                <option value="Verdana">Verdana</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Palatino">Palatino</option>
-                                <option value="Garamond">Garamond</option>
-                                <option value="Bookman">Bookman</option>
-                                <option value="Comic Sans MS">Comic Sans MS</option>
-                                <option value="Candara">Candara</option>
-                                <option value="Arial Black">Arial Black</option>
-                                <option value="Impact">Impact</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="bold">Bold</label><input id="bold" type="checkbox" />
-                        </div>
-                        <div>
-                            <label for="italic">Italic</label><input id="italic" type="checkbox" />
-                        </div>
-                        <div>
-                            <label for="underline">Underline</label><input id="underline" type="checkbox" />
+                    <div id="line" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Line</div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Thickness:</label><input id="thickness"
+                                    type="text" />
+                            </div>
+                            <div class="color_box">
+                                <label>Line Color:</label>
+                                <div id="lineColor"></div>
+                            </div>
+                            <div>
+                                <label>Cap Style:</label>
+                                <select id="jointStyle">
+                                    <option value="round">Round</option>
+                                    <option value="bevel">Bevel</option>
+                                    <option value="miter">Miter</option>
+                                </select>
+                            </div>
+                            <div class="spacer"></div>
+                            <div>
+                                <label for="dashed">Dashed</label><input
+                                    id="dashed" type="checkbox" />
+                            </div>
+                            <div class="number_box" style="display:none;">
+                                <label>Dash Length:</label><input
+                                    id="dashLength" type="text" />
+                            </div>
+                            <div class="number_box" style="display:none;">
+                                <label>Dash Spacing:</label><input
+                                    id="dashSpacing" type="text" />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="textContent" class="property_group">
-                    <div class="group_header no_select"><span class="group_header_arrow">►</span> Text Content
+                    <div id="textContent" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Text Content
+                        </div>
+                        <div class="group_content">
+                            Text:
+                            <textarea id="contentArea"></textarea>
+                        </div>
                     </div>
-                    <div class="group_content">
-                        Text:
-                        <textarea id="contentArea"></textarea>
+                    <div id="textStyle" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Text Style
+                        </div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Text Size</label><input id="textSize"
+                                    type="text" />
+                            </div>
+                            <div class="color_box">
+                                <label>Text Color:</label>
+                                <div id="textColor"></div>
+                            </div>
+                            <div>
+                                <label>Font:</label>
+                                <select id="font">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Roboto">Roboto</option>
+                                    <option value="Times New Roman">Times New
+                                        Roman</option>
+                                    <option value="Times">Times</option>
+                                    <option value="Courier New">Courier New</option>
+                                    <option value="Courier">Courier</option>
+                                    <option value="Verdana">Verdana</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Palatino">Palatino</option>
+                                    <option value="Garamond">Garamond</option>
+                                    <option value="Bookman">Bookman</option>
+                                    <option value="Comic Sans MS">Comic Sans MS</option>
+                                    <option value="Candara">Candara</option>
+                                    <option value="Arial Black">Arial Black</option>
+                                    <option value="Impact">Impact</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="bold">Bold</label><input id="bold"
+                                    type="checkbox" />
+                            </div>
+                            <div>
+                                <label for="italic">Italic</label><input
+                                    id="italic" type="checkbox" />
+                            </div>
+                            <div>
+                                <label for="underline">Underline</label><input
+                                    id="underline" type="checkbox" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="boundingBox" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span> Bounding Box</div>
+                        <div class="group_content">
+                            <div>
+                                <label for="visible">Visible</label><input
+                                    id="visible" type="checkbox" />
+                            </div>
+                            <div class="number_box">
+                                <label>Thickness:</label><input id="thickness"
+                                    type="text" />
+                            </div>
+                            <div class="color_box">
+                                <label>Line Color:</label>
+                                <div id="lineColor"></div>
+                            </div>
+                            <div>
+                                <label>Cap Style:</label>
+                                <select id="jointStyle">
+                                    <option value="round">Round</option>
+                                    <option value="bevel">Bevel</option>
+                                    <option value="miter">Miter</option>
+                                </select>
+                            </div>
+                            <div class="spacer"></div>
+                            <div>
+                                <label for="dashed">Dashed</label><input
+                                    id="dashed" type="checkbox" />
+                            </div>
+                            <div class="number_box" style="display:none;">
+                                <label>Dash Length:</label><input
+                                    id="dashLength" type="text" />
+                            </div>
+                            <div class="number_box" style="display:none;">
+                                <label>Dash Spacing:</label><input
+                                    id="dashSpacing" type="text" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="toolbox" class="floating_window">
-        <div class="title_bar no_select">
-            <span class="title">Toolbox</span>
+        <div id="toolbox" class="floating_window">
+            <div class="title_bar no_select">
+                <span class="title">Toolbox</span>
+            </div>
+            <table class="no_select">
+                <tr>
+                    <td class="tool_button" id="selectTool">
+                        Se
+                    </td>
+                    <td class="tool_button" id="lineTool">
+                        Li
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tool_button" id="textTool">
+                        Tx
+                    </td>
+                </tr>
+            </table>
         </div>
-        <table class="no_select">
-            <tr>
-                <td class="tool_button" id="selectTool">
-                    Se
-                </td>
-                <td class="tool_button" id="lineTool">
-                    Li
-                </td>
-            </tr>
-            <tr>
-                <td class="tool_button" id="textTool">
-                    Tx
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="colorPicker" class="floating_window" style="display: none;">
-        <div class="title_bar no_select">
-            <span class="title">Color Picker</span>
-            <span class="close_button">x</span>
-        </div>
-        <div class="tab_button_container">
-            <span id="paletteButton" class="tab_button no_select">Palette</span>
-            <span id="componentsButton" class="tab_button no_select">RGB</span>
-            <span id="_3DButton" class="tab_button no_select">3D</span>
-            <span id="mixerButton" class="tab_button no_select">Mixer</span>
-            <span id="swatchesButton" class="tab_button no_select">Swatches</span>
-        </div>
-        <div class="tabs">
-            <div class="tab" id="componentsTab">
-                <div style="margin-top:10px">
-                    Hex Code: <div style="float:right;">#<input type="text" id="hexBox" /></div>
-                </div>
-                <br />
-                <canvas id="componentsCanvas"></canvas>
+        <div id="colorPicker" class="floating_window" style="display: none;">
+            <div class="title_bar no_select">
+                <span class="title">Color Picker</span>
+                <span class="close_button">x</span>
             </div>
-            <div class="tab" id="_3DTab">
-                <canvas id="_3DCanvas"></canvas>
+            <div class="tab_button_container">
+                <span id="paletteButton" class="tab_button no_select">Palette</span>
+                <span id="componentsButton" class="tab_button no_select">RGB</span>
+                <span id="_3DButton" class="tab_button no_select">3D</span>
+                <span id="mixerButton" class="tab_button no_select">Mixer</span>
+                <span id="swatchesButton" class="tab_button no_select">Swatches</span>
             </div>
-            <div class="tab" id="paletteTab">
-                <table></table>
-            </div>
-            <div class="tab" id="mixerTab">
-                <div>
-                    <label>Complementary</label>
-                    <div id="complementary">
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
+            <div class="tabs">
+                <div class="tab" id="componentsTab">
+                    <div style="margin-top:10px">
+                        Hex Code: <div style="float:right;">#<input type="text"
+                                id="hexBox" /></div>
                     </div>
-                </div>
-                <div>
-                    <label>Analogous</label>
-                    <div id="analogous">
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                    </div>
-                </div>
-                <div>
-                    <label>Triadic</label>
-                    <div id="triadic">
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                    </div>
-                </div>
-                <div>
-                    <label>Split Complementary</label>
-                    <div id="splitComplementary">
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                    </div>
-                </div>
-                <div>
-                    <label>Tetradic</label>
-                    <div id="tetradic">
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                        <div class="mixer_swatch"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab" id="swatchesTab">
-                <div>
-                    <label>Swatches</label>
                     <br />
-                    <div id="swatches">
+                    <canvas id="componentsCanvas"></canvas>
+                </div>
+                <div class="tab" id="_3DTab">
+                    <canvas id="_3DCanvas"></canvas>
+                </div>
+                <div class="tab" id="paletteTab">
+                    <table></table>
+                </div>
+                <div class="tab" id="mixerTab">
+                    <div>
+                        <label>Complementary</label>
+                        <div id="complementary">
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                        </div>
                     </div>
-                    <div style="text-align: center;">
-                        <div id="swatchButton" class="color_picker_button">Add Swatch</div>
+                    <div>
+                        <label>Analogous</label>
+                        <div id="analogous">
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Triadic</label>
+                        <div id="triadic">
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Split Complementary</label>
+                        <div id="splitComplementary">
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Tetradic</label>
+                        <div id="tetradic">
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                            <div class="mixer_swatch"></div>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <label>Eye Dropper</label>
-                    <br />
-                    <div style="text-align: center;">
-                        <div id="eyeDropper" class="color_picker_button">Launch Eye Dropper</div>
+                <div class="tab" id="swatchesTab">
+                    <div>
+                        <label>Swatches</label>
+                        <br />
+                        <div id="swatches">
+                        </div>
+                        <div style="text-align: center;">
+                            <div id="swatchButton" class="color_picker_button">Add
+                                Swatch</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Eye Dropper</label>
+                        <br />
+                        <div style="text-align: center;">
+                            <div id="eyeDropper" class="color_picker_button">Launch
+                                Eye Dropper</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="float:left;" class="big_color_preview_box_outer no_select">
-            Preview Color
-            <div id="previewBox" class="big_color_preview_box">
+            <div style="float:left;" class="big_color_preview_box_outer
+                no_select">
+                Preview Color
+                <div id="previewBox" class="big_color_preview_box">
+                </div>
+            </div>
+            <div style="float:right;" class="big_color_preview_box_outer
+                no_select">
+                Selected Color
+                <div id="selectedBox" class="big_color_preview_box">
+                </div>
             </div>
         </div>
-        <div style="float:right;" class="big_color_preview_box_outer no_select">
-            Selected Color
-            <div id="selectedBox" class="big_color_preview_box">
+        <div id="fileMenu" class="no_select">
+            <div>
+                <div class="file_menu_button">File</div>
+                <div class="file_menu_items">
+                    <div class="file_menu_item">New</div>
+                    <div class="file_menu_item">Open</div>
+                </div>
+            </div>
+            <div>
+                <div class="file_menu_button">View</div>
+                <div class="file_menu_items">
+                    <div class="file_menu_item" id="showProperties"><input
+                            type="checkbox" />Show Properties</div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="fileMenu" class="no_select">
-        <div>
-            <div class="file_menu_button">File</div>
-            <div class="file_menu_items">
-                <div class="file_menu_item">New</div>
-                <div class="file_menu_item">Open</div>
-            </div>
-        </div>
-        <div>
-            <div class="file_menu_button">View</div>
-            <div class="file_menu_items">
-                <div class="file_menu_item" id="showProperties"><input type="checkbox" />Show Properties</div>
-            </div>
-        </div>
-    </div>
-    <div id="tooltip"></div>
-</body>
+        <div id="tooltip"></div>
+    </body>
 
 </html>

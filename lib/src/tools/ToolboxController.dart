@@ -17,6 +17,9 @@ class ToolboxController with HTMLViewController {
   ITool _currentTool;
   List<ITool> _tools = List();
 
+  SelectTool _selectTool;
+  SelectTool get selectTool => _selectTool;
+
   ToolboxController(this.view) {
     Draggable(view, view.querySelector(".title_bar"));
 
@@ -25,7 +28,7 @@ class ToolboxController with HTMLViewController {
     }
 
     _addTool(LineTool(view.querySelector("#lineTool")));
-    _addTool(SelectTool(view.querySelector("#selectTool")));
+    _addTool(_selectTool = SelectTool(view.querySelector("#selectTool")));
 
     //TODO: others like this
     _addTool(TextTool());

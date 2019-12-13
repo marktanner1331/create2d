@@ -6,11 +6,12 @@ import './ToolboxController.dart';
 import './SelectTool.dart';
 import './ITool.dart';
 import '../stateful_graphics/Text.dart';
+import '../property_mixins/BoundingBoxMixin.dart';
 import '../property_mixins/TextStyleMixin.dart';
 import '../property_mixins/TextContentMixin.dart';
 import '../view/MainWindow.dart';
 
-class TextTool extends ITool with TextStyleMixin, TextContentMixin {
+class TextTool extends ITool with TextStyleMixin, TextContentMixin, BoundingBoxMixin {
   TextTool() : super(document.querySelector("#toolbox #textTool"));
 
   @override
@@ -52,6 +53,7 @@ class TextTool extends ITool with TextStyleMixin, TextContentMixin {
     //we select it for them to give them a chance to add text to it
     if(content == "") {
       MainWindow.toolbox.switchToTool<SelectTool>();
+      MainWindow.toolbox.selectTool.selectShape(text);
     }
   }
 

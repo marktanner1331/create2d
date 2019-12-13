@@ -46,7 +46,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
         unsnappedMousePosition,
         squareTolerance: 100,
         ignoreLockedVertices: true);
-    
+
     if (v != null) {
       if (MainWindow.keyboardController.shiftIsDown) {
         //if the selected vertex is already selected then we deselect it
@@ -152,13 +152,55 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     ContextTab.refreshContext();
   }
 
+  void selectShape(IShape shape) {
+    //user has clicked part of the background
+    //so we deselect all
+    for (Vertex oldVertex in selectedVertices) {
+      oldVertex.locked = false;
+    }
+    selectedVertices.clear();
+    _currentVertex = null;
+
+    selectedShapes.clear();
+    selectedShapes.add(shape);
+    selectedVertices.addAll(shape.getVertices());
+
+    MainWindow.canvas.selectionLayer
+        .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
+
+    _connectedVerticesCache = [];
+
+    MainWindow.canvas.selectionLayer.deselectAllAndSelectShapes(selectedShapes);
+
+    MainWindow.canvas.invalidateGraphics();
+
+    //any changes to the selected vertices will need a total context refresh
+    //as the vertex is stored in the property group
+    ContextTab.refreshContext();
+  }
+
   @override
   HashSet<ContextController> registerAndReturnViewControllers() {
+    Map<ContextController, int> map = Map();
+
+    for (IShape shape in selectedShapes) {
+      for (ContextController controller
+          in shape.registerAndReturnViewControllers()) {
+        if (map.containsKey(controller) == false) {
+          map[controller] = 1;
+        } else {
+          map[controller]++;
+        }
+      }
+    }
+
     HashSet<ContextController> controllers =
         super.registerAndReturnViewControllers();
 
-    for (IShape shape in selectedShapes) {
-      controllers.addAll(shape.registerAndReturnViewControllers());
+    for (ContextController key in map.keys) {
+      if (map[key] == 1 || key.supportsMultipleModels) {
+        controllers.add(key);
+      }
     }
 
     return controllers;
