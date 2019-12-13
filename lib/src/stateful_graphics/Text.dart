@@ -1,6 +1,7 @@
 import 'package:design2D/src/stateful_graphics/Vertex.dart';
 import 'package:stagexl/stagexl.dart';
 
+import '../helpers/StageXLDrawingHelper.dart';
 import './IShape.dart';
 import '../property_mixins/BoundingBoxMixin.dart';
 import '../property_mixins/TextStyleMixin.dart';
@@ -110,6 +111,38 @@ class Text extends IShape with TextStyleMixin, TextContentMixin, BoundingBoxMixi
     applyStyleToText(_text);
 
     s.addChild(_text);
+
+    if(boundingBoxVisible) {
+      if(boundingBoxDashed == false) {
+        s.graphics
+        ..beginPath()
+        ..moveTo(_text.x, _text.y)
+        ..lineTo(_text.x + _text.width, _text.y)
+        ..lineTo(_text.x + _text.width, _text.y + _text.height)
+        ..lineTo(_text.x, _text.y + _text.height)
+        ..closePath();
+      } else {
+        drawDash(s.graphics, Point(_text.x, _text.y), Point(_text.x + _text.width, _text.y), boundingBoxDashLength, boundingBoxDashSpacing);
+        drawDash(s.graphics, Point(_text.x + _text.width, _text.y), Point(_text.x + _text.width, _text.y + _text.height), boundingBoxDashLength, boundingBoxDashSpacing);
+        drawDash(s.graphics, Point(_text.x + _text.width, _text.y + _text.height), Point(_text.x, _text.y + _text.height), boundingBoxDashLength, boundingBoxDashSpacing);
+        drawDash(s.graphics, Point(_text.x, _text.y + _text.height), Point(_text.x, _text.y), boundingBoxDashLength, boundingBoxDashSpacing);
+      }
+      
+      if(boundingBoxThickness > 0) {
+        s.graphics.strokeColor(boundingBoxStrokeColor, boundingBoxThickness, boundingBoxJointStyle);
+      }
+
+      if (selected) {
+        s.graphics
+          ..beginPath()
+          ..moveTo(_text.x, _text.y)
+          ..lineTo(_text.x + _text.width, _text.y)
+          ..lineTo(_text.x + _text.width, _text.y + _text.height)
+          ..lineTo(_text.x, _text.y + _text.height)
+          ..closePath()
+          ..strokeColor(0xffff0000, 1);
+      }
+    }
   }
 
   @override

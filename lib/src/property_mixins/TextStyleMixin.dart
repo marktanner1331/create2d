@@ -39,8 +39,10 @@ mixin TextStyleMixin on IHavePropertyMixins {
       ..width = text.textWidth
       ..height = text.textHeight;
 
-    //add an extra character to fix any italics being cut off
-    text.width += text.width / text.text.length;
+    if(italic) {
+      //add an extra character to fix any italics being cut off
+      text.width += text.width / text.text.length;
+    }
   }
 
   HashSet<ContextController> registerAndReturnViewControllers() {

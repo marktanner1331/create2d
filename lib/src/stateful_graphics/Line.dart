@@ -179,7 +179,12 @@ class Line extends IShape with LinePropertiesMixin {
     }
 
     if (selected) {
-      s.graphics..strokeColor(0xffff0000, 1);
+      s.graphics
+        ..beginPath()
+        ..moveTo(_start.x, _start.y)
+        ..lineTo(_end.x, _end.y)
+        ..closePath()
+        ..strokeColor(0xffff0000, 1);
     }
   }
 

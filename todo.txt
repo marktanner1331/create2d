@@ -13,6 +13,11 @@ every shape owns its own vertices, vertices cannot be shared among shapes
     which get moved when the significant vertices also moved
     this way a line can join another line halfway along
     and that is treated the same as if it was joined at the end
+    ignore that
+    when two shapes are joined and we want to select their shared vertex
+    then we want to be able to move both shapes
+    the shapes really do need to share the same vertex
+    but we still want insignificant vertices for the rest
 
 we also have helper vertices, such as teh control point for bexier splines
 
