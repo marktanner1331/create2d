@@ -154,9 +154,10 @@
                 </div>
                 <div class="tab" id="contextTab">
                     <div id="selected" class="property_group">
-                        <div class="group_header no_select"><span
-                                class="group_header_arrow">►</span> Selected
-                            Object</div>
+                        <div class="group_header no_select">
+                            <span class="group_header_arrow">►</span>
+                            Selected Object
+                        </div>
                         <div class="group_content">
                             <div class="number_box">
                                 <label>Selected Vertices:</label><input disabled
@@ -317,6 +318,18 @@
                             </div>
                         </div>
                     </div>
+                    <div id="zoom" class="property_group">
+                        <div class="group_header no_select"><span
+                                class="group_header_arrow">►</span>Zoom</div>
+                        <div class="group_content">
+                            <div class="number_box">
+                                <label>Zoom Steps:</label><input id="zoomSteps" type="text" />
+                            </div>
+                            <div class="number_box">
+                                <label>Max Zoom:</label><input id="zoomMax" type="text" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -336,6 +349,14 @@
                 <tr>
                     <td class="tool_button" id="textTool">
                         Tx
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tool_button" id="zoomTool">
+                        Zm
+                    </td>
+                    <td class="tool_button" id="panTool">
+                        Pn
                     </td>
                 </tr>
             </table>

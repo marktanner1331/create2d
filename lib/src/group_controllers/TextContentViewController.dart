@@ -20,6 +20,8 @@ class TextContentViewController extends ContextController {
 
   void _onTextContentChanged(_) {
     _model.content = _content.value;
+
+    dispatchChangeEvent();
   }
 
   void clearModels() => _model = null;

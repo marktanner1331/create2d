@@ -63,6 +63,7 @@ class SelectedViewController extends ContextController {
 
     num newY = MainWindow.canvas.unitsToPixels(_y.value);
 
+    //TODO: if newY is null then we probably don't want to dispatch the change event
     if (newY != null) {
       _properties.y = newY;
     }

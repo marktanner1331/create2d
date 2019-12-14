@@ -16,7 +16,8 @@ abstract class ITool extends IHavePropertyMixins {
   
   String get tooltipText;
 
-  void contextPropertiesHaveChanged();
+  //TODO delete empty overrides of this
+  void contextPropertiesHaveChanged() {}
 
   //only called if _isActive is set to true
   Iterable<Point> getSnappablePoints();

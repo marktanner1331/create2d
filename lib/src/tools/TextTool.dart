@@ -1,8 +1,6 @@
 import 'dart:html';
+import 'package:stagexl/stagexl.dart' as stageXL show Point;
 
-import 'package:stagexl/stagexl.dart' show Point;
-
-import './ToolboxController.dart';
 import './SelectTool.dart';
 import './ITool.dart';
 import '../stateful_graphics/Text.dart';
@@ -23,7 +21,7 @@ class TextTool extends ITool with TextStyleMixin, TextContentMixin, BoundingBoxM
   }
 
   @override
-  Iterable<Point<num>> getSnappablePoints() {
+  Iterable<stageXL.Point> getSnappablePoints() {
     return Iterable.empty();
   }
 

@@ -7,6 +7,7 @@ import '../property_windows/ContextTab.dart';
 import '../view/TooltipController.dart';
 import '../tools/LineTool.dart';
 import '../tools/SelectTool.dart';
+import '../tools/ZoomTool.dart';
 
 //TODO: others like this
 import './TextTool.dart';
@@ -32,6 +33,7 @@ class ToolboxController with HTMLViewController {
 
     //TODO: others like this
     _addTool(TextTool());
+    _addTool(ZoomTool());
   }
 
   void _addTool(ITool tool) {
