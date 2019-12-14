@@ -131,6 +131,36 @@ html, body, .stage--fullscreen {
     height: 75px;
 }
 
+.slider_box {
+    margin-top: 10px;
+    border-top: 1px solid white;
+}
+
+.slider_box > div {
+    background-color: #547A9C;
+    width: 15px;
+    height: 15px;
+    border-radius: 100px;
+    transform: translate(-50%, -59%);
+    cursor: pointer;
+}
+
+.slider_box > div:hover {
+    background-color: #6E9FCC;
+}
+
+.slider_box > label {
+    transform: translate(0, -5px);
+}
+
+.slider_box label:first-of-type {
+    float:left;
+}
+
+.slider_box label:last-of-type {
+    float:right;
+}
+
 .number_box input {
     width: 75px;
     float: right;
