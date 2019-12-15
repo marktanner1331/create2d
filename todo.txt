@@ -6,6 +6,12 @@ rendering lines that are connected and have the same properties should have thei
     i.e. the last path in the shape that has the same properties
     it will mean slightly slower rendering, but shouldn't be too bad
 
+grid makes drawing slow, need to cache as bitmap
+
+deleting shapes shouldn't delete vertices that are used in other non-selected shapes
+
+grid needs color, and default color needs to be softer
+
 ability to select a shape and 'disconnect' from other shapes
 
 every shape owns its own vertices, vertices cannot be shared among shapes
