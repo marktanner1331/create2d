@@ -281,7 +281,15 @@ class SelectTool extends ITool with SelectedObjectsMixin {
   }
 
   void deleteSelectedObjects() {
-    MainWindow.canvas.currentGraphics.deleteVertices(selectedVertices);
+    //if we have only selected vertices then
+    //we probably want to actually delete those vertices
+    if(selectedShapes.length == 0) {
+      MainWindow.canvas.currentGraphics.deleteVertices(selectedVertices);
+    } else {
+      //but if we have shapes selected, probably best just to delete those
+      
+    }
+
     _deselectAll();
     MainWindow.canvas.invalidateVertices();
   }

@@ -1,12 +1,5 @@
 layers
-colour picker
 
-grid
-    show grid
-    snapping
-    grid size
-    square
-    isometric
 
 canvas
     background color

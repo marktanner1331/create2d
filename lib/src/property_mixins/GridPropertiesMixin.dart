@@ -27,7 +27,7 @@ mixin GridPropertiesMixin {
     _didChangeGridProperty();
   }
 
-   int _gridColor = 0xff000000;
+   int _gridColor = 0xffcccccc;
    int get gridColor => _gridColor;
    void set gridColor(int value) {
     _gridColor = value;

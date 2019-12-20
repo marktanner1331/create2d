@@ -77,10 +77,21 @@ class BoundingBoxViewController extends ContextController {
   }
 
   void _onVisibleChanged(_) {
+    bool visible = _visible.checked;
+
+    for (BoundingBoxMixin model in _models) {
+      model.boundingBoxVisible = visible;
+    }
+
+    _refreshBoundingBoxVisibility();
+
+    dispatchChangeEvent();
+  }
+
+  void _refreshBoundingBoxVisibility() {
     bool dashed = _dashed.checked;
     bool visible = _visible.checked;
 
-    _visible.parent.style.display = visible ? "" : "none";
     _thickness.parent.style.display = visible ? "" : "none";
     _lineColorController.view.parent.style.display = visible ? "" : "none";
     _jointStyle.parent.style.display = visible ? "" : "none";
@@ -157,16 +168,19 @@ class BoundingBoxViewController extends ContextController {
     _lineColorController.color =
         mostCommonValue(_models.map((x) => x.boundingBoxStrokeColor));
 
-    bool dashed = mostCommonValue(_models.map((x) => x.boundingBoxDashed));
-    _dashed.checked = dashed;
+    _dashed.checked = mostCommonValue(_models.map((x) => x.boundingBoxDashed));
 
     _dashLength.value =
         mostCommonValue(_models.map((x) => x.boundingBoxDashLength)).toString();
-    _dashLength.parent.style.display = dashed ? "" : "none";
 
     _dashSpacing.value =
-        mostCommonValue(_models.map((x) => x.boundingBoxDashSpacing)).toString();
-    _dashSpacing.parent.style.display = dashed ? "" : "none";
+        mostCommonValue(_models.map((x) => x.boundingBoxDashSpacing))
+            .toString();
+
+    _visible.checked =
+        mostCommonValue(_models.map((x) => x.boundingBoxVisible));
+
+    _refreshBoundingBoxVisibility();
   }
 
   void clearModels() => _models.clear();

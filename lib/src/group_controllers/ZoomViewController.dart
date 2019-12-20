@@ -2,6 +2,7 @@ import 'dart:html';
 
 import './ContextController.dart';
 import '../view/MainWindow.dart';
+import '../helpers/Draggable.dart';
 
 class ZoomViewController extends ContextController {
   static ZoomViewController get instance =>
@@ -10,6 +11,7 @@ class ZoomViewController extends ContextController {
 
   InputElement _steps;
   InputElement _max;
+  DivElement _dot;
 
   ZoomViewController() : super(document.querySelector("#contextTab #zoom")) {
     _steps = view.querySelector("#zoomSteps");
@@ -17,6 +19,9 @@ class ZoomViewController extends ContextController {
 
     _max = view.querySelector("#zoomMax");
     _max.onInput.listen(_onMaxChanged);
+
+    _dot = view.querySelector("#dot");
+    Draggable(_dot, _dot);
   }
 
   void _onStepsChanged(_) {

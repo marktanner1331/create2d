@@ -4,11 +4,11 @@ import 'package:stagexl/stagexl.dart' as stageXL show Point;
 import './ITool.dart';
 import '../view/MainWindow.dart';
 
-class ZoomTool extends ITool {
-  ZoomTool() : super(document.querySelector("#toolbox #zoomTool"));
+class PanTool extends ITool {
+  PanTool() : super(document.querySelector("#toolbox #panTool"));
 
   @override
-  String get tooltipText => "Zoom";
+  String get tooltipText => "Pan";
 
   @override
   Iterable<stageXL.Point> getSnappablePoints() {
@@ -26,7 +26,7 @@ class ZoomTool extends ITool {
   @override
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
-    MainWindow.zoomInAtPoint(unsnappedMousePosition);
+    MainWindow.startPanningCanvas();
   }
 
   @override

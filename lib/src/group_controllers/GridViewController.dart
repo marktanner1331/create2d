@@ -5,6 +5,7 @@ import '../view/MainWindow.dart';
 import '../model/GridDisplayType.dart';
 import '../model/GridGeometryType.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
+import '../helpers/ColorSwatchController.dart';
 
 class GridViewController extends GroupController {
   GridPropertiesMixin _model;
@@ -18,6 +19,8 @@ class GridViewController extends GroupController {
 
   InputElement _geometryIsometric;
   InputElement _geometrySquare;
+
+  ColorSwatchController _gridColorController;
 
   GridViewController(Element div) : super(div) {
     _thickness = div.querySelector("#gridThickness") as InputElement;
@@ -41,6 +44,13 @@ class GridViewController extends GroupController {
 
     _geometrySquare = div.querySelector("#square");
     _geometrySquare.onInput.listen(_onGeometryChanged);
+
+    _gridColorController = ColorSwatchController(div.querySelector("#gridColor"));
+    _gridColorController.onColorChanged.listen(_onGridColorChanged);
+  }
+
+  void _onGridColorChanged(_) {
+    _model.gridColor = _gridColorController.color;
   }
 
   void _onGeometryChanged(_) {
@@ -117,5 +127,12 @@ class GridViewController extends GroupController {
       default:
         throw Error();
     }
+
+    _gridColorController.color = _model.gridColor;
+  }
+
+  @override
+  void onExit() {
+    _gridColorController.onExit();
   }
 }

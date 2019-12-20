@@ -1,6 +1,2 @@
-color picker
-    a lot of the logic is in the constructors of the tabs
-        we can move this into the onEnter
-
 selection layer
     use iterable instead of list

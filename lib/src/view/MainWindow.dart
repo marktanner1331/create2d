@@ -11,6 +11,7 @@ import '../color_picker/ColorPicker.dart';
 import '../file_menu/FileMenu.dart';
 import '../property_windows/PropertyWindowController.dart';
 import '../tools/ToolboxController.dart';
+import '../helpers/DraggableController.dart';
 
 import '../helpers/AspectFit.dart';
 
@@ -73,6 +74,14 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     p.y += canvas.y;
   }
 
+  static void globalSpaceToDrawingSpace(Point p) {
+    p.x *= canvas.canvasSpaceToDrawingSpace;
+    p.y *= canvas.canvasSpaceToDrawingSpace;
+
+    p.x -= canvas.x;
+    p.y -= canvas.y;
+  }
+
   @override
   void refresh() {
     graphics.clear();
@@ -98,6 +107,33 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     DialogLayer.relayout();
   }
 
+  static void startPanningCanvas() {
+    DraggableController dc = DraggableController(_canvas, _canvas);
+
+    EventStreamSubscription<Event> onChangedSubscription = dc.onPositionChanged.listen((_) {
+      //need to update selection layer maybe?
+    });
+
+    EventStreamSubscription<Event> onFinishedSubscription;
+    onFinishedSubscription = dc.onFinishedDrag.listen((_) {
+      onChangedSubscription.cancel();
+      onFinishedSubscription.cancel();
+    });
+  }
+
+  static void zoomInAtCenter(num zoom) {
+    _canvasZoom = zoom;
+
+    Point center = Point(
+      _instance.width / 2,
+      (_canvas.y + _canvas.y + _canvas.height) / 2
+    );
+
+    globalSpaceToDrawingSpace(center);
+
+    _zoomInAtPoint(center, zoom);
+  }
+
   //canvasPoint should be a point in drawing space
   static void zoomInAtPoint(Point canvasPoint) {
     num delta = 1 / zoomSteps;
@@ -105,9 +141,12 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     if (_canvasZoom > 1) {
       resetCanvasZoomAndPosition();
-      return;
+    } else {
+      _zoomInAtPoint(canvasPoint, _canvasZoom);
     }
+  }
 
+  static void _zoomInAtPoint(Point canvasPoint, num zoom) {
     num zoomMultiplier = pow(maxZoomMultiplier, _canvasZoom);
 
     Point global = canvasPoint.clone();

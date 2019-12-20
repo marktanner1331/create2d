@@ -149,6 +149,9 @@ class Canvas extends Sprite
 
     refreshCanvasBackground();
 
-    grid.refresh();
+    grid.setSize(width * 2, height * 2);
+    grid
+      ..scaleX = 0.5
+      ..scaleY = 0.5;
   }
 }

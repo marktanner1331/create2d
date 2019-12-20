@@ -134,7 +134,5 @@ class SelectedViewController extends ContextController {
   @override
   void clearModels() {}
 
-  void _onDeleteClick(_) {
-    _properties.deleteSelectedObjects();
-  }
+  void _onDeleteClick(_) => _properties.deleteSelectedObjects();
 }
