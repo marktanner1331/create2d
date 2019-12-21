@@ -15,8 +15,8 @@ class Container extends IShape {
   }
 
   bool foreachVertex(Function(Vertex) callback) {
-    for(IShape shape in _shapes) {
-      if(shape.foreachVertex(callback) == false) {
+    for (IShape shape in _shapes) {
+      if (shape.foreachVertex(callback) == false) {
         return false;
       }
     }
@@ -26,14 +26,15 @@ class Container extends IShape {
 
   //removes all shapes that are invalid and not in the whitelist
   void removeInvalidShapes(List<IShape> whiteList) {
-    Iterable<IShape> temp = _shapes.where((shape) => !whiteList.contains(shape));
-    
-    for(IShape shape in temp) {
-      if(shape is Container) {
+    Iterable<IShape> temp =
+        _shapes.where((shape) => !whiteList.contains(shape));
+
+    for (IShape shape in temp) {
+      if (shape is Container) {
         shape.removeInvalidShapes(whiteList);
       }
-      
-      if(shape.isValid() == false) {
+
+      if (shape.isValid() == false) {
         _shapes.remove(shape);
       }
     }
@@ -41,16 +42,17 @@ class Container extends IShape {
 
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
-      for(Vertex vertex in shape.getVertices()) {
-        Vertex existingVertex = getFirstVertexUnderPoint(vertex, ignoreLockedVertices: true);
+      for (Vertex vertex in shape.getVertices()) {
+        Vertex existingVertex =
+            getFirstVertexUnderPoint(vertex, ignoreLockedVertices: true);
 
-        if(existingVertex != null) {
+        if (existingVertex != null) {
           shape.swapVertex(vertex, existingVertex);
         }
       }
     }
 
-    if(shape is Container) {
+    if (shape is Container) {
       _shapes.addAll(shape._shapes);
     } else {
       _shapes.add(shape);
@@ -67,14 +69,17 @@ class Container extends IShape {
   ///returns the first vertex found which is close enough to the given point with the given tolerance
   ///or null if one cannot be found
   @override
-  Vertex getFirstVertexUnderPoint(Point p, {num squareTolerance = 0, bool ignoreLockedVertices = false}) {
+  Vertex getFirstVertexUnderPoint(Point p,
+      {num squareTolerance = 0, bool ignoreLockedVertices = false}) {
     for (IShape shape in _shapes) {
-      Vertex v = shape.getFirstVertexUnderPoint(p, squareTolerance: squareTolerance, ignoreLockedVertices: ignoreLockedVertices);
+      Vertex v = shape.getFirstVertexUnderPoint(p,
+          squareTolerance: squareTolerance,
+          ignoreLockedVertices: ignoreLockedVertices);
       if (v != null) {
         return v;
       }
     }
-    
+
     return null;
   }
 
@@ -82,10 +87,10 @@ class Container extends IShape {
     List<Vertex> vertices = List();
     HashSet<int> identities = HashSet();
 
-    for(IShape shape in _shapes) {
-      for(Vertex v in shape.getVerticesUnderPoint(p)) {
+    for (IShape shape in _shapes) {
+      for (Vertex v in shape.getVerticesUnderPoint(p)) {
         int identity = identityHashCode(v);
-        if(identities.contains(identity) == false) {
+        if (identities.contains(identity) == false) {
           identities.add(identity);
           vertices.add(v);
         }
@@ -159,7 +164,7 @@ class Container extends IShape {
 
   @override
   void renderToStageXL(Sprite s) {
-    for(IShape shape in _shapes) {
+    for (IShape shape in _shapes) {
       shape.renderToStageXL(s);
     }
   }
@@ -179,14 +184,14 @@ class Container extends IShape {
     for (IShape shape in _shapes) {
       vertices.addAll(shape.getAllVerticesConnectedToVertex(v));
     }
-    
+
     return vertices;
   }
 
   @override
   bool hitTest(Point<num> p) {
     for (IShape shape in _shapes) {
-      if(shape.hitTest(p)) {
+      if (shape.hitTest(p)) {
         return true;
       }
     }
@@ -199,13 +204,13 @@ class Container extends IShape {
   ///the returned shape will not be a container
   IShape getFirstShapeUnderPoint(Point p) {
     for (IShape shape in _shapes) {
-      if(shape is Container) {
+      if (shape is Container) {
         IShape subShape = shape.getFirstShapeUnderPoint(p);
-        if(subShape != null) {
+        if (subShape != null) {
           return subShape;
         }
       } else {
-        if(shape.hitTest(p)) {
+        if (shape.hitTest(p)) {
           return shape;
         }
       }
@@ -217,15 +222,31 @@ class Container extends IShape {
   @override
   void set selected(bool value) {
     super.selected = value;
-    
+
     for (IShape shape in _shapes) {
       shape.selected = value;
     }
   }
 
   @override
+  void deleteShapes(HashSet<IShape> shapesToDelete) {
+    for (IShape shape in _shapes.toList()) {
+      if(shapesToDelete.contains(shape)) {
+        _shapes.remove(shape);
+        shapesToDelete.remove(shape);
+      }
+    }
+
+    for (IShape shape in _shapes) {
+      if(shape is Container) {
+        shape.deleteShapes(shapesToDelete);
+      }
+    }
+  }
+
+  @override
   void deleteVertices(Iterable<Vertex> selectedVertices) {
-    for(IShape shape in _shapes.toList()) {
+    for (IShape shape in _shapes.toList()) {
       shape.deleteVertices(selectedVertices);
     }
 

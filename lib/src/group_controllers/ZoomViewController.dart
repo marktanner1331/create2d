@@ -21,7 +21,11 @@ class ZoomViewController extends ContextController {
     _max.onInput.listen(_onMaxChanged);
 
     _dot = view.querySelector("#dot");
-    Draggable(_dot, _dot);
+    Draggable(_dot, _dot).onPositionChanged.listen(_onDotChanged);
+  }
+
+  void _onDotChanged(_) {
+    print(_dot.style.left);
   }
 
   void _onStepsChanged(_) {

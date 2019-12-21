@@ -29,6 +29,7 @@ tools
     fill
     regular shape
         option to choose number of sides
+        including star
     select
         vertex
         line
@@ -60,16 +61,9 @@ undo
 
 tooltips
 
-color picker
-    shows when a user needs to pick a color
-    stays open after they have picked a color
-        so that they can pick again
-    can be closed manually
-    closes automatically when property window changes
-        e.g. a different tool is chosen
-            a different tab is clicked
-            all lines are deselected
-    but we do want to keep it open upon selection changes
+menu
+    delete
+    duplicate
 
 settings
     autocollapse property groups so that only one is open at a time
