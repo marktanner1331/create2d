@@ -134,6 +134,7 @@ html, body, .stage--fullscreen {
 .slider_box {
     margin-top: 10px;
     border-top: 1px solid white;
+    position: relative;
 }
 
 .slider_box > div {

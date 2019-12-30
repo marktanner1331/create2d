@@ -7,6 +7,8 @@ abstract class GroupController implements IOnEnterExit {
   Element _groupHeaderArrow;
   Element _groupContent;
 
+  bool _hasOnEntered = false;
+
   GroupController(Element div) {
     _groupHeaderArrow = div.querySelector(".group_header_arrow");
     _groupContent = div.querySelector(".group_content");
@@ -30,5 +32,13 @@ abstract class GroupController implements IOnEnterExit {
   @override
   void onEnter() {
     refreshProperties();
+    if(_hasOnEntered == false) {
+      onEnterForFirstTime();
+      _hasOnEntered = true;
+    }
+  }
+
+  void onEnterForFirstTime() {
+
   }
 }

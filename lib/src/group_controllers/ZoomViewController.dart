@@ -21,7 +21,6 @@ class ZoomViewController extends ContextController {
     _max.onInput.listen(_onMaxChanged);
 
     _dot = view.querySelector("#dot");
-    Draggable(_dot, _dot).onPositionChanged.listen(_onDotChanged);
   }
 
   void _onDotChanged(_) {
@@ -53,6 +52,14 @@ class ZoomViewController extends ContextController {
   }
 
   void clearModels() {}
+
+  @override
+  void onEnterForFirstTime() {
+    //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
+    num max = _dot.parent.getBoundingClientRect().width;
+    print(max);
+    Draggable(_dot, _dot, vertical: false, minX: 0, maxX: max).onPositionChanged.listen(_onDotChanged);
+  }
 
   @override
   void refreshProperties() {

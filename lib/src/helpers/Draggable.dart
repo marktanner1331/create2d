@@ -37,14 +37,15 @@ class Draggable {
       this.maxY = null}) {
     _objectToDrag = objectToDrag;
 
+    _objectToDrag.style.position = "absolute";
     objectToListenTo.onMouseDown.listen(_onMouseDown);
   }
 
   void _onMouseDown(MouseEvent e) {
     if (_documentMoveSubscription == null) {
       Rectangle rect = _objectToDrag.getBoundingClientRect();
+      Point mousePos = e.client;
       
-      Point mousePos = e.page;
       _originalOffset = Point(mousePos.x - rect.left, mousePos.y - rect.top);
       
       _documentMoveSubscription = document.onMouseMove.listen(_onMouseMove);
@@ -55,10 +56,10 @@ class Draggable {
   void _onMouseMove(MouseEvent e) {
     Rectangle rect = _objectToDrag.parent.getBoundingClientRect();
     Point mousePos = e.page;
-    
+
     if(horizontal) {
       num x = mousePos.x - _originalOffset.x - rect.left;
-      
+      print(x);
       if (minX != null) {
         x = math.max(x, minX);
       }
