@@ -38,7 +38,8 @@ class Canvas extends Sprite
   Grid get grid => _grid;
 
   CanvasMouseEventsController _canvasMouseEventsController;
-  CanvasMouseEventsController get canvasMouseEventsController => _canvasMouseEventsController;
+  CanvasMouseEventsController get canvasMouseEventsController =>
+      _canvasMouseEventsController;
   SelectionLayer _selectionLayer;
   SelectionLayer get selectionLayer => _selectionLayer;
 
@@ -56,7 +57,8 @@ class Canvas extends Sprite
 
     _canvasMouseEventsController = CanvasMouseEventsController(this);
     _canvasMouseEventsController.detectMouseOverVertex = true;
-    _canvasMouseEventsController.onMouseOverVertex.listen((_) => _refreshSelectedVertices());
+    _canvasMouseEventsController.onMouseOverVertex
+        .listen((_) => _refreshSelectedVertices());
 
     refreshCanvasBackground();
   }
@@ -65,7 +67,7 @@ class Canvas extends Sprite
   ///into canvas space (using width and height)
   num _drawingSpaceToCanvasSpace = 0;
   num get drawingSpaceToCanvasSpace => _drawingSpaceToCanvasSpace;
-  
+
   num _canvasSpaceToDrawingSpace = 0;
   num get canvasSpaceToDrawingSpace => _canvasSpaceToDrawingSpace;
 
@@ -73,7 +75,8 @@ class Canvas extends Sprite
     _selectionLayer.deselectAllVertices("MOUSE_OVER_VERTICES");
 
     if (_canvasMouseEventsController.currentMouseOverVertex != null) {
-      _selectionLayer.addVertexToSelection("MOUSE_OVER_VERTICES", _canvasMouseEventsController.currentMouseOverVertex);
+      _selectionLayer.addVertexToSelection("MOUSE_OVER_VERTICES",
+          _canvasMouseEventsController.currentMouseOverVertex);
     }
   }
 
@@ -97,7 +100,7 @@ class Canvas extends Sprite
     //the width and height here are inherited from setSizeMixin
     //these are different from canvasWidth and canvasHeight
     //this is because we want the grid lines to be a constant width regardless of the scale (which is relative to canvasWidth)
-    //instead, MainWindow.resetCanvasZoomAndPosition() looks at all the variables to figure out what the width and height should be and 
+    //instead, MainWindow.resetCanvasZoomAndPosition() looks at all the variables to figure out what the width and height should be and
     //calls setSize() on the canvas, which then calls this
 
     graphics.clear();
@@ -140,9 +143,10 @@ class Canvas extends Sprite
 
   @override
   void refresh() {
+    print("canvas refresh");
     _drawingSpaceToCanvasSpace = width / canvasWidth;
     _canvasSpaceToDrawingSpace = canvasWidth / width;
-    
+
     _renderer.canvas
       ..scaleX = drawingSpaceToCanvasSpace
       ..scaleY = drawingSpaceToCanvasSpace;

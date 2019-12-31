@@ -15,7 +15,7 @@ html, body, .stage--fullscreen {
     vertical-align:middle;
 }
 
-.no_select {
+*:not(input) {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
        -khtml-user-select: none; /* Konqueror HTML */
@@ -137,21 +137,21 @@ html, body, .stage--fullscreen {
     position: relative;
 }
 
-.slider_box > div {
+.slider_box > #dot {
     background-color: #547A9C;
     width: 15px;
     height: 15px;
     border-radius: 100px;
-    transform: translate(-50%, -59%);
+    transform: translate(0, -50%);
     cursor: pointer;
 }
 
-.slider_box > div:hover {
+.slider_box > #dot:hover {
     background-color: #6E9FCC;
 }
 
 .slider_box > label {
-    transform: translate(0, -5px);
+    margin-top:10px;
 }
 
 .slider_box label:first-of-type {
