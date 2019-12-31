@@ -2,14 +2,13 @@ import 'dart:html';
 
 import '../helpers/Draggable.dart';
 import '../helpers/HTMLViewController.dart';
-import '../tools/ITool.dart';
 import '../property_windows/ContextTab.dart';
 import '../view/TooltipController.dart';
-import '../tools/LineTool.dart';
-import '../tools/SelectTool.dart';
-import '../tools/ZoomTool.dart';
-
-//TODO: others like this
+import './ITool.dart';
+import './LineTool.dart';
+import './SelectTool.dart';
+import './ZoomTool.dart';
+import './PanTool.dart';
 import './TextTool.dart';
 
 class ToolboxController with HTMLViewController {
@@ -32,7 +31,9 @@ class ToolboxController with HTMLViewController {
     _addTool(_selectTool = SelectTool(view.querySelector("#selectTool")));
 
     //TODO: others like this
+    //e.g. making the tool find its own view
     _addTool(TextTool());
+    _addTool(PanTool());
     _addTool(ZoomTool());
   }
 
