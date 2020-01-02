@@ -4,7 +4,7 @@ import 'dart:html' as html;
 import 'dart:math';
 
 import './Canvas.dart';
-import './KeyboardController.dart';
+import './ShortcutController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
 import '../color_picker/ColorPicker.dart';
@@ -31,8 +31,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   //0 >= _canvasZoom  <= 1
   static num _canvasZoom = 0;
 
-  static KeyboardController _keyboardController;
-  static KeyboardController get keyboardController => _keyboardController;
+  static ShortcutController _shortcutController;
+  static ShortcutController get shortcutController => _shortcutController;
 
   static final PropertyWindowController propertyWindow =
       PropertyWindowController(html.querySelector("#properties"));
@@ -53,7 +53,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     assert(_instance == null);
     _instance = this;
 
-    _keyboardController = KeyboardController(this);
+    _shortcutController = ShortcutController(this);
 
     //initialize the singletons
     TooltipController(html.document.querySelector("#tooltip"));

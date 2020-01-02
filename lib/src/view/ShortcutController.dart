@@ -27,6 +27,11 @@ class ShortcutController {
       case KeyCode.SPACE:
         MainWindow.startPanningCanvas();
         break;
+      case KeyCode.EQUALS:
+        if(e.ctrlKey) {
+
+        }
+        break;
     }
   }
 
