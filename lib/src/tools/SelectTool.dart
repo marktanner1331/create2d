@@ -48,7 +48,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
         ignoreLockedVertices: true);
 
     if (v != null) {
-      if (MainWindow.keyboardController.shiftIsDown) {
+      if (MainWindow.shortcutController.shiftIsDown) {
         //if the selected vertex is already selected then we deselect it
         if (selectedVertices.contains(v)) {
           selectedVertices.remove(v);
@@ -82,7 +82,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
         }
       }
     } else {
-      if (MainWindow.keyboardController.shiftIsDown) {
+      if (MainWindow.shortcutController.shiftIsDown) {
         //do nothing
       } else {
         //user has clicked part of the background
@@ -99,7 +99,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
           .getFirstShapeUnderPoint(unsnappedMousePosition);
 
       if (shape != null) {
-        if (MainWindow.keyboardController.shiftIsDown) {
+        if (MainWindow.shortcutController.shiftIsDown) {
           if (selectedShapes.contains(shape)) {
             selectedShapes.remove(shape);
 
@@ -115,7 +115,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
           selectedVertices.addAll(shape.getVertices());
         }
       } else {
-        if (MainWindow.keyboardController.shiftIsDown) {
+        if (MainWindow.shortcutController.shiftIsDown) {
           //do nothing
         } else {
           selectedShapes.clear();
