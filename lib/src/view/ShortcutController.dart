@@ -1,10 +1,10 @@
 import 'package:stagexl/stagexl.dart';
 
-class KeyboardController {
+class ShortcutController {
   bool shiftIsDown = false;
 
   //the interactive object passed in must be added to the stage at some point
-  KeyboardController(InteractiveObject interactiveObject) {
+  ShortcutController(InteractiveObject interactiveObject) {
     interactiveObject.onKeyDown.listen(_onKeyDown);
     interactiveObject.onKeyUp.listen(_onKeyUp);
 

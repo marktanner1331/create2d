@@ -12,6 +12,7 @@ class ZoomViewController extends ContextController {
   InputElement _steps;
   InputElement _max;
   DivElement _dot;
+  ButtonElement _zoomOut;
 
   ZoomViewController() : super(document.querySelector("#contextTab #zoom")) {
     _steps = view.querySelector("#zoomSteps");
@@ -21,7 +22,12 @@ class ZoomViewController extends ContextController {
     _max.onInput.listen(_onMaxChanged);
 
     _dot = view.querySelector("#dot");
+
+    _zoomOut = view.querySelector("#zoomOut");
+    _zoomOut.onClick.listen(_onZoomOutClick);
   }
+
+  void _onZoomOutClick(_) => MainWindow.resetCanvasZoomAndPosition();
 
   void _onDotChanged(_) {
     print(_dot.style.left);
