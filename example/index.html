@@ -16,18 +16,18 @@
     <body>
         <canvas id="stage" class="stage--fullscreen"></canvas>
         <div id="properties" class="floating_window">
-            <div class="title_bar no_select">
+            <div class="title_bar">
                 <span class="title">Properties</span>
                 <span class="close_button">x</span>
             </div>
             <div class="tab_button_container">
-                <span id="canvasTabButton" class="tab_button no_select">Canvas</span>
-                <span id="contextTabButton" class="tab_button no_select">Properties</span>
+                <span id="canvasTabButton" class="tab_button">Canvas</span>
+                <span id="contextTabButton" class="tab_button">Properties</span>
             </div>
             <div class="tabs">
                 <div class="tab" id="canvasTab">
                     <div id="size" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Size</div>
                         <div class="group_content">
                             <div class="number_box">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div id="units" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Units</div>
                         <div class="group_content">
                             <div class="spacer"></div>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div id="grid" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Grid</div>
                         <div class="group_content">
                             <div class="number_box">
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <div id="snapping" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Snapping</div>
                         <div class="group_content">
                             <div>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="tab" id="contextTab">
                     <div id="selected" class="property_group">
-                        <div class="group_header no_select">
+                        <div class="group_header">
                             <span class="group_header_arrow">►</span>
                             Selected Object
                         </div>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div id="line" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Line</div>
                         <div class="group_content">
                             <div class="number_box">
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                     <div id="textContent" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Text Content
                         </div>
                         <div class="group_content">
@@ -238,7 +238,7 @@
                         </div>
                     </div>
                     <div id="textStyle" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Text Style
                         </div>
                         <div class="group_content">
@@ -286,7 +286,7 @@
                         </div>
                     </div>
                     <div id="boundingBox" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span> Bounding Box</div>
                         <div class="group_content">
                             <div>
@@ -325,7 +325,7 @@
                         </div>
                     </div>
                     <div id="zoom" class="property_group">
-                        <div class="group_header no_select"><span
+                        <div class="group_header"><span
                                 class="group_header_arrow">►</span>Zoom</div>
                         <div class="group_content">
                             <div class="number_box">
@@ -347,10 +347,10 @@
             </div>
         </div>
         <div id="toolbox" class="floating_window">
-            <div class="title_bar no_select">
+            <div class="title_bar">
                 <span class="title">Toolbox</span>
             </div>
-            <table class="no_select">
+            <table>
                 <tr>
                     <td class="tool_button" id="selectTool">
                         Se
@@ -375,16 +375,16 @@
             </table>
         </div>
         <div id="colorPicker" class="floating_window" style="display: none;">
-            <div class="title_bar no_select">
+            <div class="title_bar">
                 <span class="title">Color Picker</span>
                 <span class="close_button">x</span>
             </div>
             <div class="tab_button_container">
-                <span id="paletteButton" class="tab_button no_select">Palette</span>
-                <span id="componentsButton" class="tab_button no_select">RGB</span>
-                <span id="_3DButton" class="tab_button no_select">3D</span>
-                <span id="mixerButton" class="tab_button no_select">Mixer</span>
-                <span id="swatchesButton" class="tab_button no_select">Swatches</span>
+                <span id="paletteButton" class="tab_button">Palette</span>
+                <span id="componentsButton" class="tab_button">RGB</span>
+                <span id="_3DButton" class="tab_button">3D</span>
+                <span id="mixerButton" class="tab_button">Mixer</span>
+                <span id="swatchesButton" class="tab_button">Swatches</span>
             </div>
             <div class="tabs">
                 <div class="tab" id="componentsTab">
@@ -465,19 +465,19 @@
                 </div>
             </div>
             <div style="float:left;" class="big_color_preview_box_outer
-                no_select">
+               ">
                 Preview Color
                 <div id="previewBox" class="big_color_preview_box">
                 </div>
             </div>
             <div style="float:right;" class="big_color_preview_box_outer
-                no_select">
+               ">
                 Selected Color
                 <div id="selectedBox" class="big_color_preview_box">
                 </div>
             </div>
         </div>
-        <div id="fileMenu" class="no_select">
+        <div id="fileMenu">
             <div>
                 <div class="file_menu_button">File</div>
                 <div class="file_menu_items">

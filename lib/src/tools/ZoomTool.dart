@@ -35,7 +35,7 @@ class ZoomTool extends ITool {
   @override
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
-    MainWindow.zoomInAtPoint(unsnappedMousePosition);
+    MainWindow.zoomStepInAtPoint(unsnappedMousePosition);
   }
 
   @override

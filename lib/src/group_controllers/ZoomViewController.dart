@@ -13,6 +13,9 @@ class ZoomViewController extends ContextController {
   InputElement _max;
   DivElement _dot;
   ButtonElement _zoomOut;
+  Draggable _draggableDot;
+
+  Point zoomPoint;
 
   ZoomViewController() : super(document.querySelector("#contextTab #zoom")) {
     _steps = view.querySelector("#zoomSteps");
@@ -30,12 +33,23 @@ class ZoomViewController extends ContextController {
   void _onZoomOutClick(_) => MainWindow.resetCanvasZoomAndPosition();
 
   void _onDotChanged(_) {
-    print(_dot.style.left);
+    MainWindow.zoomInAtPoint(zoomPoint, _draggableDot.decimalX);
+  }
+
+  void _onDotStarted(_) {
+    zoomPoint = MainWindow.getGlobalCanvasCenter();
+    MainWindow.globalSpaceToDrawingSpace(zoomPoint);
+    
+    MainWindow.cacheCanvasAsBitmap = true;
+  }
+
+  void _onDotFinished(_) {
+    MainWindow.cacheCanvasAsBitmap = false;
   }
 
   void _onStepsChanged(_) {
     int newSteps = int.tryParse(_steps.value);
-    
+
     if (newSteps == null || newSteps < 1) {
       return;
     }
@@ -47,11 +61,11 @@ class ZoomViewController extends ContextController {
 
   void _onMaxChanged(_) {
     num newMax = int.tryParse(_max.value);
-    
+
     if (newMax == null || newMax < 1) {
       return;
     }
-    
+
     MainWindow.maxZoomMultiplier = newMax;
 
     dispatchChangeEvent();
@@ -62,9 +76,13 @@ class ZoomViewController extends ContextController {
   @override
   void onEnterForFirstTime() {
     //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
-    num max = _dot.parent.getBoundingClientRect().width;
-    print(max);
-    Draggable(_dot, _dot, vertical: false, minX: 0, maxX: max).onPositionChanged.listen(_onDotChanged);
+    num max = _dot.parent.getBoundingClientRect().width -
+        _dot.getBoundingClientRect().width;
+    _draggableDot = Draggable(_dot, _dot, vertical: false, minX: 0, maxX: max);
+
+    _draggableDot.onStartedDrag.listen(_onDotStarted);
+    _draggableDot.onPositionChanged.listen(_onDotChanged);
+    _draggableDot.onFinishedDrag.listen(_onDotFinished);
   }
 
   @override

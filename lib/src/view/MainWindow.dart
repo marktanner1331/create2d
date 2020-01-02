@@ -23,10 +23,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   //the total magnification when fully zoomed in
   static num maxZoomMultiplier = 5;
-  
+
   //how many times the user can click before returning back to the original zoom level
   static int zoomSteps = 2;
-  
+
   //represents how much the canvas is zoomed in
   //0 >= _canvasZoom  <= 1
   static num _canvasZoom = 0;
@@ -79,11 +79,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   }
 
   static void globalSpaceToDrawingSpace(Point p) {
-    p.x *= canvas.canvasSpaceToDrawingSpace;
-    p.y *= canvas.canvasSpaceToDrawingSpace;
-
     p.x -= canvas.x;
     p.y -= canvas.y;
+
+    p.x *= canvas.canvasSpaceToDrawingSpace;
+    p.y *= canvas.canvasSpaceToDrawingSpace;
   }
 
   @override
@@ -91,6 +91,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     graphics.clear();
     graphics.rect(0, 0, width, height);
     graphics.fillColor(_backgroundColor);
+
+    this.mask = Mask.rectangle(0, 0, width, height);
 
     resetCanvasZoomAndPosition();
 
@@ -114,7 +116,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static void startPanningCanvas() {
     DraggableController dc = DraggableController(_canvas, _canvas);
 
-    EventStreamSubscription<Event> onChangedSubscription = dc.onPositionChanged.listen((_) {
+    EventStreamSubscription<Event> onChangedSubscription =
+        dc.onPositionChanged.listen((_) {
       //need to update selection layer maybe?
     });
 
@@ -126,34 +129,36 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   }
 
   static void zoomInAtCenter(num zoom) {
-    _canvasZoom = zoom;
-
-    Point center = Point(
-      _instance.width / 2,
-      (_canvas.y + _canvas.y + _canvas.height) / 2
-    );
-
+    Point center = getGlobalCanvasCenter();
     globalSpaceToDrawingSpace(center);
 
-    _zoomInAtPoint(center, zoom);
+    zoomInAtPoint(center, zoom);
   }
 
+  ///returns the center of the canvas area in global space
+  ///useful for zooming in
+  static Point getGlobalCanvasCenter() =>
+      Point(instance.width / 2, (_instance.height + _fileMenu.height) / 2);
+
   //canvasPoint should be a point in drawing space
-  static void zoomInAtPoint(Point canvasPoint) {
+  static void zoomStepInAtPoint(Point canvasPoint) {
     num delta = 1 / zoomSteps;
     _canvasZoom += delta;
 
-    if (_canvasZoom > 1) {
+    if (_canvasZoom == 0) {
       resetCanvasZoomAndPosition();
     } else {
-      _zoomInAtPoint(canvasPoint, _canvasZoom);
+      zoomInAtPoint(canvasPoint, _canvasZoom);
     }
   }
 
-  static void _zoomInAtPoint(Point canvasPoint, num zoom) {
+  ///point should be in drawing space
+  static void zoomInAtPoint(Point drawingPoint, num zoom) {
+    _canvasZoom = zoom;
+
     num zoomMultiplier = pow(maxZoomMultiplier, _canvasZoom);
 
-    Point global = canvasPoint.clone();
+    Point global = drawingPoint.clone();
     drawingSpaceToGlobalSpace(global);
 
     Rectangle rect = aspectFitChildInsideParent(
@@ -165,12 +170,20 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     canvas..setSize(rect.width * zoomMultiplier, rect.height * zoomMultiplier);
 
-    Point newGlobal = canvasPoint.clone();
+    Point newGlobal = drawingPoint.clone();
     drawingSpaceToGlobalSpace(newGlobal);
 
     canvas
       ..x += global.x - newGlobal.x
       ..y += global.y - newGlobal.y;
+  }
+
+  static void set cacheCanvasAsBitmap(bool value) {
+    if (value) {
+      canvas.applyCache(0, 0, canvas.canvasWidth, canvas.canvasHeight);
+    } else {
+      canvas.removeCache();
+    }
   }
 
   ///resets the canvas back to the default size and centers it
