@@ -30,7 +30,7 @@ class SelectTool extends ITool with SelectedObjectsMixin {
   //more of a performance increase than a functionality one
   Iterable<Vertex> _connectedVerticesCache;
 
-  SelectTool(html.Element view) : super(view) {
+  SelectTool() : super(html.document.querySelector("#selectTool")) {
     selectedVertices = HashSet();
     selectedShapes = List();
   }

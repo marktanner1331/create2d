@@ -25,6 +25,12 @@ abstract class ITool extends IHavePropertyMixins {
   void onEnter();
   void onExit();
 
+  //sometimes we need to temporarily switch to another tool
+  //when that happens we call these methods on the original tool
+  //so that it can make sure the current state is never invalid
+  void onSuspend() {}
+  void onResume() {}
+
   @mustCallSuper
  void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     _isActive = true;

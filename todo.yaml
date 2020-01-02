@@ -1,3 +1,9 @@
+ToolboxController:
+    temp tools:
+        if the color picker is open then switching to a temp tool will cause it close
+        we should probably reopen its
+        might also be hte case with other things
+
 tools:
     panning:
         need to temporarily switch to the pan tool when space is down

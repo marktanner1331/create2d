@@ -14,7 +14,12 @@ import './TextTool.dart';
 class ToolboxController with HTMLViewController {
   final Element view;
 
+  //holds a reference to temporarily selected tools
+  //see temporarilySwitchToTool() for more
+  ITool _tempTool;
+
   ITool _currentTool;
+
   List<ITool> _tools = List();
 
   SelectTool _selectTool;
@@ -27,14 +32,41 @@ class ToolboxController with HTMLViewController {
       button.onClick.listen(_onButtonClick);
     }
 
-    _addTool(LineTool(view.querySelector("#lineTool")));
-    _addTool(_selectTool = SelectTool(view.querySelector("#selectTool")));
-
-    //TODO: others like this
-    //e.g. making the tool find its own view
+    _addTool(LineTool());
+    _addTool(_selectTool = SelectTool());
     _addTool(TextTool());
     _addTool(PanTool());
     _addTool(ZoomTool());
+  }
+
+  void temporarilySwitchToTool<T extends ITool>() {
+    if(currentTool is T) {
+      return;
+    }
+
+    currentTool.onSuspend();
+
+    for(ITool tool in _tools) {
+      if(tool is T) {
+        _tempTool = tool;
+        break;
+      }
+    }
+
+    _tempTool.onEnter();
+    _tempTool.view.classes.add("tool_button_selected");
+  }
+
+  void endTemporaryTool() {
+    if(_tempTool == null) {
+      return;
+    }
+
+    _tempTool.onExit();
+    _tempTool.view.classes.remove("tool_button_selected");
+    _tempTool = null;
+
+    _currentTool.onResume();
   }
 
   void _addTool(ITool tool) {
@@ -52,6 +84,10 @@ class ToolboxController with HTMLViewController {
   }
 
   void switchToTool<T extends ITool>() {
+    if(currentTool is T) {
+      return;
+    }
+
     for(ITool tool in _tools) {
       if(tool is T) {
         currentTool = tool;
@@ -60,7 +96,7 @@ class ToolboxController with HTMLViewController {
     }
   }
 
-  ITool get currentTool => _currentTool;
+  ITool get currentTool => _tempTool ?? _currentTool;
 
   void set currentTool(ITool value) {
     if(_currentTool != null) {
@@ -72,6 +108,8 @@ class ToolboxController with HTMLViewController {
     
     _currentTool.view.classes.add("tool_button_selected");
     _currentTool.onEnter();
+
+    _tempTool = null;
     
     ContextTab.refreshContext();
   }

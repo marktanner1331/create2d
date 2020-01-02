@@ -13,7 +13,7 @@ class LineTool extends ITool with LinePropertiesMixin {
   Line _currentLine;
   Container _currentGraphics;
 
-  LineTool(html.Element view) : super(view);
+  LineTool() : super(html.document.querySelector("#lineTool"));
   
   @override
   String get tooltipText => "Line Tool";
