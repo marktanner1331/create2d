@@ -25,6 +25,9 @@ class ToolboxController with HTMLViewController {
   SelectTool _selectTool;
   SelectTool get selectTool => _selectTool;
 
+  PanTool _panTool;
+  PanTool get panTool => _panTool;
+
   ToolboxController(this.view) {
     Draggable(view, view.querySelector(".title_bar"));
 

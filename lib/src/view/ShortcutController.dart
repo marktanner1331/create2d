@@ -1,7 +1,8 @@
 import 'dart:html' show KeyCode;
-
 import 'package:stagexl/stagexl.dart';
+
 import './MainWindow.dart';
+import '../tools/PanTool.dart';
 
 class ShortcutController {
   bool shiftIsDown = false;
@@ -39,13 +40,20 @@ class ShortcutController {
           MainWindow.zoomStepOutAtCenter();
         }
         break;
-        case KeyCode.SPACE:
-        MainWindow.startPanningCanvas();
+      case KeyCode.SPACE:
+        MainWindow.toolbox.temporarilySwitchToTool<PanTool>();
+        MainWindow.toolbox.panTool.startPanning();
         break;
     }
   }
 
   void _onKeyUp(KeyboardEvent e) {
     shiftIsDown = e.shiftKey;
+
+    switch(e.keyCode) {
+      case KeyCode.SPACE:
+        MainWindow.toolbox.endTemporaryTool();
+        break;
+    }
   }
 }

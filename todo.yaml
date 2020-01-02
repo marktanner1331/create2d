@@ -14,6 +14,8 @@ tools:
         
         also need to start panning immediately if we have clicked from the tool
 
+        need to use arrow keys if we are currently panning
+
 rendering lines that are connected and have the same properties should have their join styles joined better
     at the moment 'miter' and 'bevel' don't work
     this can be solved by implementing a new interface for anything that implements the line mixin
