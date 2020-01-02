@@ -42,6 +42,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static FileMenu _fileMenu;
 
+  //used when the canvas is being dragged
+  //e.g. in calls to startPanningCanvas()
+  DraggableController _panningController;
+
   static MainWindow _instance;
   static MainWindow get instance => _instance;
 

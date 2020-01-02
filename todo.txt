@@ -1,3 +1,13 @@
+tools:
+    panning:
+        need to temporarily switch to the pan tool when space is down
+        this is so mouse events on the canvas dont get sent to the active tool
+        
+        need to keep a reference to the draggable controller in mainWindow
+        so that we can reuse it, and destroy it after panning has finished
+        
+        also need to start panning immediately if we have clicked from the tool
+
 rendering lines that are connected and have the same properties should have their join styles joined better
     at the moment 'miter' and 'bevel' don't work
     this can be solved by implementing a new interface for anything that implements the line mixin
