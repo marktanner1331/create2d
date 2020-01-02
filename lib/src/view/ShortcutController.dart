@@ -24,13 +24,23 @@ class ShortcutController {
     shiftIsDown = e.shiftKey;
     
     switch(e.keyCode) {
-      case KeyCode.SPACE:
-        MainWindow.startPanningCanvas();
+      case KeyCode.ENTER:
+        if(e.ctrlKey) {
+          MainWindow.resetCanvasZoomAndPosition();
+        }
         break;
       case KeyCode.EQUALS:
         if(e.ctrlKey) {
-
+          MainWindow.zoomStepInAtCenter();
         }
+        break;
+      case KeyCode.NUM_MINUS:
+        if(e.ctrlKey) {
+          MainWindow.zoomStepOutAtCenter();
+        }
+        break;
+        case KeyCode.SPACE:
+        MainWindow.startPanningCanvas();
         break;
     }
   }
