@@ -46,6 +46,10 @@ class DraggableController extends EventDispatcher {
     _objectDownSubscription = objectToListenTo.onMouseDown.listen(_onMouseDown);
   }
 
+  //starts the drag immediately.
+  //it is probably 
+  void forceStartDrag() => _onMouseDown(null);
+
   void _onMouseDown(_) {
     _mouseOffset = Point(_objectToDrag.parent.mouseX - _objectToDrag.x,
         _objectToDrag.parent.mouseY - _objectToDrag.y);

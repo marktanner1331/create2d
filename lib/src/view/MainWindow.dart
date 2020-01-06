@@ -30,6 +30,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   //represents how much the canvas is zoomed in
   //0 >= _canvasZoom  <= 1
   static num _canvasZoom = 0;
+  static num get canvasZoom => _canvasZoom;
 
   static ShortcutController _shortcutController;
   static ShortcutController get shortcutController => _shortcutController;
@@ -44,7 +45,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   //used when the canvas is being dragged
   //e.g. in calls to startPanningCanvas()
-  DraggableController _panningController;
+  static DraggableController _panningController;
 
   static MainWindow _instance;
   static MainWindow get instance => _instance;
@@ -114,18 +115,30 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   }
 
   static void startPanningCanvas() {
-    DraggableController dc = DraggableController(_canvas, _canvas);
+    if(_panningController != null) {
+      return;
+    }
 
-    EventStreamSubscription<Event> onChangedSubscription =
-        dc.onPositionChanged.listen((_) {
+    _panningController = DraggableController(_canvas, _canvas);
+
+    _panningController.onPositionChanged.listen((_) {
       //need to update selection layer maybe?
     });
-
-    EventStreamSubscription<Event> onFinishedSubscription;
-    onFinishedSubscription = dc.onFinishedDrag.listen((_) {
-      onChangedSubscription.cancel();
-      onFinishedSubscription.cancel();
+    
+    _panningController.onFinishedDrag.listen((_) {
+      
     });
+  }
+
+  static void stopPanningCanvas() {
+    if(_panningController == null) {
+      return;
+    }
+
+    _panningController.cancel();
+    _panningController.onPositionChanged.cancelSubscriptions();
+    _panningController.onFinishedDrag.cancelSubscriptions();
+    _panningController = null;
   }
 
   static void zoomInAtCenter(num zoom) {
@@ -185,11 +198,13 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   ///point should be in drawing space
   static void zoomInAtPoint(Point drawingPoint, num zoom) {
     _canvasZoom = zoom;
+    print("drawingPoint: $drawingPoint");
 
     num zoomMultiplier = pow(maxZoomMultiplier, _canvasZoom);
-
+    
     Point global = drawingPoint.clone();
     drawingSpaceToGlobalSpace(global);
+    print("globalPoint: $global");
 
     Rectangle rect = aspectFitChildInsideParent(
         _instance.width,
@@ -202,6 +217,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     Point newGlobal = drawingPoint.clone();
     drawingSpaceToGlobalSpace(newGlobal);
+
+    print("newGlobal: $newGlobal");
 
     canvas
       ..x += global.x - newGlobal.x

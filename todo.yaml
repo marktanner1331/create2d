@@ -15,6 +15,10 @@ tools:
         also need to start panning immediately if we have clicked from the tool
 
         need to use arrow keys if we are currently panning
+    zooming:
+        changing the canvas zoom should update the property mainWindow
+    
+    
 
 rendering lines that are connected and have the same properties should have their join styles joined better
     at the moment 'miter' and 'bevel' don't work
@@ -23,9 +27,6 @@ rendering lines that are connected and have the same properties should have thei
     leaving path painting to the very end
     i.e. the last path in the shape that has the same properties
     it will mean slightly slower rendering, but shouldn't be too bad
-
-finish zoom panel
-    and put it in the menu
 
 deleting shapes shouldn't delete vertices that are used in other non-selected shapes
 

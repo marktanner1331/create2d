@@ -21,6 +21,7 @@ class PanTool extends ITool {
 
   @override
   void onExit() {
+    MainWindow.stopPanningCanvas();
   }
 
   @override

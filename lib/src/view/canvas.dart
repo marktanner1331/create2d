@@ -142,6 +142,13 @@ class Canvas extends Sprite
   }
 
   @override
+  void refreshCached() {
+    print("canvas refreshCached");
+    _drawingSpaceToCanvasSpace = width / canvasWidth;
+    _canvasSpaceToDrawingSpace = canvasWidth / width;
+  }
+
+  @override
   void refresh() {
     print("canvas refresh");
     _drawingSpaceToCanvasSpace = width / canvasWidth;

@@ -1,4 +1,5 @@
 import 'package:stagexl/stagexl.dart';
+import 'package:meta/meta.dart';
 
 mixin SetSizeMixin on DisplayObject {
   num _width = 0;
@@ -43,6 +44,7 @@ mixin SetSizeMixin on DisplayObject {
     _isCached = true;
   }
 
+  @mustCallSuper
   void setSize(num width, num height) {
     _width = width;
     _height = height;
@@ -52,8 +54,10 @@ mixin SetSizeMixin on DisplayObject {
     } else {
       super.width = width;
       super.height = height;
+      refreshCached();
     }
   }
 
   void refresh();
+  void refreshCached() {}
 }
