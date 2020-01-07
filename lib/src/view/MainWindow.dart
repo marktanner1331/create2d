@@ -198,13 +198,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   ///point should be in drawing space
   static void zoomInAtPoint(Point drawingPoint, num zoom) {
     _canvasZoom = zoom;
-    print("drawingPoint: $drawingPoint");
 
     num zoomMultiplier = pow(maxZoomMultiplier, _canvasZoom);
     
     Point global = drawingPoint.clone();
     drawingSpaceToGlobalSpace(global);
-    print("globalPoint: $global");
 
     Rectangle rect = aspectFitChildInsideParent(
         _instance.width,
@@ -218,8 +216,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Point newGlobal = drawingPoint.clone();
     drawingSpaceToGlobalSpace(newGlobal);
 
-    print("newGlobal: $newGlobal");
-
     canvas
       ..x += global.x - newGlobal.x
       ..y += global.y - newGlobal.y;
@@ -227,7 +223,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static void set cacheCanvasAsBitmap(bool value) {
     if (value) {
-      canvas.applyCache(0, 0, canvas.canvasWidth, canvas.canvasHeight);
+      canvas.applyCache(0, 0, canvas.width, canvas.height);
     } else {
       canvas.removeCache();
     }
