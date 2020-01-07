@@ -17,59 +17,82 @@ tools:
         need to use arrow keys if we are currently panning
     zooming:
         changing the canvas zoom should update the property mainWindow
+    image tool:
+    rectangle:
+    oval:
+    curve:
+        helper vertices, such as the control point for bexier splines
+    polygon:
+        including star
+    line:
+        need to sudivide lines
+        insignificant vertices
+        lock to horizontal/vertical/diagonal
+        length of line
+            use canvas units (e.g. px or mm, inch, etc)
+        fill
+    select:
+        need to merge/disconnect shapes
+
+        deleting shapes shouldn't delete vertices that are used in other non-selected shapes
+
+        need keyboard arrows for moving vertices
+
+        vertex snapping tolerance needs to be calculated from the canvas scale
+            right now its hardcoded in canvas space, so a smaller canvas would have stronger snapping than a larger one
+        duplicate
+    measure:
+    partial circle:
     
+Canvas:
+    zooming:
+        break zooming code into its own controller
+    properties:
+        convert units into dropdown
+
+        ability to enter calculations into pixels per unit
+    resize boxes:
+    drag box to select:
+    canvas rulers:
     
+rendering:
+    rendering lines that are connected and have the same properties should have their join styles joined better
+        at the moment 'miter' and 'bevel' don't work
+        this can be solved by implementing a new interface for anything that implements the line mixin
+        maybe pass through a bool in renderToStageXL() which says don't paint paths
+        leaving path painting to the very end
+        i.e. the last path in the shape that has the same properties
+        it will mean slightly slower rendering, but shouldn't be too bad
 
-rendering lines that are connected and have the same properties should have their join styles joined better
-    at the moment 'miter' and 'bevel' don't work
-    this can be solved by implementing a new interface for anything that implements the line mixin
-    maybe pass through a bool in renderToStageXL() which says don't paint paths
-    leaving path painting to the very end
-    i.e. the last path in the shape that has the same properties
-    it will mean slightly slower rendering, but shouldn't be too bad
+command palette:
 
-deleting shapes shouldn't delete vertices that are used in other non-selected shapes
+script runner:
 
-ability to enter calculations into pixels per unit
-
-need keyboard arrows for moving vertices
-
-ability to select a shape and 'disconnect' from other shapes
-
-every shape owns its own vertices, vertices cannot be shared among shapes
-    instead, every shape can have a set of insignificant vertices
-    which get moved when the significant vertices also moved
-    this way a line can join another line halfway along
-    and that is treated the same as if it was joined at the end
-    ignore that
-    when two shapes are joined and we want to select their shared vertex
-    then we want to be able to move both shapes
-    the shapes really do need to share the same vertex
-    but we still want insignificant vertices for the rest
-
-need a command palette + script runner
-
-resize boxes
-
-drag box to select
-
-undo/redo
+undo/redo:
     ability to export these as scripts
 
-we also have helper vertices, such as teh control point for bexier splines
+html:
+    rename the html ids for the canvasTabButton to just canvasButton and others
 
-remove no_select class and make all text non selectable by default
+refactor:
+    rename draggable/draggableController for something more sensible (i.e. stageXL/html)
 
-rename the html ids for the canvasTabButton to just canvasButton and others
+color picker:
+    color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
 
-rename draggable/draggableController for something more sensible (i.e. stageXL/html)
-
-color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
-
-in NumberFieldWithLabel.dart
+property windows:
+    in NumberFieldWithLabel.dart
     keep a copy of the original value (at the point of a onFocus)
     if the user deletes the value and unfocuses - default back to the original value
 
-vertex snapping tolerance needs to be calculated from the canvas scale
-    right now its hardcoded in canvas space, so a smaller canvas would have stronger snapping than a larger one
+layers:
 
+prefabs:
+
+menu items:
+    clear canvas
+    delete
+    duplicate
+
+settings:
+    autocollapse property groups so that only one is open at a time
