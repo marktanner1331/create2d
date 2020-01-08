@@ -27,11 +27,21 @@ class Draggable {
   bool vertical;
 
   //if both minX and maxX are set then this will be set to the value of x relative to the min and max
-  //if x == minX then decimalX will be 0
-  //if x == maxX then decimalX will be 1
+  //if x == minX then _decimalX will be 0
+  //if x == maxX then _decimalX will be 1
   //else it will be a value between 0 and 1
   //if either minX or maxX is null then this value will remain null
-  num decimalX = null;
+  num get decimalX => _decimalX;
+  void set decimalX(num value) {
+    _decimalX = value;
+
+    if (maxX != null && minX != null) {
+      num x = _decimalX * (maxX - minX) + minX;
+      _objectToDrag.style.left = "${x}px";
+    }
+  }
+
+  num _decimalX = null;
 
   num minX = null;
   num maxX = null;
@@ -80,7 +90,7 @@ class Draggable {
         x = math.min(x, maxX);
 
         if (minX != null) {
-          decimalX = (x - minX) / (maxX - minX);
+          _decimalX = (x - minX) / (maxX - minX);
         }
       }
 

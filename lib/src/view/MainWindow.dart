@@ -32,6 +32,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static num _canvasZoom = 0;
   static num get canvasZoom => _canvasZoom;
 
+  static EventStream<Event> get onZoomChanged => _instance.on("ZOOM_CHANGED");
+
   static ShortcutController _shortcutController;
   static ShortcutController get shortcutController => _shortcutController;
 
@@ -153,7 +155,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   static Point getGlobalCanvasCenter() =>
       Point(instance.width / 2, (_instance.height + _fileMenu.height) / 2);
 
-//will not revert back to 0 if greater than 1
+  //will not revert back to 0 if greater than 1
   static void zoomStepOutAtCenter() {
     Point center = getGlobalCanvasCenter();
     globalSpaceToDrawingSpace(center);
@@ -219,6 +221,9 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     canvas
       ..x += global.x - newGlobal.x
       ..y += global.y - newGlobal.y;
+
+    print("dispatching event");
+    _instance.dispatchEvent(Event("ZOOM_CHANGED"));
   }
 
   static void set cacheCanvasAsBitmap(bool value) {
@@ -244,5 +249,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x = rect.left
       ..y = rect.top + _fileMenu.height
       ..setSize(rect.width, rect.height);
+
+    _instance.dispatchEvent(Event("ZOOM_CHANGED"));
   }
 }

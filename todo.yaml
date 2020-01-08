@@ -43,14 +43,16 @@ tools:
         duplicate
     measure:
     partial circle:
-    
+    arrow:
+
 Canvas:
     zooming:
-        break zooming code into its own controller
     properties:
         convert units into dropdown
 
         ability to enter calculations into pixels per unit
+
+        total vertices in document
     resize boxes:
     drag box to select:
     canvas rulers:
@@ -76,6 +78,7 @@ html:
 
 refactor:
     rename draggable/draggableController for something more sensible (i.e. stageXL/html)
+    do all events like MainWindow.onZoomChanged
 
 color picker:
     color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
@@ -96,3 +99,11 @@ menu items:
 
 settings:
     autocollapse property groups so that only one is open at a time
+
+saving:
+    to image
+    to svg
+    to internal format
+
+loading:
+    from internal format

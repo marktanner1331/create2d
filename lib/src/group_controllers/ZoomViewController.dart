@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:stagexl/stagexl.dart' as stageXL;
+
 import './ContextController.dart';
 import '../view/MainWindow.dart';
 import '../helpers/Draggable.dart';
@@ -8,13 +10,14 @@ class ZoomViewController extends ContextController {
   static ZoomViewController get instance =>
       _instance ?? (_instance = ZoomViewController());
   static ZoomViewController _instance;
-
+  
   InputElement _steps;
   InputElement _max;
   DivElement _dot;
   ButtonElement _zoomOut;
   Draggable _draggableDot;
 
+  stageXL.EventStreamSubscription<stageXL.Event> _onZoomChangedSubscription;
   Point zoomPoint;
 
   ZoomViewController() : super(document.querySelector("#contextTab #zoom")) {
@@ -45,6 +48,16 @@ class ZoomViewController extends ContextController {
 
   void _onDotFinished(_) {
     MainWindow.cacheCanvasAsBitmap = false;
+    zoomPoint = null;
+  }
+
+  void _resetDotPosition() {
+    //when zoomPoint is null it means we are not currently dragging the dot
+    //this means we are safe to update its position
+    if(zoomPoint == null) {
+      print("resetting dot position");
+      _draggableDot.decimalX = MainWindow.canvasZoom;
+    }
   }
 
   void _onStepsChanged(_) {
@@ -69,6 +82,24 @@ class ZoomViewController extends ContextController {
     MainWindow.maxZoomMultiplier = newMax;
 
     dispatchChangeEvent();
+  }
+
+  @override
+  void onEnter() {
+    super.onEnter();
+
+    print("listening to event");
+    _onZoomChangedSubscription = MainWindow.onZoomChanged.listen((_) => _resetDotPosition);
+  }
+
+  @override
+  void onExit() {
+    super.onExit();
+    if(_onZoomChangedSubscription != null) {
+      print("cancelling event listener");
+      _onZoomChangedSubscription.cancel();
+      _onZoomChangedSubscription = null;
+    }
   }
 
   void clearModels() {}
