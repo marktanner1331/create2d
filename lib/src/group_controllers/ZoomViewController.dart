@@ -55,7 +55,6 @@ class ZoomViewController extends ContextController {
     //when zoomPoint is null it means we are not currently dragging the dot
     //this means we are safe to update its position
     if(zoomPoint == null) {
-      print("resetting dot position");
       _draggableDot.decimalX = MainWindow.canvasZoom;
     }
   }
@@ -88,15 +87,13 @@ class ZoomViewController extends ContextController {
   void onEnter() {
     super.onEnter();
 
-    print("listening to event");
-    _onZoomChangedSubscription = MainWindow.onZoomChanged.listen((_) => _resetDotPosition);
+    _onZoomChangedSubscription = MainWindow.onZoomChanged.listen((_) => _resetDotPosition());
   }
 
   @override
   void onExit() {
     super.onExit();
     if(_onZoomChangedSubscription != null) {
-      print("cancelling event listener");
       _onZoomChangedSubscription.cancel();
       _onZoomChangedSubscription = null;
     }

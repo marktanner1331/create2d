@@ -42,7 +42,7 @@ class ShortcutController {
         break;
       case KeyCode.SPACE:
         MainWindow.toolbox.temporarilySwitchToTool<PanTool>();
-        MainWindow.toolbox.panTool.startPanning();
+        //MainWindow.toolbox.panTool.startPanning();
         break;
     }
   }

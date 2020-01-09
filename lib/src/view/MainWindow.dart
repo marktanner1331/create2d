@@ -222,7 +222,6 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x += global.x - newGlobal.x
       ..y += global.y - newGlobal.y;
 
-    print("dispatching event");
     _instance.dispatchEvent(Event("ZOOM_CHANGED"));
   }
 

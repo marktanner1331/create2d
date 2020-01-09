@@ -17,6 +17,8 @@ tools:
         need to use arrow keys if we are currently panning
     zooming:
         changing the canvas zoom should update the property mainWindow
+        zooming in after the maximum step should wrap back round to 0
+        need to style the zoom out button
     image tool:
     rectangle:
     oval:
@@ -46,7 +48,6 @@ tools:
     arrow:
 
 Canvas:
-    zooming:
     properties:
         convert units into dropdown
 
@@ -56,6 +57,9 @@ Canvas:
     resize boxes:
     drag box to select:
     canvas rulers:
+    grid:
+        bug with web_gl in console when zooming in and no grid is showing
+            tricky to replicate
     
 rendering:
     rendering lines that are connected and have the same properties should have their join styles joined better
