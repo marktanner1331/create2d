@@ -16,9 +16,11 @@ tools:
 
         need to use arrow keys if we are currently panning
     zooming:
-        changing the canvas zoom should update the property mainWindow
-        zooming in after the maximum step should wrap back round to 0
-        need to style the zoom out button
+        changing max zoom should adjust the canvasZoom
+        clicking slider should move dot to that position
+        menu items
+        keyboard shortcuts
+            including ctrl+enter
     image tool:
     rectangle:
     oval:
@@ -77,8 +79,9 @@ script runner:
 undo/redo:
     ability to export these as scripts
 
-html:
+html/css:
     rename the html ids for the canvasTabButton to just canvasButton and others
+    try sass
 
 refactor:
     rename draggable/draggableController for something more sensible (i.e. stageXL/html)

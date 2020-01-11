@@ -341,7 +341,7 @@ html, body, .stage--fullscreen {
     background-color: #555555;
 }
 
-#fileMenu {
+#mainMenu {
     width: 100%;
     background-color: #333333;
     position: absolute;
@@ -350,25 +350,25 @@ html, body, .stage--fullscreen {
     left: 0;
 }
 
-#fileMenu>div {
+#mainMenu>div {
     display: inline-block;
 }
 
-.file_menu_button {
+.main_menu_button {
     padding: 5px;
     color: white;
     cursor: pointer;
 }
 
-.file_menu_button:hover {
+.main_menu_button:hover {
     background-color: #555555;
 }
 
-.file_menu_button_selected {
+.main_menu_button_selected {
     background-color: #555555;
 }
 
-.file_menu_items {
+.main_menu_items {
     display: none;
     background-color: rgb(34, 34, 34);
     position: absolute;
@@ -376,7 +376,7 @@ html, body, .stage--fullscreen {
     padding: 5px 0;
 }
 
-.file_menu_item {
+.main_menu_item {
     padding: 5px;
     display: inline-block;
     color: white;
@@ -384,11 +384,11 @@ html, body, .stage--fullscreen {
     padding-right: 10px;
 }
 
-.file_menu_item:hover {
+.main_menu_item:hover {
     background-color: #555555;
 }
 
-.file_menu_item>input[type="checkbox"] {
+.main_menu_item>input[type="checkbox"] {
     width: 15px;
     height: 15px;
     cursor: pointer;

@@ -3,7 +3,7 @@ import 'dart:async';
 
 import '../view/MainWindow.dart';
 
-class FileMenu  {
+class MainMenu  {
   Element _view;
   List<StreamSubscription> _mouseOverButtonSubscriptions;
   StreamSubscription _documentClickSubscription;
@@ -12,10 +12,10 @@ class FileMenu  {
 
   CheckboxInputElement _showPropertiesCheckbox;
 
-  FileMenu() {
-    _view = document.querySelector("#fileMenu");
+  MainMenu() {
+    _view = document.querySelector("#mainMenu");
 
-    for (Element button in _view.getElementsByClassName("file_menu_button")) {
+    for (Element button in _view.getElementsByClassName("main_menu_button")) {
       button.onClick.listen(_onFileButtonClick);
     }
   }
@@ -23,11 +23,11 @@ class FileMenu  {
   int get height => _view.clientHeight;
 
   void _closeAllMenus() {
-    for (Element button in _view.getElementsByClassName("file_menu_button")) {
-      button.classes.remove("file_menu_button_selected");
+    for (Element button in _view.getElementsByClassName("main_menu_button")) {
+      button.classes.remove("main_menu_button_selected");
     }
 
-    for (Element child in _view.getElementsByClassName("file_menu_items")) {
+    for (Element child in _view.getElementsByClassName("main_menu_items")) {
       child.style.display = "none";
     }
   }
@@ -49,13 +49,13 @@ class FileMenu  {
     _closeAllMenus();
     
     Element button = e.currentTarget as Element;
-    button.classes.add("file_menu_button_selected");
+    button.classes.add("main_menu_button_selected");
 
-    Element items = button.parent.querySelector(".file_menu_items");
+    Element items = button.parent.querySelector(".main_menu_items");
     items.style.display = "grid";
 
     _mouseOverButtonSubscriptions = List();
-    for (Element button in _view.getElementsByClassName("file_menu_button")) {
+    for (Element button in _view.getElementsByClassName("main_menu_button")) {
       _mouseOverButtonSubscriptions
           .add(button.onMouseOver.listen(_onMouseOverButton));
     }
@@ -94,9 +94,9 @@ class FileMenu  {
     _closeAllMenus();
 
     Element button = e.currentTarget as Element;
-    button.classes.add("file_menu_button_selected");
+    button.classes.add("main_menu_button_selected");
 
-    Element items = button.parent.querySelector(".file_menu_items");
+    Element items = button.parent.querySelector(".main_menu_items");
     items.style.display = "grid";
   }
 }

@@ -8,7 +8,7 @@ import './ShortcutController.dart';
 import './TooltipController.dart';
 import './DialogLayer.dart';
 import '../color_picker/ColorPicker.dart';
-import '../file_menu/FileMenu.dart';
+import '../main_menu/MainMenu.dart';
 import '../property_windows/PropertyWindowController.dart';
 import '../tools/ToolboxController.dart';
 import '../helpers/DraggableController.dart';
@@ -43,7 +43,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ToolboxController(html.querySelector("#toolbox"));
   static final ColorPicker colorPicker = ColorPicker();
 
-  static FileMenu _fileMenu;
+  static MainMenu _mainMenu;
 
   //used when the canvas is being dragged
   //e.g. in calls to startPanningCanvas()
@@ -62,7 +62,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     TooltipController(html.document.querySelector("#tooltip"));
     DialogLayer();
 
-    _fileMenu = FileMenu();
+    _mainMenu = MainMenu();
 
     _canvas = Canvas();
     addChild(_canvas);
@@ -101,11 +101,11 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     propertyWindow
       ..x = width - propertyWindow.width - 5
-      ..y = _fileMenu.height + 5;
+      ..y = _mainMenu.height + 5;
 
     toolbox
       ..x = 5
-      ..y = _fileMenu.height + 5;
+      ..y = _mainMenu.height + 5;
 
     if (colorPicker.x == 0 && colorPicker.y == 0) {
       colorPicker
@@ -153,7 +153,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   ///returns the center of the canvas area in global space
   ///useful for zooming in
   static Point getGlobalCanvasCenter() =>
-      Point(instance.width / 2, (_instance.height + _fileMenu.height) / 2);
+      Point(instance.width / 2, (_instance.height + _mainMenu.height) / 2);
 
   //will not revert back to 0 if greater than 1
   static void zoomStepOutAtCenter() {
@@ -205,7 +205,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     Rectangle rect = aspectFitChildInsideParent(
         _instance.width,
-        _instance.height - _fileMenu.height,
+        _instance.height - _mainMenu.height,
         canvas.canvasWidth,
         canvas.canvasHeight,
         padding: 20);
@@ -236,14 +236,14 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
     Rectangle rect = aspectFitChildInsideParent(
         _instance.width,
-        _instance.height - _fileMenu.height,
+        _instance.height - _mainMenu.height,
         canvas.canvasWidth,
         canvas.canvasHeight,
         padding: 20);
 
     canvas
       ..x = rect.left
-      ..y = rect.top + _fileMenu.height
+      ..y = rect.top + _mainMenu.height
       ..setSize(rect.width, rect.height);
 
     _instance.dispatchEvent(Event("ZOOM_CHANGED"));
