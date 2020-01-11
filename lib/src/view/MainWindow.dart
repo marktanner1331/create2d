@@ -177,18 +177,15 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     Point center = getGlobalCanvasCenter();
     globalSpaceToDrawingSpace(center);
 
-    num delta = 1 / zoomSteps;
-    _canvasZoom += delta;
-
-    _canvasZoom = min(1, _canvasZoom);
-
-    zoomInAtPoint(center, _canvasZoom);
+    zoomStepInAtPoint(center);
   }
 
   //canvasPoint should be a point in drawing space
   static void zoomStepInAtPoint(Point canvasPoint) {
     num delta = 1 / zoomSteps;
     _canvasZoom += delta;
+
+    _canvasZoom = min(1, _canvasZoom);
 
     if (_canvasZoom == 0) {
       resetCanvasZoomAndPosition();
