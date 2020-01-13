@@ -17,8 +17,7 @@ tools:
 
         need to use arrow keys if we are currently panning
     zooming:
-        keyboard shortcuts
-            including ctrl+enter
+        comamnd palette
     image tool:
     rectangle:
     oval:

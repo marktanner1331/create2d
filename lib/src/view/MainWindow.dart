@@ -56,7 +56,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     assert(_instance == null);
     _instance = this;
 
-    _shortcutController = ShortcutController(this);
+    _shortcutController = ShortcutController();
 
     //initialize the singletons
     TooltipController(html.document.querySelector("#tooltip"));
