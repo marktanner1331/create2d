@@ -80,6 +80,7 @@ class GridViewController extends GroupController {
   }
 
   void _onStepFocusOut(_) {
+    //TODO more like this?
     _step.value = MainWindow.canvas.pixelsToUnits(_model.gridStep);
   }
 

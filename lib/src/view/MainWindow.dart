@@ -23,7 +23,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   //the total magnification when fully zoomed in
   static num maxZoomMultiplier = 5;
-
+  
   //how many times the user can click before returning back to the original zoom level
   static int zoomSteps = 2;
 
@@ -219,6 +219,20 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       ..x += global.x - newGlobal.x
       ..y += global.y - newGlobal.y;
 
+    _instance.dispatchEvent(Event("ZOOM_CHANGED"));
+  }
+
+  //the zoom multiplier is a function of the current canvasZoom and the maxZoomMultiplier
+  //it can be useful for comparing situations which depend on both of these
+  static num get zoomMultiplier => pow(maxZoomMultiplier, _canvasZoom);
+  
+  //updates the _canvas zoom using the given zoomMultiplier and set maxZoomMultiplier
+  //useful for when you want to set the maxZoomMultiplier first and make sure 
+  //the _canvasZoom is adjusted accordingly
+  static void setCanvasZoomFromZoomMultiplier(num zoomMultiplier) {
+    _canvasZoom = log(zoomMultiplier) / log(maxZoomMultiplier);
+    _canvasZoom = min(_canvasZoom, 1);
+    
     _instance.dispatchEvent(Event("ZOOM_CHANGED"));
   }
 

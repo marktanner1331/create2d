@@ -12,7 +12,10 @@ class ZoomViewController extends ContextController {
   static ZoomViewController _instance;
   
   InputElement _steps;
+
   InputElement _max;
+  num _currentZoomMultiplier;
+
   DivElement _dot;
   ButtonElement _zoomOut;
   Draggable _draggableDot;
@@ -26,6 +29,7 @@ class ZoomViewController extends ContextController {
 
     _max = view.querySelector("#zoomMax");
     _max.onInput.listen(_onMaxChanged);
+    _max.onFocus.listen(_onMaxFocus);
 
     _dot = view.querySelector("#dot");
 
@@ -80,7 +84,16 @@ class ZoomViewController extends ContextController {
 
     MainWindow.maxZoomMultiplier = newMax;
 
+    //we keep track of the current zoom multiplier
+    //so that the canvasZoom can be adjusted to invert changes to the maxZoomMultiplier
+    //this gives the effect of the magnification not changing as the max zoom is updated
+    MainWindow.setCanvasZoomFromZoomMultiplier(_currentZoomMultiplier);
+
     dispatchChangeEvent();
+  }
+
+  void _onMaxFocus(_) {
+    _currentZoomMultiplier = MainWindow.zoomMultiplier;
   }
 
   @override
