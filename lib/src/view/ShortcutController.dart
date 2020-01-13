@@ -14,6 +14,10 @@ class ShortcutController {
   }
 
   bool _onKeyDown(KeyboardEvent e) {
+    if(e.target is TextInputElement) {
+      return true;
+    }
+
     shiftIsDown = e.shiftKey;
 
     switch(e.keyCode) {
@@ -42,6 +46,10 @@ class ShortcutController {
   }
 
   bool _onKeyUp(KeyboardEvent e) {
+    if(e.target is TextInputElement) {
+      return true;
+    }
+
     shiftIsDown = e.shiftKey;
 
     switch(e.keyCode) {

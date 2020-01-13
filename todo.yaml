@@ -72,6 +72,11 @@ rendering:
         it will mean slightly slower rendering, but shouldn't be too bad
 
 command palette:
+    keyboard shortcuts
+    styling
+    execute javascript entered into it
+    destroy after command
+    register functions with the external context
 
 script runner:
 

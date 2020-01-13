@@ -13,7 +13,7 @@
         <script defer src="main.dart.js"></script>
     </head>
 
-    <body onkeypress="return false;" onkeydown="return onKeyDown(event);" onkeyup="return onKeyUp(event);">
+    <body onkeypress="return event.target.tagName.toLowerCase() == 'input';" onkeydown="return onKeyDown(event);" onkeyup="return onKeyUp(event);">
         <canvas id="stage" class="stage--fullscreen"></canvas>
         <div id="properties" class="floating_window">
             <div class="title_bar">
@@ -500,6 +500,9 @@
             </div>
         </div>
         <div id="tooltip"></div>
+        <div id="commandPalette">
+            <input type="text" />
+        </div>
     </body onkeypress="return disableCtrlKeyCombination(event);" onkeydown = "return disableCtrlKeyCombination(event);">
 
 </html>

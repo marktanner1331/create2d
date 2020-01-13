@@ -12,6 +12,7 @@ import '../main_menu/MainMenu.dart';
 import '../property_windows/PropertyWindowController.dart';
 import '../tools/ToolboxController.dart';
 import '../helpers/DraggableController.dart';
+import './CommandPalette.dart';
 
 import '../helpers/AspectFit.dart';
 
@@ -45,6 +46,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
 
   static MainMenu _mainMenu;
 
+  static CommandPalette _commandPalette;
+
   //used when the canvas is being dragged
   //e.g. in calls to startPanningCanvas()
   static DraggableController _panningController;
@@ -63,6 +66,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     DialogLayer();
 
     _mainMenu = MainMenu();
+
+    _commandPalette = CommandPalette();
 
     _canvas = Canvas();
     addChild(_canvas);
