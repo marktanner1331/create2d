@@ -1,10 +1,10 @@
 import 'dart:html';
-
 import 'package:stagexl/stagexl.dart' as stageXL;
 
 import './ContextController.dart';
 import '../view/MainWindow.dart';
 import '../helpers/Draggable.dart';
+import '../helpers/SliderBoxController.dart';
 
 class ZoomViewController extends ContextController {
   static ZoomViewController get instance =>
@@ -16,9 +16,9 @@ class ZoomViewController extends ContextController {
   InputElement _max;
   num _currentZoomMultiplier;
 
-  DivElement _dot;
+  SliderBoxController _sliderBox;
+
   ButtonElement _zoomOut;
-  Draggable _draggableDot;
 
   stageXL.EventStreamSubscription<stageXL.Event> _onZoomChangedSubscription;
   Point zoomPoint;
@@ -31,8 +31,6 @@ class ZoomViewController extends ContextController {
     _max.onInput.listen(_onMaxChanged);
     _max.onFocus.listen(_onMaxFocus);
 
-    _dot = view.querySelector("#dot");
-
     _zoomOut = view.querySelector("#zoomOut");
     _zoomOut.onClick.listen(_onZoomOutClick);
   }
@@ -40,7 +38,13 @@ class ZoomViewController extends ContextController {
   void _onZoomOutClick(_) => MainWindow.resetCanvasZoomAndPosition();
 
   void _onDotChanged(_) {
-    MainWindow.zoomInAtPoint(zoomPoint, _draggableDot.decimalX);
+    Point p = zoomPoint;
+    if(p == null) {
+      p = MainWindow.getGlobalCanvasCenter();
+      MainWindow.globalSpaceToDrawingSpace(p);
+    }
+
+    MainWindow.zoomInAtPoint(p, _sliderBox.decimalX);
   }
 
   void _onDotStarted(_) {
@@ -56,10 +60,8 @@ class ZoomViewController extends ContextController {
   }
 
   void _resetDotPosition() {
-    //when zoomPoint is null it means we are not currently dragging the dot
-    //this means we are safe to update its position
-    if(zoomPoint == null) {
-      _draggableDot.decimalX = MainWindow.canvasZoom;
+    if(_sliderBox.isDragging == false) {
+      _sliderBox.decimalX = MainWindow.canvasZoom;
     }
   }
 
@@ -117,13 +119,11 @@ class ZoomViewController extends ContextController {
   @override
   void onEnterForFirstTime() {
     //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
-    num max = _dot.parent.getBoundingClientRect().width -
-        _dot.getBoundingClientRect().width;
-    _draggableDot = Draggable(_dot, _dot, vertical: false, minX: 0, maxX: max);
-
-    _draggableDot.onStartedDrag.listen(_onDotStarted);
-    _draggableDot.onPositionChanged.listen(_onDotChanged);
-    _draggableDot.onFinishedDrag.listen(_onDotFinished);
+    _sliderBox = SliderBoxController(view.querySelector(".slider_box"));
+    
+    _sliderBox.onStartedDrag.listen(_onDotStarted);
+    _sliderBox.onPositionChanged.listen(_onDotChanged);
+    _sliderBox.onFinishedDrag.listen(_onDotFinished);
   }
 
   @override

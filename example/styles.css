@@ -139,7 +139,7 @@ html, body, .stage--fullscreen {
 .group_content button {
     cursor: pointer;
     color: white;
-    background-color: #444444;
+    background-color: #222222;
     padding: 3px 6px;
     float: right;
 }
@@ -158,7 +158,7 @@ html, body, .stage--fullscreen {
     position: relative;
 }
 
-.slider_box>#dot {
+.slider_box>.dot {
     background-color: #547A9C;
     width: 15px;
     height: 15px;
@@ -167,7 +167,7 @@ html, body, .stage--fullscreen {
     cursor: pointer;
 }
 
-.slider_box>#dot:hover {
+.slider_box>.dot:hover {
     background-color: #6E9FCC;
 }
 

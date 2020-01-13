@@ -1,4 +1,5 @@
 ToolboxController:
+    keyboard shortcuts:
     temp tools:
         if the color picker is open then switching to a temp tool will cause it close
         we should probably reopen its
@@ -16,8 +17,6 @@ tools:
 
         need to use arrow keys if we are currently panning
     zooming:
-        changing max zoom should adjust the canvasZoom
-        clicking slider should move dot to that position
         menu items
         keyboard shortcuts
             including ctrl+enter
@@ -56,6 +55,8 @@ Canvas:
         ability to enter calculations into pixels per unit
 
         total vertices in document
+
+        save defaults to a cookie (if consented)
     resize boxes:
     drag box to select:
     canvas rulers:
