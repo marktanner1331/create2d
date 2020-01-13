@@ -148,6 +148,10 @@ html, body, .stage--fullscreen {
     background-color: #666666;
 }
 
+.group_content button:focus {
+    outline:0;
+}
+
 .slider_box {
     margin-top: 10px;
     border-top: 1px solid white;
