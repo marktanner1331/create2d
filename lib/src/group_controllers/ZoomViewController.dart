@@ -1,16 +1,16 @@
 import 'dart:html';
+import 'dart:math';
 import 'package:stagexl/stagexl.dart' as stageXL;
 
 import './ContextController.dart';
 import '../view/MainWindow.dart';
-import '../helpers/Draggable.dart';
 import '../helpers/SliderBoxController.dart';
 
 class ZoomViewController extends ContextController {
   static ZoomViewController get instance =>
       _instance ?? (_instance = ZoomViewController());
   static ZoomViewController _instance;
-  
+
   InputElement _steps;
 
   InputElement _max;
@@ -39,7 +39,7 @@ class ZoomViewController extends ContextController {
 
   void _onDotChanged(_) {
     Point p = zoomPoint;
-    if(p == null) {
+    if (p == null) {
       p = MainWindow.getGlobalCanvasCenter();
       MainWindow.globalSpaceToDrawingSpace(p);
     }
@@ -50,7 +50,7 @@ class ZoomViewController extends ContextController {
   void _onDotStarted(_) {
     zoomPoint = MainWindow.getGlobalCanvasCenter();
     MainWindow.globalSpaceToDrawingSpace(zoomPoint);
-    
+
     MainWindow.cacheCanvasAsBitmap = true;
   }
 
@@ -60,7 +60,7 @@ class ZoomViewController extends ContextController {
   }
 
   void _resetDotPosition() {
-    if(_sliderBox.isDragging == false) {
+    if (_sliderBox.isDragging == false) {
       _sliderBox.decimalX = MainWindow.canvasZoom;
     }
   }
@@ -76,6 +76,36 @@ class ZoomViewController extends ContextController {
 
     dispatchChangeEvent();
   }
+
+  //sets the max zoom outside of the zoom view controller context
+  //e.g. from the command palette
+  static void setMaxZoomCommand(num value) {
+    if (value == null || value < 1) {
+      return;
+    }
+
+    num zoomMultiplier = MainWindow.zoomMultiplier;
+    MainWindow.maxZoomMultiplier = value;
+
+    //we keep track of the current zoom multiplier
+    //so that the canvasZoom can be adjusted to invert changes to the maxZoomMultiplier
+    //this gives the effect of the magnification not changing as the max zoom is updated
+    MainWindow.setCanvasZoomFromZoomMultiplier(zoomMultiplier);
+
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  //sets the zoom steps outside of the zoom view controller context
+  //e.g. from the command palette
+  static void setZoomStepsCommand(num value) {
+    MainWindow.zoomSteps = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+//sets the zoom outside of the zoom view controller context
+  //e.g. from the command palette
+  static void setZoomCommand(num value) =>
+      MainWindow.zoomInAtCenter(min(1, max(0, value)));
 
   void _onMaxChanged(_) {
     num newMax = int.tryParse(_max.value);
@@ -111,7 +141,7 @@ class ZoomViewController extends ContextController {
   @override
   void onExit() {
     super.onExit();
-    if(_onZoomChangedSubscription != null) {
+    if (_onZoomChangedSubscription != null) {
       _onZoomChangedSubscription.cancel();
       _onZoomChangedSubscription = null;
     }
@@ -123,7 +153,7 @@ class ZoomViewController extends ContextController {
   void onEnterForFirstTime() {
     //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
     _sliderBox = SliderBoxController(view.querySelector(".slider_box"));
- 
+
     _sliderBox.onStartedDrag.listen(_onDotStarted);
     _sliderBox.onPositionChanged.listen(_onDotChanged);
     _sliderBox.onFinishedDrag.listen(_onDotFinished);

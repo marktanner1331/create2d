@@ -1,8 +1,8 @@
 import 'dart:html';
 import 'dart:js';
-import 'dart:math';
 
 import './MainWindow.dart';
+import '../group_controllers/ZoomViewController.dart';
 
 class CommandPalette {
   HtmlElement _view;
@@ -19,33 +19,13 @@ class CommandPalette {
   void _initializeContext() {
     context["zoomIn"] = MainWindow.zoomStepInAtCenter;
     context["zoomOut"] = MainWindow.zoomStepOutAtCenter;
-    context["setZoom"] =
-        (num value) => MainWindow.zoomInAtCenter(min(1, max(0, value)));
+    context["setZoom"] = ZoomViewController.setZoomCommand;
     context["getZoom"] = () => MainWindow.canvasZoom;
     context["resetZoom"] = MainWindow.resetCanvasZoomAndPosition;
     context["getMaxZoom"] = () => MainWindow.maxZoomMultiplier;
-    context["setMaxZoom"] = _setMaxZoom;
+    context["setMaxZoom"] = ZoomViewController.setMaxZoomCommand;
     context["getZoomSteps"] = () => MainWindow.zoomSteps;
-    context["setZoomSteps"] = (num value) {
-       MainWindow.zoomSteps = value;
-       MainWindow.propertyWindow.refreshCurrentTab();
-    };
-  }
-
-  void _setMaxZoom(num value) {
-      if (value == null || value < 1) {
-        return;
-      }
-
-      num zoomMultiplier = MainWindow.zoomMultiplier;
-      MainWindow.maxZoomMultiplier = value;
-
-      //we keep track of the current zoom multiplier
-      //so that the canvasZoom can be adjusted to invert changes to the maxZoomMultiplier
-      //this gives the effect of the magnification not changing as the max zoom is updated
-      MainWindow.setCanvasZoomFromZoomMultiplier(zoomMultiplier);
-
-      MainWindow.propertyWindow.refreshCurrentTab();
+    context["setZoomSteps"] = ZoomViewController.setZoomStepsCommand;
   }
 
   void _onKeyPress(KeyboardEvent e) {
