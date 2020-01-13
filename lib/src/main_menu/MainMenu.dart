@@ -4,6 +4,7 @@ import 'dart:async';
 import '../view/MainWindow.dart';
 
 class MainMenu  {
+  //view is the view for the entire menu, not the 'view' menu items container
   Element _view;
   List<StreamSubscription> _mouseOverButtonSubscriptions;
   StreamSubscription _documentClickSubscription;
@@ -72,6 +73,18 @@ class MainMenu  {
 
     _view.querySelector("#showProperties").onClick.listen((_) {
       MainWindow.propertyWindow.visible = !MainWindow.propertyWindow.visible;
+    });
+
+    _view.querySelector("#zoomIn").onClick.listen((_) {
+      MainWindow.zoomStepInAtCenter();
+    });
+    
+    _view.querySelector("#zoomOut").onClick.listen((_) {
+      MainWindow.zoomStepOutAtCenter();
+    });
+
+    _view.querySelector("#resetZoom").onClick.listen((_) {
+      MainWindow.resetCanvasZoomAndPosition();
     });
 
     _showPropertiesCheckbox = _view.querySelector("#showProperties > input");

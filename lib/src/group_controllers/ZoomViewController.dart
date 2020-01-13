@@ -120,6 +120,7 @@ class ZoomViewController extends ContextController {
   void onEnterForFirstTime() {
     //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
     _sliderBox = SliderBoxController(view.querySelector(".slider_box"));
+    _sliderBox.decimalX = MainWindow.canvasZoom;
     
     _sliderBox.onStartedDrag.listen(_onDotStarted);
     _sliderBox.onPositionChanged.listen(_onDotChanged);

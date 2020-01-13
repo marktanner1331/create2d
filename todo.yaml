@@ -17,7 +17,6 @@ tools:
 
         need to use arrow keys if we are currently panning
     zooming:
-        menu items
         keyboard shortcuts
             including ctrl+enter
     image tool:
