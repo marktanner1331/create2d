@@ -102,7 +102,10 @@ class ZoomViewController extends ContextController {
   void onEnter() {
     super.onEnter();
 
-    _onZoomChangedSubscription = MainWindow.onZoomChanged.listen((_) => _resetDotPosition());
+    _onZoomChangedSubscription = MainWindow.onZoomChanged.listen((_) {
+      _resetDotPosition();
+      refreshProperties();
+    });
   }
 
   @override
@@ -120,8 +123,7 @@ class ZoomViewController extends ContextController {
   void onEnterForFirstTime() {
     //we cant do this in the contructor as getBoundingClientRect returns 0 if the div isnt visible
     _sliderBox = SliderBoxController(view.querySelector(".slider_box"));
-    _sliderBox.decimalX = MainWindow.canvasZoom;
-    
+ 
     _sliderBox.onStartedDrag.listen(_onDotStarted);
     _sliderBox.onPositionChanged.listen(_onDotChanged);
     _sliderBox.onFinishedDrag.listen(_onDotFinished);
@@ -131,5 +133,6 @@ class ZoomViewController extends ContextController {
   void refreshProperties() {
     _steps.value = MainWindow.zoomSteps.toString();
     _max.value = MainWindow.maxZoomMultiplier.toString();
+    _sliderBox.decimalX = MainWindow.canvasZoom;
   }
 }

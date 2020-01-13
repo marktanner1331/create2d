@@ -31,11 +31,12 @@ abstract class GroupController implements IOnEnterExit {
 
   @override
   void onEnter() {
-    refreshProperties();
     if(_hasOnEntered == false) {
       onEnterForFirstTime();
       _hasOnEntered = true;
     }
+
+    refreshProperties();
   }
 
   void onEnterForFirstTime() {

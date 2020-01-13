@@ -37,6 +37,11 @@ class PropertyWindowController with HTMLViewController {
     view.style.display = "none";
   }
 
+  void refreshCurrentTab() {
+    _currentTab?.onExit();
+    _currentTab?.onEnter();
+  }
+
   void _onTabChanged(_) {
     _currentTab?.onExit();
     _currentTab = _tabs.firstWhere((tab) => tab.view == _tabController.currentTab);
