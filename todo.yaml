@@ -73,10 +73,12 @@ rendering:
 
 command palette:
     keyboard shortcuts
-    styling
-    execute javascript entered into it
-    destroy after command
-    register functions with the external context
+    hide autocomplete on empty string
+    error handling
+    hide if focus lost
+    include parameter hints in autocomplete
+    add more commands
+    limit max height and scroll on overflow
 
 script runner:
 

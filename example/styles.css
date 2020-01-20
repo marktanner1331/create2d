@@ -404,4 +404,38 @@ html, body, .stage--fullscreen {
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
+    padding: 5px;
+    background-color: black;
+    border: 1px solid #aaaaaa;
+    width: 250px;
+    max-width: 90%;
+}
+
+#commandPalette input {
+    background-color: #555555;
+    border: 1px solid #aaaaaa;
+    color: white;
+    padding: 4px;
+    font-family: monospace;
+    width: calc(100% - 10px);
+}
+
+#commandPalette .suggestedCommand:first-of-type {
+    margin-top: 4px;
+}
+
+#commandPalette .suggestedCommand {
+    background-color: #222222;
+    color: #ccc;
+    padding: 5px 2px 2px 4px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+#commandPalette .suggestedCommand:hover {
+    background-color: #333333;
+}
+
+#commandPalette .suggestedCommandSelected {
+    background-color: #5287BB !important;
 }

@@ -2,6 +2,7 @@ import 'dart:html';
 import 'dart:js';
 
 import './MainWindow.dart';
+import './CommandPalette.dart';
 import '../tools/PanTool.dart';
 
 class ShortcutController {
@@ -21,6 +22,11 @@ class ShortcutController {
     shiftIsDown = e.shiftKey;
 
     switch(e.keyCode) {
+      case KeyCode.DASH:
+        if(e.ctrlKey) {
+          MainWindow.zoomStepOutAtCenter();
+        }
+        break;
       case KeyCode.ENTER:
         if(e.ctrlKey) {
           MainWindow.resetCanvasZoomAndPosition();
@@ -31,9 +37,9 @@ class ShortcutController {
           MainWindow.zoomStepInAtCenter();
         }
         break;
-      case KeyCode.DASH:
+      case KeyCode.Q:
         if(e.ctrlKey) {
-          MainWindow.zoomStepOutAtCenter();
+          CommandPalette.show();
         }
         break;
       case KeyCode.SPACE:
