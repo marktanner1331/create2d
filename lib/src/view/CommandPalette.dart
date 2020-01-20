@@ -82,9 +82,7 @@ class CommandPalette {
   static void _onEnterPress() {
     String command = _input.value.trim();
 
-    if(command == "") {
-      _hide();
-    } else if(RegExp(r"^.+?\(.*?\);?$").hasMatch(command)) {
+    if(RegExp(r"^.+?\(.*?\);?$").hasMatch(command)) {
       //we have a complete command, so run it
       _runCommand(command);
       _hide();

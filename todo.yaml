@@ -79,6 +79,7 @@ command palette:
         changing tools
         canvas properties
     limit max height and scroll on overflow
+    ability to click suggested commands
 
 script runner:
 
