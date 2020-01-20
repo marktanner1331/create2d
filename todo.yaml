@@ -72,12 +72,12 @@ rendering:
         it will mean slightly slower rendering, but shouldn't be too bad
 
 command palette:
-    keyboard shortcuts
-    hide autocomplete on empty string
     error handling
-    hide if focus lost
-    include parameter hints in autocomplete
+        including number of parameters and type?
+        should be easy enough
     add more commands
+        changing tools
+        canvas properties
     limit max height and scroll on overflow
 
 script runner:
@@ -98,8 +98,9 @@ color picker:
 
 property windows:
     in NumberFieldWithLabel.dart
-    keep a copy of the original value (at the point of a onFocus)
-    if the user deletes the value and unfocuses - default back to the original value
+        keep a copy of the original value (at the point of a onFocus)
+        if the user deletes the value and unfocuses - default back to the original value
+    close buttons need some styling
 
 layers:
 

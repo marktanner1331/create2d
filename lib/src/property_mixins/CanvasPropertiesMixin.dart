@@ -56,10 +56,9 @@ mixin CanvasPropertiesMixin {
     return pixels * pixelsPerUnit;
   }
   
-  void setCanvasSize(num unitWidth, num unitHeight) {
-    _canvasWidth = canvasWidth;
-    _canvasHeight = canvasHeight;
-
+  void setCanvasSize(num width, num height) {
+    _canvasWidth = width;
+    _canvasHeight = height;
     MainWindow.resetCanvasZoomAndPosition();
   }
 }
