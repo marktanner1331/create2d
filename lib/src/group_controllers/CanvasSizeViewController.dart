@@ -27,6 +27,8 @@ class CanvasSizeViewController extends GroupController {
     _model.backgroundColor = _bgColorController.color;
   }
 
+  static String getBGColorCommand() => "#" + ColorHelper.colorToHex(MainWindow.canvas.backgroundColor);
+
   static void setBGColorCommand(String hexCode) {
     MainWindow.canvas.backgroundColor = ColorHelper.parseCssColor(hexCode);
     MainWindow.propertyWindow.refreshCurrentTab();

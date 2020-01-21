@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'package:stagexl/stagexl.dart' as stageXL;
 
+import '../view/MainWindow.dart';
 import './GroupController.dart';
 import '../model/CanvasUnitType.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
@@ -17,74 +18,102 @@ class UnitsViewController extends GroupController {
       _unitsChangedEvent.forTarget(_dispatcher);
 
   CanvasPropertiesMixin _model;
-  
-  InputElement _ppu;
 
-  InputElement _pixel;
-  InputElement _mm;
-  InputElement _cm;
-  InputElement _m;
-  InputElement _inch;
-  InputElement _foot;
-  InputElement _km;
-  InputElement _mile;
+  InputElement _ppu;
+  SelectElement _displayUnits;
 
   UnitsViewController(Element div) : super(div) {
     _ppu = div.querySelector("#ppu") as InputElement;
     _ppu.onInput.listen(_onPPUChange);
 
-    _pixel = div.querySelector("#pixel") as InputElement;
-    _pixel.onInput.listen(_onUnitTypeChange);
-
-    _mm = div.querySelector("#mm") as InputElement;
-    _mm.onInput.listen(_onUnitTypeChange);
-    
-    _cm = div.querySelector("#cm") as InputElement;
-    _cm.onInput.listen(_onUnitTypeChange);
-    
-    _m = div.querySelector("#m") as InputElement;
-    _m.onInput.listen(_onUnitTypeChange);
-    
-    _inch = div.querySelector("#inch") as InputElement;
-    _inch.onInput.listen(_onUnitTypeChange);
-    
-    _foot = div.querySelector("#foot") as InputElement;
-    _foot.onInput.listen(_onUnitTypeChange);
-    
-    _km = div.querySelector("#km") as InputElement;
-    _km.onInput.listen(_onUnitTypeChange);
-    
-    _mile = div.querySelector("#mile") as InputElement;
-    _mile.onInput.listen(_onUnitTypeChange);
+    _displayUnits = div.querySelector("#displayUnits");
+    _displayUnits.onChange.listen(_onUnitTypeChange);
   }
 
+  static void setPixelsPerUnitCommand(num value) {
+    MainWindow.canvas.pixelsPerUnit = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void setDisplayUnitsCommand(String value) {
+    MainWindow.canvas.units = _parseCanvasUnitType(value);
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static String getDisplayUnitsCommand() => _canvasUnitTypeToString(MainWindow.canvas.units);
+
   void _onUnitTypeChange(_) {
-    if(_pixel.checked) {
-      _model.units = CanvasUnitType.PIXEL;
-    } else if(_mm.checked) {
-      _model.units = CanvasUnitType.MM;
-    } else if(_cm.checked) {
-      _model.units = CanvasUnitType.CM;
-    } else if(_m.checked) {
-      _model.units = CanvasUnitType.M;
-    } else if(_inch.checked) {
-      _model.units = CanvasUnitType.INCH;
-    } else if(_foot.checked) {
-      _model.units = CanvasUnitType.FOOT;
-    } else if(_km.checked) {
-      _model.units = CanvasUnitType.KM;
-    } else if(_mile.checked) {
-      _model.units = CanvasUnitType.MILE;
-    } else {
-      throw Error();
-    }
+    String selectedOption = _displayUnits.selectedOptions.first.text;
+    _model.units = _parseCanvasUnitType(selectedOption);
 
     _dispatcher.dispatchEvent(stageXL.Event(UNITS_CHANGED));
   }
 
+  static String _canvasUnitTypeToString(CanvasUnitType value) {
+    switch (value) {
+      case CanvasUnitType.PIXEL:
+        return "Pixels";
+        break;
+      case CanvasUnitType.MM:
+        return "Millimeters";
+        break;
+      case CanvasUnitType.CM:
+        return "Centimeters";
+        break;
+      case CanvasUnitType.M:
+        return "Meters";
+        break;
+      case CanvasUnitType.INCH:
+        return "Inches";
+        break;
+      case CanvasUnitType.FOOT:
+        return "Feet";
+        break;
+      case CanvasUnitType.KM:
+        return "Kilometers";
+        break;
+      case CanvasUnitType.MILE:
+        return "Miles";
+        break;
+      default:
+        throw Exception("Unknown canvas unit type: $value");
+    }
+  }
+
+  static CanvasUnitType _parseCanvasUnitType(String value) {
+    switch (value) {
+      case "Pixels":
+        return CanvasUnitType.PIXEL;
+        break;
+      case "Millimeters":
+        return CanvasUnitType.MM;
+        break;
+      case "Centimeters":
+        return CanvasUnitType.CM;
+        break;
+      case "Meters":
+        return CanvasUnitType.M;
+        break;
+      case "Inches":
+        return CanvasUnitType.INCH;
+        break;
+      case "Feet":
+        return CanvasUnitType.FOOT;
+        break;
+      case "Kilometers":
+        return CanvasUnitType.KM;
+        break;
+      case "Miles":
+        return CanvasUnitType.MILE;
+        break;
+      default:
+        throw Exception("Unknown canvas unit type: $value");
+    }
+  }
+
   void _onPPUChange(_) {
     num newPPU = num.tryParse(_ppu.value);
-    if(newPPU == null) {
+    if (newPPU == null) {
       return;
     }
 
@@ -100,31 +129,31 @@ class UnitsViewController extends GroupController {
   @override
   void refreshProperties() {
     _ppu.value = _model.pixelsPerUnit.toString();
-    
-    switch(_model.units) {
+
+    switch (_model.units) {
       case CanvasUnitType.PIXEL:
-        _pixel.checked = true;
+        _displayUnits.selectedIndex = 0;
         break;
       case CanvasUnitType.MM:
-        _mm.checked = true;
+        _displayUnits.selectedIndex = 1;
         break;
       case CanvasUnitType.CM:
-        _cm.checked = true;
+        _displayUnits.selectedIndex = 2;
         break;
       case CanvasUnitType.M:
-        _m.checked = true;
+        _displayUnits.selectedIndex = 3;
         break;
       case CanvasUnitType.INCH:
-        _inch.checked = true;
+        _displayUnits.selectedIndex = 4;
         break;
       case CanvasUnitType.FOOT:
-        _foot.checked = true;
+        _displayUnits.selectedIndex = 5;
         break;
       case CanvasUnitType.KM:
-        _km.checked = true;
+        _displayUnits.selectedIndex = 6;
         break;
       case CanvasUnitType.MILE:
-        _mile.checked = true;
+        _displayUnits.selectedIndex = 7;
         break;
     }
   }

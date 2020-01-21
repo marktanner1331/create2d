@@ -6,6 +6,7 @@ import '../model/GridDisplayType.dart';
 import '../model/GridGeometryType.dart';
 import '../property_mixins/GridPropertiesMixin.dart';
 import '../helpers/ColorSwatchController.dart';
+import '../helpers/ColorHelper.dart';
 
 class GridViewController extends GroupController {
   GridPropertiesMixin _model;
@@ -47,6 +48,76 @@ class GridViewController extends GroupController {
 
     _gridColorController = ColorSwatchController(div.querySelector("#gridColor"));
     _gridColorController.onColorChanged.listen(_onGridColorChanged);
+  }
+
+  static void setGridGeometryType(String value) {
+    switch(value) {
+      case "Square":
+        MainWindow.canvas.gridGeometryType = GridGeometryType.Square;
+        break;
+      case "Isometric":
+        MainWindow.canvas.gridGeometryType = GridGeometryType.Isometric;
+        break;
+    }
+    
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static String getGridGeometryType() {
+    switch(MainWindow.canvas.gridGeometryType) {
+      case GridGeometryType.Square:
+        return "Square";
+      case GridGeometryType.Isometric:
+        return "Isometric";
+      default:
+        throw Exception("Unknown grid geometry type: ${MainWindow.canvas.gridGeometryType}");
+    }
+  }
+
+  static void setGridDisplayType(String value) {
+    switch(value) {
+      case "None":
+        MainWindow.canvas.gridDisplayType = GridDisplayType.None;
+        break;
+      case "Lines":
+        MainWindow.canvas.gridDisplayType = GridDisplayType.Lines;
+        break;
+      case "Dots":
+        MainWindow.canvas.gridDisplayType = GridDisplayType.Dots;
+        break;
+    }
+
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static String getGridDisplayType() {
+    switch(MainWindow.canvas.gridDisplayType) {
+      case GridDisplayType.None:
+        return "None";
+      case GridDisplayType.Lines:
+        return "Lines";
+      case GridDisplayType.Dots:
+        return "Dots";
+      default:
+        throw Exception("Unknown grid display type: ${MainWindow.canvas.gridDisplayType}");
+    }
+  }
+
+  static String getGridColorCommand() => "#" + ColorHelper.colorToHex(MainWindow.canvas.gridColor);
+
+  static void setGridColorCommand(String hexCode) {
+    MainWindow.canvas.gridColor = ColorHelper.parseCssColor(hexCode);
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void setGridStepCommand(num value) {
+    MainWindow.canvas.gridStep = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void setGridThicknessCommand(num value) {
+    MainWindow.canvas.gridThickness = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
   }
 
   void _onGridColorChanged(_) {

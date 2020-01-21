@@ -4,6 +4,8 @@ import 'dart:js';
 import './MainWindow.dart';
 import '../group_controllers/ZoomViewController.dart';
 import '../group_controllers/CanvasSizeViewController.dart';
+import '../group_controllers/UnitsViewController.dart';
+import '../group_controllers/GridViewController.dart';
 import '../helpers/AutoComplete.dart';
 
 class CommandPalette {
@@ -25,7 +27,7 @@ class CommandPalette {
     _input = _view.querySelector("input");
     _input.onKeyDown.listen(_onKeyPress);
     _input.onInput.listen(_onInputChanged);
-    //_input.addEventListener("focusout", (_) => _hide());
+    _input.addEventListener("focusout", (_) => _hide());
 
      _suggestedCommands = _view.querySelector("#suggestedCommands");
 
@@ -54,7 +56,24 @@ class CommandPalette {
     _addCommand("setCanvasWidth", "(value:Number)", CanvasSizeViewController.setCanvasWidthCommand);
     _addCommand("setCanvasHeight", "(value:Number)", CanvasSizeViewController.setCanvasHeightCommand);
     _addCommand("setCanvasSize", "(width:Number, height:Number)", CanvasSizeViewController.setCanvasSizeCommand);
+    _addCommand("getCanvasBGColor", "()", CanvasSizeViewController.getBGColorCommand);
     _addCommand("setCanvasBGColor", "(hexCode:String)", CanvasSizeViewController.setBGColorCommand);
+    
+    _addCommand("getPixelsPerUnit", "()", () => MainWindow.canvas.pixelsPerUnit);
+    _addCommand("setPixelsPerUnit", "(value:Number)", UnitsViewController.setPixelsPerUnitCommand);
+    _addCommand("getDisplayUnits", "()", UnitsViewController.getDisplayUnitsCommand);
+    _addCommand("setDisplayUnits", "(value:String)", UnitsViewController.setDisplayUnitsCommand);
+
+    _addCommand("getGridThickness", "()", () => MainWindow.canvas.gridThickness);
+    _addCommand("setGridThickness", "(value:Number)", GridViewController.setGridThicknessCommand);
+    _addCommand("getGridStep", "()", () => MainWindow.canvas.gridStep);
+    _addCommand("setGridStep", "(value:Number)", GridViewController.setGridStepCommand);
+    _addCommand("getGridColor", "()", () => GridViewController.getGridColorCommand);
+    _addCommand("setGridColor", "(value:String)", GridViewController.setGridColorCommand);
+    _addCommand("getGridDisplay", "()", GridViewController.getGridDisplayType);
+    _addCommand("setGridDisplay", "(value:String)", GridViewController.setGridDisplayType);
+    _addCommand("getGridGeometry", "()", GridViewController.getGridGeometryType);
+    _addCommand("setGridGeometry", "(value:String)", GridViewController.setGridGeometryType);
   }
 
   static void _onKeyPress(KeyboardEvent e) {
