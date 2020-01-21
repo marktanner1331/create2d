@@ -1,7 +1,7 @@
 import 'dart:html';
 
 import '../view/MainWindow.dart';
-
+import '../helpers/ColorHelper.dart';
 import '../helpers/ColorSwatchController.dart';
 import './GroupController.dart';
 import '../property_mixins/CanvasPropertiesMixin.dart';
@@ -25,6 +25,11 @@ class CanvasSizeViewController extends GroupController {
 
   void _onBGColorChanged(_) {
     _model.backgroundColor = _bgColorController.color;
+  }
+
+  static void setBGColorCommand(String hexCode) {
+    MainWindow.canvas.backgroundColor = ColorHelper.parseCssColor(hexCode);
+    MainWindow.propertyWindow.refreshCurrentTab();
   }
 
   static void setCanvasWidthCommand(num value) {

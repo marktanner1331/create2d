@@ -25,7 +25,7 @@ class CommandPalette {
     _input = _view.querySelector("input");
     _input.onKeyDown.listen(_onKeyPress);
     _input.onInput.listen(_onInputChanged);
-    _input.addEventListener("focusout", (_) => _hide());
+    //_input.addEventListener("focusout", (_) => _hide());
 
      _suggestedCommands = _view.querySelector("#suggestedCommands");
 
@@ -54,6 +54,7 @@ class CommandPalette {
     _addCommand("setCanvasWidth", "(value:Number)", CanvasSizeViewController.setCanvasWidthCommand);
     _addCommand("setCanvasHeight", "(value:Number)", CanvasSizeViewController.setCanvasHeightCommand);
     _addCommand("setCanvasSize", "(width:Number, height:Number)", CanvasSizeViewController.setCanvasSizeCommand);
+    _addCommand("setCanvasBGColor", "(hexCode:String)", CanvasSizeViewController.setBGColorCommand);
   }
 
   static void _onKeyPress(KeyboardEvent e) {
@@ -90,17 +91,23 @@ class CommandPalette {
       //otherwise, we autocomplete with a suggested command
       String suggestedCommand = _getSelectedCommand();
       if(suggestedCommand != null) {
-        suggestedCommand = _removeParametersFromCommand(suggestedCommand);
-        _input.value = suggestedCommand + "()";
-
-        //set the text cursor inside the brackets
-        int startOfParameters = suggestedCommand.length + 1;
-        _input.selectionStart = startOfParameters;
-        _input.selectionEnd = startOfParameters;
-
-        _refreshSuggestedCommandsWithPartial(suggestedCommand);
+        _completeWithSuggestedCommand(suggestedCommand);
       }
     }
+  }
+
+  ///fills in the autocoplete with the given suggested command
+  static void _completeWithSuggestedCommand(String suggestedCommand) {
+    suggestedCommand = _removeParametersFromCommand(suggestedCommand);
+    _input.value = suggestedCommand + "()";
+    _input.focus();
+
+    //set the text cursor inside the brackets
+    int startOfParameters = suggestedCommand.length + 1;
+    _input.selectionStart = startOfParameters;
+    _input.selectionEnd = startOfParameters;
+
+    _refreshSuggestedCommandsWithPartial(suggestedCommand);
   }
 
   //removes parameters including brackets
@@ -135,6 +142,20 @@ class CommandPalette {
 
     return _suggestedCommands.children.indexOf(selected);
   }
+  
+  //TODO remove this
+  // static int _getIndexOfSuggestedCommand(String suggestedCommand) {
+  //   int i = 0;
+  //   for(DivElement suggestedCommandDiv in _suggestedCommands.children) {
+  //     if(suggestedCommandDiv.text.startsWith(suggestedCommand)) {
+  //       return i;
+  //     }
+
+  //     i++;
+  //   }
+
+  //   return -1;
+  // }
 
   //this method will handle if we are going outside the bounds of the selected commands
   static void _setSelectedCommand(int index) {
@@ -171,11 +192,20 @@ class CommandPalette {
       commands.sort();
       for (String command in commands) {
         _suggestedCommands.insertAdjacentHtml(
-            "beforeEnd", "<div class=\"suggestedCommand\">$command</div>");
+            "beforeEnd", "<div id=\"command-${command.hashCode}\" class=\"suggestedCommand\">$command</div>");
+          
+         DivElement suggestedCommand = _suggestedCommands.querySelector("#command-${command.hashCode}")
+          ..onClick.listen(_onSuggestedCommandClick);
       }
 
       _setSelectedCommand(0);
     }
+  }
+
+  static void _onSuggestedCommandClick(MouseEvent e) {
+    DivElement suggestedCommand = e.target;
+    String text = suggestedCommand.text;
+    _completeWithSuggestedCommand(text);
   }
 
   static void show() {

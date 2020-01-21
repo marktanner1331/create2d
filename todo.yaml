@@ -80,6 +80,8 @@ command palette:
         canvas properties
     limit max height and scroll on overflow
     ability to click suggested commands
+    settings:
+        autoclose after command (default:true)
 
 script runner:
 
