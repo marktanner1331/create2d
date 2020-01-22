@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'dart:js';
 
@@ -18,6 +19,8 @@ class CommandPalette {
   //a list of all registered command names and their parameters
   static Map<String, String> _commandToParameters;
 
+  static StreamSubscription<MouseEvent> _bodyClickSubscription;
+
   CommandPalette() {
     _autoComplete = AutoComplete();
     _commandToParameters = Map();
@@ -27,11 +30,22 @@ class CommandPalette {
     _input = _view.querySelector("input");
     _input.onKeyDown.listen(_onKeyPress);
     _input.onInput.listen(_onInputChanged);
-    _input.addEventListener("focusout", (_) => _hide());
 
-     _suggestedCommands = _view.querySelector("#suggestedCommands");
+    _suggestedCommands = _view.querySelector("#suggestedCommands");
 
     _initializeContext();
+  }
+
+  static void _onBodyClick(MouseEvent e) {
+    HtmlElement element = e.target;
+    
+    if(element.matchesWithAncestors("#commandPalette")) {
+      return;
+    } else if(element.classes.contains("suggestedCommand")) {
+      return;
+    }
+    
+    _hide();
   }
 
   static void _onInputChanged(_) {
@@ -68,7 +82,7 @@ class CommandPalette {
     _addCommand("setGridThickness", "(value:Number)", GridViewController.setGridThicknessCommand);
     _addCommand("getGridStep", "()", () => MainWindow.canvas.gridStep);
     _addCommand("setGridStep", "(value:Number)", GridViewController.setGridStepCommand);
-    _addCommand("getGridColor", "()", () => GridViewController.getGridColorCommand);
+    _addCommand("getGridColor", "()", GridViewController.getGridColorCommand);
     _addCommand("setGridColor", "(value:String)", GridViewController.setGridColorCommand);
     _addCommand("getGridDisplay", "()", GridViewController.getGridDisplayType);
     _addCommand("setGridDisplay", "(value:String)", GridViewController.setGridDisplayType);
@@ -119,7 +133,6 @@ class CommandPalette {
   static void _completeWithSuggestedCommand(String suggestedCommand) {
     suggestedCommand = _removeParametersFromCommand(suggestedCommand);
     _input.value = suggestedCommand + "()";
-    _input.focus();
 
     //set the text cursor inside the brackets
     int startOfParameters = suggestedCommand.length + 1;
@@ -161,20 +174,6 @@ class CommandPalette {
 
     return _suggestedCommands.children.indexOf(selected);
   }
-  
-  //TODO remove this
-  // static int _getIndexOfSuggestedCommand(String suggestedCommand) {
-  //   int i = 0;
-  //   for(DivElement suggestedCommandDiv in _suggestedCommands.children) {
-  //     if(suggestedCommandDiv.text.startsWith(suggestedCommand)) {
-  //       return i;
-  //     }
-
-  //     i++;
-  //   }
-
-  //   return -1;
-  // }
 
   //this method will handle if we are going outside the bounds of the selected commands
   static void _setSelectedCommand(int index) {
@@ -225,12 +224,16 @@ class CommandPalette {
     DivElement suggestedCommand = e.target;
     String text = suggestedCommand.text;
     _completeWithSuggestedCommand(text);
+
+    _input.focus();
   }
 
   static void show() {
     _view.style.display = "block";
     _input.focus();
     _refreshSuggestedCommandsWithPartial("");
+    
+    _bodyClickSubscription = document.body.onClick.listen(_onBodyClick);
   }
 
   static void _hide() {
@@ -238,6 +241,11 @@ class CommandPalette {
     _suggestedCommands.children.clear();
 
     _view.style.display = "none";
+
+    if(_bodyClickSubscription != null) {
+      _bodyClickSubscription.cancel();
+      _bodyClickSubscription = null;
+    }
   }
 
   ///commandName should not include the closing brackets, only the function name

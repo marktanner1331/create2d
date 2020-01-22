@@ -399,9 +399,8 @@ html, body, .stage--fullscreen {
 }
 
 #commandPalette {
-    /* display:none; */
     position: absolute;
-    top: 0;
+    top: 5px;
     left: 50%;
     transform: translate(-50%, 0);
     padding: 5px;
@@ -409,6 +408,13 @@ html, body, .stage--fullscreen {
     border: 1px solid #aaaaaa;
     width: 350px;
     max-width: 90%;
+    border-radius: 5px;
+    box-shadow: -1px 1px 3px black;
+}
+
+#commandPalette #suggestedCommands {
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 #commandPalette input {
