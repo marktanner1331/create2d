@@ -49,12 +49,7 @@ class ToolboxController with HTMLViewController {
 
     currentTool.onSuspend();
 
-    for(ITool tool in _tools) {
-      if(tool is T) {
-        _tempTool = tool;
-        break;
-      }
-    }
+    _tempTool = _findTool<T>();
 
     _tempTool.onEnter();
     _tempTool.view.classes.add("tool_button_selected");
@@ -70,6 +65,14 @@ class ToolboxController with HTMLViewController {
     _tempTool = null;
 
     _currentTool.onResume();
+  }
+
+  ITool _findTool<T extends ITool>() {
+    for(ITool tool in _tools) {
+      if(tool is T) {
+        return tool;
+      }
+    }
   }
 
   void _addTool(ITool tool) {

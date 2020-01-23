@@ -91,6 +91,8 @@ class CommandPalette {
   }
 
   static void _onKeyPress(KeyboardEvent e) {
+    e.stopImmediatePropagation();
+    
     switch (e.keyCode) {
       case KeyCode.ENTER:
         _onEnterPress();

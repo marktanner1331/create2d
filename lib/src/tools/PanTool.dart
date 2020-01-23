@@ -29,7 +29,7 @@ class PanTool extends ITool {
   void onMouseDown(Point unsnappedMousePosition, Point snappedMousePosition) {
     super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
   }
-
+  
   //void startPanning() =>  MainWindow.startPanningCanvas();
 
   @override

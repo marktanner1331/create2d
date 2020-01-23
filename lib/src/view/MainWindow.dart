@@ -135,6 +135,8 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _panningController.onFinishedDrag.listen((_) {
       
     });
+
+    html.document.body.onKeyDown.listen(_onKeyDownForPanningCanvas);
   }
 
   static void stopPanningCanvas() {
@@ -146,6 +148,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _panningController.onPositionChanged.cancelSubscriptions();
     _panningController.onFinishedDrag.cancelSubscriptions();
     _panningController = null;
+  }
+
+  static void _onKeyDownForPanningCanvas(html.KeyboardEvent e) {
+
   }
 
   static void zoomInAtCenter(num zoom) {

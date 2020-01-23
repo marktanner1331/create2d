@@ -30,6 +30,26 @@ html, body, .stage--fullscreen {
                                     supported by Chrome, Opera and Firefox */
 }
 
+::-webkit-scrollbar {
+    background-color: #222222;
+    color: #777777;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #666666;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #777777;
+}
+::-webkit-scrollbar-thumb:active {
+    background-color: #777777;
+}
+::-webkit-scrollbar-corner {
+    background-color: #777777;
+}
+* {
+    scrollbar-color: #222222 #777777;
+}
+
 .floating_window {
     position: absolute;
     top: 0;
