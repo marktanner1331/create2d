@@ -11026,6 +11026,1806 @@
                     "filename": "lib\\src\\widgets\\TextButton.dart"
                 }
             ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2020-01-20 15:11:09",
+            "filesum": 98,
+            "codesum": 6247,
+            "commentsum": 358,
+            "blanksum": 1738,
+            "filelist": [
+                {
+                    "blank": 7,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "example\\main.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "lib\\design2D.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorBox.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 85,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSlider.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSliderWithLabel.dart"
+                },
+                {
+                    "blank": 34,
+                    "code": 110,
+                    "comment": 5,
+                    "filename": "lib\\src\\color_picker\\ColorPicker.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 164,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPicker3D.dart"
+                },
+                {
+                    "blank": 68,
+                    "code": 265,
+                    "comment": 4,
+                    "filename": "lib\\src\\color_picker\\ColorPickerComponents.dart"
+                },
+                {
+                    "blank": 36,
+                    "code": 231,
+                    "comment": 28,
+                    "filename": "lib\\src\\color_picker\\ColorPickerMixer.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerPalette.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerSwatches.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\EyeDropper.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 48,
+                    "comment": 3,
+                    "filename": "lib\\src\\color_picker\\Square.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\ErrorLogger.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 140,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\BoundingBoxViewController.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 56,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\CanvasSizeViewController.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\ContextController.dart"
+                },
+                {
+                    "blank": 29,
+                    "code": 109,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\GridViewController.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\GroupController.dart"
+                },
+                {
+                    "blank": 38,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\LineViewController.dart"
+                },
+                {
+                    "blank": 35,
+                    "code": 102,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\SelectedViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "lib\\src\\group_controllers\\SnappingViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextContentViewController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextStyleViewController.dart"
+                },
+                {
+                    "blank": 24,
+                    "code": 107,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\UnitsViewController.dart"
+                },
+                {
+                    "blank": 40,
+                    "code": 115,
+                    "comment": 13,
+                    "filename": "lib\\src\\group_controllers\\ZoomViewController.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AspectFit.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AutoComplete.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 103,
+                    "comment": 6,
+                    "filename": "lib\\src\\helpers\\ColorHelper.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "lib\\src\\helpers\\ColorSwatchController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\Draggable.dart"
+                },
+                {
+                    "blank": 29,
+                    "code": 89,
+                    "comment": 5,
+                    "filename": "lib\\src\\helpers\\DraggableController.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\HTMLViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\IOnEnterExit.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\MostCommonValue.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SetSizeMixin.dart"
+                },
+                {
+                    "blank": 27,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SliderBoxController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\StageXLDrawingHelper.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\TextInputViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\ToStringRounded.dart"
+                },
+                {
+                    "blank": 41,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "lib\\src\\helpers\\UnitsHelper.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 1,
+                    "filename": "lib\\src\\main_menu\\MainMenu.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\CanvasUnitType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridDisplayType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridGeometryType.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "lib\\src\\model\\Properties.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\BoundingBoxMixin.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 45,
+                    "comment": 4,
+                    "filename": "lib\\src\\property_mixins\\CanvasPropertiesMixin.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\GridPropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\IHavePropertyMixins.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 8,
+                    "filename": "lib\\src\\property_mixins\\LinePropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 72,
+                    "filename": "lib\\src\\property_mixins\\MultiObjectEngine.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SelectedObjectsMixin.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SnappingPropertiesMixin.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\TextContentMixin.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 43,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_mixins\\TextStyleMixin.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\CanvasTab.dart"
+                },
+                {
+                    "blank": 17,
+                    "code": 66,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\ContextTab.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\PropertyWindowController.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\Tab.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 39,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\TabController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 2,
+                    "filename": "lib\\src\\Renderers\\StageXLRenderer.dart"
+                },
+                {
+                    "blank": 44,
+                    "code": 199,
+                    "comment": 12,
+                    "filename": "lib\\src\\stateful_graphics\\Container.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 20,
+                    "comment": 14,
+                    "filename": "lib\\src\\stateful_graphics\\IShape.dart"
+                },
+                {
+                    "blank": 31,
+                    "code": 163,
+                    "comment": 5,
+                    "filename": "lib\\src\\stateful_graphics\\Line.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\StatefulGraphics.dart"
+                },
+                {
+                    "blank": 24,
+                    "code": 150,
+                    "comment": 3,
+                    "filename": "lib\\src\\stateful_graphics\\Text.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\Vertex.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\Styles.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 25,
+                    "comment": 7,
+                    "filename": "lib\\src\\tools\\ITool.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\LineTool.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "lib\\src\\tools\\PanTool.dart"
+                },
+                {
+                    "blank": 56,
+                    "code": 217,
+                    "comment": 42,
+                    "filename": "lib\\src\\tools\\SelectTool.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 44,
+                    "comment": 4,
+                    "filename": "lib\\src\\tools\\TextTool.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 89,
+                    "comment": 2,
+                    "filename": "lib\\src\\tools\\ToolboxController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\ZoomTool.dart"
+                },
+                {
+                    "blank": 39,
+                    "code": 113,
+                    "comment": 16,
+                    "filename": "lib\\src\\view\\Canvas.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 98,
+                    "comment": 5,
+                    "filename": "lib\\src\\view\\CanvasMouseEventsController.dart"
+                },
+                {
+                    "blank": 37,
+                    "code": 157,
+                    "comment": 11,
+                    "filename": "lib\\src\\view\\CommandPalette.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\Dialog.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 60,
+                    "comment": 4,
+                    "filename": "lib\\src\\view\\DialogLayer.dart"
+                },
+                {
+                    "blank": 75,
+                    "code": 270,
+                    "comment": 40,
+                    "filename": "lib\\src\\view\\Grid.dart"
+                },
+                {
+                    "blank": 68,
+                    "code": 182,
+                    "comment": 20,
+                    "filename": "lib\\src\\view\\MainWindow.dart"
+                },
+                {
+                    "blank": 22,
+                    "code": 77,
+                    "comment": 3,
+                    "filename": "lib\\src\\view\\SelectionLayer.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 56,
+                    "comment": 2,
+                    "filename": "lib\\src\\view\\ShortcutController.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 51,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\TooltipController.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\Checkbox.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CheckboxWithLabel.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CloseButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\GraphicsButton.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\NumberFieldWithLabel.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButton.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonGroup.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonRow.dart"
+                },
+                {
+                    "blank": 19,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\SelectableTextButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TabButton.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 54,
+                    "comment": 1,
+                    "filename": "lib\\src\\widgets\\TabButtonRow.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TextButton.dart"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2020-01-22 08:05:16",
+            "filesum": 98,
+            "codesum": 6390,
+            "commentsum": 359,
+            "blanksum": 1758,
+            "filelist": [
+                {
+                    "blank": 7,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "example\\main.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "lib\\design2D.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorBox.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 85,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSlider.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSliderWithLabel.dart"
+                },
+                {
+                    "blank": 34,
+                    "code": 110,
+                    "comment": 5,
+                    "filename": "lib\\src\\color_picker\\ColorPicker.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 164,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPicker3D.dart"
+                },
+                {
+                    "blank": 68,
+                    "code": 265,
+                    "comment": 4,
+                    "filename": "lib\\src\\color_picker\\ColorPickerComponents.dart"
+                },
+                {
+                    "blank": 36,
+                    "code": 231,
+                    "comment": 28,
+                    "filename": "lib\\src\\color_picker\\ColorPickerMixer.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerPalette.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerSwatches.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\EyeDropper.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 48,
+                    "comment": 3,
+                    "filename": "lib\\src\\color_picker\\Square.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\ErrorLogger.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 140,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\BoundingBoxViewController.dart"
+                },
+                {
+                    "blank": 17,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\CanvasSizeViewController.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\ContextController.dart"
+                },
+                {
+                    "blank": 39,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\GridViewController.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\GroupController.dart"
+                },
+                {
+                    "blank": 38,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\LineViewController.dart"
+                },
+                {
+                    "blank": 35,
+                    "code": 102,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\SelectedViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "lib\\src\\group_controllers\\SnappingViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextContentViewController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextStyleViewController.dart"
+                },
+                {
+                    "blank": 21,
+                    "code": 139,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\UnitsViewController.dart"
+                },
+                {
+                    "blank": 40,
+                    "code": 115,
+                    "comment": 13,
+                    "filename": "lib\\src\\group_controllers\\ZoomViewController.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AspectFit.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AutoComplete.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 103,
+                    "comment": 6,
+                    "filename": "lib\\src\\helpers\\ColorHelper.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "lib\\src\\helpers\\ColorSwatchController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\Draggable.dart"
+                },
+                {
+                    "blank": 29,
+                    "code": 89,
+                    "comment": 5,
+                    "filename": "lib\\src\\helpers\\DraggableController.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\HTMLViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\IOnEnterExit.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\MostCommonValue.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SetSizeMixin.dart"
+                },
+                {
+                    "blank": 27,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SliderBoxController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\StageXLDrawingHelper.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\TextInputViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\ToStringRounded.dart"
+                },
+                {
+                    "blank": 41,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "lib\\src\\helpers\\UnitsHelper.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 1,
+                    "filename": "lib\\src\\main_menu\\MainMenu.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\CanvasUnitType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridDisplayType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridGeometryType.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "lib\\src\\model\\Properties.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\BoundingBoxMixin.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 45,
+                    "comment": 4,
+                    "filename": "lib\\src\\property_mixins\\CanvasPropertiesMixin.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\GridPropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\IHavePropertyMixins.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 8,
+                    "filename": "lib\\src\\property_mixins\\LinePropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 72,
+                    "filename": "lib\\src\\property_mixins\\MultiObjectEngine.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SelectedObjectsMixin.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SnappingPropertiesMixin.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\TextContentMixin.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 43,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_mixins\\TextStyleMixin.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\CanvasTab.dart"
+                },
+                {
+                    "blank": 17,
+                    "code": 66,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\ContextTab.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\PropertyWindowController.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\Tab.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 39,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\TabController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 2,
+                    "filename": "lib\\src\\Renderers\\StageXLRenderer.dart"
+                },
+                {
+                    "blank": 44,
+                    "code": 199,
+                    "comment": 12,
+                    "filename": "lib\\src\\stateful_graphics\\Container.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 20,
+                    "comment": 14,
+                    "filename": "lib\\src\\stateful_graphics\\IShape.dart"
+                },
+                {
+                    "blank": 31,
+                    "code": 163,
+                    "comment": 5,
+                    "filename": "lib\\src\\stateful_graphics\\Line.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\StatefulGraphics.dart"
+                },
+                {
+                    "blank": 24,
+                    "code": 150,
+                    "comment": 3,
+                    "filename": "lib\\src\\stateful_graphics\\Text.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\Vertex.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\Styles.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 25,
+                    "comment": 7,
+                    "filename": "lib\\src\\tools\\ITool.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\LineTool.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "lib\\src\\tools\\PanTool.dart"
+                },
+                {
+                    "blank": 56,
+                    "code": 217,
+                    "comment": 42,
+                    "filename": "lib\\src\\tools\\SelectTool.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 44,
+                    "comment": 4,
+                    "filename": "lib\\src\\tools\\TextTool.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 89,
+                    "comment": 2,
+                    "filename": "lib\\src\\tools\\ToolboxController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\ZoomTool.dart"
+                },
+                {
+                    "blank": 39,
+                    "code": 113,
+                    "comment": 16,
+                    "filename": "lib\\src\\view\\Canvas.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 98,
+                    "comment": 5,
+                    "filename": "lib\\src\\view\\CanvasMouseEventsController.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 201,
+                    "comment": 12,
+                    "filename": "lib\\src\\view\\CommandPalette.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\Dialog.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 60,
+                    "comment": 4,
+                    "filename": "lib\\src\\view\\DialogLayer.dart"
+                },
+                {
+                    "blank": 75,
+                    "code": 270,
+                    "comment": 40,
+                    "filename": "lib\\src\\view\\Grid.dart"
+                },
+                {
+                    "blank": 68,
+                    "code": 182,
+                    "comment": 20,
+                    "filename": "lib\\src\\view\\MainWindow.dart"
+                },
+                {
+                    "blank": 22,
+                    "code": 77,
+                    "comment": 3,
+                    "filename": "lib\\src\\view\\SelectionLayer.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 56,
+                    "comment": 2,
+                    "filename": "lib\\src\\view\\ShortcutController.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 51,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\TooltipController.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\Checkbox.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CheckboxWithLabel.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CloseButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\GraphicsButton.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\NumberFieldWithLabel.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButton.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonGroup.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonRow.dart"
+                },
+                {
+                    "blank": 19,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\SelectableTextButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TabButton.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 54,
+                    "comment": 1,
+                    "filename": "lib\\src\\widgets\\TabButtonRow.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TextButton.dart"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2020-01-23 07:57:35",
+            "filesum": 99,
+            "codesum": 6464,
+            "commentsum": 358,
+            "blanksum": 1779,
+            "filelist": [
+                {
+                    "blank": 7,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "example\\main.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "lib\\design2D.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorBox.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 85,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSlider.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 1,
+                    "filename": "lib\\src\\color_picker\\ColorGradientSliderWithLabel.dart"
+                },
+                {
+                    "blank": 34,
+                    "code": 110,
+                    "comment": 5,
+                    "filename": "lib\\src\\color_picker\\ColorPicker.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 164,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPicker3D.dart"
+                },
+                {
+                    "blank": 68,
+                    "code": 265,
+                    "comment": 4,
+                    "filename": "lib\\src\\color_picker\\ColorPickerComponents.dart"
+                },
+                {
+                    "blank": 36,
+                    "code": 231,
+                    "comment": 28,
+                    "filename": "lib\\src\\color_picker\\ColorPickerMixer.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 58,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerPalette.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 84,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\ColorPickerSwatches.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 68,
+                    "comment": 0,
+                    "filename": "lib\\src\\color_picker\\EyeDropper.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 48,
+                    "comment": 3,
+                    "filename": "lib\\src\\color_picker\\Square.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\ErrorLogger.dart"
+                },
+                {
+                    "blank": 49,
+                    "code": 140,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\BoundingBoxViewController.dart"
+                },
+                {
+                    "blank": 17,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\CanvasSizeViewController.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\ContextController.dart"
+                },
+                {
+                    "blank": 39,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\GridViewController.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\GroupController.dart"
+                },
+                {
+                    "blank": 38,
+                    "code": 111,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\LineViewController.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 37,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\PanViewController.dart"
+                },
+                {
+                    "blank": 35,
+                    "code": 102,
+                    "comment": 1,
+                    "filename": "lib\\src\\group_controllers\\SelectedViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 2,
+                    "filename": "lib\\src\\group_controllers\\SnappingViewController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextContentViewController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\TextStyleViewController.dart"
+                },
+                {
+                    "blank": 21,
+                    "code": 139,
+                    "comment": 0,
+                    "filename": "lib\\src\\group_controllers\\UnitsViewController.dart"
+                },
+                {
+                    "blank": 40,
+                    "code": 115,
+                    "comment": 13,
+                    "filename": "lib\\src\\group_controllers\\ZoomViewController.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AspectFit.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\AutoComplete.dart"
+                },
+                {
+                    "blank": 26,
+                    "code": 103,
+                    "comment": 6,
+                    "filename": "lib\\src\\helpers\\ColorHelper.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 44,
+                    "comment": 2,
+                    "filename": "lib\\src\\helpers\\ColorSwatchController.dart"
+                },
+                {
+                    "blank": 28,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\Draggable.dart"
+                },
+                {
+                    "blank": 29,
+                    "code": 89,
+                    "comment": 5,
+                    "filename": "lib\\src\\helpers\\DraggableController.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\HTMLViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\IOnEnterExit.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\MostCommonValue.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 51,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SetSizeMixin.dart"
+                },
+                {
+                    "blank": 27,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\SliderBoxController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\StageXLDrawingHelper.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\TextInputViewController.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\helpers\\ToStringRounded.dart"
+                },
+                {
+                    "blank": 41,
+                    "code": 170,
+                    "comment": 1,
+                    "filename": "lib\\src\\helpers\\UnitsHelper.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 84,
+                    "comment": 1,
+                    "filename": "lib\\src\\main_menu\\MainMenu.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\CanvasUnitType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridDisplayType.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\model\\GridGeometryType.dart"
+                },
+                {
+                    "blank": 2,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "lib\\src\\model\\Properties.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\BoundingBoxMixin.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 45,
+                    "comment": 4,
+                    "filename": "lib\\src\\property_mixins\\CanvasPropertiesMixin.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\GridPropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\IHavePropertyMixins.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 27,
+                    "comment": 8,
+                    "filename": "lib\\src\\property_mixins\\LinePropertiesMixin.dart"
+                },
+                {
+                    "blank": 1,
+                    "code": 3,
+                    "comment": 72,
+                    "filename": "lib\\src\\property_mixins\\MultiObjectEngine.dart"
+                },
+                {
+                    "blank": 25,
+                    "code": 81,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SelectedObjectsMixin.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\SnappingPropertiesMixin.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_mixins\\TextContentMixin.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 43,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_mixins\\TextStyleMixin.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\CanvasTab.dart"
+                },
+                {
+                    "blank": 17,
+                    "code": 66,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\ContextTab.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 38,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\PropertyWindowController.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "lib\\src\\property_windows\\Tab.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 39,
+                    "comment": 1,
+                    "filename": "lib\\src\\property_windows\\TabController.dart"
+                },
+                {
+                    "blank": 4,
+                    "code": 16,
+                    "comment": 2,
+                    "filename": "lib\\src\\Renderers\\StageXLRenderer.dart"
+                },
+                {
+                    "blank": 44,
+                    "code": 199,
+                    "comment": 12,
+                    "filename": "lib\\src\\stateful_graphics\\Container.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 20,
+                    "comment": 14,
+                    "filename": "lib\\src\\stateful_graphics\\IShape.dart"
+                },
+                {
+                    "blank": 31,
+                    "code": 163,
+                    "comment": 5,
+                    "filename": "lib\\src\\stateful_graphics\\Line.dart"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\StatefulGraphics.dart"
+                },
+                {
+                    "blank": 24,
+                    "code": 150,
+                    "comment": 3,
+                    "filename": "lib\\src\\stateful_graphics\\Text.dart"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "lib\\src\\stateful_graphics\\Vertex.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "lib\\src\\Styles.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 25,
+                    "comment": 7,
+                    "filename": "lib\\src\\tools\\ITool.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\LineTool.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\PanTool.dart"
+                },
+                {
+                    "blank": 56,
+                    "code": 217,
+                    "comment": 42,
+                    "filename": "lib\\src\\tools\\SelectTool.dart"
+                },
+                {
+                    "blank": 12,
+                    "code": 44,
+                    "comment": 4,
+                    "filename": "lib\\src\\tools\\TextTool.dart"
+                },
+                {
+                    "blank": 29,
+                    "code": 91,
+                    "comment": 2,
+                    "filename": "lib\\src\\tools\\ToolboxController.dart"
+                },
+                {
+                    "blank": 9,
+                    "code": 34,
+                    "comment": 0,
+                    "filename": "lib\\src\\tools\\ZoomTool.dart"
+                },
+                {
+                    "blank": 39,
+                    "code": 113,
+                    "comment": 16,
+                    "filename": "lib\\src\\view\\Canvas.dart"
+                },
+                {
+                    "blank": 30,
+                    "code": 98,
+                    "comment": 5,
+                    "filename": "lib\\src\\view\\CanvasMouseEventsController.dart"
+                },
+                {
+                    "blank": 50,
+                    "code": 202,
+                    "comment": 12,
+                    "filename": "lib\\src\\view\\CommandPalette.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\Dialog.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 60,
+                    "comment": 4,
+                    "filename": "lib\\src\\view\\DialogLayer.dart"
+                },
+                {
+                    "blank": 75,
+                    "code": 270,
+                    "comment": 40,
+                    "filename": "lib\\src\\view\\Grid.dart"
+                },
+                {
+                    "blank": 73,
+                    "code": 208,
+                    "comment": 20,
+                    "filename": "lib\\src\\view\\MainWindow.dart"
+                },
+                {
+                    "blank": 22,
+                    "code": 77,
+                    "comment": 3,
+                    "filename": "lib\\src\\view\\SelectionLayer.dart"
+                },
+                {
+                    "blank": 11,
+                    "code": 56,
+                    "comment": 2,
+                    "filename": "lib\\src\\view\\ShortcutController.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 51,
+                    "comment": 1,
+                    "filename": "lib\\src\\view\\TooltipController.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\Checkbox.dart"
+                },
+                {
+                    "blank": 10,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CheckboxWithLabel.dart"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\CloseButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\GraphicsButton.dart"
+                },
+                {
+                    "blank": 15,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\NumberFieldWithLabel.dart"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButton.dart"
+                },
+                {
+                    "blank": 18,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonGroup.dart"
+                },
+                {
+                    "blank": 8,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\RadioButtonRow.dart"
+                },
+                {
+                    "blank": 19,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\SelectableTextButton.dart"
+                },
+                {
+                    "blank": 14,
+                    "code": 54,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TabButton.dart"
+                },
+                {
+                    "blank": 16,
+                    "code": 54,
+                    "comment": 1,
+                    "filename": "lib\\src\\widgets\\TabButtonRow.dart"
+                },
+                {
+                    "blank": 13,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "lib\\src\\widgets\\TextButton.dart"
+                }
+            ]
         }
     ]
 }

@@ -2,6 +2,7 @@ import 'package:stagexl/stagexl.dart';
 import 'package:stagexl_ui_components/ui_components.dart';
 import 'dart:html' as html;
 import 'dart:math';
+import 'dart:async';
 
 import './Canvas.dart';
 import './ShortcutController.dart';
@@ -51,6 +52,10 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
   //used when the canvas is being dragged
   //e.g. in calls to startPanningCanvas()
   static DraggableController _panningController;
+  static StreamSubscription<html.KeyboardEvent> _onKeyDownForPanningCanvasSubscription;
+
+  static num panStep = 5;
+  static bool reversePanDirection  = false;
 
   static MainWindow _instance;
   static MainWindow get instance => _instance;
@@ -136,7 +141,7 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
       
     });
 
-    html.document.body.onKeyDown.listen(_onKeyDownForPanningCanvas);
+    _onKeyDownForPanningCanvasSubscription = html.document.body.onKeyDown.listen(_onKeyDownForPanningCanvas);
   }
 
   static void stopPanningCanvas() {
@@ -148,10 +153,30 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _panningController.onPositionChanged.cancelSubscriptions();
     _panningController.onFinishedDrag.cancelSubscriptions();
     _panningController = null;
+
+    _onKeyDownForPanningCanvasSubscription.cancel();
+    _onKeyDownForPanningCanvasSubscription = null;
   }
 
   static void _onKeyDownForPanningCanvas(html.KeyboardEvent e) {
+    if(e.target is html.TextInputElement) {
+      return;
+    }
 
+    switch(e.keyCode) {
+      case html.KeyCode.UP:
+        _canvas.y -= panStep * (reversePanDirection ? -1 : 1);
+        break;
+      case html.KeyCode.DOWN:
+        _canvas.y += panStep * (reversePanDirection ? -1 : 1);
+        break;
+      case html.KeyCode.LEFT:
+        _canvas.x -= panStep * (reversePanDirection ? -1 : 1);
+        break;
+      case html.KeyCode.RIGHT:
+        _canvas.x += panStep * (reversePanDirection ? -1 : 1);
+        break;
+    }
   }
 
   static void zoomInAtCenter(num zoom) {

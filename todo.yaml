@@ -7,7 +7,8 @@ ToolboxController:
 
 tools:
     panning:
-        need to use arrow keys if we are currently panning
+        change step amount in context properties
+        reverse direction
     zooming:
         comamnd palette
     image tool:
@@ -67,6 +68,7 @@ command palette:
     add more commands
         changing tools
         snapping properties
+    after selecting radio button, quick command shortcut doesnt work
 
 script runner:
 
@@ -102,6 +104,8 @@ menu items:
 settings:
     autocollapse property groups so that only one is open at a time
     hide quick commands after command has run
+    should be able to save defaults
+        also works for defaults for tools
 
 saving:
     to image

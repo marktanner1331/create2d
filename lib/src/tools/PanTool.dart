@@ -1,8 +1,11 @@
+import 'dart:collection';
 import 'dart:html';
 import 'package:stagexl/stagexl.dart' as stageXL show Point;
 
 import './ITool.dart';
 import '../view/MainWindow.dart';
+import '../group_controllers/pANViewController.dart';
+import '../group_controllers/ContextController.dart';
 
 class PanTool extends ITool {
   PanTool() : super(document.querySelector("#toolbox #panTool"));
@@ -13,6 +16,12 @@ class PanTool extends ITool {
   @override
   Iterable<stageXL.Point> getSnappablePoints() {
     return Iterable.empty();
+  }
+
+  @override
+  HashSet<ContextController> registerAndReturnViewControllers() {
+    return super.registerAndReturnViewControllers()
+      ..add(PanViewController.instance);
   }
 
   @override
@@ -30,8 +39,6 @@ class PanTool extends ITool {
     super.onMouseDown(unsnappedMousePosition, snappedMousePosition);
   }
   
-  //void startPanning() =>  MainWindow.startPanningCanvas();
-
   @override
   void onMouseMove(num x, num y) {}
 }

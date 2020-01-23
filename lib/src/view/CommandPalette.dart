@@ -214,7 +214,7 @@ class CommandPalette {
         _suggestedCommands.insertAdjacentHtml(
             "beforeEnd", "<div id=\"command-${command.hashCode}\" class=\"suggestedCommand\">$command</div>");
           
-         DivElement suggestedCommand = _suggestedCommands.querySelector("#command-${command.hashCode}")
+        _suggestedCommands.querySelector("#command-${command.hashCode}")
           ..onClick.listen(_onSuggestedCommandClick);
       }
 
