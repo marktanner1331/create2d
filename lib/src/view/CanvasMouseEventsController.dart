@@ -62,6 +62,14 @@ class CanvasMouseEventsController extends EventDispatcher {
       }
     }
 
+    if(_canvas.snapToShape) {
+      _canvas.currentGraphics.foreachShape((shape) {
+        if(shape.isPointOnEdge(p, 50)) {
+
+        }
+      });
+    }
+
     if (MainWindow.toolbox.currentTool.isActive) {
       const num MAX_NUM = 1000000;
       num closestX = MAX_NUM;

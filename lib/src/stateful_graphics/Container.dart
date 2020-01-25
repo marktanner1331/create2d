@@ -24,6 +24,22 @@ class Container extends IShape {
     return true;
   }
 
+  bool foreachShape(bool Function(IShape) callback) {
+    for (IShape shape in _shapes) {
+      if(shape is Container) {
+        if (shape.foreachShape(callback) == false) {
+          return false;
+        } else {
+          if(callback(shape) == false) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
+  }
+
   //removes all shapes that are invalid and not in the whitelist
   void removeInvalidShapes(List<IShape> whiteList) {
     Iterable<IShape> temp =
@@ -82,7 +98,7 @@ class Container extends IShape {
 
     return null;
   }
-
+  
   Iterable<Vertex> getVerticesUnderPoint(Point p) {
     List<Vertex> vertices = List();
     HashSet<int> identities = HashSet();

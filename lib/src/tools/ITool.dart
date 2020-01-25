@@ -20,6 +20,7 @@ abstract class ITool extends IHavePropertyMixins {
   void contextPropertiesHaveChanged() {}
 
   //only called if _isActive is set to true
+  //used for drawing lines horizontally and vertically
   Iterable<Point> getSnappablePoints();
 
   void onEnter();

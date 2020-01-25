@@ -114,24 +114,28 @@ class Line extends IShape with LinePropertiesMixin {
     return p == _start || p == _end;
   }
 
+  bool isPointOnEdge(Point p, num tolerance) => _hitTest(p, tolerance);
+
   @override
-  bool hitTest(Point<num> p) {
+  bool hitTest(Point<num> p) => _hitTest(p, thickness);
+
+  bool _hitTest(Point<num> p, num tolerance) {
     if (_start.x < _end.x) {
-      if (p.x <= _start.x - thickness || p.x >= _end.x + thickness) {
+      if (p.x <= _start.x - tolerance || p.x >= _end.x + tolerance) {
         return false;
       }
     } else {
-      if (p.x <= _end.x - thickness || p.x >= _start.x + thickness) {
+      if (p.x <= _end.x - tolerance || p.x >= _start.x + tolerance) {
         return false;
       }
     }
 
     if (_start.y < _end.y) {
-      if (p.y <= _start.y - thickness || p.y >= _end.y + thickness) {
+      if (p.y <= _start.y - tolerance || p.y >= _end.y + tolerance) {
         return false;
       }
     } else {
-      if (p.y <= _end.y - thickness || p.y >= _start.y + thickness) {
+      if (p.y <= _end.y - tolerance || p.y >= _start.y + tolerance) {
         return false;
       }
     }
@@ -139,7 +143,7 @@ class Line extends IShape with LinePropertiesMixin {
     num dx = _end.x - _start.x;
     num dy = _end.y - _start.y;
     num lineLengthSquared = dx * dx + dy * dy;
-    num squareThickness = (thickness + 5) * (thickness + 5);
+    num squareThickness = tolerance * tolerance;
 
     num squareDistance = distanceSquaredToLineSegment2(
         _start.x, _start.y, dx, dy, lineLengthSquared, p.x, p.y);

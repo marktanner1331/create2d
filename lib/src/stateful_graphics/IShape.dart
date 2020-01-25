@@ -22,6 +22,8 @@ abstract class IShape extends IHavePropertyMixins {
   ///e.g. it doesn't have enough unique vertices
   bool isValid();
 
+  bool isPointOnEdge(Point<num> p, num tolerance);
+
   ///if a vertex exists under the given point (or close enough with the given tolerance) then it is returned
   ///otherwise null is returned instead
   ///the tolerance is given in its squared form
