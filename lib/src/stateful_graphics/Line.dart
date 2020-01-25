@@ -32,6 +32,7 @@ class Line extends IShape with LinePropertiesMixin {
     }
   }
 
+  //from: https://github.com/scottglz/distance-to-line-segment/blob/master/index.js
   num distanceSquaredToLineSegment2(
       lx1, ly1, ldx, ldy, lineLengthSquared, px, py) {
     //print("$lx1, $ly1, $ldx, $ldy, $lineLengthSquared, $px, $py");
@@ -161,7 +162,6 @@ class Line extends IShape with LinePropertiesMixin {
     }
   }
 
-  //from: https://github.com/scottglz/distance-to-line-segment/blob/master/index.js
   @override
   void renderToStageXL(Sprite s) {
     if(dashed == false) {

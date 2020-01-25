@@ -26,10 +26,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
   //only really used when moving multiple vertices at once
   Point _mouseDownPoint;
 
-  //tracks every vertex that is connected to the current vertex
-  //more of a performance increase than a functionality one
-  Iterable<Vertex> _connectedVerticesCache;
-
   SelectTool() : super(html.document.querySelector("#selectTool")) {
     selectedVertices = HashSet();
     selectedShapes = List();
@@ -135,13 +131,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
       MainWindow.canvas.selectionLayer.selectedBlacklist.remove(v);
     }
 
-    if (_currentVertex != null) {
-      _connectedVerticesCache = MainWindow.canvas.currentGraphics
-          .getAllVerticesConnectedToVertex(_currentVertex);
-    } else {
-      _connectedVerticesCache = [];
-    }
-
     MainWindow.canvas.selectionLayer.deselectAllAndSelectShapes(selectedShapes);
     MainWindow.canvas.currentGraphics.removeInvalidShapes(selectedShapes);
 
@@ -167,8 +156,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
 
     MainWindow.canvas.selectionLayer
         .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
-
-    _connectedVerticesCache = [];
 
     MainWindow.canvas.selectionLayer.deselectAllAndSelectShapes(selectedShapes);
 
@@ -215,7 +202,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     }
 
     _currentVertex = null;
-    _connectedVerticesCache = [];
   }
 
   @override
@@ -261,7 +247,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     selectedVertices.clear();
     selectedShapes.clear();
     _currentVertex = null;
-    _connectedVerticesCache = null;
 
     MainWindow.canvas.selectionLayer
         .deselectAllAndSelectVertices("SELECT_TOOL", selectedVertices);
@@ -302,7 +287,6 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     selectedVertices.clear();
     selectedShapes.clear();
     _currentVertex = null;
-    _connectedVerticesCache = [];
 
     MainWindow.canvas.selectionLayer.deselectAllVertices("SELECT_TOOL");
     MainWindow.canvas.selectionLayer.deselectAllShapes();
