@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:stagexl/stagexl.dart' show Point, Sprite;
+import 'package:stagexl/stagexl.dart';
 
 import './IShape.dart';
 import './Vertex.dart';
@@ -43,8 +43,25 @@ class Line extends IShape with LinePropertiesMixin {
       t = 0;
     else if (t > 1) t = 1;
 
-    var lx = lx1 + t * ldx, ly = ly1 + t * ldy, dx = px - lx, dy = py - ly;
+    var lx = lx1 + t * ldx;
+    var ly = ly1 + t * ldy;
+    var dx = px - lx;
+    var dy = py - ly;
     return dx * dx + dy * dy;
+  }
+
+  //returns the point on the line that is closest to the given point
+  Point _getClosestPointOnLine(lx1, ly1, ldx, ldy, lineLengthSquared, px, py) {
+    var t = ((px - lx1) * ldx + (py - ly1) * ldy) / lineLengthSquared;
+
+    if (t < 0)
+      t = 0;
+    else if (t > 1) t = 1;
+
+    num lx = lx1 + t * ldx;
+    num ly = ly1 + t * ldy;
+
+    return Point(lx, ly);
   }
 
   @override
@@ -114,7 +131,18 @@ class Line extends IShape with LinePropertiesMixin {
     return p == _start || p == _end;
   }
 
-  bool isPointOnEdge(Point p, num tolerance) => _hitTest(p, tolerance);
+  @override
+  Point<num> getClosestPointOnEdge(Point<num> p) {
+    num dx = _end.x - _start.x;
+    num dy = _end.y - _start.y;
+    num lineLengthSquared = dx * dx + dy * dy;
+
+    return _getClosestPointOnLine(
+        _start.x, _start.y, dx, dy, lineLengthSquared, p.x, p.y);
+  }
+
+  @override
+  bool isPointOnEdge(Point p, num tolerance) => _hitTest(p, tolerance + thickness);
 
   @override
   bool hitTest(Point<num> p) => _hitTest(p, thickness);
@@ -143,12 +171,12 @@ class Line extends IShape with LinePropertiesMixin {
     num dx = _end.x - _start.x;
     num dy = _end.y - _start.y;
     num lineLengthSquared = dx * dx + dy * dy;
-    num squareThickness = tolerance * tolerance;
+    num squareTolerance = tolerance * tolerance;
 
     num squareDistance = distanceSquaredToLineSegment2(
         _start.x, _start.y, dx, dy, lineLengthSquared, p.x, p.y);
-    
-    return squareDistance <= squareThickness;
+
+    return squareDistance <= squareTolerance;
   }
 
   @override

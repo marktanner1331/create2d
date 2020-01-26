@@ -63,11 +63,19 @@ class CanvasMouseEventsController extends EventDispatcher {
     }
 
     if(_canvas.snapToShape) {
+      Point ret;
       _canvas.currentGraphics.foreachShape((shape) {
-        if(shape.isPointOnEdge(p, 50)) {
-
+        
+        if(shape.isPointOnEdge(p, 10)) {
+          ret = shape.getClosestPointOnEdge(p);
+          return false;
+        } else {
+          return true;
         }
       });
+      if(ret != null) {
+        return ret;
+      }
     }
 
     if (MainWindow.toolbox.currentTool.isActive) {

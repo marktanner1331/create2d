@@ -1,5 +1,5 @@
 import './Vertex.dart';
-import 'package:stagexl/stagexl.dart' show Point, Sprite;
+import 'package:stagexl/stagexl.dart';
 
 import '../property_mixins/IHavePropertyMixins.dart';
 
@@ -22,7 +22,11 @@ abstract class IShape extends IHavePropertyMixins {
   ///e.g. it doesn't have enough unique vertices
   bool isValid();
 
-  bool isPointOnEdge(Point<num> p, num tolerance);
+  bool isPointOnEdge(Point p, num tolerance);
+
+  //returns the point that lies on the edge of the shape
+  //which is closest to the given point
+  Point getClosestPointOnEdge(Point p);
 
   ///if a vertex exists under the given point (or close enough with the given tolerance) then it is returned
   ///otherwise null is returned instead

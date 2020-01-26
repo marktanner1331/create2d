@@ -29,12 +29,12 @@ class Container extends IShape {
       if(shape is Container) {
         if (shape.foreachShape(callback) == false) {
           return false;
-        } else {
-          if(callback(shape) == false) {
+        }
+      } else {
+        if(callback(shape) == false) {
             return false;
           }
         }
-      }
     }
 
     return true;
@@ -267,5 +267,17 @@ class Container extends IShape {
     }
 
     _shapes.removeWhere((shape) => shape.isValid() == false);
+  }
+
+  @override
+  Point<num> getClosestPointOnEdge(Point<num> p) {
+    //really shouldn't be calling this on a container
+    throw Error();
+  }
+
+  @override
+  bool isPointOnEdge(Point<num> p, num tolerance) {
+    //really shouldn't be calling this on a container
+    throw Error();
   }
 }

@@ -28,6 +28,9 @@ tools:
     line:
         need to sudivide lines
         insignificant vertices
+            all this generic edge stuff is great
+            but we might want to snap to the center of a circle
+            we should farm out the insignificant logic decisions to the shapes
         lock to horizontal/vertical/diagonal
         length of line
             use canvas units (e.g. px or mm, inch, etc)
@@ -70,6 +73,7 @@ rendering:
         leaving path painting to the very end
         i.e. the last path in the shape that has the same properties
         it will mean slightly slower rendering, but shouldn't be too bad
+    try and fix the super low dpi that lines are rendered at
 
 command palette:
     error handling
@@ -124,3 +128,8 @@ saving:
 
 loading:
     from internal format
+
+optimizations:
+    when calculating insignificant vertices on lines we run the distanceToSegment code twice
+        once as a hittest, once to get the point
+        see if we can optimize that

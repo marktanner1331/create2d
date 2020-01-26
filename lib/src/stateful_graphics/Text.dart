@@ -174,4 +174,14 @@ class Text extends IShape
       _topLeft = newVertex;
     }
   }
+
+  @override
+  Point<num> getClosestPointOnEdge(Point<num> p) {
+    return null;
+  }
+
+  @override
+  bool isPointOnEdge(Point<num> p, num tolerance) {
+    return false;
+  }
 }
