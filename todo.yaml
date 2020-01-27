@@ -7,10 +7,7 @@ ToolboxController:
 
 tools:
     panning:
-        change step amount in context properties
-        reverse direction
-    zooming:
-        comamnd palette
+        command palette
     image tool:
     rectangle:
     oval:

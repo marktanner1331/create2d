@@ -158,6 +158,12 @@ class MainWindow extends Sprite with RefreshMixin, SetSizeAndPositionMixin {
     _onKeyDownForPanningCanvasSubscription = null;
   }
 
+  //adjusts the position of the canvas by the given offset
+  static void panCanvasWithOffset(num offsetX, num offsetY) {
+    _canvas.x += offsetX;
+    _canvas.y += offsetY;
+  }
+
   static void _onKeyDownForPanningCanvas(html.KeyboardEvent e) {
     if(e.target is html.TextInputElement) {
       return;

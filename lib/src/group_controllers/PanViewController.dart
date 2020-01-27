@@ -21,6 +21,18 @@ class PanViewController extends ContextController {
     resetPan.onClick.listen((_) => MainWindow.resetCanvasZoomAndPosition());
   }
 
+  static void setStepCommand(num value) {
+    MainWindow.panStep = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void setReversePanCommand(bool value) {
+    MainWindow.reversePanDirection = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void applyPanOffsetCommand(num x, num y) => MainWindow.panCanvasWithOffset(x, y);
+
   void _onStepChanged(_) {
     int newStep = int.tryParse(_step.value);
 

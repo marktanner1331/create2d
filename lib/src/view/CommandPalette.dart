@@ -7,6 +7,7 @@ import '../group_controllers/ZoomViewController.dart';
 import '../group_controllers/CanvasSizeViewController.dart';
 import '../group_controllers/UnitsViewController.dart';
 import '../group_controllers/GridViewController.dart';
+import '../group_controllers/PanViewController.dart';
 import '../helpers/AutoComplete.dart';
 
 class CommandPalette {
@@ -88,6 +89,13 @@ class CommandPalette {
     _addCommand("setGridDisplay", "(value:String)", GridViewController.setGridDisplayType);
     _addCommand("getGridGeometry", "()", GridViewController.getGridGeometryType);
     _addCommand("setGridGeometry", "(value:String)", GridViewController.setGridGeometryType);
+
+    _addCommand("resetPan", "()", MainWindow.resetCanvasZoomAndPosition);
+    _addCommand("getPanStep", "()", () => MainWindow.panStep);
+    _addCommand("setPanStep", "(value:Number)", PanViewController.setStepCommand);
+    _addCommand("getReversePanDirection", "()", () => MainWindow.reversePanDirection);
+    _addCommand("setReversePanDirection", "(value:Boolean", PanViewController.setReversePanCommand);
+    _addCommand("applyPanOffset", "(x:Number, y:Number)", PanViewController.applyPanOffsetCommand);
   }
 
   static void _onKeyPress(KeyboardEvent e) {
