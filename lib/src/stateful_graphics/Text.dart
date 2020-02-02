@@ -184,4 +184,9 @@ class Text extends IShape
   bool isPointOnEdge(Point<num> p, num tolerance) {
     return false;
   }
+
+  @override
+  void mergeInShape(IShape shape) {
+    // TODO: implement mergeInShape
+  }
 }
