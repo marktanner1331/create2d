@@ -102,7 +102,8 @@ refactor:
 
 color picker:
     color picker needs to use new resetPreviewColor() in all places (instead of manually setting the preview color)
-
+    bug in deleting swatches
+    
 property windows:
     in NumberFieldWithLabel.dart
         keep a copy of the original value (at the point of a onFocus)
