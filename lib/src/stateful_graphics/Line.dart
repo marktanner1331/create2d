@@ -18,6 +18,11 @@ class Line extends IShape with LinePropertiesMixin {
   ///     if it is half way along then it will be 0.5
   List<Tuple2<Vertex, num>> _insignificantVertices;
 
+  ///set to true when we are in the middle of processing vertices being changed
+  ///as some of the processing will cause more vertex change callbacks to fire
+  ///by checking this it means we won't end up in an endless loop
+  bool _verticesAreChanging = false;
+
   Line(Vertex start, Vertex end)
       : assert(start != null),
         assert(end != null) {
@@ -242,7 +247,15 @@ class Line extends IShape with LinePropertiesMixin {
   
   ///only fires if we have insignificant vertices
   void _onVertexPositionChanged() {
+    if(_verticesAreChanging) {
+      return;
+    }
 
+    _verticesAreChanging = true;
+
+    //move insignificant vertices here
+
+    _verticesAreChanging = false;
   }
 
   void _addInsignificantVertex(Vertex v) {
@@ -252,7 +265,7 @@ class Line extends IShape with LinePropertiesMixin {
       _end.listenToMovements(_onVertexPositionChanged);
     }
 
-    _insignificantVertices.add(v);
+    _insignificantVertices.add(Tuple2(v, 0));
   }
 
   @override
@@ -264,7 +277,7 @@ class Line extends IShape with LinePropertiesMixin {
         shape.swapVertex(vertex, _end);
       } else if (_hitTest(vertex, 0)) {
         //shape is directly on the edge, so we can add it as an insignificant vertex
-        print("adding insignificant vertex");
+        _addInsignificantVertex(vertex);
       }
     }
   }
