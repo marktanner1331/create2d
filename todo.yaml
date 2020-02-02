@@ -133,3 +133,6 @@ optimizations:
     when calculating insignificant vertices on lines we run the distanceToSegment code twice
         once as a hittest, once to get the point
         see if we can optimize that
+
+misc:
+    maybe get rid of some of the packages in the pubspec
