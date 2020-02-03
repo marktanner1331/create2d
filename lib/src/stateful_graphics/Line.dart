@@ -253,9 +253,20 @@ class Line extends IShape with LinePropertiesMixin {
 
     _verticesAreChanging = true;
 
-    //move insignificant vertices here
+    for(Tuple2<Vertex, num> pair in _insignificantVertices) {
+      Point p = _getPointAlongLine(pair.item2);
+      pair.item1.x = p.x;
+      pair.item1.y = p.y;
+    }
 
     _verticesAreChanging = false;
+  }
+
+  ///position should be a number between 0 and 1
+  Point _getPointAlongLine(num position) {
+    num x = start.x + (end.x - start.x) * position;
+    num y = start.y + (end.y - start.y) * position;
+    return Point(x, y);
   }
 
   void _addInsignificantVertex(Vertex v) {
@@ -265,7 +276,8 @@ class Line extends IShape with LinePropertiesMixin {
       _end.listenToMovements(_onVertexPositionChanged);
     }
 
-    _insignificantVertices.add(Tuple2(v, 0));
+    num positionAlongLine = (v.x - _start.x) / (_end.x - _start.x);
+    _insignificantVertices.add(Tuple2(v, positionAlongLine));
   }
 
   @override
