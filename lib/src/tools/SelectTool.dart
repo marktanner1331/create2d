@@ -198,8 +198,10 @@ class SelectTool extends ITool with SelectedObjectsMixin {
     super.onMouseUp(x, y);
     for (Vertex vertex in selectedVertices) {
       vertex.locked = false;
-      MainWindow.canvas.currentGraphics.mergeVerticesUnderVertex(vertex);
     }
+
+    MainWindow.canvas.currentGraphics.mergeInShapes(selectedShapes);
+    MainWindow.canvas.currentGraphics.mergeInVertices(selectedVertices);
 
     _currentVertex = null;
   }

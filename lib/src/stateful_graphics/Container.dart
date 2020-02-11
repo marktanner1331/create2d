@@ -77,6 +77,14 @@ class Container extends IShape {
   }
 
   @override
+  void mergeInVertices(Iterable<Vertex> vertices) {
+    foreachShape((sub) {
+      sub.mergeInVertices(vertices);
+      return true;
+    });
+  }
+
+  @override
   void mergeVerticesUnderVertex(Vertex v) {
     for (IShape shape in _shapes) {
       shape.mergeVerticesUnderVertex(v);

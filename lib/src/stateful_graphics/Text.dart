@@ -189,4 +189,9 @@ class Text extends IShape
   void mergeInShape(IShape shape) {
     // TODO: implement mergeInShape
   }
+
+  @override
+  void mergeInVertices(Iterable<Vertex> vertices) {
+    // TODO: implement mergeInVertices
+  }
 }

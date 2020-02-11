@@ -282,11 +282,16 @@ class Line extends IShape with LinePropertiesMixin {
 
   @override
   void mergeInShape(IShape shape) {
-    for (Vertex vertex in shape.getVertices()) {
+    mergeInVertices(shape.getVertices());
+  }
+
+  @override
+  void mergeInVertices(Iterable<Vertex> vertices) {
+    for (Vertex vertex in vertices) {
       if (_start.locked == false && _start == vertex) {
-        shape.swapVertex(vertex, _start);
+        swapVertex(_start, vertex);
       } else if (_end.locked == false && _end == vertex) {
-        shape.swapVertex(vertex, _end);
+        swapVertex(_end, vertex);
       } else if (_hitTest(vertex, 0)) {
         //shape is directly on the edge, so we can add it as an insignificant vertex
         _addInsignificantVertex(vertex);

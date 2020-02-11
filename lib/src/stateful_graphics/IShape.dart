@@ -17,7 +17,15 @@ abstract class IShape extends IHavePropertyMixins {
   ///removes the oldVertex from the shape and replaces it with the new vertex
   void swapVertex(Vertex oldVertex, Vertex newVertex);
 
+  void mergeInShapes(Iterable<IShape> shapes) {
+    for(IShape shape in shapes) {
+      mergeInShape(shape);
+    }
+  }
+
   void mergeInShape(IShape shape);
+
+  void mergeInVertices(Iterable<Vertex> vertices);
 
   ///returns true if the shape is valid
   ///the shape may be invalid for a number of reasons
