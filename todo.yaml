@@ -135,5 +135,9 @@ optimizations:
         once as a hittest, once to get the point
         see if we can optimize that
 
+bugs:
+    select single vertex
+    try and move it, it is jittery
+
 misc:
     maybe get rid of some of the packages in the pubspec

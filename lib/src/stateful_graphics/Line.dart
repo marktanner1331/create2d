@@ -269,6 +269,17 @@ class Line extends IShape with LinePropertiesMixin {
     return Point(x, y);
   }
 
+  void _removeInsignificantVertex(Vertex v) {
+    if(_insignificantVertices != null) {
+      _insignificantVertices.removeWhere((x) => x.item1 == v);
+
+      if(_insignificantVertices.length == 0) {
+        _start.stopListeningToMovements(_onVertexPositionChanged);
+        _end.stopListeningToMovements(_onVertexPositionChanged);
+      }
+    }
+  }
+
   void _addInsignificantVertex(Vertex v) {
     if(_insignificantVertices == null) {
       _insignificantVertices = List();
@@ -292,9 +303,13 @@ class Line extends IShape with LinePropertiesMixin {
         swapVertex(_start, vertex);
       } else if (_end.locked == false && _end == vertex) {
         swapVertex(_end, vertex);
-      } else if (_hitTest(vertex, 0)) {
-        //shape is directly on the edge, so we can add it as an insignificant vertex
-        _addInsignificantVertex(vertex);
+      } else {
+        if (_hitTest(vertex, 0)) {
+          //shape is directly on the edge, so we can add it as an insignificant vertex
+          _addInsignificantVertex(vertex);
+        } else {
+          _removeInsignificantVertex(vertex);
+        }
       }
     }
   }
