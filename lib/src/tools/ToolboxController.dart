@@ -55,6 +55,11 @@ class ToolboxController with HTMLViewController {
     _tempTool.view.classes.add("tool_button_selected");
   }
 
+  bool hasToolWithShortName(String shortName) {
+    shortName = shortName.toLowerCase();
+    return _tools.any((x) => x.shortName.toLowerCase() == shortName);
+  }
+
   void endTemporaryTool() {
     if(_tempTool == null) {
       return;
@@ -87,6 +92,21 @@ class ToolboxController with HTMLViewController {
 
   void selectFirstTool() {
     currentTool = _tools.first;
+  }
+
+  void switchToToolWithShortName(String shortName) {
+    shortName = shortName.toLowerCase();
+
+    if(currentTool.shortName.toLowerCase() == shortName) {
+      return;
+    }
+
+    for(ITool tool in _tools) {
+      if(tool.shortName.toLowerCase() == shortName) {
+        currentTool = tool;
+        break;
+      }
+    }
   }
 
   void switchToTool<T extends ITool>() {

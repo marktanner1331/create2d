@@ -15,6 +15,7 @@ abstract class ITool extends IHavePropertyMixins {
   bool get isActive => _isActive;
   
   String get tooltipText;
+  String get shortName;
 
   //TODO delete empty overrides of this
   void contextPropertiesHaveChanged() {}

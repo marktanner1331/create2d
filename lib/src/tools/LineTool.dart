@@ -19,6 +19,9 @@ class LineTool extends ITool with LinePropertiesMixin {
   String get tooltipText => "Line Tool";
 
   @override
+  String get shortName => "ln";
+
+  @override
   void contextPropertiesHaveChanged() {
   }
 

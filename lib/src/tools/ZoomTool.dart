@@ -14,6 +14,9 @@ class ZoomTool extends ITool {
   String get tooltipText => "Zoom";
 
   @override
+  String get shortName => "zm";
+
+  @override
   Iterable<stageXL.Point> getSnappablePoints() {
     return Iterable.empty();
   }

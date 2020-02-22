@@ -16,6 +16,9 @@ class TextTool extends ITool with TextStyleMixin, TextContentMixin, BoundingBoxM
   String get tooltipText => "Text";
 
   @override
+  String get shortName => "tx";
+
+  @override
   void contextPropertiesHaveChanged() {
     // TODO: implement contextPropertiesHaveChanged
   }

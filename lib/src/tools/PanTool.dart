@@ -14,6 +14,9 @@ class PanTool extends ITool {
   String get tooltipText => "Pan";
 
   @override
+  String get shortName => "pn";
+
+  @override
   Iterable<stageXL.Point> getSnappablePoints() {
     return Iterable.empty();
   }

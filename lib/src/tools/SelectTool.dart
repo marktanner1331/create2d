@@ -240,6 +240,9 @@ class SelectTool extends ITool with SelectedObjectsMixin {
   String get tooltipText => "Select Tool";
 
   @override
+  String get shortName => "se";
+
+  @override
   void onEnter() {}
 
   @override
