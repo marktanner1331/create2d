@@ -15,3 +15,4 @@ dependencies:
   stagexl_main_menu: ^1.0.1
   js: any
   test: ^1.5.3
+  tuple: ^1.0.3

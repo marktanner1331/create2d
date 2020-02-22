@@ -45,8 +45,12 @@ class ColorPickerSwatches extends Tab {
   }
 
   void _onCloseClick(MouseEvent e) {
+    e.stopImmediatePropagation();
+    
     Element closeButton = e.currentTarget as Element;
     closeButton.parent.remove();
+
+    MainWindow.colorPicker.resetPreviewColor();
   }
 
   void _onSwatchMouseOut(MouseEvent e) {
@@ -59,8 +63,7 @@ class ColorPickerSwatches extends Tab {
   void _onSwatchMouseOver(MouseEvent e) {
     Element swatch = e.currentTarget as Element;
     int color = ColorHelper.parseCssColor(swatch.style.backgroundColor);
-    print(swatch.style.backgroundColor);
-    print(color);
+    
     MainWindow.colorPicker.setPreviewPixelColor(color);
 
     swatch.querySelector(".swatch_close_button").style.display = "table";

@@ -24,6 +24,22 @@ class Container extends IShape {
     return true;
   }
 
+  bool foreachShape(bool Function(IShape) callback) {
+    for (IShape shape in _shapes) {
+      if(shape is Container) {
+        if (shape.foreachShape(callback) == false) {
+          return false;
+        }
+      } else {
+        if(callback(shape) == false) {
+            return false;
+          }
+        }
+    }
+
+    return true;
+  }
+
   //removes all shapes that are invalid and not in the whitelist
   void removeInvalidShapes(List<IShape> whiteList) {
     Iterable<IShape> temp =
@@ -42,14 +58,7 @@ class Container extends IShape {
 
   void addShape(IShape shape, bool mergeVertices) {
     if (mergeVertices) {
-      for (Vertex vertex in shape.getVertices()) {
-        Vertex existingVertex =
-            getFirstVertexUnderPoint(vertex, ignoreLockedVertices: true);
-
-        if (existingVertex != null) {
-          shape.swapVertex(vertex, existingVertex);
-        }
-      }
+      mergeInShape(shape);
     }
 
     if (shape is Container) {
@@ -57,6 +66,22 @@ class Container extends IShape {
     } else {
       _shapes.add(shape);
     }
+  }
+
+  @override
+  void mergeInShape(IShape shape) {
+    foreachShape((sub) {
+      sub.mergeInShape(shape);
+      return true;
+    });
+  }
+
+  @override
+  void mergeInVertices(Iterable<Vertex> vertices) {
+    foreachShape((sub) {
+      sub.mergeInVertices(vertices);
+      return true;
+    });
   }
 
   @override
@@ -82,7 +107,7 @@ class Container extends IShape {
 
     return null;
   }
-
+  
   Iterable<Vertex> getVerticesUnderPoint(Point p) {
     List<Vertex> vertices = List();
     HashSet<int> identities = HashSet();
@@ -251,5 +276,17 @@ class Container extends IShape {
     }
 
     _shapes.removeWhere((shape) => shape.isValid() == false);
+  }
+
+  @override
+  Point<num> getClosestPointOnEdge(Point<num> p) {
+    //really shouldn't be calling this on a container
+    throw Error();
+  }
+
+  @override
+  bool isPointOnEdge(Point<num> p, num tolerance) {
+    //really shouldn't be calling this on a container
+    throw Error();
   }
 }

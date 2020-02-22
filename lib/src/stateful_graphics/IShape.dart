@@ -1,5 +1,5 @@
 import './Vertex.dart';
-import 'package:stagexl/stagexl.dart' show Point, Sprite;
+import 'package:stagexl/stagexl.dart';
 
 import '../property_mixins/IHavePropertyMixins.dart';
 
@@ -17,10 +17,26 @@ abstract class IShape extends IHavePropertyMixins {
   ///removes the oldVertex from the shape and replaces it with the new vertex
   void swapVertex(Vertex oldVertex, Vertex newVertex);
 
+  void mergeInShapes(Iterable<IShape> shapes) {
+    for(IShape shape in shapes) {
+      mergeInShape(shape);
+    }
+  }
+
+  void mergeInShape(IShape shape);
+
+  void mergeInVertices(Iterable<Vertex> vertices);
+
   ///returns true if the shape is valid
   ///the shape may be invalid for a number of reasons
   ///e.g. it doesn't have enough unique vertices
   bool isValid();
+
+  bool isPointOnEdge(Point p, num tolerance);
+
+  //returns the point that lies on the edge of the shape
+  //which is closest to the given point
+  Point getClosestPointOnEdge(Point p);
 
   ///if a vertex exists under the given point (or close enough with the given tolerance) then it is returned
   ///otherwise null is returned instead

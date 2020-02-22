@@ -55,9 +55,7 @@ class LineTool extends ITool with LinePropertiesMixin {
   void onMouseMove(num x, num y) {
     assert(isActive == false);
     
-    _currentLine.end.x = x;
-    _currentLine.end.y = y;
-
+    _currentLine.end.setPosition(x, y);
     MainWindow.canvas.invalidateVertexPositions();
   }
 

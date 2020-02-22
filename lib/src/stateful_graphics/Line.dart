@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:stagexl/stagexl.dart' show Point, Sprite;
+import 'package:stagexl/stagexl.dart';
+import 'package:tuple/tuple.dart';
 
 import './IShape.dart';
 import './Vertex.dart';
@@ -10,6 +11,17 @@ import '../property_mixins/LinePropertiesMixin.dart';
 class Line extends IShape with LinePropertiesMixin {
   Vertex _start;
   Vertex _end;
+
+  ///vertex stored alongside its position along the line
+  ///e.g. if it is at the start then it will be 0
+  ///     if it is at the end then it will be 1
+  ///     if it is half way along then it will be 0.5
+  List<Tuple2<Vertex, num>> _insignificantVertices;
+
+  ///set to true when we are in the middle of processing vertices being changed
+  ///as some of the processing will cause more vertex change callbacks to fire
+  ///by checking this it means we won't end up in an endless loop
+  bool _verticesAreChanging = false;
 
   Line(Vertex start, Vertex end)
       : assert(start != null),
@@ -25,9 +37,9 @@ class Line extends IShape with LinePropertiesMixin {
   void deleteVertices(Iterable<Vertex> selectedVertices) {
     //setting start and end to be the same vertex will make it invalid
     //which will cause it to be removed
-    if(selectedVertices.contains(_start)) {
+    if (selectedVertices.contains(_start)) {
       _start = _end;
-    } else if(selectedVertices.contains(_end)) {
+    } else if (selectedVertices.contains(_end)) {
       _end = _start;
     }
   }
@@ -43,8 +55,28 @@ class Line extends IShape with LinePropertiesMixin {
       t = 0;
     else if (t > 1) t = 1;
 
-    var lx = lx1 + t * ldx, ly = ly1 + t * ldy, dx = px - lx, dy = py - ly;
+    var lx = lx1 + t * ldx;
+    var ly = ly1 + t * ldy;
+    var dx = px - lx;
+    var dy = py - ly;
     return dx * dx + dy * dy;
+  }
+
+  //returns the point on the line that is closest to the given point
+  Point<num> _getClosestPointOnLine(num lx1, num ly1, num ldx, num ldy,
+      num lineLengthSquared, num px, num py) {
+    num t = ((px - lx1) * ldx + (py - ly1) * ldy) / lineLengthSquared;
+
+    if (t < 0) {
+      t = 0;
+    } else if (t > 1) {
+      t = 1;
+    }
+
+    num lx = lx1 + t * ldx;
+    num ly = ly1 + t * ldy;
+
+    return Point<num>(lx, ly);
   }
 
   @override
@@ -115,23 +147,39 @@ class Line extends IShape with LinePropertiesMixin {
   }
 
   @override
-  bool hitTest(Point<num> p) {
+  Point getClosestPointOnEdge(Point p) {
+    num dx = _end.x - _start.x;
+    num dy = _end.y - _start.y;
+    num lineLengthSquared = dx * dx + dy * dy;
+
+    return _getClosestPointOnLine(
+        _start.x, _start.y, dx, dy, lineLengthSquared, p.x, p.y);
+  }
+
+  @override
+  bool isPointOnEdge(Point p, num tolerance) =>
+      _hitTest(p, tolerance + thickness);
+
+  @override
+  bool hitTest(Point<num> p) => _hitTest(p, thickness);
+
+  bool _hitTest(Point<num> p, num tolerance) {
     if (_start.x < _end.x) {
-      if (p.x <= _start.x - thickness || p.x >= _end.x + thickness) {
+      if (p.x <= _start.x - tolerance || p.x >= _end.x + tolerance) {
         return false;
       }
     } else {
-      if (p.x <= _end.x - thickness || p.x >= _start.x + thickness) {
+      if (p.x <= _end.x - tolerance || p.x >= _start.x + tolerance) {
         return false;
       }
     }
 
     if (_start.y < _end.y) {
-      if (p.y <= _start.y - thickness || p.y >= _end.y + thickness) {
+      if (p.y <= _start.y - tolerance || p.y >= _end.y + tolerance) {
         return false;
       }
     } else {
-      if (p.y <= _end.y - thickness || p.y >= _start.y + thickness) {
+      if (p.y <= _end.y - tolerance || p.y >= _start.y + tolerance) {
         return false;
       }
     }
@@ -139,12 +187,12 @@ class Line extends IShape with LinePropertiesMixin {
     num dx = _end.x - _start.x;
     num dy = _end.y - _start.y;
     num lineLengthSquared = dx * dx + dy * dy;
-    num squareThickness = (thickness + 5) * (thickness + 5);
+    num squareTolerance = tolerance * tolerance;
 
     num squareDistance = distanceSquaredToLineSegment2(
         _start.x, _start.y, dx, dy, lineLengthSquared, p.x, p.y);
-    
-    return squareDistance <= squareThickness;
+
+    return squareDistance <= squareTolerance;
   }
 
   @override
@@ -164,17 +212,17 @@ class Line extends IShape with LinePropertiesMixin {
 
   @override
   void renderToStageXL(Sprite s) {
-    if(dashed == false) {
+    if (dashed == false) {
       s.graphics
-      ..beginPath()
-      ..moveTo(_start.x, _start.y)
-      ..lineTo(_end.x, _end.y)
-      ..closePath();
+        ..beginPath()
+        ..moveTo(_start.x, _start.y)
+        ..lineTo(_end.x, _end.y)
+        ..closePath();
     } else {
       drawDash(s.graphics, start, end, dashLength, dashSpacing);
     }
-    
-    if(thickness > 0) {
+
+    if (thickness > 0) {
       s.graphics.strokeColor(strokeColor, thickness, jointStyle);
     }
 
@@ -190,10 +238,79 @@ class Line extends IShape with LinePropertiesMixin {
 
   @override
   void swapVertex(Vertex oldVertex, Vertex newVertex) {
-   if (_start == oldVertex) {
+    if (_start == oldVertex) {
       _start = newVertex;
     } else if (_end == oldVertex) {
       _end = newVertex;
+    }
+  }
+  
+  ///only fires if we have insignificant vertices
+  void _onVertexPositionChanged() {
+    if(_verticesAreChanging) {
+      return;
+    }
+
+    _verticesAreChanging = true;
+
+    for(Tuple2<Vertex, num> pair in _insignificantVertices) {
+      Point p = _getPointAlongLine(pair.item2);
+      pair.item1.x = p.x;
+      pair.item1.y = p.y;
+    }
+
+    _verticesAreChanging = false;
+  }
+
+  ///position should be a number between 0 and 1
+  Point _getPointAlongLine(num position) {
+    num x = start.x + (end.x - start.x) * position;
+    num y = start.y + (end.y - start.y) * position;
+    return Point(x, y);
+  }
+
+  void _removeInsignificantVertex(Vertex v) {
+    if(_insignificantVertices != null) {
+      _insignificantVertices.removeWhere((x) => x.item1 == v);
+
+      if(_insignificantVertices.length == 0) {
+        _start.stopListeningToMovements(_onVertexPositionChanged);
+        _end.stopListeningToMovements(_onVertexPositionChanged);
+      }
+    }
+  }
+
+  void _addInsignificantVertex(Vertex v) {
+    if(_insignificantVertices == null) {
+      _insignificantVertices = List();
+      _start.listenToMovements(_onVertexPositionChanged);
+      _end.listenToMovements(_onVertexPositionChanged);
+    }
+
+    num positionAlongLine = (v.x - _start.x) / (_end.x - _start.x);
+    _insignificantVertices.add(Tuple2(v, positionAlongLine));
+  }
+
+  @override
+  void mergeInShape(IShape shape) {
+    mergeInVertices(shape.getVertices());
+  }
+
+  @override
+  void mergeInVertices(Iterable<Vertex> vertices) {
+    for (Vertex vertex in vertices) {
+      if (_start.locked == false && _start == vertex) {
+        swapVertex(_start, vertex);
+      } else if (_end.locked == false && _end == vertex) {
+        swapVertex(_end, vertex);
+      } else {
+        if (_hitTest(vertex, 0)) {
+          //shape is directly on the edge, so we can add it as an insignificant vertex
+          _addInsignificantVertex(vertex);
+        } else {
+          _removeInsignificantVertex(vertex);
+        }
+      }
     }
   }
 }
