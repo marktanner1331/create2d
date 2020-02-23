@@ -94,6 +94,8 @@ class ToolboxController with HTMLViewController {
     currentTool = _tools.first;
   }
 
+  String getShortNameOfCurrentTool() => _currentTool.shortName;
+
   void switchToToolWithShortName(String shortName) {
     shortName = shortName.toLowerCase();
 

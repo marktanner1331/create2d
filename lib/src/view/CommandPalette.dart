@@ -96,6 +96,9 @@ class CommandPalette {
     _addCommand("getReversePanDirection", "()", () => MainWindow.reversePanDirection);
     _addCommand("setReversePanDirection", "(value:Boolean", PanViewController.setReversePanCommand);
     _addCommand("applyPanOffset", "(x:Number, y:Number)", PanViewController.applyPanOffsetCommand);
+
+    _addCommand("setCurrentTool", "(shortName:String)", MainWindow.toolbox.switchToToolWithShortName);
+    _addCommand("getCurrentTool", "()", MainWindow.toolbox.getShortNameOfCurrentTool);
   }
 
   static void _onKeyPress(KeyboardEvent e) {

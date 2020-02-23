@@ -6,10 +6,10 @@ ToolboxController:
         might also be hte case with other things
 
 tools:
-    panning:
-        command palette
     image tool:
     rectangle:
+    circle:
+        ability to add cog teeth
     oval:
     curve:
         helper vertices, such as the control point for bexier splines
