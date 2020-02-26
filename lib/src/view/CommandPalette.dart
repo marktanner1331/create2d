@@ -3,6 +3,7 @@ import 'dart:html';
 import 'dart:js';
 
 import './MainWindow.dart';
+import '../group_controllers/SnappingViewController.dart';
 import '../group_controllers/ZoomViewController.dart';
 import '../group_controllers/CanvasSizeViewController.dart';
 import '../group_controllers/UnitsViewController.dart';
@@ -94,11 +95,16 @@ class CommandPalette {
     _addCommand("getPanStep", "()", () => MainWindow.panStep);
     _addCommand("setPanStep", "(value:Number)", PanViewController.setStepCommand);
     _addCommand("getReversePanDirection", "()", () => MainWindow.reversePanDirection);
-    _addCommand("setReversePanDirection", "(value:Boolean", PanViewController.setReversePanCommand);
+    _addCommand("setReversePanDirection", "(value:Boolean)", PanViewController.setReversePanCommand);
     _addCommand("applyPanOffset", "(x:Number, y:Number)", PanViewController.applyPanOffsetCommand);
 
     _addCommand("setCurrentTool", "(shortName:String)", MainWindow.toolbox.switchToToolWithShortName);
     _addCommand("getCurrentTool", "()", MainWindow.toolbox.getShortNameOfCurrentTool);
+
+    _addCommand("getSnapToGrid", "()", () => MainWindow.canvas.snapToGrid);
+    _addCommand("setSnapToGrid", "(value:Boolean)", () => SnappingViewController.setSnapToGridCommand);
+    _addCommand("getSnapToVertices", "()", () => MainWindow.canvas.snapToVertex);
+    _addCommand("setSnapToVertices", "(value:Boolean)", () => SnappingViewController.setSnapToVerticesCommand);
   }
 
   static void _onKeyPress(KeyboardEvent e) {

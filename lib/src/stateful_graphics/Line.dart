@@ -12,6 +12,8 @@ class Line extends IShape with LinePropertiesMixin {
   Vertex _start;
   Vertex _end;
 
+  int get numVertices => 2;
+
   ///vertex stored alongside its position along the line
   ///e.g. if it is at the start then it will be 0
   ///     if it is at the end then it will be 1

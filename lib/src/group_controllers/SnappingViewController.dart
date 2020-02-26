@@ -1,14 +1,13 @@
 import 'dart:html';
 
 import './GroupController.dart';
+import '../view/MainWindow.dart';
 import '../property_mixins/SnappingPropertiesMixin.dart';
 
 class SnappingViewController extends GroupController {
   SnappingPropertiesMixin _model;
   InputElement _grid;
 
-  //TODO: when snapping to vertices is false, we probably shouldnt do the red dot overlays
-  //when hovering over a vertex while drawing
   InputElement _vertices;
 
   SnappingViewController(Element div) : super(div) {
@@ -17,6 +16,16 @@ class SnappingViewController extends GroupController {
 
     _vertices = div.querySelector("#snapToVertices") as InputElement;
     _vertices.onInput.listen(_onVerticesChanged);
+  }
+
+  static void setSnapToGridCommand(bool value) {
+    MainWindow.canvas.snapToGrid = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
+  }
+
+  static void setSnapToVerticesCommand(bool value) {
+    MainWindow.canvas.snapToVertex = value;
+    MainWindow.propertyWindow.refreshCurrentTab();
   }
 
   void _onGridChanged(_) {

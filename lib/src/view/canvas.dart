@@ -130,6 +130,7 @@ class Canvas extends Sprite
   void invalidateVertices() {
     _renderGraphics();
     _refreshSelectedVertices();
+    dispatchNumVerticesChangedEvent();
   }
 
   void _renderGraphics() {

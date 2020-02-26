@@ -14,6 +14,16 @@ class Container extends IShape {
     _shapes = List();
   }
 
+  int get numVertices {
+    int sum = 0;
+    
+    for (IShape shape in _shapes) {
+      sum += shape.numVertices;
+    }
+
+    return sum;
+  }
+
   bool foreachVertex(Function(Vertex) callback) {
     for (IShape shape in _shapes) {
       if (shape.foreachVertex(callback) == false) {

@@ -41,14 +41,19 @@ tools:
 
 Canvas:
     properties:
-        convert units into dropdown
-
+        rename CAnvasSizeViewController
         ability to enter calculations into pixels per unit
-
+            needs testing
         total vertices in document
-
+            needs testing
         save defaults to a cookie (if consented)
+
+        default paper sizes
     resize boxes:
+    snapping:
+        when snapping to vertices is false, we probably shouldnt do the red dot overlays
+        implement snap to shape in view
+        test snap to shape
     drag box to select:
     canvas rulers:
     grid:
@@ -67,7 +72,6 @@ rendering:
 
 command palette:
     add more commands
-        changing tools
         snapping properties
     after selecting radio button, quick command shortcut doesnt work
 

@@ -6,6 +6,8 @@ import '../property_mixins/IHavePropertyMixins.dart';
 abstract class IShape extends IHavePropertyMixins {
   bool selected = false;
 
+  int get numVertices;
+
   ///returns true if the shape contains the same instance of the given vertex
   bool hasVertex(Vertex vertex);
 

@@ -1,3 +1,5 @@
+import 'package:stagexl/stagexl.dart';
+
 import '../view/MainWindow.dart';
 import '../view/Canvas.dart';
 import '../helpers/UnitsHelper.dart';
@@ -5,6 +7,15 @@ import '../model/CanvasUnitType.dart';
 
 mixin CanvasPropertiesMixin {
   Canvas get myCanvas;
+
+  EventDispatcher _dispatcher = EventDispatcher();
+  EventStream<Event> get numVerticesChanged => _dispatcher.on("PROPERTY_CHANGED");
+
+  void dispatchNumVerticesChangedEvent() {
+    _dispatcher.dispatchEvent(Event("PROPERTY_CHANGED"));
+  }
+
+  int get numVertices => myCanvas.currentGraphics.numVertices;
 
   UnitsHelper _helper = UnitsHelper.getUnitsHelper(CanvasUnitType.PIXEL);
 

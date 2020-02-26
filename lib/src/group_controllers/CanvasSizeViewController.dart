@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:stagexl/stagexl.dart';
+
 import '../view/MainWindow.dart';
 import '../helpers/ColorHelper.dart';
 import '../helpers/ColorSwatchController.dart';
@@ -11,6 +13,9 @@ class CanvasSizeViewController extends GroupController {
   InputElement _width;
   InputElement _height;
   ColorSwatchController _bgColorController;
+  InputElement _numVertices;
+
+  EventStreamSubscription<Event> numVerticesChangedSubscription;
 
   CanvasSizeViewController(Element view) : super(view) {
     _width = view.querySelector("#canvasWidth") as InputElement;
@@ -21,6 +26,8 @@ class CanvasSizeViewController extends GroupController {
 
     _bgColorController = ColorSwatchController(view.querySelector("#backgroundColor"));
     _bgColorController.onColorChanged.listen(_onBGColorChanged);
+
+    _numVertices = view.querySelector("#totalVertices") as InputElement;
   }
 
   void _onBGColorChanged(_) {
@@ -70,10 +77,22 @@ class CanvasSizeViewController extends GroupController {
     _width.value = _model.canvasWidth.toString();
     _height.value = _model.canvasHeight.toString();
     _bgColorController.color = _model.backgroundColor;
+    _numVertices.value = MainWindow.canvas.numVertices.toString();
+  }
+
+  void _onNumVerticesChanged(_) {
+    _numVertices.value = MainWindow.canvas.numVertices.toString();
+  }
+
+  @override
+  void onEnter() {
+    super.onEnter();
+    numVerticesChangedSubscription = MainWindow.canvas.numVerticesChanged.listen(_onNumVerticesChanged);
   }
 
   @override
   void onExit() {
     _bgColorController.onExit();
+    numVerticesChangedSubscription.cancel();
   }
 }

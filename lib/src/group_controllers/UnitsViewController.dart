@@ -1,4 +1,5 @@
 import 'dart:html';
+import 'dart:js';
 import 'package:stagexl/stagexl.dart' as stageXL;
 
 import '../view/MainWindow.dart';
@@ -113,8 +114,17 @@ class UnitsViewController extends GroupController {
 
   void _onPPUChange(_) {
     num newPPU = num.tryParse(_ppu.value);
+
     if (newPPU == null) {
-      return;
+      //if we can't parse it as a number
+      //see if its an expression that evaluates to a number
+      dynamic temp = context.callMethod("eval", [_ppu.value]);
+
+      if(temp is num) {
+        newPPU = temp;
+      } else {
+        return;
+      }
     }
 
     _model.pixelsPerUnit = newPPU;

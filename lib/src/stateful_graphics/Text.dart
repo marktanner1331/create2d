@@ -12,6 +12,8 @@ class Text extends IShape
   //text only has one vertex that tracks the top left of the bounding box
   Vertex _topLeft;
 
+  int get numVertices => 1;
+
   //we cache the text field so that we can reuse it for hittesting
   TextField _text;
 

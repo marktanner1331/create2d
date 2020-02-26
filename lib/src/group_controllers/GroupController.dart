@@ -30,6 +30,7 @@ abstract class GroupController implements IOnEnterExit {
   void onExit() {}
 
   @override
+  @mustCallSuper
   void onEnter() {
     if(_hasOnEntered == false) {
       onEnterForFirstTime();
