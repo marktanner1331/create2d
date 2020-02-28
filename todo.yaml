@@ -41,14 +41,16 @@ tools:
 
 Canvas:
     properties:
-        rename CAnvasSizeViewController
+        rename CanvasSizeViewController to CanvasStyleViewController
+            do the same to the CanvasPropertiesMixin
         ability to enter calculations into pixels per unit
             needs testing
         total vertices in document
             needs testing
         save defaults to a cookie (if consented)
-
+            
         default paper sizes
+        units view controller, change 'div' to 'view'
     resize boxes:
     snapping:
         when snapping to vertices is false, we probably shouldnt do the red dot overlays
