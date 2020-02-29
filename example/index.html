@@ -28,7 +28,7 @@
                 <div class="tab" id="canvasTab">
                     <div id="size" class="property_group">
                         <div class="group_header"><span
-                                class="group_header_arrow">►</span> Size</div>
+                                class="group_header_arrow">►</span> Style</div>
                         <div class="group_content">
                             <div class="number_box">
                                 <label>Canvas Width:</label><input
@@ -38,6 +38,27 @@
                             <div class="number_box">
                                 <label>Canvas Height:</label><input
                                     id="canvasHeight" type="text" />
+                            </div>
+                            <br />
+                            <div>
+                                Paper Size:
+                                <select id="paperSize">
+                                    <option>Custom</option>
+                                    <option>A0</option>
+                                    <option>A1</option>
+                                    <option>A2</option>
+                                    <option>A3</option>
+                                    <option>A4</option>
+                                    <option>A5</option>
+                                    <option>A6</option>
+                                </select>
+                            </div>
+                            <div id="paperOrientationContainer" style="display:none;">
+                                Orientation:
+                                <select id="paperOrientation">
+                                    <option value="landscape">Landsacpe</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
                             </div>
                             <br />
                             <div class="spacer"></div>
@@ -135,16 +156,6 @@
                                 <input id="snapToVertices" type="checkbox" /><label
                                     for="snapToVertices">Snap to
                                     vertices</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="canvasInfo" class="property_group">
-                        <div class="group_header"><span
-                                class="group_header_arrow">►</span> Info</div>
-                        <div class="group_content">
-                            <div class="number_box">
-                                <label>Total Vertices:</label><input disabled
-                                    id="totalVertices" type="text" />
                             </div>
                         </div>
                     </div>

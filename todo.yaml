@@ -44,12 +44,20 @@ Canvas:
         rename CanvasSizeViewController to CanvasStyleViewController
             do the same to the CanvasPropertiesMixin
         ability to enter calculations into pixels per unit
-            needs testing
-        total vertices in document
-            needs testing
+            needs to update box after entering calculation
+            nah, as we can enter it from the command palette
+            we would have to store it on the model
+            but is that best for the user
+            that needs to dictate our choices, not what is easier
+            they have entered it becuase they cant be bothered to do the division
+            so if we resolve it then they will have to do the multiplication whent hey see it
+            which they wont want to do
+            so lets keep it around
+            will be much nicer for the end user
+            i.e. 1000/8 remains
+            instead of storing 125
         save defaults to a cookie (if consented)
             
-        default paper sizes
         units view controller, change 'div' to 'view'
     resize boxes:
     snapping:

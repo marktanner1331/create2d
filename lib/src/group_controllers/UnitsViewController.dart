@@ -27,7 +27,7 @@ class UnitsViewController extends GroupController {
     _ppu = div.querySelector("#ppu") as InputElement;
     _ppu.onInput.listen(_onPPUChange);
 
-    _displayUnits = div.querySelector("#displayUnits");
+    _displayUnits = div.querySelector("#displayUnits") as SelectElement;
     _displayUnits.onChange.listen(_onUnitTypeChange);
   }
 

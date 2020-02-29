@@ -74,7 +74,12 @@ class CommandPalette {
     _addCommand("setCanvasSize", "(width:Number, height:Number)", CanvasSizeViewController.setCanvasSizeCommand);
     _addCommand("getCanvasBGColor", "()", CanvasSizeViewController.getBGColorCommand);
     _addCommand("setCanvasBGColor", "(hexCode:String)", CanvasSizeViewController.setBGColorCommand);
-    
+    _addCommand("getCanvasPaperSize", "()", CanvasSizeViewController.getPaperSizeCommand);
+    _addCommand("setCanvasPaperSize", "(paperSize:String)", CanvasSizeViewController.setPaperSizeCommand);
+    _addCommand("getCanvasPaperOrientation", "()", CanvasSizeViewController.getPaperOrientationCommand);
+    _addCommand("setCanvasPaperOrientation", "(orientation:String)", CanvasSizeViewController.setPaperOrientationCommand);
+    _addCommand("numVertices", "()", () => MainWindow.canvas.numVertices);
+
     _addCommand("getPixelsPerUnit", "()", () => MainWindow.canvas.pixelsPerUnit);
     _addCommand("setPixelsPerUnit", "(value:Number)", UnitsViewController.setPixelsPerUnitCommand);
     _addCommand("getDisplayUnits", "()", UnitsViewController.getDisplayUnitsCommand);

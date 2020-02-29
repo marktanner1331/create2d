@@ -1,9 +1,12 @@
 import 'package:stagexl/stagexl.dart';
+import 'dart:math';
 
 import '../view/MainWindow.dart';
 import '../view/Canvas.dart';
 import '../helpers/UnitsHelper.dart';
 import '../model/CanvasUnitType.dart';
+import '../model/PaperSize.dart';
+import '../model/Orientation.dart';
 
 mixin CanvasPropertiesMixin {
   Canvas get myCanvas;
@@ -18,6 +21,74 @@ mixin CanvasPropertiesMixin {
   int get numVertices => myCanvas.currentGraphics.numVertices;
 
   UnitsHelper _helper = UnitsHelper.getUnitsHelper(CanvasUnitType.PIXEL);
+
+  Orientation get paperOrientation {
+    if(_canvasWidth < _canvasHeight) {
+      return Orientation.Portrait;
+    } else {
+      return Orientation.Landscape;
+    }
+  }
+  void set paperOrientation(Orientation value) {
+    if(value == Orientation.Portrait) {
+      setCanvasSize(min(_canvasWidth, _canvasHeight), max(_canvasWidth, _canvasHeight));
+    } else {
+      setCanvasSize(max(_canvasWidth, _canvasHeight), min(_canvasWidth, _canvasHeight));
+    }
+  }
+
+  //only used to keep track of it for the view
+  //the actual size is stored in _canvasWidth and _canvasHeight
+  PaperSize _paperSize = PaperSize.Custom;
+  PaperSize get paperSize => _paperSize;
+  void set paperSize(PaperSize value) {
+    _paperSize = value;
+
+    if(value == PaperSize.Custom) {
+      return;
+    }
+
+    num width;
+    num height;
+    switch(value) {
+      case PaperSize.A0:
+        width = 2384;
+        height = 3370;
+        break;
+      case PaperSize.A1:
+        width = 1684;
+        height = 2384;
+        break;
+      case PaperSize.A2:
+        width = 1191;
+        height = 1684;
+        break;
+      case PaperSize.A3:
+        width = 842;
+        height = 1191;
+        break;
+      case PaperSize.A4:
+        width = 595;
+        height = 842;
+        break;
+      case PaperSize.A5:
+        width = 420;
+        height = 595;
+        break;
+      case PaperSize.A6:
+        width = 298;
+        height = 420;
+        break;
+      default:
+        return;
+    }
+
+    if(paperOrientation == Orientation.Portrait) {
+      setCanvasSize(min(width, height), max(width, height));
+    } else {
+      setCanvasSize(max(width, height), min(width, height));
+    }
+  }
 
   num pixelsPerUnit = 1;
 
